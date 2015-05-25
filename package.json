@@ -1,0 +1,10 @@
+{
+	"name": "ternopel",
+	"version": "0.0.0",
+	"description": "Ternopel Web app",
+	"main": "server.js",
+	"dependencies": {
+	},
+	"author": "Maximiliano Carrizo"
+}
+
