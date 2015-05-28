@@ -1,7 +1,7 @@
-var logger			= require("./utils/logger");
-var express			= require('express');
-var dots			= require("dot").process({path: "./views"});
-var expressConf		= require("./utils/express-config");
+var logger			= require("./utils/logger"),
+	express			= require('express'),
+	dots			= require("dot").process({path: "./views"}),
+	expressConf		= require("./utils/express-config");
 
 var app = express();
 

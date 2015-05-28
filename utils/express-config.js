@@ -36,7 +36,7 @@
 		app.use(bodyParser.json());
 
 		logger.info("Setting cookie parser");
-		var cookieParser = require('cookie-parser')
+		var cookieParser = require('cookie-parser');
 		app.use(cookieParser());
 	
 		logger.info("Overriding 'Express' logger");
