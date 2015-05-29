@@ -9,9 +9,11 @@ logger.info("configuring express....");
 expressConf.init(app, express); 
 logger.info("Express configured");
 
-logger.info("configuring /");
-var routes = require('./routes/index')(dots); 
-app.use('/', routes);
+var about = require('./routes/about')(dots); 
+app.use('/', about);
+
+var home = require('./routes/home')(dots); 
+app.use('/', home);
 
 logger.info("Adding error routes");
 expressConf.addErrorRoutes(app,dots);
