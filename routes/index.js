@@ -4,12 +4,40 @@ var express	= require('express'),
 
 var dots;
 
+//route middleware to validate :category
+router.param('category', function(req, res, next, category) {
+	logger.info("Category is:"+category)
+    req.category = category;
+    next(); 
+});
+
+//route middleware to validate :product
+router.param('product', function(req, res, next, product) {
+	logger.info("Product is:"+product)
+	req.product = product;
+	next(); 
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	var index = dots.index();
-	logger.info(JSON.stringify(index));
-	return res.status(200).send(index);
+	return renderHomePage(req,res);
 });
+
+/* GET home page. */
+router.get('/:category', function(req, res, next) {
+	return renderHomePage(req,res);
+});
+
+/* GET home page. */
+router.get('/:category/:product', function(req, res, next) {
+	return renderHomePage(req,res);
+});
+
+function renderHomePage(req,res,category,product) {
+	logger.info("CATEGORY:"+req.category);
+	logger.info("PRODUCT:"+req.product);
+	return res.status(200).send(dots.index());
+}
 
 module.exports = function(dotsparam) {
 	dots = dotsparam;

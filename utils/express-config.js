@@ -9,7 +9,7 @@
 		app.set('view engine', 'html'); 
 
 		logger.info("Setting 'views' folder");
-		app.set('views', path.join(__dirname, 'views'));
+		app.set('views', "./views");
 
 		// uncomment after placing your favicon in /public
 		// var favicon			= require('serve-favicon');
@@ -44,7 +44,7 @@
 		app.use(morgan('combined'));
 	};
 	
-	expressConfig.addErrorRoutes = function(app) {
+	expressConfig.addErrorRoutes = function(app, dots) {
 
 		// catch 404 and forward to error handler
 		app.use(function(req, res, next) {
@@ -57,22 +57,16 @@
 		// will print stacktrace
 		if (app.get('env') === 'development') {
 			app.use(function(err, req, res, next) {
-				res.status(err.status || 500);
-				res.render('error', {
-					message: err.message,
-					error: err
-				});
+				logger.error("Error1:"+err);
+				res.status(err.status || 500).send(dots.error());
 			});
 		}
 
 		// production error handler
 		// no stacktraces leaked to user
 		app.use(function(err, req, res, next) {
-			res.status(err.status || 500);
-			res.render('error', {
-				message: err.message,
-				error: {}
-			});
+			logger.error("Error2:"+err);
+			res.status(err.status || 500).send(dots.error());
 		});
 	};
 

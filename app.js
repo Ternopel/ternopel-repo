@@ -14,6 +14,6 @@ var routes = require('./routes/index')(dots);
 app.use('/', routes);
 
 logger.info("Adding error routes");
-expressConf.addErrorRoutes(app);
+expressConf.addErrorRoutes(app,dots);
 
 module.exports = app;
