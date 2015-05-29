@@ -1,4 +1,4 @@
 {{#def.head}}
 <body class="home-bg">
-	<p>ERRRRRRRRRRORRRRRRRRR</p>
+	<p>{{=it.error}}</p>
 </body>

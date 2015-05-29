@@ -58,7 +58,7 @@
 		if (app.get('env') === 'development') {
 			app.use(function(err, req, res, next) {
 				logger.error("Error1:"+err);
-				res.status(err.status || 500).send(dots.error());
+				res.status(err.status || 500).send(dots.error({error:err}));
 			});
 		}
 
@@ -66,7 +66,7 @@
 		// no stacktraces leaked to user
 		app.use(function(err, req, res, next) {
 			logger.error("Error2:"+err);
-			res.status(err.status || 500).send(dots.error());
+			res.status(err.status || 500).send(dots.error({error:err}));
 		});
 	};
 

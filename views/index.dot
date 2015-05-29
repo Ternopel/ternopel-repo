@@ -1,4 +1,5 @@
 {{#def.head}}
 <body class="home-bg">
-	<p>Todo ok</p>
+	<p>Category:{{=it.category}}</p>
+	<p>Product:{{=it.product}}</p>
 </body>
