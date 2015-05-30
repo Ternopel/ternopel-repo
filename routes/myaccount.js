@@ -14,11 +14,14 @@ router.post('/register', function(req, res, next) {
 	var formdata=req.body.user;
 	logger.info('User trying to register:'+formdata.name);
 	
-	req.models.users.find({email_addres: formdata.name}, function(err,user) {
+	req.models.users.find({email_address: formdata.name}, function(err,user) {
 		if(err) throw err;
-		logger.info("EEEEEEEEEEE");
-		logger.info(err);
-		logger.info(people);
+		if(user.length==1) {
+			logger.info("User "+formdata.name+" already exists");
+		}
+		else {
+			logger.info("User "+formdata.name+" is new");
+		}
 	});
 	
 	return res.status(200).send(dots.myaccount());
