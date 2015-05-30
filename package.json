@@ -18,6 +18,8 @@
     "express-validator": "^2.10.0",
     "html": "0.0.10",
     "morgan": "~1.5.3",
+    "orm": "^2.1.26",
+    "pg": "^4.3.0",
     "serve-favicon": "~2.2.1",
     "winston": "^1.0.0"
   },

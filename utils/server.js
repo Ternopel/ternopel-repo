@@ -2,12 +2,19 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('ternopel:server');
-var http = require('http');
+var app = require('../app'),
+	debug = require('debug')('ternopel:server'),
+	https = require('https'),
+	fs = require('fs');
+
 var port;
 var server;
 
+ var options = {
+		key:	fs.readFileSync('./support/cert/key.pem','utf8'),
+		cert:	fs.readFileSync('./support/cert/key-cert.pem','utf8')
+	};
+ 
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -71,10 +78,9 @@ port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTPS server.
  */
-
-server = http.createServer(app);
+server = https.createServer(options,app);
 
 /**
  * Listen on provided port, on all network interfaces.

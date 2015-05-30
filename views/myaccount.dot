@@ -4,7 +4,11 @@
 <body>
 	{{#def.header}}
 	<div class="content">
-		<p>MY ACCOUNT</p>
+		<form action="/register" method="post">
+			<p><input type="text" name="user[name]" placeholder="Usuario" /></p>
+			<p><input type="password" name="user[password]" placeholder="Clave" /></p>
+			<p><input type="submit" value="Registrar" /></p>
+		</form>
 	</div>
 	{{#def.footer}}
 </body>
