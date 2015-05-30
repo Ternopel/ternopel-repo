@@ -4,6 +4,7 @@
 <body>
 	{{#def.header}}
 	<div class="content">
+		<p>{{=it.errormessage}}</p>
 		<form action="/register" method="post">
 			<p><input type="text" name="user[name]" placeholder="Usuario" /></p>
 			<p><input type="password" name="user[password]" placeholder="Clave" /></p>

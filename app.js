@@ -19,6 +19,9 @@ databaseconf.init(app, express);
 var about = require('./routes/about')(dots); 
 app.use('/', about);
 
+var welcome = require('./routes/welcome')(dots); 
+app.use('/', welcome);
+
 var myaccount = require('./routes/myaccount')(dots); 
 app.use('/', myaccount);
 
