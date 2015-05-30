@@ -34,7 +34,7 @@ router.get('/:category/:product', function(req, res, next) {
 });
 
 function renderHomePage(req,res,category,product) {
-	return res.status(200).send(dots.index({category:req.category, product:req.product}));
+	return res.status(200).send(dots.home({category:req.category, product:req.product}));
 }
 
 module.exports = function(dotsparam) {

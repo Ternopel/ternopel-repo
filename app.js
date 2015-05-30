@@ -1,7 +1,7 @@
 var logger			= require("./utils/logger"),
 	express			= require('express'),
 	dots			= require("dot").process({path: "./views"}),
-	expressConf		= require("./utils/express-config"),
+	expressConf		= require("./utils/expressconfig"),
 	liquibase		= require("./utils/liquibase");
 
 logger.info("Running liquibase");
@@ -15,6 +15,9 @@ logger.info("Express configured");
 
 var about = require('./routes/about')(dots); 
 app.use('/', about);
+
+var myaccount = require('./routes/myaccount')(dots); 
+app.use('/', myaccount);
 
 var home = require('./routes/home')(dots); 
 app.use('/', home);

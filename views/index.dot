@@ -1,5 +1,0 @@
-{{#def.head}}
-<body class="home-bg">
-	<p>Category:{{=it.category}}</p>
-	<p>Product:{{=it.product}}</p>
-</body>
