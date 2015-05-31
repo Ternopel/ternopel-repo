@@ -1,8 +1,8 @@
-(function (databaseConfig) {
+(function (modelconfig) {
 
 	var logger				= require("../utils/logger");
 
-	databaseConfig.init = function (app, express) {
+	modelconfig.init = function (app, express) {
 		var orm = require('orm');
 		
 		var opts = {
@@ -21,7 +21,10 @@
 		
 		app.use(orm.express(opts, {
 			define: function (db, models) {
-				models.users = db.define("users", { 
+				
+				require('../app/models/users.js')(orm,db,models);
+				
+/*				models.users = db.define("users", { 
 						email_address:	String,
 						first_name:		String,
 						last_name:		String
@@ -36,10 +39,9 @@
 							
 						}
 					}
-				);
+				);*/
 			}
 		}));		
-		
 	};
 	
 })(module.exports);
