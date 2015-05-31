@@ -47,7 +47,7 @@
 		app.use(morgan('combined'));
 	};
 	
-	expressConfig.addErrorRoutes = function(app, dots) {
+	expressConfig.addErrorRoutes = function(app) {
 
 		// catch 404 and forward to error handler
 		app.use(function(req, res, next) {
@@ -60,16 +60,14 @@
 		// will print stacktrace
 		if (app.get('env') === 'development') {
 			app.use(function(err, req, res, next) {
-				logger.error("Error1:"+err);
-				res.status(err.status || 500).send(dots.error({error:err}));
+				res.render('error.html',{error:err});
 			});
 		}
 
 		// production error handler
 		// no stacktraces leaked to user
 		app.use(function(err, req, res, next) {
-			logger.error("Error2:"+err);
-			res.status(err.status || 500).send(dots.error({error:err}));
+			res.render('error.html',{error:err});
 		});
 	};
 

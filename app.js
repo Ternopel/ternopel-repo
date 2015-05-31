@@ -19,4 +19,7 @@ modelconfig.init(app, express);
 logger.info("Configuring routes");
 routesconfig.init(app); 
 
+logger.info("Configuring error routes");
+expressconfig.addErrorRoutes(app); 
+
 module.exports = app;

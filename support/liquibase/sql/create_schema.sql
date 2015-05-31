@@ -1,4 +1,27 @@
 
+/* Drop Tables */
+
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS public.configuration;
+DROP TABLE IF EXISTS public.users_sessions;
+DROP TABLE IF EXISTS public.users;
+DROP TABLE IF EXISTS public.roles;
+
+
+
+/* Drop Sequences */
+
+DROP SEQUENCE IF EXISTS users_sequence;
+
+
+
+
+/* Create Sequences */
+
+CREATE SEQUENCE users_sequence;
+
+
 
 /* Create Tables */
 
@@ -10,13 +33,6 @@ CREATE TABLE categories
 ) WITHOUT OIDS;
 
 
-CREATE TABLE configuration
-(
-	id bigint NOT NULL,
-	CONSTRAINT configuration_pkey PRIMARY KEY (id)
-) WITHOUT OIDS;
-
-
 CREATE TABLE products
 (
 	id bigint NOT NULL,
@@ -25,7 +41,14 @@ CREATE TABLE products
 ) WITHOUT OIDS;
 
 
-CREATE TABLE roles
+CREATE TABLE public.configuration
+(
+	id bigint NOT NULL,
+	CONSTRAINT configuration_pkey PRIMARY KEY (id)
+) WITHOUT OIDS;
+
+
+CREATE TABLE public.roles
 (
 	id bigint NOT NULL,
 	name varchar(255) NOT NULL UNIQUE,
@@ -33,24 +56,24 @@ CREATE TABLE roles
 ) WITHOUT OIDS;
 
 
-CREATE TABLE users
+CREATE TABLE public.users
 (
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval('users_sequence') NOT NULL,
 	email_address varchar(256) NOT NULL UNIQUE,
+	password varchar(255) NOT NULL,
 	first_name varchar(256),
 	last_name varchar(256),
-	password varchar(256) NOT NULL,
 	role_id bigint NOT NULL,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
 
-CREATE TABLE users_sessions
+CREATE TABLE public.users_sessions
 (
 	id bigint NOT NULL,
 	last_access timestamp NOT NULL,
 	token varchar(255) NOT NULL,
-	zintro_user_id bigint NOT NULL,
+	user_id bigint NOT NULL,
 	CONSTRAINT zintro_user_sessions_pkey PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
@@ -66,17 +89,17 @@ ALTER TABLE products
 ;
 
 
-ALTER TABLE users
+ALTER TABLE public.users
 	ADD FOREIGN KEY (role_id)
-	REFERENCES roles (id)
+	REFERENCES public.roles (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
-ALTER TABLE users_sessions
-	ADD FOREIGN KEY (zintro_user_id)
-	REFERENCES users (id)
+ALTER TABLE public.users_sessions
+	ADD FOREIGN KEY (user_id)
+	REFERENCES public.users (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

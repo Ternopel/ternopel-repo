@@ -18,8 +18,8 @@ module.exports = {
 			}
 			else {
 				logger.info('User '+formdata.email_address+' is new');
-				req.models.users.create({email_address: formdata.email_address,password: formdata.password},function(err,user) {
-					if(err) throw err;
+				req.models.users.create({email_address: formdata.email_address,password: formdata.password, role_id:2},function(err,user) {
+					if(err) return next(err);
 					logger.info('Redirecting to home');
 					return res.redirect(301,'/');
 				});
