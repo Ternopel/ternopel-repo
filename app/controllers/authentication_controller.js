@@ -2,8 +2,7 @@ var logger	= require('../../utils/logger');
 
 module.exports = {
 	get_authentication: function(req, res, next) {
-		logger.info('Rendering authentication');
-		res.render('authentication.html')
+		res.render('authentication.html',{errormessage: req.session.errormessage})
 	},
 	post_registration: function(req, res, next) {
 		logger.info('Setting form properties');
@@ -13,8 +12,10 @@ module.exports = {
 		req.models.users.find({email_address: formdata.email_address}, function(err,user) {
 			if(err) return next(err);
 			if(user.length==1) {
-				logger.info('User '+formdata.name+' already exists');
-				return res.render('authentication.html',{errormessage: 'Usuario ya existe'});
+				logger.info('User '+formdata.email_address+' already exists');
+				req.session.errormessage	= 'Usuario ya existente';
+				logger.info('Executing back');
+				return res.redirect('back');
 			}
 			else {
 				logger.info('User '+formdata.email_address+' is new');

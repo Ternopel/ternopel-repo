@@ -23,6 +23,21 @@
 		app.use(compression({
 			threshold: 512
 		}));
+		
+		logger.info("Session management");
+		var session = require('express-session');
+//		app.use(session({secret: 'asdasdasdasda'}));
+		
+		app.use(session({
+//				genid: function(req) {
+//					return genuuid() // use UUIDs for session IDs
+//				},
+				secret: 'keyboard cat',
+				resave: false,
+				saveUninitialized: false,
+				secure:	true
+			}));
+		
 	
 		logger.info("Setting 'Public' folder with maxAge: 1 Day.");
 		var publicFolder = path.dirname(module.parent.filename)	+ "/public";
