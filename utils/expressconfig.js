@@ -2,14 +2,17 @@
 
 	var logger				= require("../utils/logger");
 	var path				= require('path');
+	var expressdot			= require('express-dot');
 
 	expressConfig.init = function (app, express) {
 
-		logger.info("Setting 'html' as view engine");
-		app.set('view engine', 'html'); 
+		logger.info("Setting 'dot' as view engine");
+		app.set('view engine', 'dot'); 
+		app.engine('html', expressdot.__express); 
 
 		logger.info("Setting 'views' folder");
-		app.set('views', "./views");
+		app.set('views', "./app/views");
+		
 
 		// uncomment after placing your favicon in /public
 		// var favicon			= require('serve-favicon');

@@ -9,7 +9,7 @@
 			database	: "ternopel_test",
 			protocol	: "postgres",
 			host		: "localhost",
-			port		: 5432,         // optional, defaults to database default
+			port		: 5432,
 			user		: "postgres",
 			password	: "Pilarcita1",
 			query		:	{

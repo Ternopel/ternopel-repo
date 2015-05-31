@@ -1,8 +1,8 @@
 var logger			= require("./utils/logger"),
 	express			= require('express'),
-	dots			= require("dot").process({path: "./views"}),
-	expressconf		= require("./utils/expressconfig"),
-	databaseconf	= require("./utils/databaseconfig"),
+	expressconfig	= require("./utils/expressconfig"),
+	databaseconfig	= require("./utils/databaseconfig"),
+	routesconfig	= require("./utils/routesconfig"),
 	liquibase		= require("./utils/liquibase");
 
 logger.info("Running liquibase");
@@ -10,25 +10,28 @@ liquibase.init();
 
 var app = express(); 
 
-logger.info("Configuring express....");
-expressconf.init(app, express); 
+logger.info("Configuring express");
+expressconfig.init(app, express); 
 
-logger.info("ORM config ....");
-databaseconf.init(app, express); 
+logger.info("Configuring orm");
+databaseconfig.init(app, express); 
 
-var about = require('./routes/about')(dots); 
-app.use('/', about);
+logger.info("Configuring routes");
+routesconfig.init(app); 
 
-var welcome = require('./routes/welcome')(dots); 
-app.use('/', welcome);
-
-var myaccount = require('./routes/myaccount')(dots); 
-app.use('/', myaccount);
-
-var home = require('./routes/home')(dots); 
-app.use('/', home);
-
-logger.info("Adding error routes");
-expressconf.addErrorRoutes(app,dots);
+//var about = require('./routes/about')(dots); 
+//app.use('/', about);
+//
+//var welcome = require('./routes/welcome')(dots); 
+//app.use('/', welcome);
+//
+//var myaccount = require('./routes/myaccount')(dots); 
+//app.use('/', myaccount);
+//
+//var home = require('./routes/home')(dots); 
+//app.use('/', home);
+//
+//logger.info("Adding error routes");
+//expressconf.addErrorRoutes(app,dots);
 
 module.exports = app;
