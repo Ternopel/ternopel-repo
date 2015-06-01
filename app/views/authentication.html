@@ -1,5 +1,7 @@
-<div class="content">
-	<p>Error:{{=it.errormessage}}</p>
+<div>
+	{{?it.errormessage}}
+		<p>Error:{{=it.errormessage}}</p>
+	{{?}}
 	<form action="/register" method="post">
 		<p><input type="text" name="user[email_address]" placeholder="Usuario" /></p>
 		<p><input type="password" name="user[password]" placeholder="Clave" /></p>

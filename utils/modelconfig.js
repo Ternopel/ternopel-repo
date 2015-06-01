@@ -21,25 +21,7 @@
 		
 		app.use(orm.express(opts, {
 			define: function (db, models) {
-				
 				require('../app/models/users.js')(orm,db,models);
-				
-/*				models.users = db.define("users", { 
-						email_address:	String,
-						first_name:		String,
-						last_name:		String
-					},
-					{
-						methods: {
-							fullName: function() {
-								return this.firstName + ' ' + this.lastName;
-							}
-						},
-						validations: {
-							
-						}
-					}
-				);*/
 			}
 		}));		
 	};

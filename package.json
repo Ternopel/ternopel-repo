@@ -17,12 +17,11 @@
     "express-dot": "^0.1.0",
     "express-session": "^1.11.2",
     "express-validator": "^2.10.0",
+    "express-winston": "^0.3.1",
     "html": "0.0.10",
-    "morgan": "~1.5.3",
     "orm": "^2.1.26",
     "pg": "^4.3.0",
-    "serve-favicon": "~2.2.1",
-    "winston": "^1.0.0"
+    "serve-favicon": "~2.2.1"
   },
   "author": "Maximiliano Carrizo"
 }

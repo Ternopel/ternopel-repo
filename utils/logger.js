@@ -1,30 +1,30 @@
-var winston = require('winston');
+var winston			= require('winston'),
+	expressWinston	= require('express-winston');
+
 winston.emitErrs = true;
 
+var console = new winston.transports.Console({
+	level: 'info',
+	handleExceptions: true,
+	json: false,
+	colorize: true
+})
+
 var logger = new winston.Logger({
-	transports: [
-		new winston.transports.File({
-			level: 'info',
-			filename: './logs/all-logs.log',
-			handleExceptions: true,
-			json: true,
-			maxsize: 5242880, //5MB
-			maxFiles: 5,
-			colorize: false
-		}),
-		new winston.transports.Console({
-			level: 'info',
-			handleExceptions: true,
-			json: false,
-			colorize: true
-		})
-	],
-	exitOnError: false
+	transports : [ console ],
+	exitOnError : false
 });
 
-module.exports = logger;
-module.exports.stream = {
-	write: function(message, encoding){
-		logger.info(message);
-	}
-};
+var expressLogger = new expressWinston.logger({
+	transports : [ console ],
+	exitOnError : false
+});
+
+var expressErrorLogger = new expressWinston.errorLogger({
+	transports : [ console ],
+	exitOnError : false
+});
+
+module.exports						= logger;
+module.exports.expressLogger		= expressLogger;
+module.exports.expressErrorLogger	= expressErrorLogger;

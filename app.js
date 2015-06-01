@@ -11,7 +11,7 @@ liquibase.init();
 var app = express(); 
 
 logger.info("Configuring express");
-expressconfig.init(app, express); 
+expressconfig.init(app, express,logger); 
 
 logger.info("Configuring orm");
 modelconfig.init(app, express); 
@@ -20,6 +20,6 @@ logger.info("Configuring routes");
 routesconfig.init(app); 
 
 logger.info("Configuring error routes");
-expressconfig.addErrorRoutes(app); 
+expressconfig.addErrorRoutes(app,logger); 
 
 module.exports = app;
