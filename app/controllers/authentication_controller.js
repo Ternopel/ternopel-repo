@@ -7,8 +7,23 @@ module.exports = {
 	},
 	post_authentication: function(req, res, next) {
 
-		req.assert(['email_address'], 'El email ingresado es incorrecto').isEmail();
-		req.assert(['password'], 'La clave es requerida').notEmpty();
+		req.logger.info("before body");
+		req.logger.info(req.body);
+		req.logger.info("after body");
+		var email_address	= req.body.email_address;
+		var password		= req.body.password;
+		req.logger.info('User trying to register:'+req.body.email_address);
+		
+		req.logger.info("Defining validators");
+		req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
+		req.assert('password', 'La clave es requerida').notEmpty();
+
+		req.logger.info("Executing validation");
+		var valerrors = req.validationErrors();
+		if(valerrors) {
+			logger.info("Errores de validacion encontrados:"+ld.pluck(valerrors,'msg'));
+			return res.status(200).send(valerrors);
+		}
 		
 		/*
 		var valerrors = req.validationErrors();
@@ -21,9 +36,6 @@ module.exports = {
 		}
 		*/
 		
-		var email_address	= req.body.email_address;
-		var password		= req.body.password;
-		req.logger.info('User trying to register:'+req.body.email_address);
 		
 		req.models.users.find({email_address: email_address}, function(err,user) {
 			if(err) return next(err);
@@ -39,7 +51,7 @@ module.exports = {
 					if(err) return next(err);
 					
 					req.logger.info('User '+email_address+' has been created. Redirecting to home');
-					return res.redirect(301,'/');
+					return "success";
 				});
 			}
 		});
