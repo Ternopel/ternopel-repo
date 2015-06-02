@@ -11,6 +11,7 @@
 			req.logger = logger;
 			next();
 		});
+//		logger.addColors({debug: 'green',info:  'cyan',silly: 'magenta',warn:  'yellow',error: 'red'});
 		
 		logger.info("Setting 'dot' as view engine");
 		app.set('view engine', 'dot'); 

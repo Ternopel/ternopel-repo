@@ -12,16 +12,25 @@ var console = new winston.transports.Console({
 
 var logger = new winston.Logger({
 	transports : [ console ],
+	meta: false, // optional: control whether you want to log the meta data about the request (default to true)
+	msg: "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
+	colorStatus: true, 
 	exitOnError : false
 });
 
 var expressLogger = new expressWinston.logger({
 	transports : [ console ],
+	meta: false, // optional: control whether you want to log the meta data about the request (default to true)
+	msg: "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
+	colorStatus: true, 
 	exitOnError : false
 });
 
 var expressErrorLogger = new expressWinston.errorLogger({
 	transports : [ console ],
+	meta: false, // optional: control whether you want to log the meta data about the request (default to true)
+	msg: "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
+	colorStatus: true, 
 	exitOnError : false
 });
 
