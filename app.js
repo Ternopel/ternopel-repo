@@ -6,7 +6,7 @@ var logger			= require("./utils/logger"),
 	liquibase		= require("./utils/liquibase");
 
 logger.info("Running liquibase");
-liquibase.init();
+// liquibase.init();
 
 var app = express(); 
 

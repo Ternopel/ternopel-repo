@@ -8,7 +8,7 @@ var console = new winston.transports.Console({
 	handleExceptions: true,
 	json: false,
 	colorize: true
-})
+});
 
 var logger = new winston.Logger({
 	transports : [ console ],
