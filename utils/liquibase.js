@@ -1,11 +1,13 @@
 (function (liquibase) {
 
-	liquibase.init = function () {
+	liquibase.init = function (logger) {
 
+		logger.debug('Before creation child_process');
 		var path	= require('path'),
 			exec	= require('child_process').execFileSync;
 		
 		var liqdir	= path.dirname(module.parent.filename) + '/support/liquibase';
+		logger.debug('liqdir:'+liqdir);
 		var args	= [	
 		        	   	'-jar',
 		        	   	liqdir + '/liquibase-core-2.0.3.jar',
@@ -17,10 +19,14 @@
 		        	   	'--password=Pilarcita1',
 		        	   	'update'
 		        	  ];
+		logger.debug('args:'+args);
 		
-		
+		if(!exec) {
+			logger.error("Exec not found");
+		}
+		logger.debug('Executing task');
 		var output = exec('java',args).toString();
-		console.log(output);
+		logger.info(output);
 	};
 	
 })(module.exports);
