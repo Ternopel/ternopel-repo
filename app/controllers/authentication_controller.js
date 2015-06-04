@@ -3,7 +3,7 @@ var util	= require('util'),
 
 module.exports = {
 	get_authentication: function(req, res, next) {
-		res.render('authentication.html');
+		res.render('authentication.html',{ csrfToken: req.csrfToken() });
 	},
 	post_authentication: function(req, res, next) {
 

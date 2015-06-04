@@ -1,8 +1,5 @@
 (function (expressConfig) {
 
-	var path				= require('path');
-	var expressdot			= require('express-dot');
-
 	expressConfig.init = function (app, express, logger) {
 		
 		logger.info("Setting 'winston' logger");
@@ -11,17 +8,18 @@
 			req.logger = logger;
 			next();
 		});
-
+		
 		logger.info("Setting public folder");
+		var path = require('path');
 		var publicFolder = path.dirname(module.parent.filename)	+ "/public";
 		
 		logger.info("Setting 'dot' as view engine");
+		var expressdot = require('express-dot');
 		app.set('view engine', 'dot'); 
 		app.engine('html', expressdot.__express); 
 
 		logger.info("Setting 'views' folder");
 		app.set('views', "./app/views");
-		
 
 		logger.info("Setting 'favicon'");
 		var favicon			= require('serve-favicon');
@@ -33,19 +31,6 @@
 			threshold: 512
 		}));
 		
-		logger.info("Session management");
-		var session = require('express-session');
-		app.use(session({
-//				genid: function(req) {
-//					return genuuid() // use UUIDs for session IDs
-//				},
-				secret: 'keyboard cat',
-				resave: false,
-				saveUninitialized: false,
-				secure:	true
-			}));
-		
-	
 		logger.info("Setting 'Public' folder with maxAge: 1 Day.");
 		var oneYear = 31557600000;
 		app.use(express.static(publicFolder, { maxAge: oneYear }));
@@ -62,7 +47,11 @@
 
 		logger.info("Setting cookie parser");
 		var cookieParser = require('cookie-parser');
-		app.use(cookieParser());
+		app.use(cookieParser('nataliaypilarcita'));
+		
+		logger.info("Generate unique identifiers");
+		var csrf = require('csurf');
+		app.use(csrf({ cookie: true }));
 	};
 	
 	expressConfig.addErrorRoutes = function(app,logger) {

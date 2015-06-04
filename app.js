@@ -2,6 +2,7 @@ var logger			= require("./utils/logger"),
 	express			= require('express'),
 	expressconfig	= require("./utils/expressconfig"),
 	modelconfig		= require("./utils/modelconfig"),
+	sessionconfig	= require("./utils/sessionconfig"),
 	routesconfig	= require("./utils/routesconfig"),
 	liquibase		= require("./utils/liquibase");
 
@@ -11,10 +12,13 @@ logger.info("Running liquibase");
 var app = express(); 
 
 logger.info("Configuring express");
-expressconfig.init(app, express,logger); 
+expressconfig.init(app, express,logger);
 
 logger.info("Configuring orm");
-modelconfig.init(app, express); 
+modelconfig.init(app, express);
+
+logger.info("Configuring user session");
+sessionconfig.init(app);
 
 logger.info("Configuring routes");
 routesconfig.init(app); 
