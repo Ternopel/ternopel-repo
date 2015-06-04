@@ -22,6 +22,7 @@
 		app.use(orm.express(opts, {
 			define: function (db, models) {
 				require('../app/models/users.js')(orm,db,models);
+				require('../app/models/userssessions.js')(orm,db,models);
 			}
 		}));		
 	};

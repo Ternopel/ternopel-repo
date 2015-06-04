@@ -1,25 +1,7 @@
-
-/* Drop Tables */
-
-DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS public.configuration;
-DROP TABLE IF EXISTS public.users_sessions;
-DROP TABLE IF EXISTS public.users;
-DROP TABLE IF EXISTS public.roles;
-
-
-
-/* Drop Sequences */
-
-DROP SEQUENCE IF EXISTS users_sequence;
-
-
-
-
 /* Create Sequences */
 
 CREATE SEQUENCE users_sequence;
+CREATE SEQUENCE users_sessions_sequence;
 
 
 
@@ -41,14 +23,14 @@ CREATE TABLE products
 ) WITHOUT OIDS;
 
 
-CREATE TABLE public.configuration
+CREATE TABLE configuration
 (
 	id bigint NOT NULL,
 	CONSTRAINT configuration_pkey PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
 
-CREATE TABLE public.roles
+CREATE TABLE roles
 (
 	id bigint NOT NULL,
 	name varchar(255) NOT NULL UNIQUE,
@@ -56,7 +38,7 @@ CREATE TABLE public.roles
 ) WITHOUT OIDS;
 
 
-CREATE TABLE public.users
+CREATE TABLE users
 (
 	id bigint DEFAULT nextval('users_sequence') NOT NULL,
 	email_address varchar(256) NOT NULL UNIQUE,
@@ -68,12 +50,12 @@ CREATE TABLE public.users
 ) WITHOUT OIDS;
 
 
-CREATE TABLE public.users_sessions
+CREATE TABLE users_sessions
 (
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval('users_sessions_sequence') NOT NULL,
 	last_access timestamp NOT NULL,
-	token varchar(255) NOT NULL,
-	user_id bigint NOT NULL,
+	token varchar(255) NOT NULL UNIQUE,
+	user_id bigint,
 	CONSTRAINT zintro_user_sessions_pkey PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
@@ -89,17 +71,17 @@ ALTER TABLE products
 ;
 
 
-ALTER TABLE public.users
+ALTER TABLE users
 	ADD FOREIGN KEY (role_id)
-	REFERENCES public.roles (id)
+	REFERENCES roles (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
-ALTER TABLE public.users_sessions
+ALTER TABLE users_sessions
 	ADD FOREIGN KEY (user_id)
-	REFERENCES public.users (id)
+	REFERENCES users (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

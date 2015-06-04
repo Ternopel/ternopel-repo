@@ -21,6 +21,7 @@
     "express-winston": "^0.3.1",
     "html": "0.0.10",
     "lodash": "^3.9.3",
+    "node-uuid": "^1.4.3",
     "orm": "^2.1.26",
     "pg": "^4.3.0",
     "serve-favicon": "~2.2.1"
