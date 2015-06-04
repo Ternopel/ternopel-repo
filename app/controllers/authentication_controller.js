@@ -18,7 +18,7 @@ module.exports = {
 		req.logger.info("Executing validation");
 		var valerrors = req.validationErrors();
 		if(valerrors) {
-			req.logger.info("Errores de validacion encontrados:"+valerrors);
+			req.logger.info("Errores de validacion encontrados:"+JSON.stringify(valerrors));
 			return res.status(200).send(valerrors);
 		}
 		req.logger.info("Validation approved");
@@ -39,8 +39,8 @@ module.exports = {
 						return next(err);
 					}
 					
-					req.logger.info('User '+email_address+' has been created. Redirecting to home');
-					return "success";
+					req.logger.info('User '+email_address+' has been created. Returning control to client');
+					return res.status(200).send('success');
 				});
 			}
 		});

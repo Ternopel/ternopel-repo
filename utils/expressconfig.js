@@ -11,7 +11,9 @@
 			req.logger = logger;
 			next();
 		});
-//		logger.addColors({debug: 'green',info:  'cyan',silly: 'magenta',warn:  'yellow',error: 'red'});
+
+		logger.info("Setting public folder");
+		var publicFolder = path.dirname(module.parent.filename)	+ "/public";
 		
 		logger.info("Setting 'dot' as view engine");
 		app.set('view engine', 'dot'); 
@@ -21,9 +23,9 @@
 		app.set('views', "./app/views");
 		
 
-		// uncomment after placing your favicon in /public
-		// var favicon			= require('serve-favicon');
-		//app.use(favicon(__dirname + '/public/favicon.ico'));
+		logger.info("Setting 'favicon'");
+		var favicon			= require('serve-favicon');
+		app.use(favicon(publicFolder+'/images/tp.ico'));
 		
 		logger.info("Enabling GZip compression.");
 		var compression = require('compression');
@@ -45,7 +47,6 @@
 		
 	
 		logger.info("Setting 'Public' folder with maxAge: 1 Day.");
-		var publicFolder = path.dirname(module.parent.filename)	+ "/public";
 		var oneYear = 31557600000;
 		app.use(express.static(publicFolder, { maxAge: oneYear }));
 

@@ -1,22 +1,17 @@
+<script src="/javascript/authentication.js" ></script>
 <div>
 	<div id="general_error"></div>
 	<form id="authentication_form">
-		<ul>
-			<li>
-				<input type="text" name="email_address" placeholder="Usuario" />
-				<div id="email_address_error"></div>
-			</li>
-			<li>
-				<input type="password" name="password" placeholder="Clave" />
-				<div id="password_error"></div>
-			</li>
-			<li>
-				<input type="button" id="submit" value="Registrar" onclick="authentication_post('/authentication', 'authentication_form');"/>
-			</li>
-		</ul>
+		<p>
+			<input type="text" name="email_address" placeholder="Usuario" />
+			<div id="email_address_error"></div>
+		</p>
+		<p>
+			<input type="password" name="password" placeholder="Clave" />
+			<div id="password_error"></div>
+		</p>
+		<p>
+			<input type="button" id="submit" value="Registrar" onclick="authentication_post('/authentication', 'authentication_form');"/>
+		</p>
 	</form>
 </div>
-
-<!-- 
-<a class="button create-btn" onclick="clear_error_fields();make_post('/sign_up_expert', 'signup_form');">create profile</a>
- -->
