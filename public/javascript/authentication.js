@@ -6,7 +6,7 @@ function authentication_post(url, formid) {
 		} 
 		else {
 			console.log('Post ok. Redirecting to home');
-//			window.location.href	= '/';
+			window.location.href	= '/';
 		}
 	});
 }

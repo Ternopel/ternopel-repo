@@ -25,12 +25,6 @@ function show_error_messages(errors) {
 
 function clear_error_fields() {
 	console.log("Clearing error fields");
-	
 	$("div[id$='_error']").html('');
-	/*
-	$('.required').each(function(elem) {
-		$(this).removeClass('required');
-	});
-	*/
 }
 
