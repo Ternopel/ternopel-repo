@@ -8,6 +8,9 @@ module.exports = function (orm, db, models) {
 		},
 		{
 			methods: {
+				isLogged: function() {
+					return !(this.user_id === null);
+				}
 			},
 			validations: {
 				

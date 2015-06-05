@@ -13,39 +13,28 @@
 						return next(err);
 					}
 					req.logger.info('User is NOT logged IN !!');
-					req.sessionstatus = { is_logged_in: false };
+					req.usersession = usersession;
 					res.cookie("ter_token", token, { secure:true, httpOnly: true, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
 					next();
 				});
 			}
 			else {
-				var waterfall = require('async-waterfall');
-				waterfall([ 
-					function(callback) {
-						req.logger.info('Searching for session');
-						req.models.userssessions.find({token: ter_token},function(err,usersession) {
-							return callback(err,usersession);
-						});
-					}, 
-					function(usersession, callback) {
-						req.logger.info("Session:"+JSON.stringify(usersession));
-						if(usersession.user_id == null) {
-							req.logger.info('User is NOT logged IN !!');
-							req.sessionstatus	= { is_logged_in: false };
-						}
-						else {
-							req.logger.info('User is logged IN !!');
-							req.sessionstatus	= { is_logged_in: true };
-						}
-						
-						req.logger.info('Changing last access');
-						usersession[0].save({last_access: new Date()},function(err) {
-							return callback(err);
-						});
+				req.logger.info('Searching for session');
+				req.models.userssessions.find({token: ter_token},function(err,usersession) {
+					if(err) {
+						next(err);
 					}
-				], 
-				function(err, result) {
-					next(err);
+					req.logger.info("Session:"+JSON.stringify(usersession));
+					req.logger.info('User is logged in:'+usersession[0].isLogged());
+					req.logger.info('Changing last access');
+					usersession[0].save({last_access: new Date()},function(err) {
+						if(err) {
+							next(err);
+						}
+						req.logger.info("Assigning current session to request");
+						req.usersession = usersession[0];
+						return next();
+					});
 				});
 			}
 		});

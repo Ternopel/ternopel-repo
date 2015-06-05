@@ -55,6 +55,7 @@ module.exports = {
 			function(usersession,user,callback) {
 				req.logger.info('Assigning user to session');
 				usersession[0].save({user_id: user.id},function(err) {
+					req.usersession = usersession[0];
 					return callback(err);
 				});
 			}
