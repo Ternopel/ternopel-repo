@@ -17,18 +17,23 @@
 				});
 			}
 			else {
-				req.logger.info("Updating token:"+ter_token);
-				req.models.userssessions.find({token: ter_token},function(err,usersession) {
-					if(err) {
-						return next(err);
+				var waterfall = require('async-waterfall');
+				waterfall([ 
+					function(callback) {
+						req.logger.info('Searching for session');
+						req.models.userssessions.find({token: ter_token},function(err,usersession) {
+							return callback(err,usersession);
+						});
+					}, 
+					function(usersession, callback) {
+						req.logger.info('Changing last access');
+						usersession[0].save({last_access: new Date()},function(err) {
+							return callback(err);
+						});
 					}
-					req.logger.info("User session id:"+usersession[0].id);
-					usersession[0].save({last_access: new Date()},function(err) {
-						if(err) {
-							return next(err);
-						}
-						next();
-					});
+				], 
+				function(err, result) {
+					next(err);
 				});
 			}
 		});
