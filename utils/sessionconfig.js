@@ -12,6 +12,8 @@
 					if(err) {
 						return next(err);
 					}
+					req.logger.info('User is NOT logged IN !!');
+					req.sessionstatus = { is_logged_in: false };
 					res.cookie("ter_token", token, { secure:true, httpOnly: true, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
 					next();
 				});
@@ -26,6 +28,16 @@
 						});
 					}, 
 					function(usersession, callback) {
+						req.logger.info("Session:"+JSON.stringify(usersession));
+						if(usersession.user_id == null) {
+							req.logger.info('User is NOT logged IN !!');
+							req.sessionstatus	= { is_logged_in: false };
+						}
+						else {
+							req.logger.info('User is logged IN !!');
+							req.sessionstatus	= { is_logged_in: true };
+						}
+						
 						req.logger.info('Changing last access');
 						usersession[0].save({last_access: new Date()},function(err) {
 							return callback(err);

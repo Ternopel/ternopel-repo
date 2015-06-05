@@ -10,7 +10,12 @@
 	<body>
 		<div>
 			<p>header</p>
-			<a title="Conectarse a su cuenta de cliente" href="/registration">Registrarse</a>
+			{{?it.is_logged_in}}
+				<a href="/logout">Salir</a>
+			{{??}}
+				<p><a href="/registration">Registrarse</a></p>
+				<p><a href="/authentication">Ingrese</a></p>
+			{{?}}	
 		</div>
 		{{=it.body}}
 		<div>
