@@ -1,4 +1,4 @@
-function authentication_post(url, formid) {
+function registration_post(url, formid) {
 	clear_error_fields();
 	make_post(url,formid,function (response) {
 		if (!('success'===response)) {

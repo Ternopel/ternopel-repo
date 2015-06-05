@@ -4,6 +4,7 @@ module.exports = function (orm, db, models) {
 			id:				{ type: 'serial', key: true}, 
 			token:		 	{ type: 'text', required: true },
 			last_access: 	{ type: 'date', required: true, time: true },
+			user_id:		{ type: 'integer', size:8, required: false }
 		},
 		{
 			methods: {

@@ -6,7 +6,7 @@ module.exports = function (orm, db, models) {
 			password: 		{ type: 'text', required: true },
 			first_name:		{ type: 'text', required: false },
 			last_name:		{ type: 'text', required: false },
-			role_id:		{ type: 'integer', size:8, required: false },
+			role_id:		{ type: 'integer', size:8, required: false }
 		},
 		{
 			methods: {
