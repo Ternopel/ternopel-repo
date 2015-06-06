@@ -1,9 +1,9 @@
 (function (modelconfig) {
 
-	var logger				= require("../utils/logger");
-
-	modelconfig.init = function (app, express) {
+	modelconfig.init = function (app, express, logger) {
 		var orm = require('orm');
+		
+		logger.debug("Setting database connection info");
 		
 		var opts = {
 			database	: "ternopel_test",
@@ -21,8 +21,9 @@
 		
 		app.use(orm.express(opts, {
 			define: function (db, models) {
-				require('../app/models/users.js')(orm,db,models);
-				require('../app/models/userssessions.js')(orm,db,models);
+				require('../app/models/roles.js')(orm,db,models,logger);
+				require('../app/models/users.js')(orm,db,models,logger);
+				require('../app/models/userssessions.js')(orm,db,models,logger);
 			}
 		}));		
 	};

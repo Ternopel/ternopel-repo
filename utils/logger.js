@@ -4,7 +4,7 @@ var winston			= require('winston'),
 winston.emitErrs = true;
 
 var console = new winston.transports.Console({
-	level: 'info',
+	level: 'debug',
 	handleExceptions: true,
 	json: false,
 	colorize: true

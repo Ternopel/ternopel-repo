@@ -15,7 +15,7 @@ logger.info("Configuring express");
 expressconfig.init(app, express,logger);
 
 logger.info("Configuring orm");
-modelconfig.init(app, express);
+modelconfig.init(app, express, logger);
 
 logger.info("Configuring user session");
 sessionconfig.init(app);

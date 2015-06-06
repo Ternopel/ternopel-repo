@@ -1,5 +1,6 @@
-module.exports = function (orm, db, models) {
+module.exports = function (orm, db, models,logger) {
 
+	logger.debug("Configuring users");
 	models.users = db.define("users", { 
 			id:				{ type: 'serial', key: true}, 
 			email_address: 	{ type: 'text', required: true },
@@ -19,4 +20,7 @@ module.exports = function (orm, db, models) {
 			}
 		}
 	);	
+	
+	logger.debug("Configuring users relations");
+	models.users.hasOne("role",models.roles);
 };

@@ -1,10 +1,10 @@
-module.exports = function (orm, db, models) {
+module.exports = function (orm, db, models,logger) {
 
+	logger.debug("Configuring users sessions");
 	models.userssessions = db.define("users_sessions", { 
 			id:				{ type: 'serial', key: true}, 
 			token:		 	{ type: 'text', required: true },
-			last_access: 	{ type: 'date', required: true, time: true },
-			user_id:		{ type: 'integer', size:8, required: false }
+			last_access: 	{ type: 'date', required: true, time: true }
 		},
 		{
 			methods: {
@@ -16,5 +16,8 @@ module.exports = function (orm, db, models) {
 				
 			}
 		}
-	);	
+	);
+	
+	logger.debug("Configuring users sessions relations");
+	models.userssessions.hasOne("user",models.users);
 };

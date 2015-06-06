@@ -13,23 +13,23 @@ module.exports = {
 		var email_address	= req.body.email_address;
 		var password		= req.body.password;
 		var is_registration	= req.body.is_registration;
-		req.logger.info('User trying to register:'+req.body.email_address);
+		req.logger.debug('User trying to register:'+req.body.email_address);
 		
-		req.logger.info("Defining validators");
+		req.logger.debug("Defining validators");
 		req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
 		req.assert('password', 'La clave es requerida').notEmpty();
 
 		req.logger.info("Executing validation");
 		var valerrors = req.validationErrors();
 		if(valerrors) {
-			req.logger.info("Errores de validacion encontrados:"+JSON.stringify(valerrors));
+			req.logger.debug("Errores de validacion encontrados:"+JSON.stringify(valerrors));
 			return res.status(200).send(valerrors);
 		}
 		
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				req.logger.info('Searching for existing user');
+				req.logger.debug('Searching for existing user');
 				req.models.users.find({email_address: email_address}, function(err,user) {
 					if(err) {
 						return callback(err);
