@@ -3,6 +3,7 @@
 	<div id="general_error"></div>
 	<form id="registration_form">
 		<input type="hidden" name="_csrf" value="{{=it.csrfToken}}">
+		<input type="hidden" name="is_registration" value="{{=it.is_registration}}">
 		<p>
 			<input type="text" name="email_address" placeholder="Usuario" />
 			<div id="email_address_error"></div>

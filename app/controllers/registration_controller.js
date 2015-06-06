@@ -3,12 +3,16 @@ var util	= require('util'),
 
 module.exports = {
 	get_registration: function(req, res, next) {
-		res.render('registration.html',{ csrfToken: req.csrfToken() });
+		res.render('registration.html',{ csrfToken: req.csrfToken(), is_registration:true });
+	},
+	get_login: function(req, res, next) {
+		res.render('registration.html',{ csrfToken: req.csrfToken(), is_registration:false });
 	},
 	post_registration: function(req, res, next) {
 
 		var email_address	= req.body.email_address;
 		var password		= req.body.password;
+		var is_registration	= req.body.is_registration;
 		req.logger.info('User trying to register:'+req.body.email_address);
 		
 		req.logger.info("Defining validators");
@@ -30,21 +34,41 @@ module.exports = {
 					if(err) {
 						return callback(err);
 					}
-					if(user.length===1) {
-						req.logger.info('User '+email_address+' already exists');
-						var jsonerror = [{'param':'general','msg':'Usuario ya existente'}];
-						return res.status(200).send(jsonerror);
+					
+					
+					if(is_registration==='true') {
+						if(user.length===1) {
+							req.logger.info('User '+email_address+' already exists');
+							var jsonerror = [{'param':'general','msg':'Usuario ya existente'}];
+							return res.status(200).send(jsonerror);
+						}
+						else {
+							return callback(null,null);
+						}
 					}
-					else {
-						return callback();
+					
+					if(is_registration==='false') {
+						if(user.length===0) {
+							req.logger.info('User '+email_address+' does not exists');
+							var jsonerror = [{'param':'general','msg':'Usuario no existente'}];
+							return res.status(200).send(jsonerror);
+						}
+						else {
+							return callback(null,user[0]);
+						}
 					}
 				});
 			}, 
-			function(callback) {
-				req.logger.info('Creating user '+email_address);
-				req.models.users.create({email_address: email_address,password: password, role_id:2},function(err,user) {
-					return callback(err,user);
-				});
+			function(user,callback) {
+				if(is_registration==='true') {
+					req.logger.info('Creating user '+email_address);
+					req.models.users.create({email_address: email_address,password: password, role_id:2},function(err,user) {
+						return callback(err,user);
+					});
+				}
+				else {
+					return callback(null,user);
+				}
 			},
 			function(user,callback) {
 				req.logger.info('Searching for current session');
