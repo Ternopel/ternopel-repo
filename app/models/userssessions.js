@@ -19,5 +19,5 @@ module.exports = function (orm, db, models,logger) {
 	);
 	
 	logger.debug("Configuring users sessions relations");
-	models.userssessions.hasOne("user",models.users);
+	models.userssessions.hasOne("user",models.users, { required: false, alwaysValidate: true });
 };

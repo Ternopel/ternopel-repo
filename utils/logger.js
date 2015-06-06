@@ -1,5 +1,6 @@
 var winston			= require('winston'),
-	expressWinston	= require('express-winston');
+	expressWinston	= require('express-winston'),
+	dateformat		= require('dateformat');
 
 winston.emitErrs = true;
 
@@ -7,7 +8,15 @@ var console = new winston.transports.Console({
 	level: 'debug',
 	handleExceptions: true,
 	json: false,
-	colorize: true
+	colorize: true,
+	timestamp: function() {
+		 return dateformat(Date.now(),"yyyy/mm/dd HH:MM:ss:l");
+	} /*,
+	formatter: function(options) {
+		return options.timestamp() +' '+ options.level.toUpperCase() +' '+ (undefined !== options.message ? options.message : '') +
+		(options.meta && Object.keys(options.meta).length ? '\n\t'+ JSON.stringify(options.meta) : '' );
+	}
+	*/
 });
 
 var logger = new winston.Logger({

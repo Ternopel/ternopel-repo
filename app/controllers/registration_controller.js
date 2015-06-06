@@ -34,8 +34,6 @@ module.exports = {
 					if(err) {
 						return callback(err);
 					}
-					
-					
 					if(is_registration==='true') {
 						if(user.length===1) {
 							req.logger.info('User '+email_address+' already exists');
@@ -79,15 +77,12 @@ module.exports = {
 				}
 			},
 			function(user,callback) {
-				req.logger.info('Searching for current session');
-				req.models.userssessions.find({token: req.cookies.ter_token},function(err,usersession) {
-					return callback(err,usersession,user);
-				});
-			},
-			function(usersession,user,callback) {
 				req.logger.info('Assigning user to session');
-				usersession[0].save({user_id: user.id},function(err) {
-					req.usersession = usersession[0];
+				req.usersession.setUser(user,function(err) {
+					if(err) {
+						next(err);
+					}
+					req.logger.info('Complete session:'+JSON.stringify(req.usersession));
 					return callback(err);
 				});
 			}

@@ -1,6 +1,6 @@
 module.exports = {
 	get_home: function(req, res, next) {
-		req.logger.info("Rendering home with log status:"+req.usersession.isLogged());
+		req.logger.info('Rendering home');
 		if(req.usersession.isLogged()===true) {
 			req.logger.debug('Getting logged in user info');
 			req.usersession.getUser(function (err, user) {

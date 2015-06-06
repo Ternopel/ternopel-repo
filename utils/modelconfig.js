@@ -8,7 +8,7 @@
 		var opts = {
 			database	: "ternopel_test",
 			protocol	: "postgres",
-			host		: "localhost",
+			host		: "maxito.zintro.com",
 			port		: 5432,
 			user		: "postgres",
 			password	: "Pilarcita1",
@@ -24,6 +24,9 @@
 				require('../app/models/roles.js')(orm,db,models,logger);
 				require('../app/models/users.js')(orm,db,models,logger);
 				require('../app/models/userssessions.js')(orm,db,models,logger);
+				
+				// Create database from scratch
+				// db.sync();
 			}
 		}));		
 	};

@@ -1,12 +1,11 @@
 module.exports = {
 	get_logout: function(req, res, next) {
-		req.logger.info('User is logged in:'+req.usersession.isLogged());
-		req.logger.info('Logout');
-		req.usersession.save({user_id:null},function(err) {
+		req.logger.info('Removing logged in user');
+		req.usersession.removeUser(function(err) {
 			if(err) {
 				next(err);
 			}
-			req.logger.info("Rendering home");
+			req.logger.info('User removed from session');
 			return res.redirect('/');
 		});
 	}

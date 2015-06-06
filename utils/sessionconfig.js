@@ -10,6 +10,7 @@
 			}
 			req.logger.debug('User is NOT logged IN !!');
 			req.usersession = usersession;
+			req.logger.info('Created session:'+JSON.stringify(req.usersession));
 			res.cookie("ter_token", token, { secure:true, httpOnly: true, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
 			next();
 		});
@@ -32,6 +33,9 @@
 
 	sessionconfigu.init = function (app) {
 		app.use(function(req, res, next) {
+			req.logger.info("==================================");
+			req.logger.info("New request to:"+req.path);
+			req.logger.info("==================================");
 			
 			var ter_token = req.cookies.ter_token;
 			if(!ter_token) {
