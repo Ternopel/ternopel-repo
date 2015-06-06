@@ -1,4 +1,4 @@
-(function (sessionconfigu) {
+(function (sessionconfig) {
 	
 	createsession = function(req,res,next) {
 		req.logger.debug("Session has no token. Creating it");
@@ -31,7 +31,7 @@
 	}
 	
 
-	sessionconfigu.init = function (app) {
+	sessionconfig.init = function (app) {
 		app.use(function(req, res, next) {
 			req.logger.info("==================================");
 			req.logger.info("New request to:"+req.path);

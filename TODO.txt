@@ -1,5 +1,4 @@
-1) Encriptar password
-2) Lazy loading
-3) Show sql
-4) Tests
-5) Agregar js name al log
+- Show sql
+- Tests
+- Agregar js name al log
+- Variables de entorno para configuracion

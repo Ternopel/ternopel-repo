@@ -1,5 +1,4 @@
-var util	= require('util'),
-	ld		= require('lodash');
+var cipher = require('../../utils/cipher');
 
 module.exports = {
 	get_registration: function(req, res, next) {
@@ -60,13 +59,13 @@ module.exports = {
 			function(user,callback) {
 				if(is_registration==='true') {
 					req.logger.info('Creating user '+email_address);
-					req.models.users.create({email_address: email_address,password: password, role_id:2},function(err,user) {
+					req.models.users.create({email_address: email_address,password: cipher.encrypt(password), role_id:2},function(err,user) {
 						return callback(err,user);
 					});
 				}
 
 				if(is_registration==='false') {
-					if(user.password != password) {
+					if(user.password != cipher.encrypt(password)) {
 						req.logger.info('Password does not match');
 						var jsonerror = [{'param':'general','msg':'Password invalida'}];
 						return res.status(200).send(jsonerror);
