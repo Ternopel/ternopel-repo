@@ -66,8 +66,16 @@ module.exports = {
 						return callback(err,user);
 					});
 				}
-				else {
-					return callback(null,user);
+
+				if(is_registration==='false') {
+					if(user.password != password) {
+						req.logger.info('Password does not match');
+						var jsonerror = [{'param':'general','msg':'Password invalida'}];
+						return res.status(200).send(jsonerror);
+					}
+					else {
+						return callback(null,user);
+					}
 				}
 			},
 			function(user,callback) {

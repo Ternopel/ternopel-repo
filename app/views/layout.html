@@ -11,6 +11,7 @@
 		<div>
 			<p>header</p>
 			{{?it.is_logged_in}}
+				<p>Bienvenida, {{=it.user_id}}</p>
 				<a href="/logout">Salir</a>
 			{{??}}
 				<p><a href="/registration">Registrarse</a></p>
