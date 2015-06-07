@@ -30,14 +30,16 @@
 		"serve-favicon": "~2.2.1"
 	},
 	"config": {
-		"db_database":	"ternopel_test",
-		"db_protocol":	"postgres",
-		"db_driver": 	"org.postgresql.Driver",
-		"db_host":		"maxito.zintro.com",
-		"db_port": 		"5432",
-		"db_user": 		"postgres",
-		"db_password": 	"Pilarcita1",
-		"db_show_sql": 	"true"
+		"db_database":		"ternopel_test",
+		"db_protocol":		"postgres",
+		"db_driver": 		"org.postgresql.Driver",
+		"db_host":			"maxito.zintro.com",
+		"db_port": 			"5432",
+		"db_user": 			"postgres",
+		"db_password": 		"Pilarcita1",
+		"db_show_sql": 		"true",
+		
+		"app_log_level":	"info"
 	},	
 	"author": "Maximiliano Carrizo"
 }
