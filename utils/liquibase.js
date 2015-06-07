@@ -1,6 +1,6 @@
 (function (liquibase) {
 
-	liquibase.init = function (logger) {
+	liquibase.init = function (logger,config) {
 
 		logger.debug('Before creation child_process');
 		var path	= require('path'),
@@ -14,9 +14,9 @@
 		        	   	'--classpath='+liqdir+'/postgresql-9.3-1101-jdbc4.jar',
 		        	   	'--driver=org.postgresql.Driver',
 		        	   	'--changeLogFile='+liqdir+'/liquibase.xml',
-		        	   	'--url=jdbc:postgresql://localhost:5432/ternopel_test?charSet=UTF-8',
-		        	   	'--username=postgres',
-		        	   	'--password=Pilarcita1',
+		        	   	'--url=jdbc:postgresql://'+config.db_host+':'+config.db_port+'/'+config.db_database+'?charSet=UTF-8',
+		        	   	'--username='+config.db_user,
+		        	   	'--password='+config.db_password,
 		        	   	'update'
 		        	  ];
 		logger.debug('args:'+args);

@@ -1,11 +1,12 @@
-(function (expressConfig) {
+(function (expressconfig) {
 
-	expressConfig.init = function (app, express, logger) {
+	expressconfig.init = function (app, express, logger, config) {
 		
 		logger.info("Setting 'winston' logger");
 		app.use(logger.expressLogger);
 		app.use(function(req, res, next) {
-			req.logger = logger;
+			req.logger	= logger;
+			req.config	= config;
 			next();
 		});
 		
@@ -54,7 +55,7 @@
 		app.use(csrf({ cookie: true }));
 	};
 	
-	expressConfig.addErrorRoutes = function(app,logger) {
+	expressconfig.addErrorRoutes = function(app,logger) {
 
 		// catch 404 and forward to error handler
 		app.use(function(req, res, next) {

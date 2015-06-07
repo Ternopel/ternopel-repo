@@ -1,20 +1,20 @@
 (function (modelconfig) {
 
-	modelconfig.init = function (app, express, logger) {
+	modelconfig.init = function (app, express, logger, config) {
 		var orm = require('orm');
 		
 		logger.debug("Setting database connection info");
 		
 		var opts = {
-			database	: "ternopel_test",
-			protocol	: "postgres",
-			host		: "maxito.zintro.com",
-			port		: 5432,
-			user		: "postgres",
-			password	: "Pilarcita1",
+			database	: config.db_database,
+			protocol	: config.db_protocol,
+			host		: config.db_host,
+			port		: config.db_port,
+			user		: config.db_user,
+			password	: config.db_password,
 			query		:	{
 				pool		: true,
-				debug		: false,
+				debug		: config.db_show_sql,
 				strdates	: false
 			}
 		};
