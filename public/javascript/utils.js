@@ -1,5 +1,5 @@
 function make_post(url, formid, callback) {
-	console.log("Posting form "+formid);
+	console.log("Submitting form");
 	var formdata = $( '#'+formid ).serialize();
 	$.ajax({
 		url : url,
@@ -23,8 +23,9 @@ function show_error_messages(errors) {
 	});
 }
 
-function clear_error_fields() {
+function clear_error_fields(form) {
 	console.log("Clearing error fields");
 	$("div[id$='_error']").html('');
+	form.find(":input").attr("class", "gogog");
 }
 
