@@ -1,7 +1,7 @@
 var winston			= require('winston'),
 	expressWinston	= require('express-winston'),
 	dateformat		= require('dateformat'),
-	appconfig		= require('./appconfig');
+	appconfig		= require('./appconfig')();
 
 winston.emitErrs = true;
 

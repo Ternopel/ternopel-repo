@@ -29,12 +29,11 @@
 			return next();
 		});
 	}
-	
 
 	sessionconfig.init = function (app) {
 		app.use(function(req, res, next) {
 			req.logger.info("==================================");
-			req.logger.info("New request to:"+req.path);
+			req.logger.info("New "+req.method+" to:"+req.path);
 			req.logger.info("==================================");
 			
 			var ter_token = req.cookies.ter_token;
