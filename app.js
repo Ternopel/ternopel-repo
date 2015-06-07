@@ -27,4 +27,30 @@ routesconfig.init(app);
 logger.info("Configuring error routes");
 expressconfig.addErrorRoutes(app,logger); 
 
-module.exports = app;
+logger.info("Starting server");
+var server = app.listen(3000, function() {
+	logger.info('Listening on port:'+server.address().port);
+});
+
+
+module.exports = function () {
+	return {
+		stop: function() {
+			logger.info("Closing server");
+			server.close();
+		},
+		listen: function(ready) {
+				logger.info("Listen");
+				server.listen(3000, function() {
+					return ready(appconfig);
+				});
+		},
+		get_test_app: function () {
+			appconfig.app_run_liquibase = 'false';
+			return app;
+		}
+	};
+};
+
+
+

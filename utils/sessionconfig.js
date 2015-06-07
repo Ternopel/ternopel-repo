@@ -11,7 +11,7 @@
 			req.logger.debug('User is NOT logged IN !!');
 			req.usersession = usersession;
 			req.logger.info('Created session:'+JSON.stringify(req.usersession));
-			res.cookie("ter_token", token, { secure:true, httpOnly: true, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
+			res.cookie("ter_token", token, { httpOnly: true, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
 			next();
 		});
 	};
