@@ -12,10 +12,10 @@
 			<p>header</p>
 			{{?it.is_logged_in}}
 				<p>Bienvenido, {{=it.email_address}}</p>
-				<a href="/logout">Salir</a>
+				<a id="logout" href="/logout">Salir</a>
 			{{??}}
-				<p><a href="/registration">Registrarse</a></p>
-				<p><a href="/login">Ingresar</a></p>
+				<p><a id="register" href="/registration">Registrarse</a></p>
+				<p><a id="login" href="/login">Ingresar</a></p>
 			{{?}}	
 		</div>
 		{{=it.body}}

@@ -13,7 +13,7 @@ liquibase.init(logger,appconfig);
 var app = express(); 
 
 logger.info("Configuring express");
-expressconfig.init(app, express,logger, appconfig);
+ expressconfig.init(app, express,logger, appconfig);
 
 logger.info("Configuring orm");
 modelconfig.init(app, express, logger, appconfig);
