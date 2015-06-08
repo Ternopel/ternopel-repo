@@ -9,27 +9,32 @@ var request		= require('supertest'),
 	browser,
 	server;
 
-describe('Expert sign up test1', function(){
+describe('Expert sign up test1', function() {
+	
 	this.timeout(0);
 
 	before(function(done) {
 		
 		config.app_run_liquibase	= 'false';
 		config.db_database			= config.test_db_datatabase;
-		
-		var appref = app.init(logger,config);
-		
-		logger.info('=======>'+__dirname);
-		
-		logger.info("Starting TEST server");
-		server = appref.listen(3000, function() {
-			logger.info('Listening on port:'+server.address().port);
-		});
-		
-		var database = appref.get('database');
-		database.sync();
-		done();
 
+		app.init(logger,config, function(app,db) {
+			logger.info("Starting server");
+			var server = app.listen(3000, function() {
+				logger.info('Listening on port:'+server.address().port);
+				db.drop(function(err) {
+					if(err) {
+						done(err);
+					}
+					else {
+						db.sync(function(err) {
+							done(err);
+						});
+					}
+				});
+			});
+			
+		});		
 		
 //		browser = soda.createClient({
 //			host: 'localhost',

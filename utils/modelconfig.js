@@ -1,6 +1,6 @@
 (function (modelconfig) {
 
-	modelconfig.init = function (app, express, logger, config) {
+	modelconfig.init = function (app, express, logger, config, callback) {
 		var orm = require('orm');
 		
 		logger.debug("Setting database connection info");
@@ -21,14 +21,12 @@
 		
 		app.use(orm.express(opts, {
 			define: function (db, models) {
-				require('../app/models/roles.js')(orm,db,models,logger);
-				require('../app/models/users.js')(orm,db,models,logger);
 				require('../app/models/userssessions.js')(orm,db,models,logger);
-				
-				// Create database from scratch
-				// db.sync();
-				
-				app.set('database',db);
+				require('../app/models/users.js')(orm,db,models,logger);
+				require('../app/models/roles.js')(orm,db,models,logger);
+
+				return callback(app,db);
+//				app.set('database',db);
 			}
 		}));		
 	};

@@ -18,13 +18,17 @@
     "csurf": "^1.8.2",
     "dateformat": "^1.0.11",
     "debug": "~2.2.0",
+    "expect": "^1.6.0",
+    "expert": "^0.3.2",
     "express": "~4.12.4",
     "express-dot": "^0.1.0",
     "express-session": "^1.11.2",
     "express-validator": "^2.10.0",
     "express-winston": "^0.3.1",
     "html": "0.0.10",
+    "istanbul": "^0.3.14",
     "lodash": "^3.9.3",
+    "mocha": "^2.2.5",
     "node-uuid": "^1.4.3",
     "orm": "^2.1.26",
     "pg": "^4.3.0",
@@ -33,19 +37,17 @@
     "supertest": "^1.0.1"
   },
   "config": {
-	"app_log_level": 		"debug",
-	"app_run_liquibase":	"true",
-
-	"db_database":			"ternopel",
-    "db_protocol":			"postgres",
-    "db_driver":			"org.postgresql.Driver",
-    "db_host":				"maxito.zintro.com",
-    "db_port":				"5432",
-    "db_user":				"postgres",
-    "db_password":			"Pilarcita1",
-    "db_show_sql":			"true",
-    
-    "test_db_datatabase":	"ternopel_test"
+    "app_log_level": "debug",
+    "app_run_liquibase": "true",
+    "db_database": "ternopel",
+    "db_protocol": "postgres",
+    "db_driver": "org.postgresql.Driver",
+    "db_host": "maxito.zintro.com",
+    "db_port": "5432",
+    "db_user": "postgres",
+    "db_password": "Pilarcita1",
+    "db_show_sql": "true",
+    "test_db_datatabase": "ternopel_test"
   },
   "author": "Maximiliano Carrizo"
 }
