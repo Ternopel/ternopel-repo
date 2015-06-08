@@ -1,6 +1,0 @@
-<div class="header">
-	<p id="header_user_info">
-		Bienvenido
-		<a class="login" title="Conectarse a su cuenta de cliente" href="/my-account">Entrar</a>
-	</p>
-</div>

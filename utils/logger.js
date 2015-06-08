@@ -1,12 +1,12 @@
 var winston			= require('winston'),
 	expressWinston	= require('express-winston'),
 	dateformat		= require('dateformat'),
-	appconfig		= require('./appconfig')();
+	config			= require('./config')();
 
 winston.emitErrs = true;
 
 var console = new winston.transports.Console({
-	level: appconfig.app_log_level,
+	level: config.app_log_level,
 	handleExceptions: true,
 	json: false,
 	colorize: true,

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Ternopel Web Application",
   "private": true,
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node ./app",
+    "start": "node ./server",
     "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -u exports -R spec --recursive"
   },
   "dependencies": {
@@ -33,16 +33,19 @@
     "supertest": "^1.0.1"
   },
   "config": {
-    "db_database": "ternopel_test",
-    "db_protocol": "postgres",
-    "db_driver": "org.postgresql.Driver",
-    "db_host": "maxito.zintro.com",
-    "db_port": "5432",
-    "db_user": "postgres",
-    "db_password": "Pilarcita1",
-    "db_show_sql": "false",
-    "app_log_level": "debug",
-    "app_run_liquibase": "true"
+	"app_log_level": 		"debug",
+	"app_run_liquibase":	"true",
+
+	"db_database":			"ternopel",
+    "db_protocol":			"postgres",
+    "db_driver":			"org.postgresql.Driver",
+    "db_host":				"maxito.zintro.com",
+    "db_port":				"5432",
+    "db_user":				"postgres",
+    "db_password":			"Pilarcita1",
+    "db_show_sql":			"false",
+    
+    "test_db_datatabase":	"ternopel_test"
   },
   "author": "Maximiliano Carrizo"
 }

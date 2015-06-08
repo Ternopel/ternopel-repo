@@ -1,21 +1,36 @@
-var server	= require('E:/Zintro/workspaces/ternopel/ternopel-repo/app.js');
-var request	= require('supertest'),
-	soda	= require('soda'),
-	assert	= require('assert'),
-	expect	= require('expect'),
+var app			= require('E:/Zintro/workspaces/ternopel/ternopel-repo/app.js'),
+	logger		= require("E:/Zintro/workspaces/ternopel/ternopel-repo/utils/logger"),
+	config		= require("E:/Zintro/workspaces/ternopel/ternopel-repo/utils/config")();
+
+var request		= require('supertest'),
+	soda		= require('soda'),
+	assert		= require('assert'),
+	expect		= require('expect'),
 	browser;
 
 describe('Expert sign up test1', function(){
 	this.timeout(0);
 
 	before(function(done) {
-		browser = soda.createClient({
-			host: 'localhost',
-			port: 4444,
-			url: 'http://localhost:3000',
-			browser: 'googlechrome'
+		
+		config.app_run_liquibase	= false;
+		config.db_database			= config.test_db_datatabase;
+		
+		var appref = app.init(logger,config);
+		
+		logger.info("Starting TEST server");
+		var server = appref.listen(3000, function() {
+			logger.info('Listening on port:'+server.address().port);
 		});
-		done();
+
+		
+//		browser = soda.createClient({
+//			host: 'localhost',
+//			port: 4444,
+//			url: 'http://localhost:3000',
+//			browser: 'googlechrome'
+//		});
+//		done();
 	});
 
  	it('Sign up with existing email', function(done) {
