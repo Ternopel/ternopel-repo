@@ -1,27 +1,34 @@
-var app			= require('E:/Zintro/workspaces/ternopel/ternopel-repo/app.js'),
-	logger		= require("E:/Zintro/workspaces/ternopel/ternopel-repo/utils/logger"),
-	config		= require("E:/Zintro/workspaces/ternopel/ternopel-repo/utils/config")();
+var app			= require(__dirname+'/../app.js'),
+	logger		= require(__dirname+'/../utils/logger'),
+	config		= require(__dirname+'/../utils/config')();
 
 var request		= require('supertest'),
 	soda		= require('soda'),
 	assert		= require('assert'),
 	expect		= require('expect'),
-	browser;
+	browser,
+	server;
 
 describe('Expert sign up test1', function(){
 	this.timeout(0);
 
 	before(function(done) {
 		
-		config.app_run_liquibase	= false;
+		config.app_run_liquibase	= 'false';
 		config.db_database			= config.test_db_datatabase;
 		
 		var appref = app.init(logger,config);
 		
+		logger.info('=======>'+__dirname);
+		
 		logger.info("Starting TEST server");
-		var server = appref.listen(3000, function() {
+		server = appref.listen(3000, function() {
 			logger.info('Listening on port:'+server.address().port);
 		});
+		
+		var database = appref.get('database');
+		database.sync();
+		done();
 
 		
 //		browser = soda.createClient({
@@ -83,5 +90,6 @@ describe('Expert sign up test1', function(){
  	
 	after(function (){
 		console.log('Stopping');
+		server.stop();
 	});
 });

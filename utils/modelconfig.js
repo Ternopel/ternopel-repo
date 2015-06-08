@@ -27,6 +27,8 @@
 				
 				// Create database from scratch
 				// db.sync();
+				
+				app.set('database',db);
 			}
 		}));		
 	};
