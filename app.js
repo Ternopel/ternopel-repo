@@ -17,6 +17,8 @@
 		logger.info("Configuring express");
 		expressconfig.init(app, express,logger, config);
 
+		logger.info("Configuring orm");
+		modelconfig.init(app, express, logger, config, callback);
 
 		logger.info("Configuring user session");
 		sessionconfig.init(app);
@@ -27,8 +29,6 @@
 		logger.info("Configuring error routes");
 		expressconfig.addErrorRoutes(app,logger); 
 		
-		logger.info("Configuring orm");
-		modelconfig.init(app, express, logger, config, callback);
 	};
 
 })(module.exports);

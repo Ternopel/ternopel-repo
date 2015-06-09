@@ -39,6 +39,7 @@
   "config": {
     "app_log_level": "debug",
     "app_run_liquibase": "true",
+    "app_port": "3000",
     "db_database": "ternopel",
     "db_protocol": "postgres",
     "db_driver": "org.postgresql.Driver",
@@ -47,7 +48,8 @@
     "db_user": "postgres",
     "db_password": "Pilarcita1",
     "db_show_sql": "true",
-    "test_db_datatabase": "ternopel_test"
+    "test_db_datatabase": "ternopel_test",
+    "test_app_port": "3000"
   },
   "author": "Maximiliano Carrizo"
 }
