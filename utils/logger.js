@@ -7,7 +7,7 @@ winston.emitErrs = true;
 
 var console = new winston.transports.Console({
 	level: config.app_log_level,
-	handleExceptions: true,
+	handleExceptions: false,
 	json: false,
 	colorize: true,
 	timestamp: function() {

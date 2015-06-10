@@ -1,19 +1,31 @@
 <script src="/javascript/registration.js" ></script>
-<div>
-	<div id="general_error"></div>
-	<form id="registration_form">
-		<input type="hidden" name="_csrf" value="{{=it.csrfToken}}">
-		<input type="hidden" name="is_registration" value="{{=it.is_registration}}">
-		<p>
-			<input type="text" name="email_address" placeholder="Usuario" />
-			<div id="email_address_error"></div>
-		</p>
-		<p>
-			<input type="password" name="password" placeholder="Clave" />
-			<div id="password_error"></div>
-		</p>
-		<p>
-			<input id="submit" type="submit" value="Registrar"/>
-		</p>
-	</form>
+<div class="middleSection">
+	<div class="content">
+		<div class="notifications">
+			<div id="general_error" class="error"></div>
+		</div>
+		<h1>Browser Calls</h1>
+		
+		<form id="registration_form">
+			<input type="hidden" name="_csrf" value="{{=it.csrfToken}}">
+			<input type="hidden" name="is_registration" value="{{=it.is_registration}}">
+			<div class="crudForm">
+				<div class="form2Cols">
+					<span class="formItem error"> 
+						<label>Usuario</label> 
+						<input type="text" name="email_address"></input>
+						<div class="errorMsg" id="email_address_error" ></div>
+					</span> 
+					<span class="formItem error"> 
+						<label>Clave</label> 
+						<input type="password" name="password"></input>
+						<div class="errorMsg" id="password_error" ></div>
+					</span> 
+				</div>
+			</div>
+			<div class="buttons">
+				<input id="submit" type="submit" value="Registrarse" />
+			</div>
+		</form>		
+	</div>
 </div>

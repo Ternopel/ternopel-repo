@@ -1,27 +1,46 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Simple login</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+	
+		<title>Papelera Ternopel</title>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/styles.css" media="screen,projection" />
 		<script src="/javascript/jquery.min.js"></script>
 		<script src="/javascript/utils.js" ></script>
 	</head>
 
 	<body>
-		<div>
-			<p>header</p>
-			{{?it.is_logged_in}}
-				<p>Bienvenido, {{=it.email_address}}</p>
-				<a id="logout" href="/logout">Salir</a>
-			{{??}}
-				<p><a id="register" href="/registration">Registrarse</a></p>
-				<p><a id="login" href="/login">Ingresar</a></p>
-			{{?}}	
+		<div class="header">
+			<div class="pageHeader">
+				<div class="logo">
+					<img src="/images/baseImages/tpLogo.png" alt="Avaya" />
+				</div>
+				<div class="userPanel">
+					<p class="user">
+						{{?it.is_logged_in}}
+							<span>Bienvenido, <em>{{=it.email_address}}</em></span>
+						{{??}}
+							<span>Bienvenido, <em>Extraño</em></span>
+						{{?}}	
+					</p>
+				</div>
+				<div class="toolbar">
+					<div class="version">Ternopel Web Site - 1.0</div>
+					<div class="menu">
+						{{?it.is_logged_in}}
+							<a class="user" href="/myaccount">Mi cuenta</a> 
+							<a class="logoff" href="/logout">Salir</a>
+						{{??}}
+							<a class="user" id="register" href="/registration">Registrarse</a>
+							<a class="user" id="login" href="/login">Ingresar</a>
+						{{?}}	
+					</div>
+				</div>
+			</div>
 		</div>
 		{{=it.body}}
-		<div>
-			<p>footer</p>
-		</div>
+		<div class="footer"></div>
 	</body>
 </html>
 
