@@ -34,6 +34,7 @@ CREATE TABLE products
 	units int4,
 	wholesale float8,
 	retail float8,
+	url varchar(255) NOT NULL UNIQUE,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 

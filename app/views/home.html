@@ -9,7 +9,7 @@
 				<ul>
 					{{~ category.products:product}}
 						<li>
-							<p>{{=product.description}}</p>
+							<a href="/{{=category.url}}/{{=product.url}}">{{=product.description}}</a>
 						</li>
 					{{~}}
 				</ul>
