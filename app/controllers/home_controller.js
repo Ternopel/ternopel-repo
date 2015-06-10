@@ -1,20 +1,20 @@
 module.exports = {
+		
 	get_home: function(req, res, next) {
-		req.logger.info('Rendering home');
-		if(req.usersession.isLogged()===true) {
-			req.logger.debug('Getting logged in user info. Session:'+req.usersession.token);
-			req.usersession.getUser(function (err, user) {
-				if(err) {
-					next(err);
-				}
-				req.logger.debug("User found:"+JSON.stringify(user));
-				res.render('home.html',{category:req.params.category, product:req.params.product, is_logged_in:true, email_address: user.email_address});
-			});
-		}
-		else {
-			req.logger.debug('No info user to display');
-			res.render('home.html',{category:req.params.category, product:req.params.product, is_logged_in:false});
-		}
+		var ld = require('lodash');
+		
+		req.logger.info('Rendering home with:'+JSON.stringify(req.sessionstatus));
+		var pageinfo = ld.merge(req.sessionstatus, {category:req.params.category, product:req.params.product});
+		req.models.categories.find({},function(err,categories) {
+			if(err) {
+				next(err);
+			}
+		
+			
+			req.logger.debug('categories:'+JSON.stringify(categories));
+			ld.merge(pageinfo,{categories:categories});
+			res.render('home.html',pageinfo);
+		});
 		
 	}
 };

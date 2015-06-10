@@ -13,6 +13,7 @@ CREATE TABLE categories
 (
 	id bigint DEFAULT nextval('categories_sequence') NOT NULL,
 	name varchar(255) NOT NULL UNIQUE,
+	url varchar(255) NOT NULL UNIQUE,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 

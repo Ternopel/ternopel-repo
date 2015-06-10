@@ -1,24 +1,6 @@
 (function (sessionconfig) {
 	
-	createsession = function(req,res,next) {
-		req.logger.debug("Session has no token. Creating it");
-		var token	= require('node-uuid').v1();
-		req.logger.debug("Creating user session");
-		req.models.userssessions.create({token: token,last_access: new Date()},function(err,usersession) {
-			if(err) {
-				return next(err);
-			}
-			req.logger.debug('User is NOT logged IN !!');
-			req.usersession = usersession;
-			req.logger.info('Created session:'+JSON.stringify(req.usersession));
-			res.cookie("ter_token", token, { httpOnly: true, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
-			next();
-		});
-	};
-	
-	updatesession = function(req,res,next,usersession) {
-		req.logger.debug("Session:"+JSON.stringify(usersession));
-		req.logger.debug('User is logged in:'+usersession.isLogged());
+	savesession	= function(req,next,usersession) {
 		req.logger.debug('Changing last access');
 		usersession.save({last_access: new Date()},function(err) {
 			if(err) {
@@ -28,6 +10,41 @@
 			req.usersession = usersession;
 			return next();
 		});
+	}
+	
+	createsession = function(req,res,next) {
+		req.logger.debug("Session has no token. Creating it");
+		var token	= require('node-uuid').v1();
+		req.logger.debug("Creating user session");
+		req.models.userssessions.create({token: token,last_access: new Date()},function(err,usersession) {
+			if(err) {
+				return next(err);
+			}
+			req.logger.debug('User is NOT logged IN !!');
+			req.usersession		= usersession;
+			req.sessionstatus	= {is_logged_in:false};
+			req.logger.info('Created session:'+JSON.stringify(req.usersession));
+			res.cookie("ter_token", token, { httpOnly: true, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
+			next();
+		});
+	};
+	
+	updatesession = function(req,res,next,usersession) {
+		req.logger.debug("Session:"+JSON.stringify(usersession));
+		req.logger.debug('User is logged in:'+usersession.isLogged());
+		if(usersession.isLogged()===true) {
+			usersession.getUser(function (err, user) {
+				if(err) {
+					next(err);
+				}
+				req.sessionstatus = {is_logged_in:true, email_address: user.email_address};
+				savesession(req,next,usersession);
+			});
+		}
+		else {
+			req.sessionstatus	= {is_logged_in:false};
+			savesession(req,next,usersession);
+		}
 	}
 
 	sessionconfig.init = function (app) {
