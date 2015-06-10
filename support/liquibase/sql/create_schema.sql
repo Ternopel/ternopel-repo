@@ -1,38 +1,52 @@
 /* Create Sequences */
-
-CREATE SEQUENCE users_sequence;
-CREATE SEQUENCE users_sessions_sequence;
-
-
+CREATE SEQUENCE configuration_sequence start with 1000;
+CREATE SEQUENCE packaging_sequence start with 1000;
+CREATE SEQUENCE categories_sequence start with 1000;
+CREATE SEQUENCE products_sequence start with 1000;
+CREATE SEQUENCE roles_sequence start with 1000;
+CREATE SEQUENCE users_sequence start with 1000;
+CREATE SEQUENCE users_sessions_sequence start with 1000;
 
 /* Create Tables */
 
 CREATE TABLE categories
 (
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval('categories_sequence') NOT NULL,
 	name varchar(255) NOT NULL UNIQUE,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
 
+CREATE TABLE packaging
+(
+	id bigint DEFAULT nextval('packaging_sequence') NOT NULL,
+	name varchar(255) NOT NULL UNIQUE,
+	PRIMARY KEY (id)
+) WITHOUT OIDS;
+
 CREATE TABLE products
 (
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval('products_sequence') NOT NULL,
 	category_id bigint NOT NULL,
+	packaging_id bigint NOT NULL,
+	description varchar(255) NOT NULL,
+	units int4,
+	wholesale float8,
+	retail float8,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
 
 CREATE TABLE configuration
 (
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval('configuration_sequence') NOT NULL,
 	CONSTRAINT configuration_pkey PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
 
 CREATE TABLE roles
 (
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval('roles_sequence') NOT NULL,
 	name varchar(255) NOT NULL UNIQUE,
 	CONSTRAINT roles_pkey PRIMARY KEY (id)
 ) WITHOUT OIDS;
@@ -70,6 +84,12 @@ ALTER TABLE products
 	ON DELETE RESTRICT
 ;
 
+ALTER TABLE products
+	ADD FOREIGN KEY (packaging_id)
+	REFERENCES packaging (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
 
 ALTER TABLE users
 	ADD FOREIGN KEY (role_id)
