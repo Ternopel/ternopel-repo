@@ -12,3 +12,4 @@ app.init(logger,config, function(app,db) {
 	
 });
 
+require('jsreport').bootstrapper({ httpPort: 4000 }).start();
