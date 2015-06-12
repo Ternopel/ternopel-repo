@@ -27,6 +27,7 @@
     "express-winston": "^0.3.1",
     "html": "0.0.10",
     "istanbul": "^0.3.14",
+    "jsreport": "^0.7.0",
     "lodash": "^3.9.3",
     "mocha": "^2.2.5",
     "node-uuid": "^1.4.3",
