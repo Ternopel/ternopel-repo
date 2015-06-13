@@ -82,15 +82,20 @@ module.exports = {
 						next(err);
 					}
 					req.logger.info('Complete session:'+JSON.stringify(req.usersession));
-					return callback(err);
+					return callback(err,user);
 				});
 			}
 		], 
-		function(err, result) {
+		function(err, user) {
 			if(err) {
  				next(err);
 			}
-			return res.status(200).send('success');
+			if(user.role_id === req.constants.ADMIN_ID) {
+				return res.status(200).send('success_admin');
+			}
+			if(user.role_id === req.constants.CUSTOMER_ID) {
+				return res.status(200).send('success_client');
+			}
 		});
 	}
 };
