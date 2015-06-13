@@ -10,6 +10,12 @@
 			next();
 		});
 		
+		logger.debug("Setting constants");
+		app.use(function(req, res, next) {
+			req.constants = require('../utils/constants');
+			next();
+		});
+		
 		logger.debug("Setting public folder");
 		var path = require('path');
 		var publicFolder = path.dirname(module.parent.filename)	+ "/public";
@@ -68,14 +74,16 @@
 		// will print stacktrace
 		if (app.get('env') === 'development') {
 			app.use(function(err, req, res, next) {
-				res.render('error.html',{error:err});
+				var pageinfo = ld.merge(req.sessionstatus, {error:err});
+				res.render('error.html',pageinfo);
 			});
 		}
 
 		// production error handler
 		// no stacktraces leaked to user
 		app.use(function(err, req, res, next) {
-			res.render('error.html',{error:err});
+			var pageinfo = ld.merge(req.sessionstatus, {error:err});
+			res.render('error.html',pageinfo);
 		});
 		
 		logger.debug("Setting 'winston' error logger");

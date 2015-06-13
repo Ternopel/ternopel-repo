@@ -14,7 +14,9 @@
 		<div class="header">
 			<div class="pageHeader">
 				<div class="logo">
-					<img src="/images/baseImages/tpLogo.png" alt="Avaya" />
+					<a href="/">
+						<img src="/images/baseImages/tpLogo.png" alt="Ternopel" />
+					</a>
 				</div>
 				<div class="userPanel">
 					<p class="user">
@@ -29,6 +31,7 @@
 					<div class="version">Ternopel Web Site - 1.0</div>
 					<div class="menu">
 						{{?it.is_logged_in}}
+							<a class="user" href="/">Home</a> 
 							<a class="user" href="/myaccount">Mi cuenta</a> 
 							<a class="logoff" href="/logout">Salir</a>
 						{{??}}

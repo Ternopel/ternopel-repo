@@ -59,7 +59,7 @@ module.exports = {
 			function(user,callback) {
 				if(is_registration==='true') {
 					req.logger.info('Creating user '+email_address);
-					req.models.users.create({email_address: email_address,password: cipher.encrypt(password), role_id:2},function(err,user) {
+					req.models.users.create({email_address: email_address,password: cipher.encrypt(password), role_id:req.constants.CUSTOMER_ID},function(err,user) {
 						return callback(err,user);
 					});
 				}
