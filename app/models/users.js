@@ -11,7 +11,7 @@ module.exports = function (orm, db, models,logger) {
 		{
 			methods: {
 				fullName: function() {
-					return this.firstName + ' ' + this.lastName;
+					return this.first_name + ' ' + this.last_name;
 				}
 			},
 			validations: {

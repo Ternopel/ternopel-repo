@@ -12,6 +12,7 @@ function make_post(url, formid, callback) {
 function show_error_messages(errors) {
 	console.log("Showing error messages");
 	$.each(errors, function(index, error) {
+		$("div[id='notifications']").show();
 		if (error.param === 'general') {
 			$("#" + error.param + "_error").show();
 			$("#" + error.param + "_error").html(error.msg);
@@ -25,7 +26,7 @@ function show_error_messages(errors) {
 
 function clear_error_fields(form) {
 	console.log("Clearing error fields");
-	$("div[id$='_error']").html('');
+	$("div[id='notifications']").hide();
 	form.find(":input").attr("class", "gogog");
 }
 

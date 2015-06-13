@@ -11,12 +11,18 @@ module.exports = {
 
 		var email_address	= req.body.email_address;
 		var password		= req.body.password;
+		var last_name		= req.body.last_name;
+		var first_name		= req.body.first_name;
 		var is_registration	= req.body.is_registration;
 		req.logger.debug('User trying to register:'+req.body.email_address);
 		
 		req.logger.debug("Defining validators");
 		req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
 		req.assert('password', 'La clave es requerida').notEmpty();
+		if(is_registration==='true') {
+			req.assert('last_name', 'El apellido es requerido').notEmpty();
+			req.assert('first_name', 'El nombre es requerido').notEmpty();
+		}
 
 		req.logger.info("Executing validation");
 		var valerrors = req.validationErrors();
@@ -59,7 +65,11 @@ module.exports = {
 			function(user,callback) {
 				if(is_registration==='true') {
 					req.logger.info('Creating user '+email_address);
-					req.models.users.create({email_address: email_address,password: cipher.encrypt(password), role_id:req.constants.CUSTOMER_ID},function(err,user) {
+					req.models.users.create({	email_address:	email_address,
+												password:		cipher.encrypt(password), 
+												role_id:		req.constants.CUSTOMER_ID,
+												last_name:		last_name,
+												first_name:		first_name},function(err,user) {
 						return callback(err,user);
 					});
 				}

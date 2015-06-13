@@ -37,7 +37,7 @@
 				if(err) {
 					next(err);
 				}
-				req.sessionstatus = {is_logged_in:true, email_address: user.email_address, role_id: user.role_id};
+				req.sessionstatus = {is_logged_in:true, full_name: user.fullName(), role_id: user.role_id};
 				savesession(req,next,usersession);
 			});
 		}
