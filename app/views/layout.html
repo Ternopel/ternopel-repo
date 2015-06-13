@@ -31,8 +31,12 @@
 					<div class="version">Ternopel Web Site - 1.0</div>
 					<div class="menu">
 						{{?it.is_logged_in}}
-							<a class="user" href="/">Home</a> 
-							<a class="user" href="/myaccount">Mi cuenta</a> 
+							{{?it.is_admin}}
+								<a class="user" href="/report" target="_blank">Listado de Productos</a>
+							{{??}}
+								<a class="user" href="/">Home</a> 
+								<a class="user" href="/myaccount">Mi cuenta</a> 
+							{{?}}	
 							<a class="logoff" href="/logout">Salir</a>
 						{{??}}
 							<a class="user" id="register" href="/registration">Registrarse</a>

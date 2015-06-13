@@ -1,5 +1,5 @@
 module.exports = {
-	get_about: function(req, res, next) {
+	get_report: function(req, res, next) {
 		
 		req.logger.info('Starting waterfall');
 		var waterfall = require('async-waterfall');
@@ -7,29 +7,35 @@ module.exports = {
 			function(callback) {
 				req.logger.info('Reading template file');
 				var fs = require('fs');
-				fs.readFile('./app/reports/products_by_category.html', "utf8", function (err, data) {
+				fs.readFile('./app/reports/products_by_category.html', "utf8", function (err, content) {
 					if (err) {
 						return callback(err);
 					}
-					return callback(null,data);
+					return callback(null,content);
 				});
 			},
-			function(data,callback) {
+			function(content,callback) {
 				req.logger.info('Reading categories');
 				req.models.categories.find({},['name'],function(err,categories) {
 					if(err) {
 						return callback(err);
 					}
-					return callback(null,data,categories);
+					return callback(null,content,categories);
 				});
 			},
-			function(data,categories, callback) {
+			function(content,categories, callback) {
 				req.logger.info('Generating report');
 				jsreport = require('jsreport');
 				jsreport.render({
 					template: {
-						content: data,
-						engine: "jsrender"
+						content: content,
+						engine: "jsrender",
+						phantom: {
+							header: "<table> <tr> <td><h1>Listado de Productos por Categor&iacute;a<h1></td> <td style='text-align: right; width:350px;'><h1>Ternopel</h1></td> </tr> </table>",
+							footer: "<div style='text-align:center'>Página {#pageNum} de {#numPages}</div>",
+							orientation: "portrait",
+							width: "600px"
+						}
 					},
 					data: { 
 						categories: categories 
@@ -49,24 +55,5 @@ module.exports = {
 				out.stream.pipe(res);
 			}
 		});
-
-
-		
-		/*
-		var fs			= require('fs');
-		var jsreport	= require('jsreport');	
-		fs.readFile('./app/reports/products_by_category.html', "utf8", function (err, data) {
-			if (err) {
-				next(err);
-			}
-			req.logger.info(data);
-			jsreport.render(data).then(function(out) {
-				out.stream.pipe(res);
-			}).catch(function(e) {
-				res.end(e.message);
-			});		
-		});		
-		*/
-	
 	}
 };

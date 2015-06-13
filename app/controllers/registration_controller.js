@@ -101,10 +101,10 @@ module.exports = {
  				next(err);
 			}
 			else {
-				if(user.role_id === req.constants.ADMIN_ID) {
+				if(user.isAdmin()) {
 					return res.status(200).send('success_admin');
 				}
-				if(user.role_id === req.constants.CUSTOMER_ID) {
+				if(!user.isAdmin()) {
 					return res.status(200).send('success_client');
 				}
 			}

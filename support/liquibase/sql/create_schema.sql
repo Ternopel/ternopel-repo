@@ -59,8 +59,8 @@ CREATE TABLE users
 	id bigint DEFAULT nextval('users_sequence') NOT NULL,
 	email_address varchar(256) NOT NULL UNIQUE,
 	password varchar(255) NOT NULL,
-	first_name varchar(256),
-	last_name varchar(256),
+	first_name varchar(256) NOT NULL,
+	last_name varchar(256) NOT NULL,
 	role_id bigint NOT NULL,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
