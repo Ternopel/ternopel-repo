@@ -100,11 +100,13 @@ module.exports = {
 			if(err) {
  				next(err);
 			}
-			if(user.role_id === req.constants.ADMIN_ID) {
-				return res.status(200).send('success_admin');
-			}
-			if(user.role_id === req.constants.CUSTOMER_ID) {
-				return res.status(200).send('success_client');
+			else {
+				if(user.role_id === req.constants.ADMIN_ID) {
+					return res.status(200).send('success_admin');
+				}
+				if(user.role_id === req.constants.CUSTOMER_ID) {
+					return res.status(200).send('success_client');
+				}
 			}
 		});
 	}

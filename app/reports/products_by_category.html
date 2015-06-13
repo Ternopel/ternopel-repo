@@ -1,0 +1,34 @@
+
+<br>
+<table>
+	{{for categories}}
+	<tr>
+		<td><h2>Categor&iacute;a:{{:name}}</h2></td>
+	</tr>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<th style='text-align: left;'>Nombre</th>
+					<th>Precio x Menor</th>
+					<th>Packaging</th>
+					<th>Unidades</th>
+					<th>Precio x Mayor</th>
+				</tr>
+				{{for products}}
+				<tr>
+					<td>{{:description}}</td>
+					<td style='text-align: right;'>$ {{:retail}}</td>
+					<td style='text-align: right;'>{{:packaging_id}}</td>
+					<td style='text-align: right;'>{{:units}}</td>
+					<td style='text-align: right;'>$ {{:wholesale}}</td>
+				</tr>
+				{{/for}}
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+	</tr>
+	{{/for}}
+</table>

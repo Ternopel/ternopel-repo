@@ -32,7 +32,7 @@ module.exports = {
 				}
 			}
 			
-//			req.logger.debug('categories:'+JSON.stringify(categories));
+			req.logger.debug('categories:'+JSON.stringify({categories:categories}));
 			ld.merge(pageinfo,{categories:categories});
 			res.render('home.html',pageinfo);
 		});

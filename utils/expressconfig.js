@@ -74,6 +74,7 @@
 		// will print stacktrace
 		if (app.get('env') === 'development') {
 			app.use(function(err, req, res, next) {
+				var ld = require('lodash');
 				var pageinfo = ld.merge(req.sessionstatus, {error:err});
 				res.render('error.html',pageinfo);
 			});
@@ -82,6 +83,7 @@
 		// production error handler
 		// no stacktraces leaked to user
 		app.use(function(err, req, res, next) {
+			var ld = require('lodash');
 			var pageinfo = ld.merge(req.sessionstatus, {error:err});
 			res.render('error.html',pageinfo);
 		});
