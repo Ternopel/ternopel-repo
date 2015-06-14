@@ -15,8 +15,9 @@ module.exports = {
 				});
 			},
 			function(content,callback) {
+				var modelsutil	= require('../models/modelsutil');
 				req.logger.info('Reading categories');
-				req.models.categories.find({},['name'],function(err,categories) {
+				modelsutil.getCategories(req,res,next,function(err,categories) {
 					if(err) {
 						return callback(err);
 					}
