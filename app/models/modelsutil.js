@@ -12,11 +12,11 @@
 			}
 			req.logger.debug('Categories readed:'+categories.length);
 			async.each(categories, function(category, callback) {
-				req.logger.debug("Category:"+JSON.stringify(category));
 				category.getProducts().order('description').run(function(err,products) {
 					if(err) {
 						return callback(err);
 					}
+					req.logger.debug("Category:"+category.name+" Products readed:"+products.length);
 					ld.merge(category, {products:products});
 					return callback();
 				});
