@@ -21,7 +21,7 @@
 		var publicFolder = path.dirname(module.parent.filename)	+ "/public";
 		
 		logger.debug("Setting 'dot' as view engine");
-		var expressdot = require('express-dot');
+		var expressdot = require('../utils/express-dot');
 		app.set('view engine', 'dot'); 
 		app.engine('html', expressdot.__express); 
 

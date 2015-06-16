@@ -1,11 +1,11 @@
 (function (routesconfig) {
 		
 	function restrict(req, res, next) {
-		if (req.sessionstatus.is_logged_in === true && req.sessionstatus.role_id === req.constants.ADMIN_ID) {
+		if (req.sessionstatus.is_logged_in === true && req.sessionstatus.is_admin === true) {
 			next();
 		} 
 		else {
-			next('Restricted area !');
+			next('Usted no tiene permisos para ver esta página. Vayase de aquí o llamaremos al CUCO !');
 		}
 	}	
 
@@ -13,6 +13,7 @@
 	routesconfig.init = function (app) {
 		app.get( '/admin',				restrict);
 		app.get( '/admin',				controllers.admin.get_admin);
+		app.get( '/admin/categories',	controllers.admin.get_categories);
 		app.get( '/report',				controllers.report.get_report);
 		app.get( '/registration',		controllers.registration.get_registration);
 		app.post('/registration',		controllers.registration.post_registration);
