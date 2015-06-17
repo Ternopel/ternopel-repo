@@ -2,6 +2,10 @@
 <div class="middleSection">
 	{{#def.load('./app/views/admin_menu.html')}}
 	<div class="content">
+		<div id="notifications" class="notifications" style="display:none">
+			<div id="general_error" class="error"></div>
+		</div>
+		<input type="hidden" name="_csrf" value="{{=it.csrfToken}}">
 		<h1>Gestión de Categorías</h1>
 		<br/>
 		<table>
@@ -13,9 +17,9 @@
 			<tr><td></td></tr>
 			{{~ it.categories:category}}
 			<tr name='{{=category.id}}'>
-				<td name='id' style='text-align: left;'>{{=category.id}}</td>
-				<td name='name' style='text-align: left;'>{{=category.name}}</td>
-				<td name='url' style='text-align: left;'>{{=category.url}}</td>
+				<td name='id' style='text-align: left; width: 50px;'>{{=category.id}}</td>
+				<td name='name' style='text-align: left; width: 500px;'>{{=category.name}}</td>
+				<td name='url' style='text-align: left; width: 500px;'>{{=category.url}}</td>
 			</tr>
 			{{~}}
 			

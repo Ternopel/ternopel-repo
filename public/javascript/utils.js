@@ -12,8 +12,8 @@ function make_post(url, formid, callback) {
 function show_error_messages(errors) {
 	console.log("Showing error messages");
 	$.each(errors, function(index, error) {
-		$("div[id='notifications']").show();
 		if (error.param === 'general') {
+			$("div[id='notifications']").show();
 			$("#" + error.param + "_error").show();
 			$("#" + error.param + "_error").html(error.msg);
 		}
@@ -24,9 +24,14 @@ function show_error_messages(errors) {
 	});
 }
 
-function clear_error_fields(form) {
-	console.log("Clearing error fields");
+
+function clear_notification_toolbar() {
+	console.log("Clearing notification toolbar");
 	$("div[id='notifications']").hide();
-	form.find(":input").attr("class", "gogog");
 }
 
+function clear_error_fields(form) {
+	clear_notification_toolbar();
+	console.log("Clearing form fields");
+	form.find(":input").attr("class", "gogog");
+}
