@@ -72,6 +72,7 @@ $(function () {
 $(function () {
 	$("td input[type='button']").click(function () {
 		var trid		=$(this).parent().parent().attr('name');
+		var csrf		=$("input[name='_csrf']").val();	
 		
 		console.log('Id:'+trid);
 		var formdata={id:trid, _csrf:csrf};

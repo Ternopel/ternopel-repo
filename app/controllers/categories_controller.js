@@ -1,6 +1,6 @@
 module.exports = {
 	get_categories: function(req, res, next) {
-		req.logger.info("Rendering admin/categories");
+		req.logger.info('En GET categories');
 		
 		req.models.categories.find({},['name'],function(err,categories) {
 			if(err) {
@@ -12,7 +12,7 @@ module.exports = {
 	},
 
 	post_categories: function(req, res, next) {
-		req.logger.info("En post categories");
+		req.logger.info("En POST categories");
 		
 		var id			= req.body.id;
 		var colname		= req.body.colname;
@@ -83,6 +83,61 @@ module.exports = {
 	},
 	
 	delete_categories: function(req, res, next) {
+		req.logger.info('En DELETE categories');
+		
+		var id			= req.body.id;
+		
+		req.logger.debug("Starting category deletion with id:"+id);
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				req.logger.info("Getting category");
+				req.models.categories.get(id, function(err,category) {
+					if(err) {
+						return callback(err);
+					}
+					req.logger.debug("Category:"+JSON.stringify(category));
+					return callback(null,category);
+				});
+			},
+			function(category,callback) {
+				req.logger.info("Getting products");
+				category.getProducts(function(err,products) {
+					if(err) {
+						return callback(err);
+					}
+					req.logger.info("Products quantity:"+products.length);
+					if(products.length>0) {
+						return callback('Esta categoría tiene '+products.length+' productos asociados. Borre primero los productos');
+					}
+				});
+			}
+		], 
+		function(err) {
+			req.logger.info("En function error de waterfall:"+err);
+			if(err) {
+				var jsonerror = [{'param':'general','msg':err}];
+				return res.status(500).send(jsonerror);
+			}
+			req.logger.debug('Returning success');
+			return res.status(200).send('success');
+		});
+
+		
+//		req.models.categories.get(id).getProducts(function(err,products) {
+//			req.logger.info('MEC>1');
+//			if(err) {
+//				req.logger.info('MEC>2');
+//				var jsonerror = [{'param':'general','msg':err}];
+//				return res.status(500).send(jsonerror);
+//			}
+//			req.logger.info('MEC>3');
+//			if(products.length>0) {
+//				req.logger.info('MEC>4');
+//				var jsonerror = [{'param':'general','msg':'Esta categoría tiene productos asociados. Borre primero los productos'}];
+//				return res.status(500).send(jsonerror);
+//			}
+//		});
 	}
 	
 	
