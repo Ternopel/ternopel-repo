@@ -80,8 +80,10 @@ module.exports = {
 			req.logger.debug("Sending category to browser:"+JSON.stringify(category));
 			return res.status(200).send(category);
 		});
-	}
+	},
 	
+	delete_categories: function(req, res, next) {
+	}
 	
 	
 };

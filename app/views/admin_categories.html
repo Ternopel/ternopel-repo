@@ -17,12 +17,14 @@
 				<th style='text-align: left;'><h2>Id</h2></th>
 				<th style='text-align: left;'><h2>Nombre</h2></th>
 				<th style='text-align: left;'><h2>Url</h2></th>
+				<th style='text-align: left;'><h2></h2></th>
 			</tr>
 			{{~ it.categories:category}}
 			<tr name='{{=category.id}}'>
 				<td name='id' style='text-align: left; width: 50px;'>{{=category.id}}</td>
-				<td name='name' style='text-align: left; width: 500px;'>{{=category.name}}</td>
-				<td name='url' style='text-align: left; width: 500px;'>{{=category.url}}</td>
+				<td name='name' style='text-align: left; width: 500px;'><span>{{=category.name}}</span></td>
+				<td name='url' style='text-align: left; width: 500px;'><span>{{=category.url}}</span></td>
+				<td name='remove'><input type='button' value='Borrar'></input></td>
 			</tr>
 			{{~}}
 			
