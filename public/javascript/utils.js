@@ -13,6 +13,7 @@ function make_form_post(url, formid, successcallback,errorcallback) {
 function show_error_messages(errors) {
 	console.log("Showing error messages:"+errors.responseText);
 	$.each(JSON.parse(errors.responseText), function(index, error) {
+		console.log("Error message:"+error.msg);
 		if (error.param === 'general') {
 			$("div[id='notifications']").show();
 			$("#" + error.param + "_error").show();

@@ -51,21 +51,20 @@ $(function () {
 
 $(function () {
 	$("#addCategory").click(function () {
-//		$('#categoriesTable tr:first').after('<tr><td>HOLA</td></tr>');
 		var csrf	=$("input[name='_csrf']").val();
 		var formdata={_csrf:csrf};
 		$.ajax({
 			url : '/admin/categories',
 			type : 'PUT',
 			data : formdata,
-			success : function (response) {
-				console.log(response);
+			success : function (category) {
+				console.log(category);
+				window.location.href	= '/admin/categories';
+			},
+			error : function(errorresponse) {
+				show_error_messages(errorresponse);
 			}
-		});					
-		
-		
-		
-		
+		});
 	});
 });
 
