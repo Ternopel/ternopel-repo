@@ -5,15 +5,15 @@
 		password	= 'natalitaypilarcita'; 
 	
 	cipher.encrypt = function (text) {
-		var cipher	= crypto.createCipher(algorithm,password)
-		var crypted	= cipher.update(text,'utf8','hex')
+		var cipher	= crypto.createCipher(algorithm,password);
+		var crypted	= cipher.update(text,'utf8','hex');
 		crypted		+= cipher.final('hex');
 		return crypted; 		
 	};
 	
 	cipher.decrypt = function (text) {
-		var decipher	= crypto.createDecipher(algorithm,password)
-		var decrypted	= decipher.update(text,'hex','utf8')
+		var decipher	= crypto.createDecipher(algorithm,password);
+		var decrypted	= decipher.update(text,'hex','utf8');
 		decrypted		+= decipher.final('utf8');
 		return decrypted; 
 	};

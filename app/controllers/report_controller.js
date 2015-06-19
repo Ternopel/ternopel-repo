@@ -26,7 +26,7 @@ module.exports = {
 			},
 			function(content,categories, callback) {
 				req.logger.info('Generating report');
-				jsreport = require('jsreport');
+				var jsreport = require('jsreport');
 				jsreport.render({
 					template: {
 						content: content,

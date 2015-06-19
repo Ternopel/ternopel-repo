@@ -2,7 +2,7 @@
 
 	liquibase.init = function (logger,config) {
 
-		if(config.app_run_liquibase=='false') {
+		if(config.app_run_liquibase==='false') {
 			logger.warn("Not running liquibase");
 			return;
 		}

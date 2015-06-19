@@ -12,6 +12,7 @@ module.exports = {
 				return next(err);
 			}
 
+			var i=0,ilen=0;
 			for (i=0,ilen=categories.length;i<ilen;++i) {
 				var category = categories[i];
 				if(category.url === req.params.category) {
@@ -22,6 +23,7 @@ module.exports = {
 				}
 				
 				var products = category.products;
+				var j=0,jlen=0;
 				for (j=0,jlen=products.length;j<jlen;++j) {
 					var product = products[j];
 

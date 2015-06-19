@@ -1,6 +1,6 @@
 (function (sessionconfig) {
 	
-	savesession	= function(req,next,usersession) {
+	var savesession	= function(req,next,usersession) {
 		req.logger.debug('Changing last access');
 		usersession.save({last_access: new Date()},function(err) {
 			if(err) {
@@ -10,9 +10,9 @@
 			req.usersession = usersession;
 			return next();
 		});
-	}
+	};
 	
-	createsession = function(req,res,next) {
+	var createsession = function(req,res,next) {
 		req.logger.debug("Session has no token. Creating it");
 		var token	= require('node-uuid').v1();
 		req.logger.debug("Creating user session");
@@ -29,7 +29,7 @@
 		});
 	};
 	
-	updatesession = function(req,res,next,usersession) {
+	var updatesession = function(req,res,next,usersession) {
 		req.logger.debug("Session:"+JSON.stringify(usersession));
 		req.logger.debug('User is logged in:'+usersession.isLogged());
 		if(usersession.isLogged()===true) {
@@ -45,7 +45,7 @@
 			req.sessionstatus	= {is_logged_in:false};
 			savesession(req,next,usersession);
 		}
-	}
+	};
 
 	sessionconfig.init = function (app) {
 		app.use(function(req, res, next) {

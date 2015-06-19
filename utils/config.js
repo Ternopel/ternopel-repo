@@ -1,4 +1,4 @@
-ld = require('lodash');
+var ld = require('lodash');
 
 module.exports = function() {
 	var config = ld.reduce(process.env,function(config, value, key) {

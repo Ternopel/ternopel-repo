@@ -1,4 +1,5 @@
-var cipher = require('../../utils/cipher');
+var cipher	= require('../../utils/cipher'),
+	utils	= require('./utils');
 
 module.exports = {
 	get_registration: function(req, res, next) {
@@ -27,8 +28,7 @@ module.exports = {
 		req.logger.info("Executing validation");
 		var valerrors = req.validationErrors();
 		if(valerrors) {
-			req.logger.debug("Errores de validacion encontrados:"+JSON.stringify(valerrors));
-			return res.status(500).send(valerrors);
+			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
 		
 		var waterfall = require('async-waterfall');
@@ -41,9 +41,7 @@ module.exports = {
 					}
 					if(is_registration==='true') {
 						if(user.length===1) {
-							req.logger.info('User '+email_address+' already exists');
-							var jsonerror = [{'param':'general','msg':'Usuario ya existente'}];
-							return res.status(500).send(jsonerror);
+							return callback('Usuario ya existente');
 						}
 						else {
 							return callback(null,null);
@@ -52,9 +50,7 @@ module.exports = {
 					
 					if(is_registration==='false') {
 						if(user.length===0) {
-							req.logger.info('User '+email_address+' does not exists');
-							var jsonerror = [{'param':'general','msg':'Usuario no existente'}];
-							return res.status(500).send(jsonerror);
+							return callback('Usuario no existente');
 						}
 						else {
 							return callback(null,user[0]);
@@ -75,10 +71,8 @@ module.exports = {
 				}
 
 				if(is_registration==='false') {
-					if(user.password != cipher.encrypt(password)) {
-						req.logger.info('Password does not match');
-						var jsonerror = [{'param':'general','msg':'Password invalida'}];
-						return res.status(500).send(jsonerror);
+					if(user.password !== cipher.encrypt(password)) {
+						return callback('Password inválida');
 					}
 					else {
 						return callback(null,user);
@@ -89,7 +83,7 @@ module.exports = {
 				req.logger.info('Assigning user to session');
 				req.usersession.setUser(user,function(err) {
 					if(err) {
-						next(err);
+						callback(err);
 					}
 					req.logger.info('Complete session:'+JSON.stringify(req.usersession));
 					return callback(err,user);
@@ -98,7 +92,7 @@ module.exports = {
 		], 
 		function(err, user) {
 			if(err) {
- 				next(err);
+				return utils.send_ajax_error(req,res,err);
 			}
 			else {
 				if(user.isAdmin()) {

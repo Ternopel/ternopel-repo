@@ -1,7 +1,9 @@
+var utils	= require('./utils');
+
 module.exports = {
 	get_categories: function(req, res, next) {
 		req.logger.info('En GET categories');
-		
+		var ld = require('lodash');
 		req.models.categories.find({},['name'],function(err,categories) {
 			if(err) {
 				return next(err);
@@ -21,14 +23,19 @@ module.exports = {
 
 		var valerrors = req.validationErrors();
 		if(valerrors) {
-			return res.status(500).send(valerrors);
+			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
 
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				if(colname==='name')	var filter={ name:colvalue };
-				if(colname==='url')		var filter={ url:colvalue };
+				var filter = '';
+				if(colname==='name') {
+					filter={ name:colvalue };
+				}
+				if(colname==='url')	{
+					filter={ url:colvalue };
+				}
 				req.logger.info("Searching using filter:"+JSON.stringify(filter));
 				req.models.categories.find(filter, function(err,categories) {
 					if(err) {
@@ -47,8 +54,12 @@ module.exports = {
 				});
 			},
 			function(category,callback) {
-				if(colname==='name')	category.name	= colvalue;
-				if(colname==='url')		category.url	= colvalue;
+				if(colname==='name') {
+					category.name	= colvalue;
+				}
+				if(colname==='url') {
+					category.url	= colvalue;
+				}
 				
 				req.logger.info("Updating category:"+JSON.stringify(category));
 				category.save(function(err) {
@@ -58,8 +69,7 @@ module.exports = {
 		], 
 		function(err) {
 			if(err) {
-				var jsonerror = [{'param':'general','msg':err}];
-				return res.status(500).send(jsonerror);
+				return utils.send_ajax_error(req,res,err);
 			}
 			req.logger.debug('Returning success');
 			return res.status(200).send('success');
@@ -74,8 +84,7 @@ module.exports = {
 		req.models.categories.create({	name:			'A Insert Category Text here '+milli,
 										url:			'A Insert Category url here'+milli},function(err,category) {
 			if(err) {
-				var jsonerror = [{'param':'general','msg':err}];
-				return res.status(500).send(jsonerror);
+				return utils.send_ajax_error(req,res,err);
 			}
 			req.logger.debug("Sending category to browser:"+JSON.stringify(category));
 			return res.status(200).send(category);
@@ -116,28 +125,11 @@ module.exports = {
 		function(err) {
 			req.logger.info("En function error de waterfall:"+err);
 			if(err) {
-				var jsonerror = [{'param':'general','msg':err}];
-				return res.status(500).send(jsonerror);
+				return utils.send_ajax_error(req,res,err);
 			}
 			req.logger.debug('Returning success');
 			return res.status(200).send('success');
 		});
-
-		
-//		req.models.categories.get(id).getProducts(function(err,products) {
-//			req.logger.info('MEC>1');
-//			if(err) {
-//				req.logger.info('MEC>2');
-//				var jsonerror = [{'param':'general','msg':err}];
-//				return res.status(500).send(jsonerror);
-//			}
-//			req.logger.info('MEC>3');
-//			if(products.length>0) {
-//				req.logger.info('MEC>4');
-//				var jsonerror = [{'param':'general','msg':'Esta categoría tiene productos asociados. Borre primero los productos'}];
-//				return res.status(500).send(jsonerror);
-//			}
-//		});
 	}
 	
 	
