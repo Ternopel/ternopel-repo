@@ -1,45 +1,45 @@
-<script src="/javascript/registration.js" ></script>
-<div class="middleSection">
-	<div class="content">
-		<div id="notifications" class="notifications" style="display:none">
-			<div id="general_error" class="error"></div>
+<script src='/javascript/registration.js' ></script>
+<div class='middleSection'>
+	<div class='content'>
+		<div id='notifications' class='notifications' style='display:none'>
+			<div id='general_error' class='error'></div>
 		</div>
 		<h1>Browser Calls</h1>
 		
-		<form id="registration_form">
-			<input type="hidden" name="_csrf" value="{{=it.csrfToken}}">
-			<input type="hidden" name="is_registration" value="{{=it.is_registration}}">
-			<div class="crudForm">
-				<div class="form2Cols">
-					<span class="formItem"> 
+		<form id='registration_form'>
+			<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+			<input type='hidden' name='is_registration' value='{{=it.is_registration}}'>
+			<div class='crudForm'>
+				<div class='form2Cols'>
+					<span class='formItem'> 
 						<label>Usuario</label> 
-						<input type="text" name="email_address"></input>
-						<div class="errorMsg" id="email_address_error" ></div>
+						<input type='text' name='email_address'></input>
+						<div class='errorMsg' id='email_address_error' ></div>
 					</span> 
-					<span class="formItem"> 
+					<span class='formItem'> 
 						<label>Clave</label> 
-						<input type="password" name="password"></input>
-						<div class="errorMsg" id="password_error" ></div>
+						<input type='password' name='password'></input>
+						<div class='errorMsg' id='password_error' ></div>
 					</span> 
 					{{?it.is_registration}}
-						<span class="formItem"> 
+						<span class='formItem'> 
 							<label>Apellido</label> 
-							<input type="text" name="last_name"></input>
-							<div class="errorMsg" id="last_name_error" ></div>
+							<input type='text' name='last_name'></input>
+							<div class='errorMsg' id='last_name_error' ></div>
 						</span> 
-						<span class="formItem"> 
+						<span class='formItem'> 
 							<label>Nombre</label> 
-							<input type="text" name="first_name"></input>
-							<div class="errorMsg" id="first_name_error" ></div>
+							<input type='text' name='first_name'></input>
+							<div class='errorMsg' id='first_name_error' ></div>
 						</span> 
 					{{?}}	
 				</div>
 			</div>
-			<div class="buttons">
+			<div class='buttons'>
 				{{?it.is_registration}}
-					<input id="submit" type="submit" value="Registrarse" />
+					<input id='submit' type='submit' value='Registrarse' />
 				{{??}}
-					<input id="submit" type="submit" value="Ingresar" />
+					<input id='submit' type='submit' value='Ingresar' />
 				{{?}}	
 			</div>
 		</form>		

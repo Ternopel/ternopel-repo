@@ -1,20 +1,23 @@
-<script src="/javascript/categories.js" ></script>
-<div class="middleSection">
+<script src='/javascript/categories.js' ></script>
+<div class='middleSection'>
 	{{#def.load('./app/views/admin_menu.html')}}
-	<div class="content">
-		<div id="notifications" class="notifications" style="display:none">
-			<div id="general_error" class="error"></div>
+	<div class='content'>
+		<div id='notifications' class='notifications' style='display:none'>
+			<div id='general_error' class='error'></div>
 		</div>
-		<input type="hidden" name="_csrf" value="{{=it.csrfToken}}">
+		<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 		<h1>Gestión de Categorías</h1>
 		<br/>
-		<table>
+		<input type='button' id='addCategory' value='Agregar Categoría' ></input>
+		<br/>
+		<br/>
+		<br/>
+		<table id='categoriesTable'>
 			<tr>
 				<th style='text-align: left;'><h2>Id</h2></th>
 				<th style='text-align: left;'><h2>Nombre</h2></th>
 				<th style='text-align: left;'><h2>Url</h2></th>
 			</tr>
-			<tr><td></td></tr>
 			{{~ it.categories:category}}
 			<tr name='{{=category.id}}'>
 				<td name='id' style='text-align: left; width: 50px;'>{{=category.id}}</td>

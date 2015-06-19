@@ -16,6 +16,7 @@
 		app.get( '/admin/categories',	restrict);
 		app.get( '/admin/categories',	controllers.categories.get_categories);
 		app.post('/admin/categories',	controllers.categories.post_categories);
+		app.put( '/admin/categories',	controllers.categories.put_categories);
 		app.get( '/report',				controllers.report.get_report);
 		app.get( '/registration',		controllers.registration.get_registration);
 		app.post('/registration',		controllers.registration.post_registration);

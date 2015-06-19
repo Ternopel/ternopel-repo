@@ -1,17 +1,18 @@
-function make_post(url, formid, callback) {
+function make_form_post(url, formid, successcallback,errorcallback) {
 	console.log("Submitting form");
 	var formdata = $( '#'+formid ).serialize();
 	$.ajax({
 		url : url,
 		type : 'POST',
 		data : formdata,
-		success : callback
+		success : successcallback,
+		error: errorcallback
 	});
 }
 
 function show_error_messages(errors) {
-	console.log("Showing error messages");
-	$.each(errors, function(index, error) {
+	console.log("Showing error messages:"+errors.responseText);
+	$.each(JSON.parse(errors.responseText), function(index, error) {
 		if (error.param === 'general') {
 			$("div[id='notifications']").show();
 			$("#" + error.param + "_error").show();

@@ -28,7 +28,7 @@ module.exports = {
 		var valerrors = req.validationErrors();
 		if(valerrors) {
 			req.logger.debug("Errores de validacion encontrados:"+JSON.stringify(valerrors));
-			return res.status(200).send(valerrors);
+			return res.status(500).send(valerrors);
 		}
 		
 		var waterfall = require('async-waterfall');
@@ -43,7 +43,7 @@ module.exports = {
 						if(user.length===1) {
 							req.logger.info('User '+email_address+' already exists');
 							var jsonerror = [{'param':'general','msg':'Usuario ya existente'}];
-							return res.status(200).send(jsonerror);
+							return res.status(500).send(jsonerror);
 						}
 						else {
 							return callback(null,null);
@@ -54,7 +54,7 @@ module.exports = {
 						if(user.length===0) {
 							req.logger.info('User '+email_address+' does not exists');
 							var jsonerror = [{'param':'general','msg':'Usuario no existente'}];
-							return res.status(200).send(jsonerror);
+							return res.status(500).send(jsonerror);
 						}
 						else {
 							return callback(null,user[0]);
@@ -78,7 +78,7 @@ module.exports = {
 					if(user.password != cipher.encrypt(password)) {
 						req.logger.info('Password does not match');
 						var jsonerror = [{'param':'general','msg':'Password invalida'}];
-						return res.status(200).send(jsonerror);
+						return res.status(500).send(jsonerror);
 					}
 					else {
 						return callback(null,user);
