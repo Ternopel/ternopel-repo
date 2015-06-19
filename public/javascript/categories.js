@@ -77,13 +77,14 @@ $(function () {
 		console.log('Id:'+trid);
 		var formdata={id:trid, _csrf:csrf};
 		console.log('Data to send:'+JSON.stringify(formdata));
+		clear_notification_toolbar();
 		
 		$.ajax({
 			url : '/admin/categories',
 			type : 'DELETE',
 			data : formdata,
 			success : function (successresponse) {
-
+				window.location.href	= '/admin/categories';
 			},
 			error : function(errorresponse) {
 				show_error_messages(errorresponse);

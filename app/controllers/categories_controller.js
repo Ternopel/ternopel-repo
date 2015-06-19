@@ -119,6 +119,17 @@ module.exports = {
 					if(products.length>0) {
 						return callback('Esta categoría tiene '+products.length+' productos asociados. Borre primero los productos');
 					}
+					return callback(null,category);
+				});
+			},
+			function(category,callback) {
+				req.logger.info("Getting category to remove");
+				category.remove(function(err,products) {
+					if(err) {
+						return callback(err);
+					}
+					req.logger.info("Category removed successfully");
+					return callback();
 				});
 			}
 		], 
