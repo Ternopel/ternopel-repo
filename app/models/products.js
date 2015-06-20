@@ -11,6 +11,7 @@ module.exports = function (orm, db, models,logger) {
 			url:			{ type: 'text', required: true,unique:true }
 		},
 		{
+			/* autoFetch:true, */
 			methods: {
 			},
 			validations: {
@@ -20,5 +21,5 @@ module.exports = function (orm, db, models,logger) {
 	);	
 	
 	logger.debug("Configuring products relations");
-	models.products.hasOne("category",models.categories,{ required: true, reverse: "products" });
+	models.products.hasOne("category",models.categories,{ required: true, autoFetch:true, reverse: "products" });
 };

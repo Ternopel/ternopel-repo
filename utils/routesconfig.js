@@ -20,6 +20,12 @@
 		app.put		( '/admin/categories',		controllers.categories.put_categories);
 		app.delete	( '/admin/categories',		controllers.categories.delete_categories);
 
+		app.get		( '/admin/products',		restrict);
+		app.get		( '/admin/products',		controllers.products.get_products);
+		app.post	( '/admin/products',		controllers.products.post_products);
+		app.put		( '/admin/products',		controllers.products.put_products);
+		app.delete	( '/admin/products',		controllers.products.delete_products);
+		
 		app.get		( '/report',				controllers.report.get_report);
 
 		app.get		( '/registration',			controllers.registration.get_registration);
