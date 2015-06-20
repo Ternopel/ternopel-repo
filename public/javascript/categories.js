@@ -71,7 +71,8 @@ $(function () {
 // Remove category
 $(function () {
 	$("td input[type='button']").click(function () {
-		var trid		=$(this).parent().parent().attr('name');
+		var tr			=$(this).parent().parent();
+		var trid		=tr.attr('name');
 		var csrf		=$("input[name='_csrf']").val();	
 		
 		console.log('Id:'+trid);
@@ -84,7 +85,7 @@ $(function () {
 			type : 'DELETE',
 			data : formdata,
 			success : function (successresponse) {
-				window.location.href	= '/admin/categories';
+				tr.remove();
 			},
 			error : function(errorresponse) {
 				show_error_messages(errorresponse);
