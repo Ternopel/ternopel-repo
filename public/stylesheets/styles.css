@@ -600,10 +600,10 @@ a:hover {
 }
 h2{
 	border: none;
-	margin-bottom: 10px;
+	margin-bottom: 4px;
 }
 .menuBox {
-  margin-bottom: 30px;
+/*   margin-bottom: 30px; */
 	position:relative;
 }
 .menuBox .handler{
@@ -738,7 +738,7 @@ table tbody tr:hover td {
 }
 table tbody td {
   border-bottom: 1px solid #eeeeee;
-  padding: 6px 4px;
+  padding: 2px 4px;
 }
 /*
 table tbody td:first-child {
