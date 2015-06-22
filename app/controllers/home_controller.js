@@ -66,6 +66,8 @@ module.exports = {
 						if(products.length===0) {
 							return callback('Este producto no está más disponible');
 						}
+						var currentproduct = products[0];
+						ld.merge(pageinfo,{currentproduct:currentproduct});
 						return callback();
 					});
 				}
@@ -76,7 +78,41 @@ module.exports = {
 			function(callback) {
 				if(pageinfo.page_to_render==='category') {
 					req.logger.info('-------------------> Get Category Info');
-					return callback();
+					req.models.categories.find({url: req.params.category},function(err,categories) {
+						req.logger.info('MEC>1');
+						if(err) {
+							req.logger.info('MEC>2');
+							return callback(err);
+						}
+						req.logger.info('MEC>31');
+
+						if(categories.length===0) {
+							req.logger.info('MEC>41');
+
+							return callback('Esta categoria no está más disponible');
+						}
+						req.logger.info('MEC>51');
+
+						var currentcategory = categories[0];
+						req.logger.info('MEC>61');
+
+						currentcategory.getProducts(function(err,products) {
+							req.logger.info('MEC>71');
+
+							if(err) {
+								req.logger.info('MEC>8');
+
+								return callback(err);
+							}
+							req.logger.info('MEC>91');
+
+							ld.merge(currentcategory,{products:products});
+							req.logger.info('MEC>10');
+
+							ld.merge(pageinfo,{currentcategory:currentcategory});
+							return callback();
+						});
+					});
 				}
 				else {
 					return callback();

@@ -50,7 +50,7 @@ INSERT INTO categories (id,name,url) VALUES
 
 /* Bandas elasticas */
 INSERT INTO products (id,category_id,packaging,description,url) VALUES 
-(1,1,'BOLSA','Bolsa','bolsa-bandas-elasticas');
+(1,1,'BOLSA','Bolsa de banditas elásticas','bolsa-bandas-elasticas');
 
 INSERT INTO products_formats (id,product_id,format,units,wholesale,retail) VALUES 
 (1,1,'Bolsa por 1000 gramos',10,576,65),
