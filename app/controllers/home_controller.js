@@ -1,42 +1,114 @@
-module.exports = {
-		
-	get_home: function(req, res, next) {
-		var ld = require('lodash');
-		
-		req.logger.info('Rendering home with:'+JSON.stringify(req.sessionstatus));
-		var pageinfo	= ld.merge(req.sessionstatus, {category:req.params.category, product:req.params.product});
-		var modelsutil	= require('../models/modelsutil');
-		req.logger.info('Reading categories');
-		modelsutil.getCategories(req,res,next,function(err,categories) {
-			if(err) {
-				return next(err);
-			}
+var ld = require('lodash');
 
-			var i=0,ilen=0;
-			for (i=0,ilen=categories.length;i<ilen;++i) {
-				var category = categories[i];
-				if(category.url === req.params.category) {
-					ld.merge(category,{selected: true});
+// Getting information to render main menu
+var get_categories_info = function(req, res, next, mycallback) {
+	req.logger.info('Reading categories');
+	var modelsutil	= require('../models/modelsutil');
+	modelsutil.getCategories(req,res,next,function(err,categories) {
+		if(err) {
+			return mycallback(err);
+		}
+		var i=0,ilen=0;
+		for (i=0,ilen=categories.length;i<ilen;++i) {
+			var category = categories[i];
+			if(category.url === req.params.category) {
+				ld.merge(category,{selected: true});
+			}
+			else {
+				ld.merge(category,{selected: false});
+			}
+			
+			var products = category.products;
+			var j=0,jlen=0;
+			for (j=0,jlen=products.length;j<jlen;++j) {
+				var product = products[j];
+
+				if(product.url === req.params.product) {
+					ld.merge(product,{selected: true});
 				}
 				else {
-					ld.merge(category,{selected: false});
-				}
-				
-				var products = category.products;
-				var j=0,jlen=0;
-				for (j=0,jlen=products.length;j<jlen;++j) {
-					var product = products[j];
-
-					if(product.url === req.params.product) {
-						ld.merge(product,{selected: true});
-					}
-					else {
-						ld.merge(product,{selected: false});
-					}
+					ld.merge(product,{selected: false});
 				}
 			}
-//			req.logger.debug('categories:'+JSON.stringify({categories:categories}));
-			ld.merge(pageinfo,{categories:categories});
+		}
+		return mycallback(null,categories);
+	});
+};
+		
+module.exports = {
+	get_home: function(req, res, next) {
+		req.logger.info("Home GET");
+		var pageinfo	= ld.merge(req.sessionstatus);
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				req.logger.info('Deciding which subpage we must render');
+				var page_to_render='';
+				if(req.params.product) {
+					page_to_render='product';
+				}
+				else {
+					if(req.params.category) {
+						page_to_render='category';
+					}
+					else {
+						page_to_render='sales';
+					}
+				}
+				req.logger.info("We will render:"+page_to_render);
+				ld.merge(pageinfo,{page_to_render:page_to_render});
+				return callback();
+			},
+			function(callback) {
+				if(pageinfo.page_to_render==='product') {
+					req.logger.info('-------------------> Get Product Info');
+					req.models.products.find({url: req.params.product},function(err,products) {
+						if(products.length===0) {
+							return callback('Este producto no está más disponible');
+						}
+						return callback();
+					});
+				}
+				else {
+					return callback();
+				}
+			},
+			function(callback) {
+				if(pageinfo.page_to_render==='category') {
+					req.logger.info('-------------------> Get Category Info');
+					return callback();
+				}
+				else {
+					return callback();
+				}
+			
+			},
+			function(callback) {
+				if(pageinfo.page_to_render==='sales') {
+					req.logger.info('-------------------> Get Sales Info');
+					return callback();
+				}
+				else {
+					return callback();
+				}
+			},
+			function(callback) {
+				get_categories_info(req,res,next,function(err,categories) {
+					if(err) {
+						return callback(err);
+					}
+					ld.merge(pageinfo,{categories:categories});
+					return callback();
+				});
+			}
+		], 
+		function(err) {
+			req.logger.info("Rendering page");
+			if(err) {
+				req.logger.info("Rendering page error:"+err);
+				return next(err);
+			}
+			req.logger.info("Rendering page with NO ERROR");
 			res.render('home.html',pageinfo);
 		});
 	}

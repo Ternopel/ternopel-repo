@@ -24,8 +24,16 @@
 		{{~}}
 	</div>
 
-	<div class="content">
-		<p>Category:{{=it.category}}</p>
-		<p>Product:{{=it.product}}</p>
-	</div>
+	{{? it.page_to_render === 'category'}}
+		{{#def.load('./app/views/home_category.html')}}
+	{{?}}
+
+	{{? it.page_to_render === 'product'}}
+		{{#def.load('./app/views/home_product.html')}}
+	{{?}}
+
+	{{? it.page_to_render === 'sales'}}
+		{{#def.load('./app/views/home_sales.html')}}
+	{{?}}
+
 </div>

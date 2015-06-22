@@ -3,6 +3,7 @@ CREATE SEQUENCE configuration_sequence start with 1000;
 CREATE SEQUENCE packaging_sequence start with 1000;
 CREATE SEQUENCE categories_sequence start with 1000;
 CREATE SEQUENCE products_sequence start with 1000;
+CREATE SEQUENCE products_formats_sequence start with 1000;
 CREATE SEQUENCE roles_sequence start with 1000;
 CREATE SEQUENCE users_sequence start with 1000;
 CREATE SEQUENCE users_sessions_sequence start with 1000;
@@ -31,13 +32,20 @@ CREATE TABLE products
 	category_id bigint NOT NULL,
 	packaging varchar(255) NOT NULL,
 	description varchar(255) NOT NULL,
-	units int4,
-	wholesale float8,
-	retail float8,
 	url varchar(255) NOT NULL UNIQUE,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
+CREATE TABLE products_formats
+(
+	id bigint DEFAULT nextval('products_formats_sequence') NOT NULL,
+	product_id bigint NOT NULL,
+	format varchar(255) NOT NULL,
+	units int4,
+	wholesale float8,
+	retail float8,
+	PRIMARY KEY (id)
+) WITHOUT OIDS;
 
 CREATE TABLE configuration
 (
@@ -82,6 +90,13 @@ CREATE TABLE users_sessions
 ALTER TABLE products
 	ADD FOREIGN KEY (category_id)
 	REFERENCES categories (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+ALTER TABLE products_formats
+	ADD FOREIGN KEY (product_id)
+	REFERENCES products (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

@@ -24,6 +24,7 @@
 				require('../app/models/categories.js')(orm,db,models,logger);
 				require('../app/models/packaging.js')(orm,db,models,logger);
 				require('../app/models/products.js')(orm,db,models,logger);
+				require('../app/models/productsformats.js')(orm,db,models,logger);
 				require('../app/models/roles.js')(orm,db,models,logger);
 				require('../app/models/users.js')(orm,db,models,logger);
 				require('../app/models/userssessions.js')(orm,db,models,logger);
