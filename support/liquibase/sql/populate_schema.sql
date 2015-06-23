@@ -57,13 +57,31 @@ INSERT INTO products_formats (id,product_id,format,units,wholesale,retail) VALUE
 (2,1,'Bolsa por 500 gramos',10,300,33),
 (3,1,'Bolsa por 100 gramos',10,80,10);
 
-/* Bolsas */
+/* Bolsas economicas */
 INSERT INTO products (id,category_id,packaging,description,url) VALUES 
-(2,5,'BOLSA','Bolsas de camisetas económicas','bolsas-camisetas-economicas'),
-(3,5,'BOLSA','Bolsas de camisetas reforzadas','bolsas-camisetas-reforzadas'),
-(4,5,'BOLSA','Bolsas de consorcio','bolsas-consorcio'),
-(5,5,'BOLSA','Bolsas de residuos','bolsas-residuos'),
-(6,5,'BOLSA','Bolsas de papel sulfito','bolsas-papel-sulfito'),
-(7,5,'BOLSA','Bolsas de polipropileno','bolsas-polipropileno'),
+(2,5,'BOLSA','Bolsas de camisetas económicas','bolsas-camisetas-economicas');
+
+/* Bolsas reforzadas */
+INSERT INTO products (id,category_id,packaging,description,url) VALUES 
+(3,5,'BOLSA','Bolsas de camisetas reforzadas','bolsas-camisetas-reforzadas');
+
+/* Bolsas consorcio */
+INSERT INTO products (id,category_id,packaging,description,url) VALUES 
+(4,5,'BOLSA','Bolsas de consorcio','bolsas-consorcio');
+
+/* Bolsas residuos */
+INSERT INTO products (id,category_id,packaging,description,url) VALUES 
+(5,5,'BOLSA','Bolsas de residuos','bolsas-residuos');
+
+/* Bolsas papel sulfito */
+INSERT INTO products (id,category_id,packaging,description,url) VALUES 
+(6,5,'BOLSA','Bolsas de papel sulfito','bolsas-papel-sulfito');
+
+/* Bolsas polipropileno */
+INSERT INTO products (id,category_id,packaging,description,url) VALUES 
+(7,5,'BOLSA','Bolsas de polipropileno','bolsas-polipropileno');
+
+/* Bolsas con manija */
+INSERT INTO products (id,category_id,packaging,description,url) VALUES 
 (8,5,'BOLSA','Bolsas de papel con manija','bolsas-papel-manija');
 
