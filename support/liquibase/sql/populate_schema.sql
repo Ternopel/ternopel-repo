@@ -61,6 +61,13 @@ INSERT INTO products_formats (id,product_id,format,units,wholesale,retail) VALUE
 INSERT INTO products (id,category_id,packaging,description,url) VALUES 
 (2,5,'BOLSA','Bolsas de camisetas económicas','bolsas-camisetas-economicas');
 
+INSERT INTO products_formats (id,product_id,format,units,wholesale,retail) VALUES 
+(4,2,'Bolsa por 1000 gramos',10,576,65),
+(5,2,'Bolsa por 500 gramos',10,300,33),
+(6,2,'Bolsa por 100 gramos',10,80,10);
+
+
+
 /* Bolsas reforzadas */
 INSERT INTO products (id,category_id,packaging,description,url) VALUES 
 (3,5,'BOLSA','Bolsas de camisetas reforzadas','bolsas-camisetas-reforzadas');
