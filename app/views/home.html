@@ -3,7 +3,9 @@
 		{{~ it.categories:category}}
 			<div class="menuBox">
 				{{?category.selected}}
-					<span class="handler open"></span>
+					<a href="/">
+						<span class="handler open"></span>
+					</a>
 					<h2><a href="/">{{=category.name}}</a></h2>
 					<ul>
 						{{~ category.products:product}}
@@ -17,7 +19,9 @@
 						{{~}}
 					</ul>
 				{{??}}
-					<span class="handler"></span>
+					<a href="/{{=category.url}}">
+						<span class="handler"></span>
+					</a>
 					<h2><a href="/{{=category.url}}">{{=category.name}}</a></h2>
 				{{?}}	
 			</div>

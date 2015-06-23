@@ -594,7 +594,7 @@ a:hover {
  *
  ************************************************************************* */
 .leftColumn {
-  width: 180px;
+  width: 265px;
   padding: 20px;
   float: left;
 }
@@ -624,12 +624,13 @@ h2{
 .menuBox ul {
 	background: url(../images/baseImages/line_shadow_menut.png) 0 0 repeat-x;
 	padding-top: 5px;
+	padding-bottom: 5px;
 	margin:0 -15px;
 }
 .menuBox ul li a {
   display: block;
   font-size: 14px;
-  line-height: 22px;
+  line-height: 18px;
   padding: 0 30px;
 }
 .menuBox ul li a:hover {
@@ -646,7 +647,7 @@ h2{
  *
  ************************************************************************* */
 .content {
-  margin-left: 225px;
+  margin-left: 300px;
   background: white;
   padding: 20px;
 }
