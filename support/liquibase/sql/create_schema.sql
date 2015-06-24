@@ -30,7 +30,7 @@ CREATE TABLE products
 (
 	id bigint DEFAULT nextval('products_sequence') NOT NULL,
 	category_id bigint NOT NULL,
-	packaging varchar(255) NOT NULL,
+	packaging_id bigint NOT NULL,
 	description varchar(255) NOT NULL,
 	url varchar(255) NOT NULL UNIQUE,
 	PRIMARY KEY (id)
@@ -91,6 +91,13 @@ CREATE TABLE users_sessions
 ALTER TABLE products
 	ADD FOREIGN KEY (category_id)
 	REFERENCES categories (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+ALTER TABLE products
+	ADD FOREIGN KEY (packaging_id)
+	REFERENCES packaging (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

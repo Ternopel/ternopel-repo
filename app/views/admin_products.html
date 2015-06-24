@@ -16,12 +16,29 @@
 			<tr>
 				<th style='text-align: left;'><h2>Id</h2></th>
 				<th style='text-align: left;'><h2>Descripción</h2></th>
+				<th style='text-align: left;'><h2>Packaging</h2></th>
 				<th style='text-align: left;'><h2></h2></th>
 			</tr>
 			{{~ it.products:product}}
 			<tr name='{{=product.id}}'>
 				<td name='id' style='text-align: left; width: 50px;'>{{=product.id}}</td>
 				<td name='description' style='text-align: left; width: 500px;'><span>{{=product.description}}</span></td>
+				<td name='category' style='text-align: left; width: 500px;'>
+				<select>
+					{{~ it.packaging:packaging}}
+					
+					{{? packaging.id === product.packaging_id}}
+						<option value="{{=packaging.id}}" selected="selected">{{=packaging.name}}</option>
+					{{??}}
+						<option value="{{=packaging.id}}">{{=packaging.name}}</option>
+					{{?}}
+					
+					
+					
+					{{~}}
+				</select> 				
+				
+				</td>
 				<td name='remove'><input type='button' value='Borrar'></input></td>
 			</tr>
 			{{~}}

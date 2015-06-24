@@ -9,7 +9,13 @@ module.exports = {
 			}
 			var ld			= require('lodash');
 			var pageinfo	= ld.merge(req.sessionstatus, {products:products, csrfToken: req.csrfToken(),search: req.query.search});
-			res.render('admin_products.html',pageinfo);
+			req.models.packaging.find({},['name'],function(err,packaging) {
+				if(err) {
+					return next(err);
+				}
+				ld.merge(pageinfo, {packaging:packaging});
+				res.render('admin_products.html',pageinfo);
+			});
 		});
 	},
 
