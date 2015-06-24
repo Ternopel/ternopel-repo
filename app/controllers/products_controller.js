@@ -9,12 +9,21 @@ module.exports = {
 			}
 			var ld			= require('lodash');
 			var pageinfo	= ld.merge(req.sessionstatus, {products:products, csrfToken: req.csrfToken(),search: req.query.search});
+			req.logger.info('Getting packaging');
 			req.models.packaging.find({},['name'],function(err,packaging) {
 				if(err) {
 					return next(err);
 				}
 				ld.merge(pageinfo, {packaging:packaging});
-				res.render('admin_products.html',pageinfo);
+				req.logger.info('Getting categories');
+				req.models.categories.find({},['name'],function(err,categories) {
+					if(err) {
+						return next(err);
+					}
+					ld.merge(pageinfo, {categories:categories});
+					req.logger.info('Rendering page');
+					res.render('admin_products.html',pageinfo);
+				});
 			});
 		});
 	},

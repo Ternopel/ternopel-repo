@@ -17,6 +17,7 @@
 				<th style='text-align: left;'><h2>Id</h2></th>
 				<th style='text-align: left;'><h2>Descripción</h2></th>
 				<th style='text-align: left;'><h2>Packaging</h2></th>
+				<th style='text-align: left;'><h2>Categoría</h2></th>
 				<th style='text-align: left;'><h2></h2></th>
 			</tr>
 			{{~ it.products:product}}
@@ -25,16 +26,22 @@
 				<td name='description' style='text-align: left; width: 500px;'><span>{{=product.description}}</span></td>
 				<td name='category' style='text-align: left; width: 500px;'>
 				<select>
+					{{~ it.categories:category}}
+						{{? category.id === product.category_id}}
+							<option value="{{=category.id}}" selected="selected">{{=category.name}}</option>
+						{{??}}
+							<option value="{{=category.id}}">{{=category.name}}</option>
+						{{?}}
+					{{~}}
+				</select> 				
+				<td name='packaging' style='text-align: left; width: 500px;'>
+				<select>
 					{{~ it.packaging:packaging}}
-					
-					{{? packaging.id === product.packaging_id}}
-						<option value="{{=packaging.id}}" selected="selected">{{=packaging.name}}</option>
-					{{??}}
-						<option value="{{=packaging.id}}">{{=packaging.name}}</option>
-					{{?}}
-					
-					
-					
+						{{? packaging.id === product.packaging_id}}
+							<option value="{{=packaging.id}}" selected="selected">{{=packaging.name}}</option>
+						{{??}}
+							<option value="{{=packaging.id}}">{{=packaging.name}}</option>
+						{{?}}
 					{{~}}
 				</select> 				
 				
