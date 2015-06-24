@@ -739,7 +739,7 @@ table tbody tr:hover td {
 }
 table tbody td {
   border-bottom: 1px solid #eeeeee;
-  padding: 2px 4px;
+  padding: 0px 4px;
 }
 /*
 table tbody td:first-child {

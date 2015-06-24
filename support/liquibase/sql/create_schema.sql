@@ -41,6 +41,7 @@ CREATE TABLE products_formats
 	id bigint DEFAULT nextval('products_formats_sequence') NOT NULL,
 	product_id bigint NOT NULL,
 	format varchar(255) NOT NULL,
+	quantity int4,
 	units int4,
 	wholesale float8,
 	retail float8,
