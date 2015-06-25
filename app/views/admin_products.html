@@ -14,15 +14,14 @@
 		<br/>
 		<table id='productsTable'>
 			<tr>
-				<th style='text-align: left;'><h2>Id</h2></th>
 				<th style='text-align: left;'><h2>Descripción</h2></th>
-				<th style='text-align: left;'><h2>Packaging</h2></th>
 				<th style='text-align: left;'><h2>Categoría</h2></th>
+				<th style='text-align: left;'><h2>Packaging</h2></th>
+				<th style='text-align: left;'><h2></h2></th>
 				<th style='text-align: left;'><h2></h2></th>
 			</tr>
 			{{~ it.products:product}}
 			<tr name='{{=product.id}}'>
-				<td name='id' style='text-align: left; width: 50px;'>{{=product.id}}</td>
 				<td name='description' style='text-align: left; width: 500px;'><span>{{=product.description}}</span></td>
 				<td name='category' style='text-align: left; width: 500px;'>
 				<select>
@@ -46,7 +45,30 @@
 				</select> 				
 				
 				</td>
+				<td name='show' style="width:140px;"><input type='checkbox' name='formatscheck'><span>Ver formatos</span></input></td>
 				<td name='remove'><input type='button' value='Borrar'></input></td>
+			</tr>
+			<tr name='{{=product.id}}_format' style='display:none;'>
+				<td colspan="4">
+					<table id='productsFormatsTable'>
+						<tr>
+							<th style='text-align: left;'><h3>Formato</h3></th>
+							<th style='text-align: left;'><h3>Unidades</h3></th>
+							<th style='text-align: left;'><h3>Cantidad</h3></th>
+							<th style='text-align: left;'><h3>Precio Por Menor</h3></th>
+							<th style='text-align: left;'><h3>Precio Por Mayor</h3></th>
+						</tr>
+						{{~ product.productsformats:productformat}}
+						<tr name='{{=productformat.id}}'>
+							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.format}}</span></td>
+							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.units}}</span></td>
+							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.quantity}}</span></td>
+							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.retail}}</span></td>
+							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.wholesale}}</span></td>
+						</tr>
+						{{~}}
+					</table>
+				</td>
 			</tr>
 			{{~}}
 			
