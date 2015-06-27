@@ -72,38 +72,70 @@ module.exports = {
 			req.logger.info("Rendering page with NO ERROR");
 			res.render('admin_products.html',pageinfo);
 		});
-		
-		
-		/*
-		req.logger.info('En GET products with search:'+req.query.search);
-		req.models.products.find({},['description']).where('lower(description) ilike ?',['%'+req.query.search+'%']).run(function(err,products) {
-			if(err) {
-				return next(err);
-			}
-			var ld			= require('lodash');
-			var pageinfo	= ld.merge(req.sessionstatus, {products:products, csrfToken: req.csrfToken(),search: req.query.search});
-			req.logger.info('Getting packaging');
-			req.models.packaging.find({},['name'],function(err,packaging) {
-				if(err) {
-					return next(err);
-				}
-				ld.merge(pageinfo, {packaging:packaging});
-				req.logger.info('Getting categories');
-				req.models.categories.find({},['name'],function(err,categories) {
-					if(err) {
-						return next(err);
-					}
-					ld.merge(pageinfo, {categories:categories});
-					req.logger.info('Rendering page');
-					
-				});
-			});
-		});
-		*/
 	},
 
 	post_products: function(req, res, next) {
-		req.logger.info('En POST products');
+
+		req.logger.info("En POST products");
+		
+		var id			= req.body.id;
+		var colname		= req.body.colname;
+		var colvalue	= req.body.colvalue;
+		req.assert('colvalue',		'El valor es requerido').notEmpty();
+
+		var valerrors = req.validationErrors();
+		if(valerrors) {
+			return utils.send_ajax_validation_errors(req,res,valerrors);
+		}
+
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				var filter = '';
+				if(colname==='description') {
+					filter={ description:colvalue };
+				}
+				if(colname==='url') {
+					filter={ url:colvalue };
+				}
+				req.logger.info("Searching using filter:"+JSON.stringify(filter));
+				req.models.products.find(filter, function(err,products) {
+					if(err) {
+						return callback(err);
+					}
+					if(products.length===1 && products[0].id != id) {
+						return callback('El valor asignado a la columna existe en otro registro ('+products[0].id+')');
+					}
+					return callback();
+				});
+			},
+			function(callback) {
+				req.logger.info("Getting id:"+id);
+				req.models.products.get(id,function(err,product) {
+					return callback(err,product);
+				});
+			},
+			function(product,callback) {
+				if(colname==='description') {
+					product.description	= colvalue;
+				}
+				if(colname==='url') {
+					product.url	= colvalue;
+				}
+				
+				req.logger.info("Updating product:"+JSON.stringify(product));
+				product.save(function(err) {
+					return callback(err);
+				});
+			}
+		], 
+		function(err) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			req.logger.debug('Returning success');
+			return res.status(200).send('success');
+		});
 	},
 
 	put_products: function(req, res, next) {

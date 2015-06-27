@@ -1,3 +1,4 @@
+<script src='/javascript/crud.js'></script>
 <script src='/javascript/products.js'></script>
 <div class='middleSection'>
 	{{#def.load('./app/views/admin_menu.html')}}
@@ -12,9 +13,10 @@
 		<br/>
 		<br/>
 		<br/>
-		<table id='productsTable'>
+		<table id='productsTable' summary='/admin/products'>
 			<tr>
 				<th style='text-align: left;'><h2>Descripción</h2></th>
+				<th style='text-align: left;'><h2>Url</h2></th>
 				<th style='text-align: left;'><h2>Categoría</h2></th>
 				<th style='text-align: left;'><h2>Packaging</h2></th>
 				<th style='text-align: left;'><h2></h2></th>
@@ -23,6 +25,7 @@
 			{{~ it.products:product}}
 			<tr name='{{=product.id}}'>
 				<td name='description' style='text-align: left; width: 500px;'><span>{{=product.description}}</span></td>
+				<td name='url' style='text-align: left; width: 500px;'><span>{{=product.url}}</span></td>
 				<td name='category' style='text-align: left; width: 500px;'>
 				<select>
 					{{~ it.categories:category}}
@@ -45,12 +48,12 @@
 				</select> 				
 				
 				</td>
-				<td name='show' style="width:140px;"><input type='checkbox' name='formatscheck'><span>Ver formatos</span></input></td>
+				<td name='show' style="width:290px;"><input type='checkbox' name='formatscheck'><span>Ver formatos</span></input></td>
 				<td name='remove'><input type='button' value='Borrar'></input></td>
 			</tr>
 			<tr name='{{=product.id}}_format' style='display:none;'>
 				<td colspan="4">
-					<table id='productsFormatsTable'>
+					<table id='productsFormatsTable' summary='/admin/productsformats'>
 						<tr>
 							<th style='text-align: left;'><h3>Formato</h3></th>
 							<th style='text-align: left;'><h3>Unidades</h3></th>
@@ -61,10 +64,10 @@
 						{{~ product.productsformats:productformat}}
 						<tr name='{{=productformat.id}}'>
 							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.format}}</span></td>
-							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.units}}</span></td>
-							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.quantity}}</span></td>
-							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.retail}}</span></td>
-							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.wholesale}}</span></td>
+							<td name='units' style='text-align: left; width: 500px;'><span>{{=productformat.units}}</span></td>
+							<td name='quantity' style='text-align: left; width: 500px;'><span>{{=productformat.quantity}}</span></td>
+							<td name='retail' style='text-align: left; width: 500px;'><span>{{=productformat.retail}}</span></td>
+							<td name='wholesale' style='text-align: left; width: 500px;'><span>{{=productformat.wholesale}}</span></td>
 						</tr>
 						{{~}}
 					</table>
