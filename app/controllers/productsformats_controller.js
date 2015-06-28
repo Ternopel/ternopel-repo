@@ -3,12 +3,18 @@ var utils	= require('./utils');
 module.exports = {
 	post_productsformats: function(req, res, next) {
 
-		req.logger.info("En POST products");
+		req.logger.info("En POST products formats");
 		
 		var id			= req.body.id;
 		var colname		= req.body.colname;
 		var colvalue	= req.body.colvalue;
 		req.assert('colvalue',		'El valor es requerido').notEmpty();
+		if(	colname==='quantity' || colname==='units') {
+			req.assert('colvalue',		'El valor es un entero').isInt();
+		}
+		if(	colname==='retail' || colname==='wholesale') {
+			req.assert('colvalue',		'El valor es un importe').isFloat();
+		}
 
 		var valerrors = req.validationErrors();
 		if(valerrors) {

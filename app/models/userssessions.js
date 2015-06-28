@@ -7,6 +7,7 @@ module.exports = function (orm, db, models,logger) {
 			last_access: 	{ type: 'date', required: true, time: true }
 		},
 		{
+			cache:	false,
 			methods: {
 				isLogged: function() {
 					return (this.user_id !== null);

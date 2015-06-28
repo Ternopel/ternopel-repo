@@ -7,6 +7,7 @@ module.exports = function (orm, db, models,logger) {
 			url:		{ type: 'text', required: true }
 		},
 		{
+			cache:	false,
 			methods: {
 			},
 			validations: {

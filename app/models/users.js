@@ -10,6 +10,7 @@ module.exports = function (orm, db, models,logger) {
 			last_name:		{ type: 'text', required: true }
 		},
 		{
+			cache:	false,
 			methods: {
 				fullName: function() {
 					return this.first_name + ' ' + this.last_name;

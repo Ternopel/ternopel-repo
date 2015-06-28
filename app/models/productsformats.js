@@ -10,6 +10,7 @@ module.exports = function (orm, db, models,logger) {
 			retail:			{ type: 'number', size:8, required: true }
 		},
 		{
+			cache:	false,
 			methods: {
 			},
 			validations: {
