@@ -79,7 +79,7 @@ module.exports = {
 		var milli		= new Date().getTime();
 		var product_id	= req.body.product_id;
 		req.logger.info('Creating product format');
-		req.models.productsformats.create({	format:			'A Insert Format Text here '+milli,
+		req.models.productsformats.create({	format:			'A '+milli,
 											product_id:		product_id,
 											quantity:		1,
 											units:			1,
