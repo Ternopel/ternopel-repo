@@ -31,7 +31,7 @@ CREATE TABLE products
 	id bigint DEFAULT nextval('products_sequence') NOT NULL,
 	category_id bigint NOT NULL,
 	packaging_id bigint NOT NULL,
-	description varchar(255) NOT NULL,
+	description varchar(255) NOT NULL UNIQUE,
 	url varchar(255) NOT NULL UNIQUE,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
@@ -41,11 +41,12 @@ CREATE TABLE products_formats
 	id bigint DEFAULT nextval('products_formats_sequence') NOT NULL,
 	product_id bigint NOT NULL,
 	format varchar(255) NOT NULL,
-	quantity int4,
-	units int4,
-	wholesale float8,
-	retail float8,
-	PRIMARY KEY (id)
+	quantity int4 NOT NULL,
+	units int4 NOT NULL,
+	wholesale float8 NOT NULL,
+	retail float8 NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE(product_id,format)
 ) WITHOUT OIDS;
 
 CREATE TABLE configuration

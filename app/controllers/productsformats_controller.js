@@ -74,6 +74,27 @@ module.exports = {
 		});
 	},
 	
+	put_productsformats: function(req, res, next) {
+		req.logger.info('En PUT products formats');
+		var milli		= new Date().getTime();
+		var product_id	= req.body.product_id;
+		req.logger.info('Creating product format');
+		req.models.productsformats.create({	format:			'A Insert Format Text here '+milli,
+											product_id:		product_id,
+											quantity:		1,
+											units:			1,
+											retail:			1,
+											wholesale:	1},function(err,productformat) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			req.logger.debug("Sending product format to browser:"+JSON.stringify(productformat));
+			return res.status(200).send(productformat);
+		});
+	},
+	
+	
+	
 	delete_productsformats: function(req, res, next) {
 		req.logger.info('En DELETE products formats');
 		

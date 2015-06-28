@@ -86,7 +86,6 @@ function add(url) {
 		data : formdata,
 		success : function (entity) {
 			console.log(entity);
-//			window.location.href	= href;
 			window.location.reload(true);
 		},
 		error : function(errorresponse) {
@@ -97,7 +96,7 @@ function add(url) {
 
 // Remove category
 $(function () {
-	$("td input[type='button']").click(function () {
+	$("td input[name='remove']").click(function () {
 		var tr			=$(this).parent().parent();
 		var trid		=tr.attr('name');
 		var csrf		=$("input[name='_csrf']").val();	

@@ -90,14 +90,14 @@ module.exports = {
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				var filter;
+				var filter='';
 				if(colname==='description') {
 					filter={ description:colvalue };
 				}
 				if(colname==='url') {
 					filter={ url:colvalue };
 				}
-				if(!filter) {
+				if(filter!=='') {
 					req.logger.info("Searching using filter:"+JSON.stringify(filter));
 					req.models.products.find(filter, function(err,products) {
 						if(err) {

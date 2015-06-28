@@ -24,10 +24,31 @@ $(function () {
 	});
 });
 
-// Add category
+// Add product
 $(function () {
 	$("#addProduct").click(function () {
 		add('/admin/products');
+	});
+});
+
+// Add product
+$(function () {
+	$("#addProductFormat").click(function () {
+		var csrf		=$("input[name='_csrf']").val();
+		var product_id	=$(this).attr('name');
+		var formdata	={_csrf:csrf, product_id:product_id};
+		$.ajax({
+			url : '/admin/productsformats',
+			type : 'PUT',
+			data : formdata,
+			success : function (entity) {
+				console.log(entity);
+				window.location.reload(true);
+			},
+			error : function(errorresponse) {
+				show_error_messages(errorresponse);
+			}
+		});
 	});
 });
 

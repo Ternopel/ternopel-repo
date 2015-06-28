@@ -49,10 +49,15 @@
 					</select> 				
 				</td>
 				<td name='show' style="width:290px;"><input type='checkbox' name='formatscheck'><span>Ver formatos</span></input></td>
-				<td name='remove'><input type='button' value='Borrar'></input></td>
+				<td><input name='remove' type='button' value='Borrar'></input></td>
 			</tr>
 			<tr name='{{=product.id}}_format' style='display:none;'>
 				<td colspan="4">
+					<br/>
+					<input type='button' id='addProductFormat' name='{{=product.id}}' value='Agregar Formato' ></input>
+					<br/>
+					<br/>
+					<br/>
 					<table id='productsFormatsTable' summary='/admin/productsformats'>
 						<tr>
 							<th style='text-align: left;'><h3>Formato</h3></th>
@@ -69,7 +74,7 @@
 							<td name='quantity' style='text-align: left; width: 500px;'><span>{{=productformat.quantity}}</span></td>
 							<td name='retail' style='text-align: left; width: 500px;'><span>{{=productformat.retail}}</span></td>
 							<td name='wholesale' style='text-align: left; width: 500px;'><span>{{=productformat.wholesale}}</span></td>
-							<td name='remove'><input type='button' value='Borrar'></input></td>
+							<td><input name='remove' type='button' value='Borrar'></input></td>
 						</tr>
 						{{~}}
 					</table>
