@@ -27,6 +27,7 @@
 		app.delete	( '/admin/products',		controllers.products.delete_products);
 		
 		app.post	( '/admin/productsformats',	controllers.productsformats.post_productsformats);
+		app.delete	( '/admin/productsformats',	controllers.productsformats.delete_productsformats);
 
 		app.get		( '/report',				controllers.report.get_report);
 

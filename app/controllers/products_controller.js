@@ -65,7 +65,7 @@ module.exports = {
 		function(err) {
 			req.logger.info("Rendering page");
 			if(err) {
-				req.logger.info("Rendering page error:"+err);
+				req.logger.error("Rendering page error:"+err);
 				return next(err);
 			}
 			req.logger.info("Rendering page with NO ERROR");
@@ -150,10 +150,73 @@ module.exports = {
 
 	put_products: function(req, res, next) {
 		req.logger.info('En PUT products');
+		var milli=new Date().getTime();
+		req.logger.info('Creating product');
+		req.models.products.create({	description:	'A Insert Product Text here '+milli,
+										url:			'A Insert Product url here'+milli,
+										category_id:	1,
+										packaging_id:	1},function(err,product) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			req.logger.debug("Sending product to browser:"+JSON.stringify(product));
+			return res.status(200).send(product);
+		});
 	},
 	
 	delete_products: function(req, res, next) {
 		req.logger.info('En DELETE products');
+		
+		var id			= req.body.id;
+		req.logger.debug("Starting product deletion with id:"+id);
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				req.logger.info("Getting product");
+				req.models.products.get(id, function(err,product) {
+					if(err) {
+						return callback(err);
+					}
+					req.logger.debug("Product:"+JSON.stringify(product));
+					return callback(null,product);
+				});
+			},
+			function(product,callback) {
+				req.logger.info("Getting products formats");
+				product.getProductsFormats(function(err,productsformats) {
+					if(err) {
+						return callback(err);
+					}
+					req.logger.info("Products formats quantity:"+productsformats.length);
+					if(productsformats.length>0) {
+						return callback('Este producto tiene '+productsformats.length+' formatos asociados. Borre primero los formatos');
+					}
+					return callback(null,product);
+				});
+			},
+			function(product,callback) {
+				req.logger.info("Getting product to remove");
+				product.remove(function(err,productsformats) {
+					if(err) {
+						return callback(err);
+					}
+					req.logger.info("Category removed successfully");
+					return callback();
+				});
+			}
+		], 
+		function(err) {
+			req.logger.info("En function error de waterfall:"+err);
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			req.logger.debug('Returning success');
+			return res.status(200).send('success');
+		});
+		
+		
+		
+		
 	}
 };
 

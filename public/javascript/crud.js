@@ -47,3 +47,78 @@ $(function () {
 	});
 	
 });
+
+$(function () {
+	$("td select").change(function () {
+
+		var tdname		=$(this).parent().attr('name');
+		var trid		=$(this).parent().parent().attr('name');
+		var csrf		=$("input[name='_csrf']").val();
+		var urltopost	=$(this).parent().parent().parent().parent().attr('summary');
+
+		var field		=$(this);
+		var newvalue	=field.val();
+		
+		console.log('Id:'+trid+' column name:'+tdname+' value:'+newvalue);
+		var formdata={id:trid, colname:tdname, colvalue:newvalue, _csrf:csrf};
+		console.log('Data to send:'+JSON.stringify(formdata));
+		
+		$.ajax({
+			url : urltopost,
+			type : 'POST',
+			data : formdata,
+			success : function (successresponse) {
+				console.log('Success');
+			},
+			error : function(errorresponse) {
+				show_error_messages(errorresponse);
+			}
+		});
+	});
+});
+
+function add(url) {
+	var csrf	=$("input[name='_csrf']").val();
+	var formdata={_csrf:csrf};
+	$.ajax({
+		url : url,
+		type : 'PUT',
+		data : formdata,
+		success : function (entity) {
+			console.log(entity);
+//			window.location.href	= href;
+			window.location.reload(true);
+		},
+		error : function(errorresponse) {
+			show_error_messages(errorresponse);
+		}
+	});
+}
+
+// Remove category
+$(function () {
+	$("td input[type='button']").click(function () {
+		var tr			=$(this).parent().parent();
+		var trid		=tr.attr('name');
+		var csrf		=$("input[name='_csrf']").val();	
+		var urltopost	=$(this).parent().parent().parent().parent().attr('summary');
+		
+		console.log('Id:'+trid);
+		var formdata={id:trid, _csrf:csrf};
+		console.log('Data to send:'+JSON.stringify(formdata));
+		clear_notification_toolbar();
+		
+		$.ajax({
+			url : urltopost,
+			type : 'DELETE',
+			data : formdata,
+			success : function (successresponse) {
+				tr.remove();
+			},
+			error : function(errorresponse) {
+				show_error_messages(errorresponse);
+			}
+		});
+	});
+});
+

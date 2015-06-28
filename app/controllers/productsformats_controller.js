@@ -72,6 +72,27 @@ module.exports = {
 			req.logger.debug('Returning success');
 			return res.status(200).send('success');
 		});
+	},
+	
+	delete_productsformats: function(req, res, next) {
+		req.logger.info('En DELETE products formats');
+		
+		var id			= req.body.id;
+		req.logger.debug("Starting product format deletion with id:"+id);
+		
+		req.models.productsformats.get(id, function(err,productformat) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			
+			productformat.remove(function (err) {
+				if(err) {
+					return utils.send_ajax_error(req,res,err);
+				}
+				req.logger.debug("Product:"+JSON.stringify(productformat));
+				return res.status(200).send('success');
+			});
+		});
 	}
 };
 

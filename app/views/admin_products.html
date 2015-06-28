@@ -10,6 +10,7 @@
 		<h1>Gestión de Productos</h1>
 		<br/>
 		<input type='text' name='search' placeholder='Ingrese búsqueda' value='{{=it.search}}'>
+		<input type='button' id='addProduct' value='Agregar Producto' ></input>
 		<br/>
 		<br/>
 		<br/>
@@ -59,6 +60,7 @@
 							<th style='text-align: left;'><h3>Cantidad</h3></th>
 							<th style='text-align: left;'><h3>Precio Por Menor</h3></th>
 							<th style='text-align: left;'><h3>Precio Por Mayor</h3></th>
+							<th style='text-align: left;'><h2></h2></th>
 						</tr>
 						{{~ product.productsformats:productformat}}
 						<tr name='{{=productformat.id}}'>
@@ -67,6 +69,7 @@
 							<td name='quantity' style='text-align: left; width: 500px;'><span>{{=productformat.quantity}}</span></td>
 							<td name='retail' style='text-align: left; width: 500px;'><span>{{=productformat.retail}}</span></td>
 							<td name='wholesale' style='text-align: left; width: 500px;'><span>{{=productformat.wholesale}}</span></td>
+							<td name='remove'><input type='button' value='Borrar'></input></td>
 						</tr>
 						{{~}}
 					</table>
