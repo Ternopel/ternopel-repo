@@ -26,27 +26,26 @@
 			<tr name='{{=product.id}}'>
 				<td name='description' style='text-align: left; width: 500px;'><span>{{=product.description}}</span></td>
 				<td name='url' style='text-align: left; width: 500px;'><span>{{=product.url}}</span></td>
-				<td name='category' style='text-align: left; width: 500px;'>
-				<select>
-					{{~ it.categories:category}}
-						{{? category.id === product.category_id}}
-							<option value="{{=category.id}}" selected="selected">{{=category.name}}</option>
-						{{??}}
-							<option value="{{=category.id}}">{{=category.name}}</option>
-						{{?}}
-					{{~}}
-				</select> 				
-				<td name='packaging' style='text-align: left; width: 500px;'>
-				<select>
-					{{~ it.packaging:packaging}}
-						{{? packaging.id === product.packaging_id}}
-							<option value="{{=packaging.id}}" selected="selected">{{=packaging.name}}</option>
-						{{??}}
-							<option value="{{=packaging.id}}">{{=packaging.name}}</option>
-						{{?}}
-					{{~}}
-				</select> 				
-				
+				<td name='category_id' style='text-align: left; width: 500px;'>
+					<select>
+						{{~ it.categories:category}}
+							{{? category.id === product.category_id}}
+								<option value="{{=category.id}}" selected="selected">{{=category.name}}</option>
+							{{??}}
+								<option value="{{=category.id}}">{{=category.name}}</option>
+							{{?}}
+						{{~}}
+					</select> 				
+				<td name='packaging_id' style='text-align: left; width: 500px;'>
+					<select>
+						{{~ it.packaging:packaging}}
+							{{? packaging.id === product.packaging_id}}
+								<option value="{{=packaging.id}}" selected="selected">{{=packaging.name}}</option>
+							{{??}}
+								<option value="{{=packaging.id}}">{{=packaging.name}}</option>
+							{{?}}
+						{{~}}
+					</select> 				
 				</td>
 				<td name='show' style="width:290px;"><input type='checkbox' name='formatscheck'><span>Ver formatos</span></input></td>
 				<td name='remove'><input type='button' value='Borrar'></input></td>

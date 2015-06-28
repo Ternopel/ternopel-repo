@@ -3,7 +3,6 @@ $(function () {
 		
 		var tdname		=$(this).parent().attr('name');
 		var trid		=$(this).parent().parent().attr('name');
-		var urltopost	=$(this).parent().parent().parent().attr('summary');
 		var csrf		=$("input[name='_csrf']").val();
 		var urltopost	=$(this).parent().parent().parent().parent().attr('summary');
 		

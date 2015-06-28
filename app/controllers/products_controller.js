@@ -46,7 +46,6 @@ module.exports = {
 					}
 					req.logger.debug('Packaging readed:'+packaging.length);
 					ld.merge(pageinfo, {packaging:packaging});
-					req.logger.info('MEC>1');
 					return callback();
 				});
 			},
@@ -91,23 +90,28 @@ module.exports = {
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				var filter = '';
+				var filter;
 				if(colname==='description') {
 					filter={ description:colvalue };
 				}
 				if(colname==='url') {
 					filter={ url:colvalue };
 				}
-				req.logger.info("Searching using filter:"+JSON.stringify(filter));
-				req.models.products.find(filter, function(err,products) {
-					if(err) {
-						return callback(err);
-					}
-					if(products.length===1 && products[0].id != id) {
-						return callback('El valor asignado a la columna existe en otro registro ('+products[0].id+')');
-					}
+				if(!filter) {
+					req.logger.info("Searching using filter:"+JSON.stringify(filter));
+					req.models.products.find(filter, function(err,products) {
+						if(err) {
+							return callback(err);
+						}
+						if(products.length===1 && products[0].id != id) {
+							return callback('El valor asignado a la columna existe en otro registro ('+products[0].id+')');
+						}
+						return callback();
+					});
+				}
+				else {
 					return callback();
-				});
+				}
 			},
 			function(callback) {
 				req.logger.info("Getting id:"+id);
@@ -121,6 +125,12 @@ module.exports = {
 				}
 				if(colname==='url') {
 					product.url	= colvalue;
+				}
+				if(colname==='packaging_id') {
+					product.packaging_id	= colvalue;
+				}
+				if(colname==='category_id') {
+					product.category_id	= colvalue;
 				}
 				
 				req.logger.info("Updating product:"+JSON.stringify(product));
