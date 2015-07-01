@@ -33,6 +33,7 @@ CREATE TABLE products
 	packaging_id bigint NOT NULL,
 	description varchar(255) NOT NULL UNIQUE,
 	url varchar(255) NOT NULL UNIQUE,
+	show_format boolean NOT NULL default false,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 

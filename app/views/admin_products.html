@@ -48,10 +48,22 @@
 						{{~}}
 					</select> 				
 				</td>
-				<td name='show' style="width:290px;"><input type='checkbox' name='formatscheck'><span>Ver formatos</span></input></td>
+				<td name='show_format' style="width:290px;">
+					{{? product.show_format === true}}
+						<input type='checkbox' name='formatscheck1' checked='checked'>Ver formatos1</input>
+					{{??}}
+						<input type='checkbox' name='formatscheck1'>Ver formatos2</input>
+					{{?}}
+				</td>
 				<td><input name='remove' type='button' value='Borrar'></input></td>
 			</tr>
+			{{? product.show_format === true}}
+			<tr name='{{=product.id}}_format'>
+			{{??}}
 			<tr name='{{=product.id}}_format' style='display:none;'>
+			{{?}}
+			
+			
 				<td colspan="4">
 					<br/>
 					<input type='button' id='addProductFormat' name='{{=product.id}}' value='Agregar Formato' ></input>

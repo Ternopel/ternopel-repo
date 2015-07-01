@@ -127,10 +127,13 @@ module.exports = {
 					product.url	= colvalue;
 				}
 				if(colname==='packaging_id') {
-					product.packaging_id	= colvalue;
+					product.packaging_id = colvalue;
 				}
 				if(colname==='category_id') {
 					product.category_id	= colvalue;
+				}
+				if(colname==='show_format') {
+					product.show_format	= colvalue;
 				}
 				
 				req.logger.info("Updating product:"+JSON.stringify(product));

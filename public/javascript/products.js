@@ -9,6 +9,7 @@ $(function () {
 });
 
 // See formats
+/*
 $(function () {
 	var input=$("input[name='formatscheck']");
 	input.click(function (e) {	
@@ -23,6 +24,7 @@ $(function () {
 		}
 	});
 });
+*/
 
 // Add product
 $(function () {
@@ -34,9 +36,11 @@ $(function () {
 // Add product
 $(function () {
 	$("#addProductFormat").click(function () {
+		console.log('Add product format pressed');
 		var csrf		=$("input[name='_csrf']").val();
 		var product_id	=$(this).attr('name');
 		var formdata	={_csrf:csrf, product_id:product_id};
+		console.log('Data to send:'+JSON.stringify(formdata));
 		$.ajax({
 			url : '/admin/productsformats',
 			type : 'PUT',
