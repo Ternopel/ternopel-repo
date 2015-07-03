@@ -49,14 +49,12 @@
 
 	sessionconfig.init = function (app) {
 		app.use(function(req, res, next) {
+			if(req.path==='/health') {
+				return next();
+			}
 			req.logger.info("==================================");
 			req.logger.info("New "+req.method+" to:"+req.path);
 			req.logger.info("==================================");
-			
-			if(req.path==='/health') {
-				req.logger.warn("Health check: No session created !");
-				return next();
-			}
 			
 			var ter_token = req.cookies.ter_token;
 			if(!ter_token) {
