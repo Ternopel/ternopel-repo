@@ -5,7 +5,8 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "node ./server",
+    "start": "forever -a -l ./ternopel.log start ./server.js ",
+    "stop": "forever stopall",
     "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -u exports -R spec --recursive"
   },
   "dependencies": {
