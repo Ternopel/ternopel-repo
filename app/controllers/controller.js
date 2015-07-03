@@ -1,4 +1,5 @@
 module.exports = {
+	health:				require('./health_controller'),
 	admin:				require('./admin_controller'),
 	categories:			require('./categories_controller'),
 	products:			require('./products_controller'),
