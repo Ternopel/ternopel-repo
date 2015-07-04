@@ -1,3 +1,5 @@
+'use strict';
+
 $(function() {
 	var $form = $('#registration_form');
 	$form.find('input[type="submit"]').click(function() {

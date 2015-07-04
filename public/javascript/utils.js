@@ -1,3 +1,5 @@
+'use strict';
+
 function make_form_post(url, formid, successcallback,errorcallback) {
 	console.log("Submitting form");
 	var formdata = $( '#'+formid ).serialize();

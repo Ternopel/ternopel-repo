@@ -1,3 +1,5 @@
+'use strict';
+
 // Enter on search field
 $(function () {
 	var input=$("input[name='search']");
