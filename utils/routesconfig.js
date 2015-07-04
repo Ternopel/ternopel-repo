@@ -1,3 +1,5 @@
+'use strict';
+
 (function (routesconfig) {
 		
 	function restrict(req, res, next) {

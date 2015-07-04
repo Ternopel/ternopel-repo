@@ -1,3 +1,5 @@
+'use strict';
+
 (function (modelsutil) {
 
 	modelsutil.getCategories = function (req,res,next,getcallback) {

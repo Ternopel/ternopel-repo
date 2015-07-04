@@ -1,3 +1,5 @@
+'use strict';
+
 var app			= require(__dirname+'/../app.js'),
 	logger		= require(__dirname+'/../utils/logger'),
 	config		= require(__dirname+'/../utils/config')();

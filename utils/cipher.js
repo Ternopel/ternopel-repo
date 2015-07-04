@@ -1,3 +1,5 @@
+'use strict';
+
 (function (cipher) {
 	
 	var	crypto		= require('crypto'),

@@ -1,3 +1,5 @@
+'use strict';
+
 (function (test2) {
 
 	test2.init = function (done) {

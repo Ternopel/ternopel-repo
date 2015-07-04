@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	get_admin: function(req, res, next) {
 		req.logger.info("Rendering admin");

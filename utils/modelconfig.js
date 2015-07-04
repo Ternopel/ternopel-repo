@@ -1,3 +1,5 @@
+'use strict';
+
 (function (modelconfig) {
 
 	modelconfig.init = function (app, express, logger, config, callback) {

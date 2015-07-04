@@ -1,3 +1,5 @@
+'use strict';
+
 var ld = require('lodash');
 
 module.exports = function() {

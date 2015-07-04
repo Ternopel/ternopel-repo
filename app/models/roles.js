@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (orm, db, models,logger) {
 
 	logger.debug("Configuring roles");

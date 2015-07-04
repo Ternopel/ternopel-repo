@@ -1,3 +1,5 @@
+'use strict';
+
 var logger		= require("./utils/logger"),
 	config		= require("./utils/config")(),
 	app			= require("./app.js");

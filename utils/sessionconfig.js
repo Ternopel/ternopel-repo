@@ -1,3 +1,5 @@
+'use strict';
+
 (function (sessionconfig) {
 	
 	var savesession	= function(req,next,usersession) {

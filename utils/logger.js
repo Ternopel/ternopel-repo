@@ -1,3 +1,5 @@
+'use strict';
+
 var winston			= require('winston'),
 	expressWinston	= require('express-winston'),
 	dateformat		= require('dateformat'),

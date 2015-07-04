@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	get_report: function(req, res, next) {
 		

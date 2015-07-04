@@ -1,3 +1,5 @@
+'use strict';
+
 (function (expressconfig) {
 
 	expressconfig.init = function (app, express, logger, config) {

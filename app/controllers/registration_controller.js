@@ -1,3 +1,5 @@
+'use strict';
+
 var cipher	= require('../../utils/cipher'),
 	utils	= require('./utils');
 

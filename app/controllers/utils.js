@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	send_ajax_error: function(req, res, err) {
 		req.logger.error('Error sent to browser:'+err);

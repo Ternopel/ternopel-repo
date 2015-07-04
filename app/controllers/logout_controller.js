@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	get_logout: function(req, res, next) {
 		req.logger.info('Removing logged in user');

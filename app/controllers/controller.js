@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	health:				require('./health_controller'),
 	admin:				require('./admin_controller'),

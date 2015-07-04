@@ -1,3 +1,5 @@
+'use strict';
+
 var ld = require('lodash');
 
 // Getting information to render main menu

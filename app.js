@@ -1,3 +1,5 @@
+'use strict';
+
 (function (appconfig) {
 
 	var express			= require('express'),
