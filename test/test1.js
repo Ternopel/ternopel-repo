@@ -8,6 +8,8 @@ var request		= require('supertest'),
 	server,
 	db;
 
+var test2		= require(__dirname+'/../test/test2');
+
 describe('Users creation', function() {
 	
 	this.timeout(0);
@@ -41,7 +43,6 @@ describe('Users creation', function() {
 		});
 	});	
 	
-
  	it('Create not existing user', function(done) {
  		logger.info("EN TEST1");
  		return done();
@@ -52,6 +53,8 @@ describe('Users creation', function() {
  		logger.info("EN TEST2");
  		return done();
  	});
+ 	
+ 	it('Sign up with noexisting email', test2.init);
  	
 	after(function (){
 		logger.info('Stopping');
