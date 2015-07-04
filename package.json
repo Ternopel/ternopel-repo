@@ -55,6 +55,7 @@
     "db_password": "Pilarcita1",
     "db_show_sql": "true",
     "test_db_datatabase": "ternopel_test",
+    "test_db_show_sql": "false",
     "test_app_port": "3000"
   },
   "author": "Maximiliano Carrizo"
