@@ -10,7 +10,7 @@ var request		= require('supertest'),
 	server,
 	db;
 
-var test2		= require(__dirname+'/../test/test2');
+var testsregistration		= require(__dirname+'/../test/testsregistration');
 
 describe('Users creation', function() {
 	
@@ -45,21 +45,15 @@ describe('Users creation', function() {
 		});
 	});	
 	
- 	it('Create not existing user', function(done) {
- 		logger.info("EN TEST1");
- 		return done();
-	});
-
- 	it('Sign up with noexisting email', function(done) {
-
- 		logger.info("EN TEST2");
- 		return done();
- 	});
- 	
- 	it('Sign up with noexisting email', test2.init);
+	beforeEach(function(done) {
+		logger.info('---------------- Starting test -----------------');
+		return done();
+	});	
+	
+ 	it('Users registration', testsregistration.registerNewUser);
  	
 	after(function (){
-		logger.info('Stopping');
+		logger.info('Stopping server');
 		server.close();
 	});
 });
