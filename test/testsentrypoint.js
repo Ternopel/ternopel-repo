@@ -10,7 +10,7 @@ var request		= require('supertest'),
 	server,
 	db;
 
-var testsregistration		= require(__dirname+'/../test/testsregistration');
+var testsregistration		= require(__dirname+'/../goma/testregistration');
 
 describe('Users creation', function() {
 	

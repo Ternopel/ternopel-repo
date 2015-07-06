@@ -17,29 +17,17 @@ var request		= require('supertest'),
  		};
 		
 		logger.info('Executing get to server');
-		if(!request) {
-			logger.info('Request is not defined');
-		}
-		else {
-			logger.info(request);
-		}
-			
-//		if(!(request.get)) {
-//			logger.info('get is not defined');
-//		}
-		request.get('/registration');
-		return done();
-		
-//				.expect(200)
-//				.send(post_data)
-//				.expect(200)
-//				.end(function(err, res) {
-//					handle_err(err, res, done, function() {
-//						console.info(res.text);
-//						expect(res.text).toNotBe('success');
-//						return done();
-//					})
-//				});
+		request("http://localhost:3000")
+			.get('/registration')
+			.end(function(err, res){
+				
+				var cheerio = require('cheerio');
+				var $ = cheerio.load(res.text);
+				var xx = $('input[name=_csrf]').val();
+				console.log(xx);
+
+				done();
+			});
 	};
 
 })(module.exports);
