@@ -20,9 +20,13 @@ var request		= require('supertest'),
 		if(!request) {
 			logger.info('Request is not defined');
 		}
-		if(!(request.get)) {
-			logger.info('get is not defined');
+		else {
+			logger.info(request);
 		}
+			
+//		if(!(request.get)) {
+//			logger.info('get is not defined');
+//		}
 		request.get('/registration');
 		return done();
 		
