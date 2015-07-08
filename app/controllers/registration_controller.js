@@ -22,6 +22,7 @@ module.exports = {
 		req.logger.debug("Defining validators");
 		req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
 		req.assert('password', 'La clave es requerida').notEmpty();
+		req.assert('is_registration', 'Parametro de tipo de registracion es requerido').notEmpty();
 		if(is_registration==='true') {
 			req.assert('last_name', 'El apellido es requerido').notEmpty();
 			req.assert('first_name', 'El nombre es requerido').notEmpty();
@@ -39,8 +40,10 @@ module.exports = {
 				req.logger.debug('Searching for existing user');
 				req.models.users.find({email_address: email_address}, function(err,user) {
 					if(err) {
+						req.logger.debug('Error in search:'+err);
 						return callback(err);
 					}
+					req.logger.debug('Is registration:'+is_registration+' y user length:'+user.length);
 					if(is_registration==='true') {
 						if(user.length===1) {
 							return callback('Usuario ya existente');
@@ -61,8 +64,9 @@ module.exports = {
 				});
 			}, 
 			function(user,callback) {
+				req.logger.debug('Creacion de usuario o login !');
 				if(is_registration==='true') {
-					req.logger.info('Creating user '+email_address);
+					req.logger.info('Creando user '+email_address);
 					req.models.users.create({	email_address:	email_address,
 												password:		cipher.encrypt(password), 
 												role_id:		req.constants.CUSTOMER_ID,
@@ -73,6 +77,7 @@ module.exports = {
 				}
 
 				if(is_registration==='false') {
+					req.logger.info('Evaluando claves');
 					if(user.password !== cipher.encrypt(password)) {
 						return callback('Password inválida');
 					}
@@ -93,10 +98,13 @@ module.exports = {
 			}
 		], 
 		function(err, user) {
+			req.logger.debug('Finalizacion de registration');
 			if(err) {
+				req.logger.debug('Error por enviar al cliente:'+err);
 				return utils.send_ajax_error(req,res,err);
 			}
 			else {
+				req.logger.debug('Registracion o login exitoso !');
 				if(user.isAdmin()) {
 					return res.status(200).send('success_admin');
 				}
