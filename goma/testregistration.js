@@ -16,11 +16,14 @@ var request		= require('supertest'),
 				var $ = cheerio.load(res.text);
 				var csrf = $('input[name=_csrf]').val();
 				logger.info('csrf:'+csrf);
+				
+				var cookies = ''+res.headers['set-cookie'];
+				cookies = cookies.replace('Path=/,','');
 
 				logger.info('Posting info to server');
 				request("http://localhost:3000")
 					.post('/registration')
-					.set('cookie', res.headers['set-cookie'])
+					.set('cookie', cookies)
 					.send({
 						'first_name' : 'Nicasio',
 						'last_name' : 'Oronio',
@@ -46,11 +49,14 @@ var request		= require('supertest'),
 				var $ = cheerio.load(res.text);
 				var csrf = $('input[name=_csrf]').val();
 				logger.info('csrf:'+csrf);
+				
+				var cookies = ''+res.headers['set-cookie'];
+				cookies = cookies.replace('Path=/,','');
 
 				logger.info('Posting info to server');
 				request("http://localhost:3000")
 					.post('/registration')
-					.set('cookie', res.headers['set-cookie'])
+					.set('cookie', cookies)
 					.send({
 						'email_address' : 'nicasio@gmail.com',
 						'password' : 'nicasio',
@@ -60,7 +66,7 @@ var request		= require('supertest'),
 					.expect(200, done);
 			});
 		});
-	}
+	};
 
 
 })(module.exports);
