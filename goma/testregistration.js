@@ -33,7 +33,11 @@ var request		= require('supertest'),
 						'_csrf' : csrf,
 						'is_registration': 'true'
 					})
-					.expect(200, done);
+					.expect(200)
+					.end(function(err,res) {
+						logger.info('Hola');
+						done();
+					});
 			});
 	};
 
