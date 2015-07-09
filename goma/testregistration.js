@@ -7,8 +7,6 @@ var request		= require('supertest'),
 
 	testsregistration.registerNewUser = function (done) {
 		
-		logger.info('Defining data to post');
-		
 		logger.info('Executing get to server');
 		request("http://localhost:3000")
 			.get('/registration')
@@ -30,19 +28,39 @@ var request		= require('supertest'),
 						'password' : 'nicasio',
 						'confirm_password' : 'nicasio',
 						'_csrf' : csrf,
-						'is_registration': true
+						'is_registration': 'true'
 					})
-					.expect(function(res){
-						assert.equal(undefined, res.body.name);
-						assert.equal('You must provide a valid email address', res.body.email);
-						assert.equal('You must provide a message', res.body.message);
-					})
-					.expect(500, done);
-//					.end(function(err,res) {
-//						logger.info('Error:'+err);
-//						done(err);
-//					});
+					.expect(200, done);
 			});
 	};
+
+	testsregistration.authenticateUser = function (done) {
+		testsregistration.registerNewUser(function(subdone) {
+
+		logger.info('Executing get to server');
+		request("http://localhost:3000")
+			.get('/registration')
+			.end(function(err, res){
+				
+				var cheerio = require('cheerio');
+				var $ = cheerio.load(res.text);
+				var csrf = $('input[name=_csrf]').val();
+				logger.info('csrf:'+csrf);
+
+				logger.info('Posting info to server');
+				request("http://localhost:3000")
+					.post('/registration')
+					.set('cookie', res.headers['set-cookie'])
+					.send({
+						'email_address' : 'nicasio@gmail.com',
+						'password' : 'nicasio',
+						'_csrf' : csrf,
+						'is_registration': 'false'
+					})
+					.expect(200, done);
+			});
+		});
+	}
+
 
 })(module.exports);

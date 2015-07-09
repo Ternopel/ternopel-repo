@@ -52,7 +52,6 @@ module.exports = {
 							return callback(null,null);
 						}
 					}
-					
 					if(is_registration==='false') {
 						if(user.length===0) {
 							return callback('Usuario no existente');
@@ -61,6 +60,7 @@ module.exports = {
 							return callback(null,user[0]);
 						}
 					}
+					return callback('No se puede evaluar parametro is_registration');
 				});
 			}, 
 			function(user,callback) {

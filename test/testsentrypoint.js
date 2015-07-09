@@ -33,6 +33,7 @@ describe('Users creation', function() {
 	});
 	
 	beforeEach(function(done) {
+		logger.info('---------------- Starting test -----------------');
 		logger.info("Dropping model");
 		db.drop(function(err) {
 			if(err) {
@@ -45,12 +46,8 @@ describe('Users creation', function() {
 		});
 	});	
 	
-	beforeEach(function(done) {
-		logger.info('---------------- Starting test -----------------');
-		return done();
-	});	
-	
  	it('Users registration', testsregistration.registerNewUser);
+// 	it('Users authentication', testsregistration.authenticateUser);
  	
 	after(function (){
 		logger.info('Stopping server');
