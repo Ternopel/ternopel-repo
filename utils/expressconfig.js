@@ -28,8 +28,8 @@
 		app.engine('html', expressdot.__express); 
 
 		logger.debug("Setting 'views' folder");
-		app.set('views', "./app/views");
-
+		app.set('views', path.dirname(module.parent.filename)+"/app/views");
+		
 		logger.debug("Setting 'favicon'");
 		var favicon			= require('serve-favicon');
 		app.use(favicon(publicFolder+'/images/tp.ico'));

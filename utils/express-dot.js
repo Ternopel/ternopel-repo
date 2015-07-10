@@ -6,6 +6,8 @@ var path = require('path');
 
 var _cache = {};
 var _partialsCache = {};
+var _views_dir = {};
+
 var _globals = {
 	load : function(file) {
 		var template = null;
@@ -16,7 +18,7 @@ var _globals = {
 
 		// no content so let's load from file system 
 		if (template == null) {
-			template = fs.readFileSync(path.join(path.dirname(process.argv[1]),file));
+			template = fs.readFileSync(path.join(_views_dir,file));
 		}
 
 		// let's cache the partial  
@@ -87,6 +89,7 @@ exports.__express = function(filename, options, cb) {
 	}
 
 	var viewDir = options.settings.views;
+	_views_dir = viewDir;
 	var layoutFileName = path.join(viewDir, options.layout || 'layout' + extension);
 
 	var layoutTemplate = _cache[layoutFileName];
