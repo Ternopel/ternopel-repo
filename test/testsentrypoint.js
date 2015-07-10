@@ -46,7 +46,9 @@ describe('Users creation', function() {
 		});
 	});	
 	
- 	it('Users registration', testsregistration.registerNewUser);
+ 	it('Users registration and login OK', testsregistration.registerNewUser);
+ 	it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
+ 	it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
  	
 	after(function (){
 		logger.info('Stopping server');

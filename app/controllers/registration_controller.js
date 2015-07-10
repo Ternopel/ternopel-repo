@@ -54,7 +54,7 @@ module.exports = {
 					}
 					if(is_registration==='false') {
 						if(user.length===0) {
-							return callback('Usuario no existente');
+							return callback('Usuario/Clave invalido');
 						}
 						else {
 							return callback(null,user[0]);
