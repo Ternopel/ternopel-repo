@@ -8,7 +8,7 @@ module.exports = {
 				next(err);
 			}
 			req.logger.info('User removed from session');
-			return res.redirect('/');
+			return res.redirect(301,'/');
 		});
 	}
 };

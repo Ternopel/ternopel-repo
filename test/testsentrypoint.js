@@ -47,7 +47,6 @@ describe('Users creation', function() {
 	});	
 	
  	it('Users registration', testsregistration.registerNewUser);
-// 	it('Users authentication', testsregistration.authenticateUser);
  	
 	after(function (){
 		logger.info('Stopping server');
