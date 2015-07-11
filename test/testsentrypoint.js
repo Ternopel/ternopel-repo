@@ -10,6 +10,8 @@ var request		= require('supertest'),
 	db;
 
 var testsregistration		= require(__dirname+'/../goma/testregistration');
+var testreport				= require(__dirname+'/../goma/testreport');
+var testhealth				= require(__dirname+'/../goma/testhealth');
 
 describe('Users creation', function() {
 	
@@ -53,13 +55,21 @@ describe('Users creation', function() {
 		});
 	});	
 	
+	// Registration tests
+ 	it('Admin with no permissions', testsregistration.adminWithNoPermissions);
  	it('Users registration and login OK', testsregistration.registerNewUser);
  	it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
  	it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
  	it('Register existing user', testsregistration.registerExistingUser);
  	it('Admin login', testsregistration.adminLogin);
  	
-	after(function (){
+ 	// Health check
+ 	it('Health check', testhealth.getHealth);
+ 	
+ 	// Report test
+ 	it('Report', testreport.getReport);
+
+ 	after(function (){
 		logger.info('Stopping server');
 		server.close();
 	});

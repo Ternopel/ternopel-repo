@@ -253,9 +253,6 @@ var request		= require('supertest'),
 		});
 	};	
 	
-	
-	
-	
 	testsregistration.registerExistingUser = function (done) {
 		
 		var waterfall = require('async-waterfall');
@@ -288,6 +285,31 @@ var request		= require('supertest'),
 						return callback(err,res);
 					});
 			},			
+		], 
+		function(err) {
+			if(err) {
+				return done(err);
+			}
+			else {
+				return done();
+			}
+		});
+	};	
+	
+	testsregistration.adminWithNoPermissions = function (done) {
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:3000")
+					.get('/admin')
+					.expect(200)
+					.end(function(err, res){
+						expect(res.text).toInclude('Usted no tiene permisos para ver esta página');
+						return callback(err,res);
+					});
+			}
 		], 
 		function(err) {
 			if(err) {
