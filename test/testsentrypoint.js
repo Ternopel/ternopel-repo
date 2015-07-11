@@ -24,7 +24,6 @@ describe('Users creation', function() {
 	before(function(done) {
 		
 		config.app_run_liquibase	= 'false';
-		config.app_log_level		= config.test_app_log_level;
 		config.app_port				= config.test_app_port;
 		config.db_database			= config.test_db_database;
 		config.db_show_sql			= config.test_db_show_sql;
