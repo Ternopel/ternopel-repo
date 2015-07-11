@@ -62,12 +62,7 @@ var request		= require('supertest'),
 			}
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 
@@ -133,12 +128,7 @@ var request		= require('supertest'),
 			}
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 
@@ -187,12 +177,7 @@ var request		= require('supertest'),
 			}
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 
@@ -312,12 +297,7 @@ var request		= require('supertest'),
 			}
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 	

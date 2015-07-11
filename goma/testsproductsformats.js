@@ -54,12 +54,7 @@ var request		= require('supertest'),
 			} 
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 	
@@ -123,12 +118,7 @@ var request		= require('supertest'),
 			}
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 	
@@ -202,6 +192,57 @@ var request		= require('supertest'),
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'id' : '1',
+						'colname' : 'quantity',
+						'colvalue' : '2',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Updating product');
+				request("http://localhost:"+config.test_app_port)
+					.post('/admin/productsformats')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'id' : '1',
+						'colname' : 'retail',
+						'colvalue' : '2.30',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Updating product');
+				request("http://localhost:"+config.test_app_port)
+					.post('/admin/productsformats')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'id' : '1',
+						'colname' : 'wholesale',
+						'colvalue' : '2.30',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Updating product');
+				request("http://localhost:"+config.test_app_port)
+					.post('/admin/productsformats')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'id' : '1',
 						'colname' : 'format',
 						'_csrf' : utils.getcsrf(res)
 					})
@@ -247,12 +288,7 @@ var request		= require('supertest'),
 			} 
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 

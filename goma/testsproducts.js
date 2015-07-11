@@ -78,12 +78,7 @@ var request		= require('supertest'),
 			}
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 	
@@ -150,12 +145,7 @@ var request		= require('supertest'),
 			}
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 	
@@ -204,12 +194,7 @@ var request		= require('supertest'),
 			}
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 	
@@ -251,6 +236,57 @@ var request		= require('supertest'),
 						'id' : '1',
 						'colname' : 'description',
 						'colvalue' : 'Nuevas bolsitas',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success');
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Updating product');
+				request("http://localhost:"+config.test_app_port)
+					.post('/admin/products')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'id' : '1',
+						'colname' : 'packaging_id',
+						'colvalue' : '2',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Updating product');
+				request("http://localhost:"+config.test_app_port)
+					.post('/admin/products')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'id' : '1',
+						'colname' : 'category_id',
+						'colvalue' : '2',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Updating product');
+				request("http://localhost:"+config.test_app_port)
+					.post('/admin/products')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'id' : '1',
+						'colname' : 'show_format',
+						'colvalue' : 'true',
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(200)
@@ -328,12 +364,7 @@ var request		= require('supertest'),
 			}
 		], 
 		function(err) {
-			if(err) {
-				return done(err);
-			}
-			else {
-				return done();
-			}
+			return done(err);
 		});
 	};
 
