@@ -4,7 +4,9 @@ var utils	= require('./utils');
 
 module.exports = {
 	get_products: function(req, res, next) {
-
+		if(typeof req.query.search === 'undefined') {
+			return next('No se encontro parámetro de búsqueda');
+		}
 		var ld			= require('lodash');
 		var pageinfo	= ld.merge(req.sessionstatus, {csrfToken: req.csrfToken(),search: req.query.search});
 		var waterfall	= require('async-waterfall');
@@ -15,7 +17,7 @@ module.exports = {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.info('Iterating products');
+					req.logger.info('Products readed:'+products.length);
 					var async = require('async');
 					async.each(products, function(product, asynccallback) {
 						req.logger.info('Product Info'+JSON.stringify(product));

@@ -3,7 +3,8 @@
 var request		= require('supertest'),
 	expect		= require('expect'),
 	utils		= require('../utils/testutils.js'),
-	logger		= require(__dirname+'/../utils/logger');
+	logger		= require(__dirname+'/../utils/logger'),
+	config		= require(__dirname+"/../utils/config")();
 
 (function (testreport) {
 
@@ -13,7 +14,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/report')
 					.expect(200)
 					.end(function(err, res){

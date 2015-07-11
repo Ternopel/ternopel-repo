@@ -3,7 +3,8 @@
 var request		= require('supertest'),
 	expect		= require('expect'),
 	utils		= require('../utils/testutils.js'),
-	logger		= require(__dirname+'/../utils/logger');
+	logger		= require(__dirname+'/../utils/logger'),
+	config		= require(__dirname+"/../utils/config")();
 
 (function (testshome) {
 
@@ -13,7 +14,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/')
 					.expect(200)
 					.end(function(err, res){
@@ -38,7 +39,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/bandas-elasticas')
 					.expect(200)
 					.end(function(err, res){
@@ -63,7 +64,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/no-existing-category')
 					.expect(200)
 					.end(function(err, res){
@@ -87,7 +88,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/bandas-elasticas/bolsa-bandas-elasticas')
 					.expect(200)
 					.end(function(err, res){
@@ -112,7 +113,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/no-existing-category/no-existing-product')
 					.expect(200)
 					.end(function(err, res){

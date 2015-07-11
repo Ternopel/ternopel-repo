@@ -14,6 +14,7 @@ var testreport				= require(__dirname+'/../goma/testreport');
 var testhealth				= require(__dirname+'/../goma/testhealth');
 var testshome				= require(__dirname+'/../goma/testshome');
 var testscategories			= require(__dirname+'/../goma/testscategories');
+var testsproducts			= require(__dirname+'/../goma/testsproducts');
 
 describe('Users creation', function() {
 	
@@ -22,6 +23,8 @@ describe('Users creation', function() {
 	before(function(done) {
 		
 		config.app_run_liquibase	= 'false';
+		config.app_log_level		= config.test_app_log_level;
+		config.app_port				= config.test_app_port;
 		config.db_database			= config.test_db_database;
 		config.db_show_sql			= config.test_db_show_sql;
 		config.db_liquibase_xml		= config.test_db_liquibase_xml;
@@ -60,6 +63,11 @@ describe('Users creation', function() {
 	var runTests=true;
 	// admin categories tests
 	if(true) {
+		it('Get products', testsproducts.getProducts);
+	}	
+	
+	// admin categories tests
+	if(runTests) {
 		it('Get categories', testscategories.getCategories);
 		it('Delete category', testscategories.deleteCategory);
 		it('Create category', testscategories.createCategory);

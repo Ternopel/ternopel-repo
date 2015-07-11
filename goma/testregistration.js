@@ -3,7 +3,8 @@
 var request		= require('supertest'),
 	expect		= require('expect'),
 	utils		= require('../utils/testutils.js'),
-	logger		= require(__dirname+'/../utils/logger');
+	logger		= require(__dirname+'/../utils/logger'),
+	config		= require(__dirname+"/../utils/config")();
 
 (function (testsregistration) {
 
@@ -13,7 +14,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/registration')
 					.end(function(err, res){
 						return callback(err,res);
@@ -21,7 +22,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -41,7 +42,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/')
 					.set('cookie', utils.getcookies(res))
 					.end(function(err, res){
@@ -51,7 +52,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 				.get('/logout')
 				.expect(301)
 				.end(function(err, res){
@@ -60,7 +61,7 @@ var request		= require('supertest'),
 			},
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -68,7 +69,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -85,7 +86,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/')
 					.set('cookie', utils.getcookies(res))
 					.end(function(err, res){
@@ -110,7 +111,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -118,7 +119,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -152,7 +153,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -160,7 +161,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -177,7 +178,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -209,7 +210,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -217,7 +218,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -234,7 +235,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/')
 					.set('cookie', utils.getcookies(res))
 					.end(function(err, res){
@@ -259,7 +260,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/registration')
 					.end(function(err, res){
 						return callback(err,res);
@@ -267,7 +268,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -302,7 +303,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:3000")
+				request("http://localhost:"+config.test_app_port)
 					.get('/admin')
 					.expect(200)
 					.end(function(err, res){

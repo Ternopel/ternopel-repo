@@ -8,7 +8,7 @@ logger.info("Creating express app");
 app.init(logger,config, function(app,db) {
 	
 	logger.info("Starting server");
-	var server = app.listen(3000, function() {
+	var server = app.listen(config.app_port, function() {
 		logger.info('Listening on port:'+server.address().port);
 	});
 });
