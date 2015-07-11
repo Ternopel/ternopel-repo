@@ -172,7 +172,7 @@ var request		= require('supertest'),
 					});
 			}, 
 			function(res,callback) {
-				logger.info('Deleting category');
+				logger.info('Creating category');
 				request("http://localhost:"+config.test_app_port)
 					.put('/admin/categories')
 					.set('cookie', utils.getcookies(res))

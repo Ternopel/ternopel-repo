@@ -161,6 +161,7 @@ module.exports = {
 		req.logger.info('Creating product');
 		req.models.products.create({	description:	'A Insert Product Text here '+milli,
 										url:			'A Insert Product url here'+milli,
+										show_format:	false,
 										category_id:	1,
 										packaging_id:	1},function(err,product) {
 			if(err) {

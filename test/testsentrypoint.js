@@ -60,10 +60,12 @@ describe('Users creation', function() {
 		});
 	});	
 
-	var runTests=true;
+	var runTests=false;
 	// admin categories tests
 	if(true) {
 		it('Get products', testsproducts.getProducts);
+		it('Delete product', testsproducts.deleteProduct);
+		it('Create product', testsproducts.createProduct);
 	}	
 	
 	// admin categories tests

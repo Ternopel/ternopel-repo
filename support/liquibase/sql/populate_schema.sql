@@ -218,3 +218,7 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 (8,'FLANERA H 7',100,1170.0,85.0,1),
 (8,'TAPA P/FLANERA H 10',100,600.0,43.0,1),
 (8,'CENICERO DE ALUMINIO',100,161.0,35.0,1);
+
+/* Caja de madera */
+INSERT INTO products (id,category_id,packaging_id,description,url,show_format) VALUES 
+(9,7,1,'Caja de madera','caja-madera',false);
