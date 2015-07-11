@@ -2,11 +2,10 @@
 
 var app			= require(__dirname+'/../app.js'),
 	logger		= require(__dirname+'/../utils/logger'),
-	config		= require(__dirname+'/../utils/config')();
+	config		= require(__dirname+'/../utils/config')(),
+	liquibase	= require(__dirname+'/../utils/liquibase');
 
 var request		= require('supertest'),
-//	assert		= require('assert'),
-//	expect		= require('expect'),
 	server,
 	db;
 
@@ -19,8 +18,9 @@ describe('Users creation', function() {
 	before(function(done) {
 		
 		config.app_run_liquibase	= 'false';
-		config.db_database			= config.test_db_datatabase;
+		config.db_database			= config.test_db_database;
 		config.db_show_sql			= config.test_db_show_sql;
+		config.db_liquibase_xml		= config.test_db_liquibase_xml;
 		
 		logger.info("Initiating app");
 		app.init(logger,config, function(app,pdb) {
@@ -41,6 +41,9 @@ describe('Users creation', function() {
 			}
 			logger.info("Creating model");
 			db.sync(function(err) {
+				config.app_run_liquibase	= 'true';
+				logger.info("Running liquibase");
+				liquibase.init(logger,config);
 				return done(err);
 			});
 		});

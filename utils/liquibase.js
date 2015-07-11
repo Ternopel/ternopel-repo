@@ -19,14 +19,14 @@
 						liqdir + '/liquibase-core-2.0.3.jar',
 						'--classpath='+liqdir+'/postgresql-9.3-1101-jdbc4.jar',
 						'--driver=org.postgresql.Driver',
-						'--changeLogFile='+liqdir+'/liquibase.xml',
+						'--changeLogFile='+liqdir+'/'+config.db_liquibase_xml,
 						'--url=jdbc:postgresql://'+config.db_host+':'+config.db_port+'/'+config.db_database+'?charSet=UTF-8',
 						'--username='+config.db_user,
 						'--password='+config.db_password,
 						'update'
 					];
 		
-		logger.debug('Executing task');
+		logger.debug('Executing task:'+args);
 		var output = exec('java',args).toString();
 		logger.info(output);
 	};
