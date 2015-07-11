@@ -86,8 +86,16 @@ module.exports = {
 		req.logger.info('En PUT products formats');
 		var milli		= new Date().getTime();
 		var product_id	= req.body.product_id;
+		
+		req.assert('product_id', 'El producto es requerido').notEmpty();
+		req.logger.info("Executing validation");
+		var valerrors = req.validationErrors();
+		if(valerrors) {
+			return utils.send_ajax_validation_errors(req,res,valerrors);
+		}
+		
 		req.logger.info('Creating product format');
-		req.models.productsformats.create({	format:			'A '+milli,
+		req.models.productsformats.create({	format:			'INS FORMAT '+milli,
 											product_id:		product_id,
 											quantity:		1,
 											units:			1,
