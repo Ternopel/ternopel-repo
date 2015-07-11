@@ -13,6 +13,7 @@ var testsregistration		= require(__dirname+'/../goma/testregistration');
 var testreport				= require(__dirname+'/../goma/testreport');
 var testhealth				= require(__dirname+'/../goma/testhealth');
 var testshome				= require(__dirname+'/../goma/testshome');
+var testscategories			= require(__dirname+'/../goma/testscategories');
 
 describe('Users creation', function() {
 	
@@ -56,26 +57,43 @@ describe('Users creation', function() {
 		});
 	});	
 
+	var runTests=true;
+	// admin categories tests
+	if(true) {
+		it('Get categories', testscategories.getCategories);
+		it('Delete category', testscategories.deleteCategory);
+		it('Create category', testscategories.createCategory);
+		it('Update category', testscategories.updateCategory);
+	}	
+	
 	// home tests
- 	it('Plain home', testshome.getPlainHome);
- 	it('Get category', testshome.getCategory);
- 	it('Get product', testshome.getProduct);
- 	it('Get no existing category', testshome.getNoExistingCategory);
- 	it('Get no existing product', testshome.getNoExistingProduct);
+	if(runTests) {
+		it('Plain home', testshome.getPlainHome);
+		it('Get category', testshome.getCategory);
+		it('Get product', testshome.getProduct);
+		it('Get no existing category', testshome.getNoExistingCategory);
+		it('Get no existing product', testshome.getNoExistingProduct);
+	}
 	
 	// Registration tests
-// 	it('Admin with no permissions', testsregistration.adminWithNoPermissions);
-// 	it('Users registration and login OK', testsregistration.registerNewUser);
-// 	it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
-// 	it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
-// 	it('Register existing user', testsregistration.registerExistingUser);
-// 	it('Admin login', testsregistration.adminLogin);
- 	
+	if(runTests) {
+		it('Admin with no permissions', testsregistration.adminWithNoPermissions);
+		it('Users registration and login OK', testsregistration.registerNewUser);
+		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
+		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
+		it('Register existing user', testsregistration.registerExistingUser);
+		it('Admin login', testsregistration.adminLogin);
+	}
+	 	
  	// Health check
-// 	it('Health check', testhealth.getHealth);
+	if(runTests) {
+		it('Health check', testhealth.getHealth);
+	}
  	
  	// Report test
-// 	it('Report', testreport.getReport);
+	if(runTests) {
+		it('Report', testreport.getReport);
+	}
 
  	after(function (){
 		logger.info('Stopping server');
