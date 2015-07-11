@@ -153,7 +153,7 @@ var request		= require('supertest'),
 			function(callback) {
 				logger.info('Executing get to server');
 				request("http://localhost:3000")
-					.get('/registration')
+					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
 					});
@@ -171,7 +171,24 @@ var request		= require('supertest'),
 					})
 					.expect(500)
 					.end(function(err,newres) {
-						expect(newres.text).toInclude('Usuario/Clave invalido');
+						expect(newres.text).toInclude('Usuario/Clave inválido');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:3000")
+					.post('/registration')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'mcarrizo@gmail.com',
+						'password' : 'nicasio',
+						'_csrf' : utils.getcsrf(res),
+						'is_registration': 'false'
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Usuario/Clave inválido');
 						return callback(err,res);
 					});
 			}
@@ -185,6 +202,59 @@ var request		= require('supertest'),
 			}
 		});
 	};	
+	
+	testsregistration.adminLogin = function (done) {
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:3000")
+					.get('/login')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:3000")
+					.post('/registration')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'mcarrizo@ternopel.com',
+						'password' : 'maxi',
+						'_csrf' : utils.getcsrf(res),
+						'is_registration': 'false'
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success_admin');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:3000")
+					.get('/')
+					.set('cookie', utils.getcookies(res))
+					.end(function(err, res){
+						expect(res.text).toInclude('Maxi Admin');
+						return callback(err,res);
+					});
+			}
+		], 
+		function(err) {
+			if(err) {
+				return done(err);
+			}
+			else {
+				return done();
+			}
+		});
+	};	
+	
+	
+	
 	
 	testsregistration.registerExistingUser = function (done) {
 		
@@ -228,6 +298,7 @@ var request		= require('supertest'),
 			}
 		});
 	};	
-		
+
+	
 	
 })(module.exports);

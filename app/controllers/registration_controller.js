@@ -54,7 +54,7 @@ module.exports = {
 					}
 					if(is_registration==='false') {
 						if(user.length===0) {
-							return callback('Usuario/Clave invalido');
+							return callback('Usuario/Clave inválido');
 						}
 						else {
 							return callback(null,user[0]);
@@ -79,7 +79,7 @@ module.exports = {
 				if(is_registration==='false') {
 					req.logger.info('Evaluando claves');
 					if(user.password !== cipher.encrypt(password)) {
-						return callback('Password inválida');
+						return callback('Usuario/Clave inválido');
 					}
 					else {
 						return callback(null,user);

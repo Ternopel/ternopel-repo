@@ -57,6 +57,7 @@ describe('Users creation', function() {
  	it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
  	it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
  	it('Register existing user', testsregistration.registerExistingUser);
+ 	it('Admin login', testsregistration.adminLogin);
  	
 	after(function (){
 		logger.info('Stopping server');
