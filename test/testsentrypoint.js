@@ -39,19 +39,24 @@ describe('Users creation', function() {
 			if(err) {
 				return done(err);
 			}
-			logger.info("Creating model");
-			db.sync(function(err) {
-				config.app_run_liquibase	= 'true';
-				logger.info("Running liquibase");
-				liquibase.init(logger,config);
-				return done(err);
+			db.driver.execQuery('drop table databasechangelog', function(err,data) {
+				logger.info("Creating model");
+				db.sync(function(err) {
+					config.app_run_liquibase	= 'true';
+					logger.info("Running liquibase");
+					liquibase.init(logger,config);
+					return done(err);
+				});
 			});
+			
+			
 		});
 	});	
 	
  	it('Users registration and login OK', testsregistration.registerNewUser);
  	it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
  	it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
+ 	it('Register existing user', testsregistration.registerExistingUser);
  	
 	after(function (){
 		logger.info('Stopping server');

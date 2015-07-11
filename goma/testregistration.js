@@ -61,7 +61,7 @@ var request		= require('supertest'),
 			function(callback) {
 				logger.info('Executing get to server');
 				request("http://localhost:3000")
-					.get('/registration')
+					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
 					});
@@ -111,7 +111,7 @@ var request		= require('supertest'),
 			function(callback) {
 				logger.info('Executing get to server');
 				request("http://localhost:3000")
-					.get('/registration')
+					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
 					});
@@ -186,6 +186,48 @@ var request		= require('supertest'),
 		});
 	};	
 	
-	
+	testsregistration.registerExistingUser = function (done) {
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:3000")
+					.get('/registration')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:3000")
+					.post('/registration')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'first_name' : 'Maximiliano',
+						'last_name' : 'Carrizo',
+						'email_address' : 'mcarrizo@gmail.com',
+						'password' : 'maxito',
+						'confirm_password' : 'maxito',
+						'_csrf' : utils.getcsrf(res),
+						'is_registration': 'true'
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Usuario ya existente');
+						return callback(err,res);
+					});
+			},			
+		], 
+		function(err) {
+			if(err) {
+				return done(err);
+			}
+			else {
+				return done();
+			}
+		});
+	};	
+		
 	
 })(module.exports);
