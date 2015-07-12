@@ -22,7 +22,18 @@ var request		= require('supertest'),
 						expect(res.text).toExclude('Bolsa de banditas elásticas');
 						return callback(err,res);
 					});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/')
+					.set('cookie', 'ter_token=notoken')
+					.expect(200)
+					.end(function(err, res){
+						return callback(err,res);
+					});
 			}
+
 		], 
 		function(err) {
 			return done(err);
