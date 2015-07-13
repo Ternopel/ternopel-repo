@@ -43,7 +43,7 @@ module.exports = {
 					if(err) {
 						return callback(err);
 					}
-					if(categories.length===1 && categories[0].id != id) {
+					if(categories.length===1 && categories[0].id !== id) {
 						return callback('El valor asignado a la columna existe en otro registro ('+categories[0].id+')');
 					}
 					return callback();

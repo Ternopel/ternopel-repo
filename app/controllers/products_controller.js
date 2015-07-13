@@ -107,7 +107,7 @@ module.exports = {
 						if(err) {
 							return callback(err);
 						}
-						if(products.length===1 && products[0].id != id) {
+						if(products.length===1 && products[0].id !== id) {
 							return callback('El valor asignado a la columna existe en otro registro ('+products[0].id+')');
 						}
 						return callback();

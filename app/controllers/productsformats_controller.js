@@ -34,7 +34,7 @@ module.exports = {
 						if(err) {
 							return callback(err);
 						}
-						if(productsformats.length===1 && productsformats[0].id != id) {
+						if(productsformats.length===1 && productsformats[0].id !== id) {
 							return callback('El valor asignado a la columna existe en otro registro ('+productsformats[0].id+')');
 						}
 						return callback();
