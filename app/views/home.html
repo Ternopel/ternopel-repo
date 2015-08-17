@@ -1,43 +1,240 @@
-<div class="middleSection">
-	<div class="leftColumn">
-		{{~ it.categories:category}}
-			<div class="menuBox">
-				{{?category.selected}}
-					<a href="/">
-						<span class="handler open"></span>
-					</a>
-					<h2><a href="/">{{=category.name}}</a></h2>
-					<ul>
-						{{~ category.products:product}}
-							<li>
-									{{?product.selected}}
-										<a class='active' href="/{{=category.url}}/{{=product.url}}">{{=product.description}}</a>
+			<section class="page-container clear-fix">
+				<aside class="main-sidebar">
+					<section class="advertising-aside">
+						<img src="{{=it.app_resources}}/images/delivery-van.png" alt="">
+					</section>
+					<section class="category-aside">
+						<h2 class="aside-title">Categorias</h2>
+						<ul class="aside-menu">
+						
+							{{~ it.categories:category}}
+								<li>
+									{{?category.selected}}
+										<span class="compress"></span>
+										<a href="/{{=category.url}}">{{=category.name}}</a>
+										<ul class="aside-sub-menu">
+											{{~ category.products:product}}
+												<li>
+													{{?product.selected}}
+														<a href="#">Sub Item 1</a>
+													{{??}}
+														<a href="/{{=category.url}}/{{=product.url}}">{{=product.description}}</a>
+													{{?}}
+												</li>
+											{{~}}
+										</ul>
 									{{??}}
-										<a href="/{{=category.url}}/{{=product.url}}">{{=product.description}}</a>
-									{{?}}
+										<span class="expand"></span>
+										<a href="/{{=category.url}}">{{=category.name}}</a>
+									{{?}}	
+								</li>
+							{{~}}
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						<!-- 
+							<li><a href="#">Vasos de Plastico</a>
+								<span class="expand"></span>
+								<ul class="aside-sub-menu">
+									<li><a href="#">Sub Item 1</a></li>
+									<li><a href="#">Sub Item 2</a></li>
+									<li><a href="#">Sub Item 3</a></li>
+								</ul>
 							</li>
-						{{~}}
-					</ul>
-				{{??}}
-					<a href="/{{=category.url}}">
-						<span class="handler"></span>
-					</a>
-					<h2><a href="/{{=category.url}}">{{=category.name}}</a></h2>
-				{{?}}	
-			</div>
-		{{~}}
-	</div>
-
-	{{? it.page_to_render === 'category'}}
-		{{#def.load('home_category.html')}}
-	{{?}}
-
-	{{? it.page_to_render === 'product'}}
-		{{#def.load('home_product.html')}}
-	{{?}}
-
-	{{? it.page_to_render === 'sales'}}
-		{{#def.load('home_sales.html')}}
-	{{?}}
-
-</div>
+							<li><a href="#">Vasos Personalizados</a></li>
+							<li><a href="#">Vasos de Cubata, Mojito y Sidra</a></li>
+							<li><a href="#">Copas de Plastico</a></li>
+							<li><a href="#">Chupitos de Plastico</a></li>
+							<li><a href="#">Jarras de Plastico</a>
+								<span class="expand"></span>
+								<ul class="aside-sub-menu">
+									<li><a href="#">Sub Item 1</a></li>
+									<li><a href="#">Sub Item 2</a></li>
+									<li><a href="#">Sub Item 3</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Vasos de Carton</a></li>
+							<li><a href="#">Vasos de Plastico</a>
+								<span class="expand"></span>
+								<ul class="aside-sub-menu">
+									<li><a href="#">Sub Item 1</a></li>
+									<li><a href="#">Sub Item 2</a></li>
+									<li><a href="#">Sub Item 3</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Vasos Personalizados</a></li>
+							<li><a href="#">Vasos de Cubata, Mojito y Sidra</a></li>
+							<li><a href="#">Copas de Plastico</a></li>
+							<li><a href="#">Chupitos de Plastico</a></li>
+							<li><a href="#">Jarras de Plastico</a>
+								<span class="expand"></span>
+								<ul class="aside-sub-menu">
+									<li><a href="#">Sub Item 1</a></li>
+									<li><a href="#">Sub Item 2</a></li>
+									<li><a href="#">Sub Item 3</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Vasos de Carton</a></li>
+							<li><a href="#">Vasos de Plastico</a>
+								<span class="expand"></span>
+								<ul class="aside-sub-menu">
+									<li><a href="#">Sub Item 1</a></li>
+									<li><a href="#">Sub Item 2</a></li>
+									<li><a href="#">Sub Item 3</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Vasos Personalizados</a></li>
+							<li><a href="#">Vasos de Cubata, Mojito y Sidra</a></li>
+							 -->
+						</ul>
+					</section>
+					<section class="descuentos-aside clear-fix">
+						<h2 class="aside-title">Descuentos</h2>
+						<div class="discount-image">
+							<a href="#"><img src="{{=it.app_resources}}/images/discount-product.jpg" alt=""></a>
+						</div>
+						<div class="discount-details">
+							<ul>
+								<li class="item-name"><span class="discount-tag">10%</span><a href="#">Vasos de Plastico Irrompibles 100cc Moca</a></li>
+								<li class="old-price">1,84 €</li>
+								<li class="discount-price">1,47 €</li>
+							</ul>
+						</div>
+						<p><a href="#">&gt;&gt; Todos los descuentos</a></p>
+					</section>
+					<section class="contactar-aside">
+						<h2 class="aside-title">Contactar</h2>
+						<div class="contact-details">
+							<ul>
+								<li class="aside-tel"><a href="#">644 319 409</a></li>
+								<li class="aside-email"><a href="#">E-Mail</a></li>
+							</ul>
+						</div>
+						<div class="payment-logos">
+							<a href="#"><img src="{{=it.app_resources}}/images/payment-options.png" alt="an image of payment options"></a>
+						</div>
+					</section>
+					<section class="infomacion-aside">
+						<h2 class="aside-title">Informacion</h2>
+						<ul class="aside-menu">
+							<li><a href="#">Envios y Devoluciones</a></li>
+							<li><a href="#">Quienes somos</a></li>
+							<li><a href="#">Aviso legal</a></li>
+							<li><a href="#">Condiciones generales</a></li>
+							<li><a href="#">Formas de pago</a></li>
+							<li><a href="#">Proteccion de datos</a></li>
+							<li><a href="#">Politica de cookies</a></li>
+							<li><a href="#">Preguntas Frecuentes</a></li>
+						</ul>
+					</section>
+				</aside>
+				<section class="main-content">
+					<div class="main-slider">
+						<div class="slider-container">
+							<ul class="slider-images">
+								<li><a href="#"><img src="{{=it.app_resources}}/images/slide-img.png" alt="slide image"></a></li>
+							</ul>
+						</div>
+						<div class="slider-btn-container">
+							<ul class="slider-btns">
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#" class="active-slide">3</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="main-products">
+						<h2 class="main-title">Productos destacados</h2>
+						<ul class="main-products-list clear-fix">
+							<li>
+								<a href="#"><img src="{{=it.app_resources}}/images/product-img1.jpg" alt=""></a>
+								<h3 class="main-product-title"><a href="#">Sed ut perspiciatis unde omnis iste</a></h3>
+								<p class="main-product-description"><a href="#">Do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</a></p>
+								<div class="product-prices">
+									<p><span class="price-con">1,25€</span> con IVA</p>
+									<p>1,25€ sin IVA</p>
+								</div>
+							</li>
+							<li>
+								<a href="#"><img src="{{=it.app_resources}}/images/product-img2.jpg" alt=""></a>
+								<h3 class="main-product-title"><a href="#">Et iusto odio dignissimos ducimus qui blanditiis</a></h3>
+								<p class="main-product-description"><a href="#">Totam rem aperiam. Esse cillum dolore eu fugiat nulla pariatur. Nihil molestiae consequatur, vel illum qui dolorem eum...</a></p>
+								<div class="product-prices">
+									<p><span class="price-con">3,57€</span> con IVA</p>
+									<p>2,95€ sin IVA</p>
+								</div>
+							</li>
+							<li>
+								<a href="#"><img src="{{=it.app_resources}}/images/product-img3.jpg" alt=""></a>
+								<h3 class="main-product-title"><a href="#">Corrupti quos dolores et quas</a></h3>
+								<p class="main-product-description"><a href="#">Eaque ipsa quae ab illo inventore veritatis et quasi. Totam rem aperiam. Nihil molestiae consequatur...</a></p>
+								<div class="product-prices">
+									<p><span class="price-con">2,64€</span> con IVA</p>
+									<p>2,18€ sin IVA</p>
+								</div>
+							</li>
+							<li>
+								<a href="#"><img src="{{=it.app_resources}}/images/product-img4.jpg" alt=""></a>
+								<h3 class="main-product-title"><a href="#">Quia consequuntur magni dolores eos</a></h3>
+								<p class="main-product-description"><a href="#">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. Ut enim ad minim veniam, quis nostrud exercitation...</a></p>
+								<div class="product-prices">
+									<p><span class="price-con">1,05€</span> con IVA</p>
+									<p>0,86€ sin IVA</p>
+								</div>
+							</li>
+							<li>
+								<a href="#"><img src="{{=it.app_resources}}/images/product-img5.jpg" alt=""></a>
+								<h3 class="main-product-title"><a href="#">At vero eos et accusamus</a></h3>
+								<p class="main-product-description"><a href="#">Nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam...</a></p>
+								<div class="product-prices">
+									<p><span class="price-con">3,27€</span> con IVA</p>
+									<p>2,70€ sin IVA</p>
+								</div>
+							</li>
+							<li>
+								<a href="#"><img src="{{=it.app_resources}}/images/product-img6.jpg" alt=""></a>
+								<h3 class="main-product-title"><a href="#">Esse cillum dolore eu fugiat nulla</a></h3>
+								<p class="main-product-description"><a href="#">Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo...</a></p>
+								<div class="product-prices">
+									<p><span class="price-con">58,56€</span> con IVA</p>
+									<p>48,40€ sin IVA</p>
+								</div>
+							</li>
+							<li>
+								<a href="#"><img src="{{=it.app_resources}}/images/product-img7.jpg" alt=""></a>
+								<h3 class="main-product-title"><a href="#">Laboris nisi ut aliquip ex ea commodo</a></h3>
+								<p class="main-product-description"><a href="#">Totam rem aperiam. Itaque earum rerum hic tenetur a sapiente delectus. At vero eos et accusamus...</a></p>
+								<div class="product-prices">
+									<p><span class="price-con">78,17€</span> con IVA</p>
+									<p>64,60€ sin IVA</p>
+								</div>
+							</li>
+							<li>
+								<a href="#"><img src="{{=it.app_resources}}/images/product-img8.jpg" alt=""></a>
+								<h3 class="main-product-title"><a href="#">Quia consequuntur magni dolores</a></h3>
+								<p class="main-product-description"><a href="#">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Totam rem aperiam. Architecto beatae vitae dicta...</a></p>
+								<div class="product-prices">
+									<p><span class="price-con">1,37€</span> con IVA</p>
+									<p>1,13€ sin IVA</p>
+								</div>
+							</li>
+							<li>
+								<a href="#"><img src="{{=it.app_resources}}/images/product-img9.jpg" alt=""></a>
+								<h3 class="main-product-title"><a href="#">Neque porro quisquam est</a></h3>
+								<p class="main-product-description"><a href="#">Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat...</a></p>
+								<div class="product-prices">
+									<p><span class="price-con">1,27€</span> con IVA</p>
+									<p>1,05€ sin IVA</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>

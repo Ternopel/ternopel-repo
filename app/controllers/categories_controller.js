@@ -10,7 +10,7 @@ module.exports = {
 			if(err) {
 				return next(err);
 			}
-			var pageinfo	= ld.merge(req.sessionstatus, {categories:categories, csrfToken: req.csrfToken()});
+			var pageinfo	= ld.merge(req.pageinfo, {categories:categories, csrfToken: req.csrfToken()});
 			res.render('admin_categories.html',pageinfo);
 		});
 	},

@@ -5,7 +5,7 @@
 	var express			= require('express'),
 		expressconfig	= require("./utils/expressconfig"),
 		modelconfig		= require("./utils/modelconfig"),
-		sessionconfig	= require("./utils/sessionconfig"),
+		pageinfoconfig	= require("./utils/pageinfoconfig"),
 		routesconfig	= require("./utils/routesconfig"),
 		liquibase		= require("./utils/liquibase");
 
@@ -23,8 +23,11 @@
 		modelconfig.init(app, express, logger, config, callback);
 
 		logger.info("Configuring user session");
-		sessionconfig.init(app);
+		pageinfoconfig.session(app);
 
+		logger.info("Configuring page params");
+		pageinfoconfig.params(app);
+		
 		logger.info("Configuring routes");
 		routesconfig.init(app); 
 

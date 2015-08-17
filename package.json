@@ -5,7 +5,7 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "forever -a -l ./ternopel.log start ./server.js",
+    "start": "node ./server.js",
     "stop": "forever stopall",
     "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -u exports -R spec --recursive"
   },
@@ -47,6 +47,7 @@
     "app_log_level": "debug",
     "app_run_liquibase": "true",
     "app_port": "3000",
+    "app_resources": "//localhost:3000",
     "db_database": "ternopel",
     "db_protocol": "postgres",
     "db_driver": "org.postgresql.Driver",

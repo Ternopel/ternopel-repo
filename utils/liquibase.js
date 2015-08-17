@@ -26,7 +26,7 @@
 						'update'
 					];
 		
-		logger.debug('Executing task');
+		logger.debug('Executing task:'+'java'+' '+args);
 		var output = exec('java',args).toString();
 		logger.info(output);
 	};

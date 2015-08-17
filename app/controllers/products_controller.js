@@ -8,7 +8,7 @@ module.exports = {
 			return next('No se encontro parámetro de búsqueda');
 		}
 		var ld			= require('lodash');
-		var pageinfo	= ld.merge(req.sessionstatus, {csrfToken: req.csrfToken(),search: req.query.search});
+		var pageinfo	= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(),search: req.query.search});
 		var waterfall	= require('async-waterfall');
 		waterfall([ 
 			function(callback) {

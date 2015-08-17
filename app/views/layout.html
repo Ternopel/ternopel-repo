@@ -3,52 +3,147 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+		<meta name="description" content="Papelera Ternopel" />
+		<meta name="viewport" content="width=device-width"/>
 	
 		<title>Papelera Ternopel</title>
-		<link rel="stylesheet" type="text/css" href="/stylesheets/styles.css" media="screen,projection" />
+		
+		<link rel="stylesheet" type="text/css" href="{{=it.app_resources}}/css/styles.css" media="screen,projection" />
 		<script src="/javascript/jquery.min.js"></script>
 		<script src="/javascript/utils.js" ></script>
+		
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<!--[if IE 7]>
+		<link rel="stylesheet" href="css/ie7.css" type="text/css">
+		<![endif]-->		
+		
 	</head>
 
 	<body>
-		<div class="header">
-			<div class="pageHeader">
-				<div class="logo">
-					<a href="/">
-						<img src="/images/baseImages/tpLogo.png" alt="Ternopel" />
-					</a>
+		<section class="main-wrapper">
+			<header class="main-header clear-fix">
+				<div class="logo-section">
+					<h1 class="logo"><a href="#">Plastico Mania</a></h1>
 				</div>
-				<div class="userPanel">
-					<p class="user">
+				<div class="header-labels">
+					<img src="{{=it.app_resources}}/images/tel-tab.png" alt="">
+					<img src="{{=it.app_resources}}/images/header-image.png" alt="">
+				</div>
+				<div class="header-details">
+					<ul>
+						<li><a href="#">Contacto</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Mapa sitio</a></li>
+						<li class="cart-box"><a href="#" class="header-cart">Carrito: vacio</a></li>
 						{{?it.is_logged_in}}
 							<span>Bienvenido, <em>{{=it.full_name}}</em></span>
+							<li><a href="#">Bienvenido</a>{{=it.full_name}}</li>
 						{{??}}
-							<span>Bienvenido, <em>Extraño</em></span>
+							<li><a href="#" class="user-login">Entra</a></li>
 						{{?}}	
-					</p>
+					</ul>
 				</div>
-				<div class="toolbar">
-					<div class="version">Ternopel Web Site - 1.0</div>
-					<div class="menu">
-						{{?it.is_logged_in}}
-							{{?it.is_admin}}
-								<a class="user" href="/admin">Opciones de Administrador</a>
-								<a class="user" href="/report" target="_blank">Listado de Productos</a>
-							{{??}}
-								<a class="user" href="/">Home</a> 
-								<a class="user" href="/myaccount">Mi cuenta</a> 
-							{{?}}	
-							<a class="logoff" href="/logout">Salir</a>
-						{{??}}
-							<a class="user" id="register" href="/registration">Registrarse</a>
-							<a class="user" id="login" href="/login">Ingresar</a>
-						{{?}}	
+			</header>
+			<section class="error-notification">
+				<p>ERROR MESSAGE - This is a message bar that will display all error messages</p>
+			</section>
+			<nav class="nav-bar">
+				<ul class="main-nav clear-fix">
+					<li><a href="#" class="sub-menu-item">Inicio</a>
+						<ul class="sub-menu-list">
+							<li><a href="#">List item 1</a></li>
+							<li><a href="#">List item 2</a></li>
+							<li><a href="#">List item 3</a></li>
+							<li><a href="#">List item 4</a></li>
+							<li><a href="#">List item 5</a></li>
+							<li><a href="#">List item 6</a></li>
+							<li><a href="#">List item 7</a></li>
+							<li><a href="#">List item 8</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Mi Cuenta</a></li>
+					<li><a href="#">Contacto</a></li>
+					<li><a href="#">Descuentos</a></li>
+					<li><a href="#">Carrito</a></li>
+					<li class="main-search"><input type="text" class="search-input"><button class="search-btn">Search</button></li>
+				</ul>
+			</nav>
+			{{=it.body}}
+			<footer class="main-footer">
+				<section class="footer-subscribe clear-fix">
+					<p>Subscribe a nuestras novedades y ofertas</p>
+					<div class="subscribe-form">
+						<div class="subscribe-input clear-fix">
+							<input type="text" placeholder="su email"><button class="subscribe-btn">Enviar</button>
+						</div>
+						<div class="subscribe-checkbox">
+							<input type="checkbox"><span>He leido y estoy conforme con la <a href="#">Politica de proteccion de Datos</a></span>
+						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-		{{=it.body}}
-		<div class="footer"></div>
+				</section>
+				<section class="footer-columns clear-fix">
+					<div class="footer-links">
+						<h4>Categorias</h4>
+						<ul>
+							<li><a href="#">Vasos de Plastico</a></li>
+							<li><a href="#">Vasos Personalizados</a></li>
+							<li><a href="#">Vasos de Cubata, Mojito y Sidra</a></li>
+							<li><a href="#">Copas de Plastico</a></li>
+							<li><a href="#">Chupitos de Plastico</a></li>
+							<li><a href="#">Jarras de Plastico</a></li>
+							<li><a href="#">Vasos de Carton</a></li>
+							<li><a href="#">Vasos de Plastico</a></li>
+							<li><a href="#">Vasos Personalizados</a></li>
+							<li><a href="#">Vasos de Cubata, Mojito y Sidra</a></li>
+							<li><a href="#">Copas de Plastico</a></li>
+							<li><a href="#">Chupitos de Plastico</a></li>
+							<li><a href="#">Jarras de Plastico</a></li>
+							<li><a href="#">Vasos de Carton</a></li>
+						</ul>
+					</div>
+					<div class="footer-links">
+						<h4>Infomacion</h4>
+						<ul>
+							<li><a href="#">Contacte con nostros</a></li>
+							<li><a href="#">Envios y Devoluciones</a></li>
+							<li><a href="#">Quienes somos</a></li>
+							<li><a href="#">Avisio legal</a></li>
+							<li><a href="#">Condiciones generales</a></li>
+							<li><a href="#">Formas de pago</a></li>
+							<li><a href="#">Proteccion de datos</a></li>
+							<li><a href="#">Politica de Cookies</a></li>
+							<li><a href="#">Descuentos</a></li>
+							<li><a href="#">Preguntas Frecuentes</a></li>
+							<li><a href="#">Mapa del sitito</a></li>
+						</ul>
+					</div>
+					<div class="footer-links">
+						<h4>Mi Cuenta</h4>
+						<ul>
+							<li><a href="#">Mis pedidos</a></li>
+							<li><a href="#">Mis vales descuento</a></li>
+							<li><a href="#">Mis direcciones</a></li>
+							<li><a href="#">Mis datos presonales</a></li>
+						</ul>
+					</div>
+					<div class="footer-links">
+						<h4>Contacte Con Nosotros</h4>
+						<ul>
+							<li><a href="#">PlasticoMania.com</a></li>
+							<li><a href="#">Tel: 34 644 319 409</a></li>
+							<li><a href="#">Email: info@plasticomania.com</a></li>
+						</ul>
+					</div>
+					<div class="footer-links">
+						<h4>Siguenos</h4>
+						<ul class="social-links">
+							<li><a href="#"><img src="{{=it.app_resources}}/images/fb-icon.png"></a></li>
+							<li><a href="#"><img src="{{=it.app_resources}}/images/twitter-icon.png"></a></li>
+						</ul>
+					</div>
+				</section>
+			</footer>
+		</section>
 	</body>
 </html>
 

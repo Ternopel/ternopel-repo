@@ -3,7 +3,7 @@
 (function (routesconfig) {
 		
 	function restrict(req, res, next) {
-		if (req.sessionstatus.is_logged_in === true && req.sessionstatus.is_admin === true) {
+		if (req.pageinfo.is_logged_in === true && req.pageinfo.is_admin === true) {
 			next();
 		} 
 		else {

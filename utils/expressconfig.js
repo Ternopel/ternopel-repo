@@ -32,7 +32,7 @@
 		
 		logger.debug("Setting 'favicon'");
 		var favicon			= require('serve-favicon');
-		app.use(favicon(publicFolder+'/images/tp.ico'));
+		app.use(favicon(publicFolder+'/icon/tp.ico'));
 		
 		logger.debug("Enabling GZip compression.");
 		var compression = require('compression');
@@ -78,7 +78,7 @@
 			app.use(function(err, req, res, next) {
 				logger.error(err);
 				var ld = require('lodash');
-				var pageinfo = ld.merge(req.sessionstatus, {error:err});
+				var pageinfo = ld.merge(req.pageinfo, {error:err});
 				res.render('error.html',pageinfo);
 			});
 		}
@@ -88,7 +88,7 @@
 		app.use(function(err, req, res, next) {
 			logger.error(err);
 			var ld = require('lodash');
-			var pageinfo = ld.merge(req.sessionstatus, {error:err});
+			var pageinfo = ld.merge(req.pageinfo, {error:err});
 			res.render('error.html',pageinfo);
 		});
 		
