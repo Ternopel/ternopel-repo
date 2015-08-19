@@ -1,12 +1,25 @@
-<div class='content'>
-	<h1>{{=it.currentcategory.name}}</h1>
-	{{~ it.currentcategory.products:currentproduct}}
-		<article>
-			<a href="/{{=it.currentcategory.url}}/{{=currentproduct.url}}">
-				<img src="/images/products/{{=currentproduct.id}}.jpg" width="200px" height="200px"></img>
-				<span>{{=currentproduct.description}}</span>
-			</a>
-		</article>
-	{{~}}
+<section class="main-content">
+	<div class="main-products">
+		<h2 class="main-title">{{=it.currentcategory.name}}</h2>
+		<ul class="main-products-list clear-fix" id="ulproducts">
 
-</div>
+			{{~ it.currentcategory.products:currentproduct}}
+				<li>
+					<a href="/{{=it.currentcategory.url}}/{{=currentproduct.url}}">
+						<img src="{{=it.app_resources}}/images/product-img1.jpg" alt="">
+					</a>
+					<h3 class="main-product-title">
+						<a href="/{{=it.currentcategory.url}}/{{=currentproduct.url}}">{{=currentproduct.description}}</a>
+					</h3>
+					<p class="main-product-description">
+						<a href="/{{=it.currentcategory.url}}/{{=currentproduct.url}}">Descripción mas larga</a>
+					</p>
+					<div class="product-prices">
+						<p><span class="price-con">1,25€</span> con IVA</p>
+						<p>1,25€ sin IVA</p>
+					</div>
+				</li>
+			{{~}}
+		</ul>
+	</div>
+</section>
