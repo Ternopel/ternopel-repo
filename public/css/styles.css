@@ -936,3 +936,16 @@ ul.social-links li {
 	display: inline;
 	margin: 0 3px 0 0;
 }
+
+/*
+ * Maxi section
+ */
+td {
+	font-size: 11px;
+	line-height: 16px;
+	text-align: left;
+}
+
+th {
+	text-align: left;
+}

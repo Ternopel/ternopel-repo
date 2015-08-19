@@ -1,14 +1,17 @@
 'use strict';
 
 var cipher	= require('../../utils/cipher'),
-	utils	= require('./utils');
+	utils	= require('./utils'),
+	ld		= require('lodash');
 
 module.exports = {
 	get_registration: function(req, res, next) {
-		res.render('registration.html',{ csrfToken: req.csrfToken(), is_registration:true });
+		var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken(), is_registration:true });
+		res.render('registration.html',pageinfo);
 	},
 	get_login: function(req, res, next) {
-		res.render('registration.html',{ csrfToken: req.csrfToken(), is_registration:false });
+		var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken(), is_registration:false });
+		res.render('registration.html',pageinfo);
 	},
 	post_registration: function(req, res, next) {
 

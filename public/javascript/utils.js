@@ -17,7 +17,7 @@ function show_error_messages(errors) {
 	$.each(JSON.parse(errors.responseText), function(index, error) {
 		console.log("Error message:"+error.msg);
 		if (error.param === 'general') {
-			$("div[id='notifications']").show();
+			$("section[id='notifications']").show();
 			$("#" + error.param + "_error").show();
 			$("#" + error.param + "_error").html(error.msg);
 		}

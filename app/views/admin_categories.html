@@ -1,36 +1,31 @@
 <script src='/javascript/crud.js'></script>
 <script src='/javascript/categories.js'></script>
-<div class='middleSection'>
+<section class="page-container clear-fix">
 	{{#def.load('admin_menu.html')}}
-	<div class='content'>
-		<div id='notifications' class='notifications' style='display:none'>
-			<div id='general_error' class='error'></div>
-		</div>
+	
+	<section class="main-content">
 		<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 		<h1>Gestión de Categorías</h1>
-		<br/>
 		<input type='button' id='addCategory' value='Agregar Categoría' ></input>
-		<br/>
-		<br/>
 		<br/>
 		<table id='categoriesTable' summary='/admin/categories'>
 			<thead>
 				<tr>
-					<th style='text-align: left;'><h2>Id</h2></th>
-					<th style='text-align: left;'><h2>Nombre</h2></th>
-					<th style='text-align: left;'><h2>Url</h2></th>
-					<th style='text-align: left;'><h2></h2></th>
+					<th><h4>Id</h4></th>
+					<th><h4>Nombre</h4></th>
+					<th><h4>Url</h4></th>
+					<th><h4></h4></th>
 				</tr>
 			</thead>
 			{{~ it.categories:category}}
 			<tr name='{{=category.id}}'>
-				<td name='id' style='text-align: left; width: 50px;'>{{=category.id}}</td>
-				<td name='name' style='text-align: left; width: 500px;'><span>{{=category.name}}</span></td>
-				<td name='url' style='text-align: left; width: 500px;'><span>{{=category.url}}</span></td>
+				<td name='id' style='width: 50px;'>{{=category.id}}</td>
+				<td name='name' style='width: 500px;'><span>{{=category.name}}</span></td>
+				<td name='url' style='width: 500px;'><span>{{=category.url}}</span></td>
 				<td><input name='remove' type='button' value='Borrar'></input></td>
 			</tr>
 			{{~}}
 			
 		</table>
-	</div>
-</div>
+	</section>
+</section>

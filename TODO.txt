@@ -1,3 +1,4 @@
-- Tests
-- Agregar js name al log
-- Maxi se la come
+- Pedir a Mike que resalte categoria / producto elegido
+- Un iconito de logout
+- Ver para que se usa el is_registration
+- Mejorar la pagina de llamaremos al CUCO

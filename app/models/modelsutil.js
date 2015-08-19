@@ -7,7 +7,7 @@
 		var async		= require('async'),
 			ld			= require('lodash');
 		
-		req.logger.info('Entering to get_reports');
+		req.logger.info('Entering to get_categories');
 		req.models.categories.find({},['name'],function(err,categories) {
 			if(err) {
 				return next(err);
@@ -33,4 +33,35 @@
 		});
 	};
 
+	modelsutil.getProducts = function (req,res,next,category,getcallback) {
+		
+		var async		= require('async'),
+		ld			= require('lodash');
+		
+		req.logger.info('Entering to get_products');
+		req.models.products.find({category_id:category.id},['description'],function(err,products) {
+			if(err) {
+				return next(err);
+			}
+			req.logger.debug('Products readed:'+products.length);
+			async.each(products, function(product, callback) {
+				product.getProductsFormats().run(function(err,productformats) {
+					if(err) {
+						return callback(err);
+					}
+					req.logger.debug("Product:"+product.description+" Formats readed:"+productformats.length);
+					ld.merge(product, {productformats:productformats});
+					return callback();
+				});
+			}, function(err) {
+				if(err) {
+					getcallback(err);
+				}
+				else {
+					return getcallback(null,products);
+				}
+			});
+		});
+	};
+	
 })(module.exports);

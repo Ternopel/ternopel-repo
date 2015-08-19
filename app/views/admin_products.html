@@ -1,33 +1,27 @@
 <script src='/javascript/crud.js'></script>
 <script src='/javascript/products.js'></script>
-<div class='middleSection'>
+<section class="page-container clear-fix">
 	{{#def.load('admin_menu.html')}}
-	<div class='content'>
-		<div id='notifications' class='notifications' style='display:none'>
-			<div id='general_error' class='error'></div>
-		</div>
+	<section class="main-content">
 		<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 		<h1>Gestión de Productos</h1>
-		<br/>
 		<input type='text' name='search' placeholder='Ingrese búsqueda' value='{{=it.search}}'>
 		<input type='button' id='addProduct' value='Agregar Producto' ></input>
 		<br/>
-		<br/>
-		<br/>
 		<table id='productsTable' summary='/admin/products'>
 			<tr>
-				<th style='text-align: left;'><h2>Descripción</h2></th>
-				<th style='text-align: left;'><h2>Url</h2></th>
-				<th style='text-align: left;'><h2>Categoría</h2></th>
-				<th style='text-align: left;'><h2>Packaging</h2></th>
-				<th style='text-align: left;'><h2></h2></th>
-				<th style='text-align: left;'><h2></h2></th>
+				<th><h4>Descripción</h4></th>
+				<th><h4>Url</h4></th>
+				<th><h4>Categoría</h4></th>
+				<th><h4>Packaging</h4></th>
+				<th><h4></h4></th>
+				<th><h4></h4></th>
 			</tr>
 			{{~ it.products:product}}
 			<tr name='{{=product.id}}'>
-				<td name='description' style='text-align: left; width: 500px;'><span>{{=product.description}}</span></td>
-				<td name='url' style='text-align: left; width: 500px;'><span>{{=product.url}}</span></td>
-				<td name='category_id' style='text-align: left; width: 500px;'>
+				<td name='description' style='width: 500px;'><span>{{=product.description}}</span></td>
+				<td name='url' style='width: 500px;'><span>{{=product.url}}</span></td>
+				<td name='category_id' style='width: 500px;'>
 					<select>
 						{{~ it.categories:category}}
 							{{? category.id === product.category_id}}
@@ -37,7 +31,7 @@
 							{{?}}
 						{{~}}
 					</select> 				
-				<td name='packaging_id' style='text-align: left; width: 500px;'>
+				<td name='packaging_id' style='width: 500px;'>
 					<select>
 						{{~ it.packaging:packaging}}
 							{{? packaging.id === product.packaging_id}}
@@ -62,30 +56,26 @@
 			{{??}}
 			<tr name='{{=product.id}}_format' style='display:none;'>
 			{{?}}
-			
-			
 				<td colspan="4">
 					<br/>
 					<input type='button' id='addProductFormat' name='{{=product.id}}' value='Agregar Formato' ></input>
 					<br/>
-					<br/>
-					<br/>
 					<table id='productsFormatsTable' summary='/admin/productsformats'>
 						<tr>
-							<th style='text-align: left;'><h3>Formato</h3></th>
-							<th style='text-align: left;'><h3>Unidades</h3></th>
-							<th style='text-align: left;'><h3>Cantidad</h3></th>
-							<th style='text-align: left;'><h3>Precio Por Menor</h3></th>
-							<th style='text-align: left;'><h3>Precio Por Mayor</h3></th>
-							<th style='text-align: left;'><h2></h2></th>
+							<th><h4>Formato</h4></th>
+							<th><h4>Unidades</h4></th>
+							<th><h4>Cantidad</h4></th>
+							<th><h4>Precio Por Menor</h4></th>
+							<th><h4>Precio Por Mayor</h4></th>
+							<th><h4></h4></th>
 						</tr>
 						{{~ product.productsformats:productformat}}
 						<tr name='{{=productformat.id}}'>
-							<td name='format' style='text-align: left; width: 500px;'><span>{{=productformat.format}}</span></td>
-							<td name='units' style='text-align: left; width: 500px;'><span>{{=productformat.units}}</span></td>
-							<td name='quantity' style='text-align: left; width: 500px;'><span>{{=productformat.quantity}}</span></td>
-							<td name='retail' style='text-align: left; width: 500px;'><span>{{=productformat.retail}}</span></td>
-							<td name='wholesale' style='text-align: left; width: 500px;'><span>{{=productformat.wholesale}}</span></td>
+							<td name='format' style='width: 500px;'><span>{{=productformat.format}}</span></td>
+							<td name='units' style='width: 500px;'><span>{{=productformat.units}}</span></td>
+							<td name='quantity' style='width: 500px;'><span>{{=productformat.quantity}}</span></td>
+							<td name='retail' style='width: 500px;'><span>{{=productformat.retail}}</span></td>
+							<td name='wholesale' style='width: 500px;'><span>{{=productformat.wholesale}}</span></td>
 							<td><input name='remove' type='button' value='Borrar'></input></td>
 						</tr>
 						{{~}}
@@ -97,5 +87,5 @@
 		</table>		
 		
 		
-	</div>
-</div>
+	</section>
+</section>

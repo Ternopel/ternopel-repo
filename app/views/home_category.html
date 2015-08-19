@@ -17,6 +17,10 @@
 					<div class="product-prices">
 						<p><span class="price-con">1,25€</span> con IVA</p>
 						<p>1,25€ sin IVA</p>
+						
+						{{~ currentproduct.productformats:currentproductformat}}
+							<p>MY ID: "{{=currentproductformat.format}} {{=currentproductformat.product_id}}"</p>
+						{{~}}
 					</div>
 				</li>
 			{{~}}

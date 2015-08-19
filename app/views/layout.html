@@ -26,7 +26,7 @@
 		<section class="main-wrapper">
 			<header class="main-header clear-fix">
 				<div class="logo-section">
-					<h1 class="logo"><a href="#">Plastico Mania</a></h1>
+					<h1 class="logo"><a href="/">Papelera Ternopel</a></h1>
 				</div>
 				<div class="header-labels">
 					<img src="{{=it.app_resources}}/images/tel-tab.png" alt="">
@@ -37,36 +37,31 @@
 						<li><a href="#">Contacto</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Mapa sitio</a></li>
 						<li class="cart-box"><a href="#" class="header-cart">Carrito: vacio</a></li>
 						{{?it.is_logged_in}}
-							<span>Bienvenido, <em>{{=it.full_name}}</em></span>
-							<li><a href="#">Bienvenido</a>{{=it.full_name}}</li>
+							<li><a href="#">Bienvenido, {{=it.full_name}} </a></li>
 						{{??}}
-							<li><a href="#" class="user-login">Entra</a></li>
+							<li><a href="/login" class="user-login">Entra</a></li>
 						{{?}}	
 					</ul>
 				</div>
 			</header>
-			<section class="error-notification">
-				<p>ERROR MESSAGE - This is a message bar that will display all error messages</p>
+			<section class="error-notification" id='notifications' style='display:none'>
+				<p id='general_error'>ERROR MESSAGE - This is a message bar that will display all error messages</p>
 			</section>
 			<nav class="nav-bar">
 				<ul class="main-nav clear-fix">
-					<li><a href="#" class="sub-menu-item">Inicio</a>
-						<ul class="sub-menu-list">
-							<li><a href="#">List item 1</a></li>
-							<li><a href="#">List item 2</a></li>
-							<li><a href="#">List item 3</a></li>
-							<li><a href="#">List item 4</a></li>
-							<li><a href="#">List item 5</a></li>
-							<li><a href="#">List item 6</a></li>
-							<li><a href="#">List item 7</a></li>
-							<li><a href="#">List item 8</a></li>
-						</ul>
-					</li>
-					<li><a href="#">Mi Cuenta</a></li>
-					<li><a href="#">Contacto</a></li>
-					<li><a href="#">Descuentos</a></li>
-					<li><a href="#">Carrito</a></li>
-					<li class="main-search"><input type="text" class="search-input"><button class="search-btn">Search</button></li>
+					{{?it.is_logged_in}}
+						{{?it.is_admin}}
+							<li><a href="/admin">Administrador</a></li>
+							<li><a href="/report" target="_blank">Listado</a></li>
+						{{??}}
+							<li><a href="/">Inicio</a>
+							<li><a href="#">Mi Cuenta</a></li>
+							<li><a href="#">Contacto</a></li>
+							<li><a href="#">Descuentos</a></li>
+							<li><a href="#">Carrito</a></li>
+							<li class="main-search"><input type="text" class="search-input"><button class="search-btn">Search</button></li>
+						{{?}}	
+					{{?}}					
 				</ul>
 			</nav>
 			{{=it.body}}

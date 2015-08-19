@@ -1,11 +1,11 @@
 'use strict';
 
-var ld = require('lodash');
+var ld			= require('lodash'),
+	modelsutil	= require('../models/modelsutil');
 
 // Getting information to render main menu
 var get_categories_info = function(req, res, next, mycallback) {
 	req.logger.info('Reading categories');
-	var modelsutil	= require('../models/modelsutil');
 	modelsutil.getCategories(req,res,next,function(err,categories) {
 		if(err) {
 			return mycallback(err);
@@ -88,7 +88,8 @@ module.exports = {
 							return callback('Esta categoria no está más disponible');
 						}
 						var currentcategory = categories[0];
-						currentcategory.getProducts(function(err,products) {
+						
+						modelsutil.getProducts(req,res,next,currentcategory, function(err,products) {
 							if(err) {
 								return callback(err);
 							}
