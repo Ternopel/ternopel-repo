@@ -508,7 +508,7 @@ a:hover, a:active {
 .header-details {
 	float: right;
 	padding: 20px;
-	width: 200px;
+	width: 210px;
 }
 
 .header-details ul li {
@@ -540,6 +540,11 @@ a:hover, a:active {
 
 a.user-login {
 	background: url(../images/user-icon.png) no-repeat left center;
+	padding: 0 0 0 20px;
+}
+
+a.user-logout {
+	background: url(../images/logout-icon.png) no-repeat left center;
 	padding: 0 0 0 20px;
 }
 
@@ -816,6 +821,10 @@ p.main-product-description {
 	font-weight: 600;
 	font-size: 22px;
 }
+
+/* Authentication Page */
+
+
 
 /* Footer */
 
