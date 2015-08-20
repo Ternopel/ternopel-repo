@@ -44,7 +44,7 @@
     "winston": "^1.0.0"
   },
   "config": {
-    "app_log_level": "debug",
+    "app_log_level": "info",
     "app_run_liquibase": "true",
     "app_port": "3000",
     "app_resources": "//localhost:3000",
@@ -55,7 +55,7 @@
     "db_port": "5432",
     "db_user": "postgres",
     "db_password": "Pilarcita1",
-    "db_show_sql": "true",
+    "db_show_sql": "false",
     "db_liquibase_xml": "liquibase.xml",
 
     "test_app_port": "3001",

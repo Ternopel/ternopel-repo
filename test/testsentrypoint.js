@@ -60,7 +60,7 @@ describe('Users creation', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 
 	// admin products formats tests
 	if(runTests) {
@@ -88,11 +88,11 @@ describe('Users creation', function() {
 	// home tests
 	if(runTests) {
 		it('Plain home', testshome.getPlainHome);
+		it('Get category', testshome.getCategory);
 		it('Get product', testshome.getProduct);
 		it('Get no existing category', testshome.getNoExistingCategory);
 		it('Get no existing product', testshome.getNoExistingProduct);
 	}
-	it('Get category', testshome.getCategory);
 	
 	// Registration tests
 	if(runTests) {

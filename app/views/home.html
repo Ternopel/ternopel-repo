@@ -12,12 +12,12 @@
 					<li name="{{=category.url}}">
 						{{?category.selected}}
 							<span name="compress" class="compress"></span>
-							<a href="/">{{=category.name}}</a>
+							<a href="/" class="aside-active">{{=category.name}}</a>
 							<ul class="aside-sub-menu">
 								{{~ category.products:product}}
 									<li>
 										{{?product.selected}}
-											<a class='active' href="/{{=category.url}}/{{=product.url}}">{{=product.description}}</a>
+											<a class="aside-active" href="/{{=category.url}}/{{=product.url}}">{{=product.description}}</a>
 										{{??}}
 											<a href="/{{=category.url}}/{{=product.url}}">{{=product.description}}</a>
 										{{?}}

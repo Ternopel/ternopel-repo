@@ -13,6 +13,7 @@
 
 	var controllers = require('../app/controllers/controller');
 	routesconfig.init = function (app) {
+		
 		app.get		( '/health',				controllers.health.get_health);
 
 		app.get		( '/admin',					restrict);

@@ -37,7 +37,7 @@
 						<li><a href="#">Contacto</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Mapa sitio</a></li>
 						<li class="cart-box"><a href="#" class="header-cart">Carrito: vacio</a></li>
 						{{?it.is_logged_in}}
-							<li><a href="#">Bienvenido, {{=it.full_name}} </a></li>
+							<li><a href="#">Bienvenido, {{=it.full_name}} </a><a href="/logout" class="user-logout">Cerrar sesión</a></li>
 						{{??}}
 							<li><a href="/login" class="user-login">Entra</a></li>
 						{{?}}	
@@ -60,7 +60,13 @@
 							<li><a href="#">Descuentos</a></li>
 							<li><a href="#">Carrito</a></li>
 							<li class="main-search"><input type="text" class="search-input"><button class="search-btn">Search</button></li>
-						{{?}}	
+						{{?}}
+					{{??}}	
+						<li><a href="/">Inicio</a>
+						<li><a href="#">Contacto</a></li>
+						<li><a href="#">Descuentos</a></li>
+						<li><a href="#">Carrito</a></li>
+						<li class="main-search"><input type="text" class="search-input"><button class="search-btn">Search</button></li>
 					{{?}}					
 				</ul>
 			</nav>

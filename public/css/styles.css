@@ -508,7 +508,7 @@ a:hover, a:active {
 .header-details {
 	float: right;
 	padding: 20px;
-	width: 200px;
+	width: 210px;
 }
 
 .header-details ul li {
@@ -540,6 +540,11 @@ a:hover, a:active {
 
 a.user-login {
 	background: url(../images/user-icon.png) no-repeat left center;
+	padding: 0 0 0 20px;
+}
+
+a.user-logout {
+	background: url(../images/logout-icon.png) no-repeat left center;
 	padding: 0 0 0 20px;
 }
 
@@ -686,6 +691,10 @@ ul.aside-menu > li > a {
 	display: inline-block
 }
 
+ul.aside-menu > li > a.aside-active {
+	color: #d41b29;
+}
+
 ul.aside-sub-menu {
 	margin: 0 0 0 30px;
 }
@@ -697,17 +706,6 @@ ul.aside-sub-menu li a {
 
 span.expand {
 	background: url(../images/plus-icon.png) no-repeat center center;
-	display: inline-block;
-	height: 9px;
-	width: 9px;
-	position: absolute;
-	right: 0;
-	top: 12px;
-	cursor: pointer;
-}
-
-span.compress {
-	background: url(../images/minus-icon.png) no-repeat center center;
 	display: inline-block;
 	height: 9px;
 	width: 9px;
@@ -826,6 +824,10 @@ p.main-product-description {
 	font-weight: 600;
 	font-size: 22px;
 }
+
+/* Authentication Page */
+
+
 
 /* Footer */
 
