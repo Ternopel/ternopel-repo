@@ -469,15 +469,15 @@ a:hover, a:active {
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #2b2b2b;  
+   color: #2b2b2b;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #2b2b2b;  
+   color: #2b2b2b;
 }
 
-:-ms-input-placeholder {  
-   color: #2b2b2b;  
+:-ms-input-placeholder {
+   color: #2b2b2b;
 }
 
 /* Header */
@@ -580,9 +580,9 @@ ul.sub-menu-list {
 	background: rgba(0, 0, 0, 0.7);
 	width: 180px;
 	position: absolute;
-    top: 36px;
-    left: 17px;
-    z-index: 1;
+	top: 36px;
+	left: 17px;
+	z-index: 1;
 }
 
 ul.sub-menu-list > li {
@@ -689,6 +689,10 @@ ul.aside-menu > li > a {
 	background: url(../images/list-point.png) no-repeat 10px 12px;
 	padding: 8px 12px 8px 25px;
 	display: inline-block
+}
+
+ul.aside-menu > li > a.aside-active {
+	color: #d41b29;
 }
 
 ul.aside-sub-menu {
