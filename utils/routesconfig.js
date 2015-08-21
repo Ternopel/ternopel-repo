@@ -38,6 +38,7 @@
 		var multipart			= require('connect-multiparty');
 		var multipartMiddleware = multipart();
 		
+		app.get		( '/admin/productspictures',controllers.productspictures.get_productspictures);
 		app.post	( '/admin/productspictures',multipartMiddleware,controllers.productspictures.post_productspictures);
 		
 		app.get		( '/report',				controllers.report.get_report);

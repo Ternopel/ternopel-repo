@@ -50,12 +50,20 @@ module.exports = {
 						});
 				}
 			});
-			
-			
-			
-			
 		});
 	},
+	get_productspictures: function(req, res, next) {
+		req.logger.info("En GET products pictures");
+		var id			= req.body.id;
+		
+		req.models.productspictures.get(id,function(err,productpicture) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			res.setHeader('Content-Type', 'png');
+			res.setHeader('Content-Length', productpicture.picture.length);
+			res.setHeader('Content-Disposition', 'inline; filename='+'X.png');
+			return res.send(productpicture.picture);
+		});
+	}
 };
-
-
