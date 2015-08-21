@@ -35,6 +35,11 @@
 		app.put		( '/admin/productsformats',	controllers.productsformats.put_productsformats);
 		app.delete	( '/admin/productsformats',	controllers.productsformats.delete_productsformats);
 
+		var multipart			= require('connect-multiparty');
+		var multipartMiddleware = multipart();
+		
+		app.post	( '/admin/productspictures',multipartMiddleware,controllers.productspictures.post_productspictures);
+		
 		app.get		( '/report',				controllers.report.get_report);
 
 		app.get		( '/registration',			controllers.registration.get_registration);

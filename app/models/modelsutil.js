@@ -36,7 +36,7 @@
 	modelsutil.getProducts = function (req,res,next,category,getcallback) {
 		
 		var async		= require('async'),
-		ld			= require('lodash');
+			ld			= require('lodash');
 		
 		req.logger.info('Entering to get_products');
 		req.models.products.find({category_id:category.id},['description'],function(err,products) {
@@ -45,10 +45,13 @@
 			}
 			req.logger.debug('Products readed:'+products.length);
 			async.each(products, function(product, callback) {
-				product.getProductsFormats().run(function(err,productformats) {
+				product.getProductsFormats().order('retail').limit(3).run(function(err,productformats) {
 					if(err) {
 						return callback(err);
 					}
+					productformats.forEach(function(productformat) {
+						productformat.description = productformat.fullDescription();
+					});
 					req.logger.debug("Product:"+product.description+" Formats readed:"+productformats.length);
 					ld.merge(product, {productformats:productformats});
 					return callback();

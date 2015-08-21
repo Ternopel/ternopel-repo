@@ -37,6 +37,14 @@ CREATE TABLE products
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
+CREATE TABLE products_pictures
+(
+	id bigint NOT NULL,
+	picture bytea NOT NULL,
+	last_update timestamp NOT NULL,
+	PRIMARY KEY (id)
+) WITHOUT OIDS;
+
 CREATE TABLE products_formats
 (
 	id bigint DEFAULT nextval('products_formats_sequence') NOT NULL,
@@ -100,6 +108,13 @@ ALTER TABLE products
 ALTER TABLE products
 	ADD FOREIGN KEY (packaging_id)
 	REFERENCES packaging (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+ALTER TABLE products_pictures
+	ADD FOREIGN KEY (id)
+	REFERENCES products (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

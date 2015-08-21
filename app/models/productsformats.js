@@ -14,6 +14,15 @@ module.exports = function (orm, db, models,logger) {
 		{
 			cache:	false,
 			methods: {
+				fullDescription: function() {
+					var description=this.format;
+					if(this.quantity>1) {
+					}
+					if(this.units>1) {
+						description+=' x '+this.units+' unid. ';
+					}
+					return description;
+				}
 			},
 			validations: {
 			}

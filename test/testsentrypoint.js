@@ -16,6 +16,7 @@ var testshome				= require(__dirname+'/../goma/testshome');
 var testscategories			= require(__dirname+'/../goma/testscategories');
 var testsproducts			= require(__dirname+'/../goma/testsproducts');
 var testsproductsformats	= require(__dirname+'/../goma/testsproductsformats');
+var testsproductspictures	= require(__dirname+'/../goma/testsproductspictures');
 
 describe('Users creation', function() {
 	
@@ -60,8 +61,11 @@ describe('Users creation', function() {
 		});
 	});	
 
-	var runTests=true;
+	var runTests=false;
 
+	// admin products pictures tests
+	it('Create product picture', testsproductspictures.createProductPicture);
+	
 	// admin products formats tests
 	if(runTests) {
 		it('Delete product format', testsproductsformats.deleteProductFormat);
