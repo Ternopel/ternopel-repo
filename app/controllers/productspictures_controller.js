@@ -54,7 +54,7 @@ module.exports = {
 	},
 	get_productspictures: function(req, res, next) {
 		req.logger.info("En GET products pictures");
-		var id			= req.body.id;
+		var id			= req.params.id;
 		
 		req.models.productspictures.get(id,function(err,productpicture) {
 			if(err) {

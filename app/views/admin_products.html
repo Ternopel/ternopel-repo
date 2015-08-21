@@ -82,7 +82,20 @@
 					</table>
 				</td>
 			</tr>
+			<tr name='{{=product.id}}_picture'>
+				<td colspan="4">
+					<form enctype="multipart/form-data" action="/admin/productspictures?_csrf={{=it.csrfToken}}" method="post">
+						<input type='hidden' name='id' value='{{=product.id}}'>
+						<input type="file" name="picture" />
+						<button type="submit">Submit</button>
+					</form>				
+				</td>
+			</tr>
 			{{~}}
+			
+			
+			
+			
 			
 		</table>		
 		
