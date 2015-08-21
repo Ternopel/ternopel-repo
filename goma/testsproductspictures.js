@@ -42,14 +42,24 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 					.set('cookie', utils.getcookies(res))
-					.send({
-						'id' : '1'
-					})
+					.field('id', '1')
 					.expect(200)
-					.attach('picture',  __dirname + '/logo.png')
+					.attach('picture',  __dirname + '/logo1.png')
 					.end(function(err,newres) {
 						return callback(err,res);
 					});
+			},
+			function(res,callback) {
+				logger.info('Creating product picture:'+utils.getcsrf(res));
+				request("http://localhost:"+config.test_app_port)
+				.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
+				.set('cookie', utils.getcookies(res))
+				.field('id', '1')
+				.expect(200)
+				.attach('picture',  __dirname + '/logo2.png')
+				.end(function(err,newres) {
+					return callback(err,res);
+				});
 			}
 		], 
 		function(err) {
