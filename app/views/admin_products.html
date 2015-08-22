@@ -44,10 +44,13 @@
 				</td>
 				<td name='show_format' style="width:290px;">
 					{{? product.show_format === true}}
-						<input type='checkbox' name='formatscheck1' checked='checked'>Ver formatos</input>
+						<input type='checkbox' name='formatscheck1' checked='checked'>&nbsp;Formatos?</input>
 					{{??}}
-						<input type='checkbox' name='formatscheck1'>Ver formatos</input>
+						<input type='checkbox' name='formatscheck1'>&nbsp;Formatos?</input>
 					{{?}}
+				</td>
+				<td name='show_picture' style="width:290px;">
+					<input type='checkbox' name='showpicturebutton'>&nbsp;Imagen?</input>
 				</td>
 				<td><input name='remove' type='button' value='Borrar'></input></td>
 			</tr>
@@ -82,7 +85,7 @@
 					</table>
 				</td>
 			</tr>
-			<tr name='{{=product.id}}_picture'>
+			<tr name='{{=product.id}}_picture' style='display:none;'>
 				<td colspan="4">
 					<form enctype="multipart/form-data" action="/admin/productspictures?_csrf={{=it.csrfToken}}" method="post">
 						<input type='hidden' name='id' value='{{=product.id}}'>

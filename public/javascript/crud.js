@@ -82,6 +82,11 @@ $(function () {
 $(function () {
 	$("td input[type='checkbox']").change(function () {
 		var tdname		=$(this).parent().attr('name');
+		if(tdname=='show_picture') {
+			console.log('Ignore this field');
+			return;
+		}
+		
 		var trid		=$(this).parent().parent().attr('name');
 		var csrf		=$("input[name='_csrf']").val();
 		var urltopost	=$(this).parent().parent().parent().parent().attr('summary');

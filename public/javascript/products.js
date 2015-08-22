@@ -10,14 +10,13 @@ $(function () {
 	});
 });
 
-// See formats
-/*
+// Show picture upload
 $(function () {
-	var input=$("input[name='formatscheck']");
+	var input=$("input[name='showpicturebutton']");
 	input.click(function (e) {	
 		var check		=$(this);
 		var trid		=$(this).parent().parent().attr('name');
-		var formatstr	=$('tr[name='+trid+'_format]');
+		var formatstr	=$('tr[name='+trid+'_picture]');
 		if(check.is(':checked')) {
 			formatstr.show();
 		}
@@ -26,7 +25,6 @@ $(function () {
 		}
 	});
 });
-*/
 
 // Add product
 $(function () {
