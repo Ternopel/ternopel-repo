@@ -951,3 +951,8 @@ td {
 th {
 	text-align: left;
 }
+
+.prodimg {
+	width:226px;
+	height:150px;
+}

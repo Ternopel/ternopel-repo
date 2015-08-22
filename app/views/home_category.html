@@ -6,7 +6,7 @@
 			{{~ it.currentcategory.products:currentproduct}}
 				<li>
 					<a href="/{{=it.currentcategory.url}}/{{=currentproduct.url}}">
-						<img src="{{=it.app_resources}}/images/product-img1.jpg" alt="">
+						<img class="prodimg" src="/admin/productspictures/{{=currentproduct.id}}" alt="">
 					</a>
 					<h3 class="main-product-title">
 						<a href="/{{=it.currentcategory.url}}/{{=currentproduct.url}}">{{=currentproduct.description}}</a>

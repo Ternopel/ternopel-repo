@@ -5,7 +5,7 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "node ./server.js",
+    "start": "forever -a -l ./ternopel.log start ./server.js",
     "stop": "forever stopall",
     "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -u exports -R spec --recursive"
   },
@@ -49,7 +49,7 @@
     "app_run_liquibase": "true",
     "app_port": "3000",
     "app_resources": "//localhost:3000",
-    "app_temp_images_dir": "/tmp",
+    "app_products_imgs_dir": "./products/images",
     "db_database": "ternopel",
     "db_protocol": "postgres",
     "db_driver": "org.postgresql.Driver",
@@ -61,8 +61,9 @@
     "db_liquibase_xml": "liquibase.xml",
     "test_app_port": "3001",
     "test_db_database": "ternopel_test",
-    "test_db_show_sql": "true",
-    "test_db_liquibase_xml": "liquibase_test.xml"
+    "test_db_show_sql": "false",
+    "test_db_liquibase_xml": "liquibase_test.xml",
+    "test_app_products_imgs_dir": "./products/testimages"
   },
   "author": "Maximiliano Carrizo"
 }

@@ -38,25 +38,43 @@ var request		= require('supertest'),
 					});
 			}, 
 			function(res,callback) {
-				logger.info('Creating product picture:'+utils.getcsrf(res));
+				logger.info('Creating product picture');
 				request("http://localhost:"+config.test_app_port)
 					.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 					.set('cookie', utils.getcookies(res))
 					.field('id', '1')
 					.expect(200)
-					.attach('picture',  __dirname + '/logo1.png')
+					.attach('picture',  __dirname + '/logo1.jpg')
 					.end(function(err,newres) {
 						return callback(err,res);
 					});
 			},
 			function(res,callback) {
-				logger.info('Creating product picture:'+utils.getcsrf(res));
+				logger.info('Updating product picture');
 				request("http://localhost:"+config.test_app_port)
 				.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 				.set('cookie', utils.getcookies(res))
 				.field('id', '1')
 				.expect(200)
-				.attach('picture',  __dirname + '/logo2.png')
+				.attach('picture',  __dirname + '/logo2.jpg')
+				.end(function(err,newres) {
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Getting product picture');
+				request("http://localhost:"+config.test_app_port)
+				.get('/admin/productspictures/1')
+				.expect(200)
+				.end(function(err,newres) {
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Getting non existing product picture with default picture');
+				request("http://localhost:"+config.test_app_port)
+				.get('/admin/productspictures/2')
+				.expect(200)
 				.end(function(err,newres) {
 					return callback(err,res);
 				});

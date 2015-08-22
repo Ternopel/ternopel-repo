@@ -40,7 +40,7 @@ CREATE TABLE products
 CREATE TABLE products_pictures
 (
 	id bigint NOT NULL,
-	picture bytea NOT NULL,
+	content_type varchar(255) NOT NULL,
 	last_update timestamp NOT NULL,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;

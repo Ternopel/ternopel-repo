@@ -24,11 +24,12 @@ describe('Users creation', function() {
 
 	before(function(done) {
 		
-		config.app_run_liquibase	= 'false';
-		config.app_port				= config.test_app_port;
-		config.db_database			= config.test_db_database;
-		config.db_show_sql			= config.test_db_show_sql;
-		config.db_liquibase_xml		= config.test_db_liquibase_xml;
+		config.app_run_liquibase			= 'false';
+		config.app_port						= config.test_app_port;
+		config.db_database					= config.test_db_database;
+		config.db_show_sql					= config.test_db_show_sql;
+		config.db_liquibase_xml				= config.test_db_liquibase_xml;
+		config.app_products_imgs_dir		= config.test_app_products_imgs_dir;
 		
 		logger.info("Initiating app");
 		app.init(logger,config, function(app,pdb) {
