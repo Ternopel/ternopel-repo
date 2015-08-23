@@ -62,10 +62,12 @@ describe('Users creation', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 
 	// admin products pictures tests
-	it('Create product picture', testsproductspictures.createProductPicture);
+	if(runTests) {
+		it('Create product picture', testsproductspictures.createProductPicture);
+	}
 	
 	// admin products formats tests
 	if(runTests) {

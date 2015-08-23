@@ -4,7 +4,8 @@ var request		= require('supertest'),
 	expect		= require('expect'),
 	utils		= require('../utils/testutils.js'),
 	logger		= require(__dirname+'/../utils/logger'),
-	config		= require(__dirname+"/../utils/config")();
+	config		= require(__dirname+"/../utils/config")(),
+	fs			= require('fs');
 
 (function (testsproductspictures) {
 
@@ -39,26 +40,40 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Creating product picture');
-				request("http://localhost:"+config.test_app_port)
-					.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
-					.set('cookie', utils.getcookies(res))
-					.field('id', '1')
-					.expect(200)
-					.attach('picture',  __dirname + '/logo1.jpg')
-					.end(function(err,newres) {
+				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
+					if(err) {
 						return callback(err,res);
-					});
+					}
+					request("http://localhost:"+config.test_app_port)
+						.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
+						.set('cookie', utils.getcookies(res))
+						.field('product_id', '1')
+						.field('type', 'image/jpeg')
+						.field('data', data)
+						.expect(200)
+						.end(function(err,newres) {
+							expect(newres.text).toBe('created');
+							return callback(err,res);
+						});
+				});
 			},
 			function(res,callback) {
 				logger.info('Updating product picture');
-				request("http://localhost:"+config.test_app_port)
-				.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
-				.set('cookie', utils.getcookies(res))
-				.field('id', '1')
-				.expect(200)
-				.attach('picture',  __dirname + '/logo2.jpg')
-				.end(function(err,newres) {
-					return callback(err,res);
+				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
+					if(err) {
+						return callback(err,res);
+					}
+					request("http://localhost:"+config.test_app_port)
+						.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
+						.set('cookie', utils.getcookies(res))
+						.field('product_id', '1')
+						.field('type', 'image/jpeg')
+						.field('data', data)
+						.expect(200)
+						.end(function(err,newres) {
+							expect(newres.text).toBe('updated');
+							return callback(err,res);
+						});
 				});
 			},
 			function(res,callback) {

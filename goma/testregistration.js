@@ -54,7 +54,7 @@ var request		= require('supertest'),
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)
 				.get('/logout')
-				.expect(301)
+				.expect(302)
 				.end(function(err, res){
 					return callback(err);
 				});
