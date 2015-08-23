@@ -83,7 +83,7 @@ $(function () {
 	$("td input[type='checkbox']").change(function () {
 		var tdname		=$(this).parent().attr('name');
 		if(tdname=='show_picture') {
-			console.log('Ignore this field');
+			console.log('Ignore show_picture crud event');
 			return;
 		}
 		

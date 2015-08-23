@@ -6,54 +6,50 @@ var utils	= require('./utils'),
 module.exports = {
 	post_productspictures: function(req, res, next) {
 		req.logger.info("En POST products pictures");
-		var id			= req.body.id;
+		var product_id	= req.body.product_id;
+		var type		= req.body.type;
+		var data		= req.body.data;
 		
-		req.logger.info("Id:"+id);
-		req.logger.debug(JSON.stringify(req.files));
+		req.logger.info("Id:"+product_id);
+		req.logger.info("type:"+type);
 		
-		fs.readFile(req.files.picture.path, function (err, data) {
+		var picture_name=req.config.app_products_imgs_dir+"/"+product_id;
+		req.logger.info('Writing picture:'+picture_name);
+		fs.writeFile(picture_name, data,'base64',function (err) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
-			
-			var picture_name=req.config.app_products_imgs_dir+"/"+id;
-			req.logger.info('Writing picture:'+picture_name);
-			fs.writeFile(picture_name, data, function (err) {
-				if(err) {
+			req.models.productspictures.get(product_id,function(err,productpicture) {
+				// Not found !
+				if(err && err.literalCode!=='NOT_FOUND') {
 					return utils.send_ajax_error(req,res,err);
 				}
-				req.models.productspictures.get(id,function(err,productpicture) {
-					// Not found !
-					if(err && err.literalCode!=='NOT_FOUND') {
-						return utils.send_ajax_error(req,res,err);
-					}
-					if(productpicture) {
-						productpicture.content_type	= req.files.picture.type;
-						productpicture.last_update	= new Date();
-						
-						req.logger.info('Updating product picture');
-						productpicture.save(function(err) {
-							if(err) {
-								return utils.send_ajax_error(req,res,err);
-							}
-							req.logger.debug("Sending product picture ack to browser:");
-							return res.status(200).send(id);
-						});
-					}
-					else {
-						req.logger.info('Creating product picture');
-						req.models.productspictures.create({id:	id,last_update:	new Date(),content_type: req.files.picture.type}, function(err,productpicture) {
-							if(err) {
-								return utils.send_ajax_error(req,res,err);
-							}
-							req.logger.debug("Sending product picture ack to browser:");
-							return res.status(200).send(id);
-						});
-					}
-				});
+				if(productpicture) {
+					productpicture.content_type	= type;
+					productpicture.last_update	= new Date();
+					
+					req.logger.info('Updating product picture');
+					productpicture.save(function(err) {
+						if(err) {
+							return utils.send_ajax_error(req,res,err);
+						}
+						req.logger.debug("Sending product picture ack to browser:");
+						return res.status(200).send('updated');
+					});
+				}
+				else {
+					req.logger.info('Creating product picture');
+					req.models.productspictures.create({id:	product_id,last_update:	new Date(),content_type: type}, function(err,productpicture) {
+						if(err) {
+							return utils.send_ajax_error(req,res,err);
+						}
+						req.logger.debug("Sending product picture ack to browser:");
+						return res.status(200).send('created');
+					});
+				}
 			});
 		});
-	},
+},
 	get_productspictures: function(req, res, next) {
 		req.logger.info("En GET products pictures");
 		var id			= req.params.id;

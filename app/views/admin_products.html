@@ -1,9 +1,14 @@
+<script src='/javascript/imagecrop.min.js'></script>
 <script src='/javascript/crud.js'></script>
 <script src='/javascript/products.js'></script>
 <section class="page-container clear-fix">
 	{{#def.load('admin_menu.html')}}
 	<section class="main-content">
 		<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+
+		<input type="hidden" name="picture_type" id="picture_type" />
+		<input type="hidden" name="picture_data" id="picture_data" />		
+		
 		<h1>Gestión de Productos</h1>
 		<input type='text' name='search' placeholder='Ingrese búsqueda' value='{{=it.search}}'>
 		<input type='button' id='addProduct' value='Agregar Producto' ></input>
@@ -50,7 +55,7 @@
 					{{?}}
 				</td>
 				<td name='show_picture' style="width:290px;">
-					<input type='checkbox' name='showpicturebutton'>&nbsp;Imagen?</input>
+					<input type='checkbox' id='showpicture_{{=product.id}}' name='showpicturebutton'>&nbsp;Imagen?</input>
 				</td>
 				<td><input name='remove' type='button' value='Borrar'></input></td>
 			</tr>
@@ -87,19 +92,23 @@
 			</tr>
 			<tr name='{{=product.id}}_picture' style='display:none;'>
 				<td colspan="4">
-					<form enctype="multipart/form-data" action="/admin/productspictures?_csrf={{=it.csrfToken}}" method="post">
-						<input type='hidden' name='id' value='{{=product.id}}'>
-						<input type="file" name="picture" />
-						<button type="submit">Submit</button>
-					</form>				
+					<div class="upload-photo-container"> 
+						<div class="imageBox">
+							<div class="thumbBox"></div>
+							<div class="spinner" style="display: none">Cargando...</div>
+						</div>
+						<div class="action clear-fix">
+							<span class="upload-btn"><span class="upload-label">Subir foto</span><input type="file" id="picture" accept="image/*"></span>
+							<input type="button" class="crop-btn" id="btnCrop" value="Crop" style="float: right;display:none">
+							<input type="button" class="zoom-in-btn" id="btnZoomIn" value="+" style="float: right;display:none">
+							<input type="button" class="zoom-out-btn" id="btnZoomOut" value="-" style="float: right;display:none">
+							<button type="button" id="savepicture" name="{{=product.id}}" style="display:none">Grabar foto</button>
+						</div>
+						<div class="cropped" style="display:none"></div>
+					</div>				
 				</td>
 			</tr>
 			{{~}}
-			
-			
-			
-			
-			
 		</table>		
 		
 		

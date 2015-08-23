@@ -45,10 +45,11 @@
 		app.use(express.static(publicFolder, { maxAge: oneYear }));
 
 	
+		var bodyMaxSize = 1024 * 1024 * 8 * 100;
 		logger.debug("Setting parse urlencoded request bodies into req.body.");
 		var bodyParser = require('body-parser');
-		app.use(bodyParser.urlencoded({ extended: true }));
-		app.use(bodyParser.json());
+		app.use(bodyParser.urlencoded({ extended: true, limit: bodyMaxSize }));
+		app.use(bodyParser.json({limit: bodyMaxSize}));
 
 		logger.debug("Setting express validator");
 		var expressValidator	= require('express-validator');
