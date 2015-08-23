@@ -12,7 +12,7 @@
 					<li name="{{=category.url}}">
 						{{?category.selected}}
 							<span name="compress" class="compress"></span>
-							<a href="/" class="aside-active">{{=category.name}}</a>
+							<a href="/{{=category.url}}" class="aside-active">{{=category.name}}</a>
 							<ul class="aside-sub-menu">
 								{{~ category.products:product}}
 									<li>
