@@ -21,7 +21,8 @@ $(function () {
 		if(check.is(':checked')) {
 			formatstr.show();
 			
-			$("div[name='"+trid+"-upload-photo-container']").attr('style', 'background: url(/admin/productspictures/'+trid+'); ');
+			var milliseconds=new Date().getTime();
+			$("div[name='"+trid+"-upload-photo-container']").attr('style', 'background: url(/admin/productspictures/'+trid+'?a='+milliseconds+'); ');
 	
 			var options = {
 				imageBox: "div[name='"+trid+"-imageBox']",
@@ -29,9 +30,23 @@ $(function () {
 				spinner: "div[name='"+trid+"-spinner']",
 				imgSrc: 'avatar.jpg'
 			};
+			
+			console.log('Unbinding events');
+			$("input[name='"+trid+"-picture']").unbind();
+			$("input[name='"+trid+"-btnCrop']").unbind();
+			$("input[name='"+trid+"-btnZoomIn']").unbind();
+			$("input[name='"+trid+"-btnZoomOut']").unbind();
+			$("input[name='"+trid+"-save']").unbind();
+			
+			$("span[name='"+trid+"-upload-btn']").attr('class', 'upload-btn');
+			$("span[name='"+trid+"-upload-label']").html('Subir foto');
+			
+			$("input[name='"+trid+"-btnZoomIn']").hide();
+			$("input[name='"+trid+"-btnZoomOut']").hide();
+			$("span[name='"+trid+"-save-span']").hide();
 	
 			var cropper;
-			document.querySelector("input[name='"+trid+"-picture']").addEventListener('change', function(){ 
+			$("input[name='"+trid+"-picture']").change(function(){ 
 				console.log('Firing picture change');
 				file_name = $("input[name='"+trid+"-picture']").val();
 				var reader = new FileReader();
@@ -49,7 +64,7 @@ $(function () {
 
 							$("input[name='"+trid+"-btnZoomIn']").show();
 							$("input[name='"+trid+"-btnZoomOut']").show();
-							$("button[name='"+trid+"-save']").show();
+							$("span[name='"+trid+"-save-span']").show();
 						} 
 						else {
 							alert('Imagen debe ser mayor a 452x x 300px');
@@ -60,21 +75,21 @@ $(function () {
 				reader.readAsDataURL(this.files[0]);
 			});
 	
-			document.querySelector("input[name='"+trid+"-btnCrop']").addEventListener('click', function() {
+			$("input[name='"+trid+"-btnCrop']").click(function() {
 				console.log('Firing crop button');
 				var img = cropper.getDataURL();
 				document.querySelector("div[name='"+trid+"-cropped']").innerHTML += '<img src="'+img+'">';
 			});
-			document.querySelector("input[name='"+trid+"-btnZoomIn']").addEventListener('click', function() {
+			$("input[name='"+trid+"-btnZoomIn']").click(function() {
 				console.log('Zoom in');
 				cropper.zoomIn();
 			});
-			document.querySelector("input[name='"+trid+"-btnZoomOut']").addEventListener('click', function() {
+			$("input[name='"+trid+"-btnZoomOut']").click(function() {
 				console.log('Zoom out');
 				cropper.zoomOut();
 			});
 			
-			$("button[name='"+trid+"-save']").click(function () {
+			$("input[name='"+trid+"-save']").click(function () {
 				console.log('Saving picture');
 				var csrf		=$("input[name='_csrf']").val();
 				
