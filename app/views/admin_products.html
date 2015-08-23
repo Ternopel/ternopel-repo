@@ -92,19 +92,19 @@
 			</tr>
 			<tr name='{{=product.id}}_picture' style='display:none;'>
 				<td colspan="4">
-					<div class="upload-photo-container"> 
-						<div class="imageBox">
-							<div class="thumbBox"></div>
-							<div class="spinner" style="display: none">Cargando...</div>
+					<div name="{{=product.id}}-upload-photo-container" class="upload-photo-container"> 
+						<div name="{{=product.id}}-imageBox" class="imageBox">
+							<div name="{{=product.id}}-thumbBox" class="thumbBox"></div>
+							<div name="{{=product.id}}-spinner" class="spinner" style="display:none">Cargando...</div>
 						</div>
 						<div class="action clear-fix">
-							<span class="upload-btn"><span class="upload-label">Subir foto</span><input type="file" id="picture" accept="image/*"></span>
-							<input type="button" class="crop-btn" id="btnCrop" value="Crop" style="float: right;display:none">
-							<input type="button" class="zoom-in-btn" id="btnZoomIn" value="+" style="float: right;display:none">
-							<input type="button" class="zoom-out-btn" id="btnZoomOut" value="-" style="float: right;display:none">
-							<button type="button" id="savepicture" name="{{=product.id}}" style="display:none">Grabar foto</button>
+							<span name="{{=product.id}}-upload-btn" class="upload-btn"><span name="{{=product.id}}-upload-label" class="upload-label">Subir foto</span><input type="file" name="{{=product.id}}-picture" accept="image/*"></span>
+							<input type="button" class="crop-btn" name="{{=product.id}}-btnCrop" value="Crop" style="float: right;display:none">
+							<input type="button" class="zoom-in-btn" name="{{=product.id}}-btnZoomIn" value="+" style="float: right;display:none">
+							<input type="button" class="zoom-out-btn" name="{{=product.id}}-btnZoomOut" value="-" style="float: right;display:none">
+							<button name="{{=product.id}}-save" style="display:none">Grabar foto</button>
 						</div>
-						<div class="cropped" style="display:none"></div>
+						<div name="{{=product.id}}-cropped" class="cropped" style="display:none"></div>
 					</div>				
 				</td>
 			</tr>
