@@ -5,9 +5,11 @@ module.exports = function (orm, db, models,logger) {
 	logger.debug("Configuring products");
 	models.products = db.define("products", { 
 			id:				{ type: 'serial', key: true}, 
-			description: 	{ type: 'text', required: true},
+			name:		 	{ type: 'text', required: true},
 			url:			{ type: 'text', required: true,unique:true },
-			show_format:	{ type: 'boolean', required: true }
+			show_format:	{ type: 'boolean', required: true },
+			is_visible:		{ type: 'boolean', required: true },
+			is_offer:		{ type: 'boolean', required: true }
 		},
 		{
 			cache:	false,

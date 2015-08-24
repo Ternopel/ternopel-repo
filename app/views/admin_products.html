@@ -19,12 +19,14 @@
 				<th><h4>Url</h4></th>
 				<th><h4>Categoría</h4></th>
 				<th><h4>Packaging</h4></th>
+				<th><h4>Visible</h4></th>
+				<th><h4>Oferta</h4></th>
 				<th><h4></h4></th>
 				<th><h4></h4></th>
 			</tr>
 			{{~ it.products:product}}
 			<tr name='{{=product.id}}'>
-				<td name='description' style='width: 500px;'><span>{{=product.description}}</span></td>
+				<td name='name' style='width: 500px;'><span>{{=product.name}}</span></td>
 				<td name='url' style='width: 500px;'><span>{{=product.url}}</span></td>
 				<td name='category_id' style='width: 500px;'>
 					<select>
@@ -47,15 +49,29 @@
 						{{~}}
 					</select> 				
 				</td>
+				<td name='is_visible' style="width:290px;">
+					{{? product.is_visible === true}}
+						<input type='checkbox' name='isvisible1' checked='checked'>&nbsp;Visible</input>
+					{{??}}
+						<input type='checkbox' name='isvisible1'>&nbsp;Visible</input>
+					{{?}}
+				</td>
+				<td name='is_offer' style="width:290px;">
+					{{? product.is_offer === true}}
+						<input type='checkbox' name='isoffer1' checked='checked'>&nbsp;Oferta</input>
+					{{??}}
+						<input type='checkbox' name='isoffer1'>&nbsp;Oferta</input>
+					{{?}}
+				</td>
 				<td name='show_format' style="width:290px;">
 					{{? product.show_format === true}}
-						<input type='checkbox' name='formatscheck1' checked='checked'>&nbsp;Formatos?</input>
+						<input type='checkbox' name='formatscheck1' checked='checked'>&nbsp;Form.</input>
 					{{??}}
-						<input type='checkbox' name='formatscheck1'>&nbsp;Formatos?</input>
+						<input type='checkbox' name='formatscheck1'>&nbsp;Form.</input>
 					{{?}}
 				</td>
 				<td name='show_picture' style="width:290px;">
-					<input type='checkbox' id='showpicture_{{=product.id}}' name='showpicturebutton'>&nbsp;Imagen?</input>
+					<input type='checkbox' id='showpicture_{{=product.id}}' name='showpicturebutton'>&nbsp;Img.</input>
 				</td>
 				<td><input name='remove' type='button' value='Borrar'></input></td>
 			</tr>

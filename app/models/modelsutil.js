@@ -14,11 +14,15 @@
 			}
 			req.logger.debug('Categories readed:'+categories.length);
 			async.each(categories, function(category, callback) {
-				category.getProducts().order('description').run(function(err,products) {
+				category.is_visible	= false;
+				category.getProducts().order('name').run(function(err,products) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.debug("Category:"+category.name+" Products readed:"+products.length);
+					if(products.length>0) {
+						category.is_visible	= true;
+					}
+					req.logger.debug("Category:"+category.name+" "+category.is_visible+" Products readed:"+products.length);
 					ld.merge(category, {products:products});
 					return callback();
 				});
@@ -33,24 +37,18 @@
 		});
 	};
 
-	modelsutil.getProducts = function (req,res,next,category,getcallback) {
+	modelsutil.getProducts = function (req,res,next,filter,getcallback) {
 		
 		var async		= require('async'),
 			ld			= require('lodash');
 		
 		req.logger.info('Entering to get_products');
-		req.models.products.find({category_id:category.id},['description'],function(err,products) {
+		req.models.products.find(filter,['name'],function(err,products) {
 			if(err) {
 				return next(err);
 			}
 			req.logger.debug('Products readed:'+products.length);
 			async.each(products, function(product, callback) {
-				
-				req.logger.info("===================================================================");
-				req.logger.info(JSON.stringify(product));
-				req.logger.info("===================================================================");
-				
-				
 				product.getProductsFormats().order('retail').limit(3).run(function(err,productformats) {
 					if(err) {
 						return callback(err);
@@ -70,9 +68,16 @@
 						productformat.retaildescription		= retaildescription;
 						productformat.wholesaledescription	= wholesaledescription;
 					});
-					req.logger.debug("Product:"+product.description+" Formats readed:"+productformats.length);
+					req.logger.debug("Product:"+product.name+" Formats readed:"+productformats.length);
 					ld.merge(product, {productformats:productformats});
-					return callback();
+					product.getCategory(function(err,category) {
+						if(err) {
+							return callback(err);
+						}
+						req.logger.debug("Product:"+product.name+" Category:"+category.name);
+						ld.merge(product, {category:category});
+						return callback();
+					});
 				});
 			}, function(err) {
 				if(err) {
@@ -84,5 +89,4 @@
 			});
 		});
 	};
-	
 })(module.exports);

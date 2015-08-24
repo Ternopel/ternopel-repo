@@ -14,89 +14,26 @@
 		</div>
 	</div>
 	<div class="main-products">
-		<h2 class="main-title">Productos destacados</h2>
-		<ul class="main-products-list clear-fix">
-			<li>
-				<a href="#"><img src="{{=it.app_resources}}/images/product-img1.jpg" alt=""></a>
-				<h3 class="main-product-title"><a href="#">Sed ut perspiciatis unde omnis iste</a></h3>
-				<p class="main-product-description"><a href="#">Do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</a></p>
-				<div class="product-prices">
-					<p><span class="price-con">1,25€</span> con IVA</p>
-					<p>1,25€ sin IVA</p>
-				</div>
-			</li>
-			<li>
-				<a href="#"><img src="{{=it.app_resources}}/images/product-img2.jpg" alt=""></a>
-				<h3 class="main-product-title"><a href="#">Et iusto odio dignissimos ducimus qui blanditiis</a></h3>
-				<p class="main-product-description"><a href="#">Totam rem aperiam. Esse cillum dolore eu fugiat nulla pariatur. Nihil molestiae consequatur, vel illum qui dolorem eum...</a></p>
-				<div class="product-prices">
-					<p><span class="price-con">3,57€</span> con IVA</p>
-					<p>2,95€ sin IVA</p>
-				</div>
-			</li>
-			<li>
-				<a href="#"><img src="{{=it.app_resources}}/images/product-img3.jpg" alt=""></a>
-				<h3 class="main-product-title"><a href="#">Corrupti quos dolores et quas</a></h3>
-				<p class="main-product-description"><a href="#">Eaque ipsa quae ab illo inventore veritatis et quasi. Totam rem aperiam. Nihil molestiae consequatur...</a></p>
-				<div class="product-prices">
-					<p><span class="price-con">2,64€</span> con IVA</p>
-					<p>2,18€ sin IVA</p>
-				</div>
-			</li>
-			<li>
-				<a href="#"><img src="{{=it.app_resources}}/images/product-img4.jpg" alt=""></a>
-				<h3 class="main-product-title"><a href="#">Quia consequuntur magni dolores eos</a></h3>
-				<p class="main-product-description"><a href="#">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. Ut enim ad minim veniam, quis nostrud exercitation...</a></p>
-				<div class="product-prices">
-					<p><span class="price-con">1,05€</span> con IVA</p>
-					<p>0,86€ sin IVA</p>
-				</div>
-			</li>
-			<li>
-				<a href="#"><img src="{{=it.app_resources}}/images/product-img5.jpg" alt=""></a>
-				<h3 class="main-product-title"><a href="#">At vero eos et accusamus</a></h3>
-				<p class="main-product-description"><a href="#">Nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam...</a></p>
-				<div class="product-prices">
-					<p><span class="price-con">3,27€</span> con IVA</p>
-					<p>2,70€ sin IVA</p>
-				</div>
-			</li>
-			<li>
-				<a href="#"><img src="{{=it.app_resources}}/images/product-img6.jpg" alt=""></a>
-				<h3 class="main-product-title"><a href="#">Esse cillum dolore eu fugiat nulla</a></h3>
-				<p class="main-product-description"><a href="#">Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo...</a></p>
-				<div class="product-prices">
-					<p><span class="price-con">58,56€</span> con IVA</p>
-					<p>48,40€ sin IVA</p>
-				</div>
-			</li>
-			<li>
-				<a href="#"><img src="{{=it.app_resources}}/images/product-img7.jpg" alt=""></a>
-				<h3 class="main-product-title"><a href="#">Laboris nisi ut aliquip ex ea commodo</a></h3>
-				<p class="main-product-description"><a href="#">Totam rem aperiam. Itaque earum rerum hic tenetur a sapiente delectus. At vero eos et accusamus...</a></p>
-				<div class="product-prices">
-					<p><span class="price-con">78,17€</span> con IVA</p>
-					<p>64,60€ sin IVA</p>
-				</div>
-			</li>
-			<li>
-				<a href="#"><img src="{{=it.app_resources}}/images/product-img8.jpg" alt=""></a>
-				<h3 class="main-product-title"><a href="#">Quia consequuntur magni dolores</a></h3>
-				<p class="main-product-description"><a href="#">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Totam rem aperiam. Architecto beatae vitae dicta...</a></p>
-				<div class="product-prices">
-					<p><span class="price-con">1,37€</span> con IVA</p>
-					<p>1,13€ sin IVA</p>
-				</div>
-			</li>
-			<li>
-				<a href="#"><img src="{{=it.app_resources}}/images/product-img9.jpg" alt=""></a>
-				<h3 class="main-product-title"><a href="#">Neque porro quisquam est</a></h3>
-				<p class="main-product-description"><a href="#">Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat...</a></p>
-				<div class="product-prices">
-					<p><span class="price-con">1,27€</span> con IVA</p>
-					<p>1,05€ sin IVA</p>
-				</div>
-			</li>
+		<h2 class="main-title">Ofertas</h2>
+		<ul class="main-products-list clear-fix" id="ulproducts">
+			{{~ it.offers:offerproduct}}
+				<li>
+					<a href="/{{=offerproduct.category.url}}/{{=offerproduct.url}}">
+						<img class="prodimg" src="/admin/productspictures/{{=offerproduct.id}}">
+					</a>
+					<h3 class="main-product-title">
+						<a href="/{{=offerproduct.category.url}}/{{=offerproduct.url}}">{{=offerproduct.name}}</a>
+					</h3>
+					<p class="main-product-description">
+						<a href="/{{=offerproduct.category.url}}/{{=offerproduct.url}}">Descripción mas larga</a>
+					</p>
+					<div class="product-prices">
+						{{~ offerproduct.productformats:productformat}}
+							<p>{{=productformat.retaildescription}} <span class="price-con">${{=productformat.retail}}</span>, {{=productformat.wholesaledescription}}<span class="price-con">${{=productformat.wholesale}}</span></p>
+						{{~}}
+					</div>
+				</li>
+			{{~}}		
 		</ul>
 	</div>
 </section>

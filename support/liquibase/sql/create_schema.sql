@@ -31,9 +31,11 @@ CREATE TABLE products
 	id bigint DEFAULT nextval('products_sequence') NOT NULL,
 	category_id bigint NOT NULL,
 	packaging_id bigint NOT NULL,
-	description varchar(255) NOT NULL UNIQUE,
+	name varchar(255) NOT NULL UNIQUE,
 	url varchar(255) NOT NULL UNIQUE,
 	show_format boolean NOT NULL default false,
+	is_visible boolean NOT NULL default false,
+	is_offer boolean NOT NULL default false,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 

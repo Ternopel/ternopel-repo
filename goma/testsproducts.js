@@ -234,7 +234,7 @@ var request		= require('supertest'),
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'id' : '1',
-						'colname' : 'description',
+						'colname' : 'name',
 						'colvalue' : 'Nuevas bolsitas',
 						'_csrf' : utils.getcsrf(res)
 					})
@@ -298,6 +298,40 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Updating product');
 				request("http://localhost:"+config.test_app_port)
+				.post('/admin/products')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'id' : '1',
+					'colname' : 'is_visible',
+					'colvalue' : 'true',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toBe('success');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Updating product');
+				request("http://localhost:"+config.test_app_port)
+				.post('/admin/products')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'id' : '1',
+					'colname' : 'is_offer',
+					'colvalue' : 'true',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toBe('success');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Updating product');
+				request("http://localhost:"+config.test_app_port)
 					.post('/admin/products')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -319,7 +353,7 @@ var request		= require('supertest'),
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'id' : '1',
-						'colname' : 'description',
+						'colname' : 'name',
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(500)
@@ -335,7 +369,7 @@ var request		= require('supertest'),
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'id' : '1',
-						'colname' : 'description',
+						'colname' : 'name',
 						'colvalue' : 'Caja de madera',
 						'_csrf' : utils.getcsrf(res)
 					})

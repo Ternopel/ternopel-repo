@@ -13,7 +13,7 @@ module.exports = {
 		waterfall([ 
 			function(callback) {
 				req.logger.info('Reading products');
-				req.models.products.find({},['description']).where('lower(description) ilike ?',['%'+req.query.search+'%']).run(function(err,products) {
+				req.models.products.find({},['name']).where('lower(name) ilike ?',['%'+req.query.search+'%']).run(function(err,products) {
 					if(err) {
 						return callback(err);
 					}
@@ -25,7 +25,7 @@ module.exports = {
 							if(err) {
 								return asynccallback(err);
 							}
-							req.logger.debug('Product:'+product.description+' Products Formats readed:'+productsformats.length);
+							req.logger.debug('Product:'+product.name+' Products Formats readed:'+productsformats.length);
 							ld.merge(product, {productsformats:productsformats});
 							return asynccallback();
 						});
@@ -95,8 +95,8 @@ module.exports = {
 		waterfall([ 
 			function(callback) {
 				var filter='';
-				if(colname==='description') {
-					filter={ description:colvalue };
+				if(colname==='name') {
+					filter={ name:colvalue };
 				}
 				if(colname==='url') {
 					filter={ url:colvalue };
@@ -124,8 +124,8 @@ module.exports = {
 				});
 			},
 			function(product,callback) {
-				if(colname==='description') {
-					product.description	= colvalue;
+				if(colname==='name') {
+					product.name	= colvalue;
 				}
 				if(colname==='url') {
 					product.url	= colvalue;
@@ -138,6 +138,12 @@ module.exports = {
 				}
 				if(colname==='show_format') {
 					product.show_format	= colvalue;
+				}
+				if(colname==='is_visible') {
+					product.is_visible	= colvalue;
+				}
+				if(colname==='is_offer') {
+					product.is_offer	= colvalue;
 				}
 				
 				req.logger.info("Updating product:"+JSON.stringify(product));
@@ -159,9 +165,11 @@ module.exports = {
 		req.logger.info('En PUT products');
 		var milli=new Date().getTime();
 		req.logger.info('Creating product');
-		req.models.products.create({	description:	'A Insert Product Text here '+milli,
+		req.models.products.create({	name:			'A Insert Product Text here '+milli,
 										url:			'A Insert Product url here'+milli,
 										show_format:	false,
+										is_visible:		false,
+										is_offer:		false,
 										category_id:	1,
 										packaging_id:	1},function(err,product) {
 			if(err) {

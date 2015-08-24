@@ -8,7 +8,7 @@ var request		= require('supertest'),
 
 (function (testshome) {
 
-	testshome.getPlainHome = function (done) {
+	testshome.getSales = function (done) {
 		
 		var waterfall = require('async-waterfall');
 		waterfall([ 
@@ -18,8 +18,7 @@ var request		= require('supertest'),
 					.get('/')
 					.expect(200)
 					.end(function(err, res){
-						expect(res.text).toInclude('Bandas elásticas');
-						expect(res.text).toExclude('Bolsa de banditas elásticas');
+						expect(res.text).toInclude('Bolsa de banditas elásticas');
 						return callback(err,res);
 					});
 			},

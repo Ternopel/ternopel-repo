@@ -88,8 +88,9 @@ module.exports = {
 							return callback('Esta categoria no está más disponible');
 						}
 						var currentcategory = categories[0];
+						var filter = ld.merge({category_id:currentcategory.id});
 						
-						modelsutil.getProducts(req,res,next,currentcategory, function(err,products) {
+						modelsutil.getProducts(req,res,next,filter, function(err,products) {
 							if(err) {
 								return callback(err);
 							}
@@ -107,7 +108,14 @@ module.exports = {
 			function(callback) {
 				if(pageinfo.page_to_render==='sales') {
 					req.logger.info('-------------------> Get Sales Info');
-					return callback();
+					var filter = ld.merge({is_offer:true,is_visible:true});
+					modelsutil.getProducts(req,res,next,filter, function(err,offers) {
+						if(err) {
+							return callback(err);
+						}
+						ld.merge(pageinfo,{offers:offers});
+						return callback();
+					});
 				}
 				else {
 					return callback();

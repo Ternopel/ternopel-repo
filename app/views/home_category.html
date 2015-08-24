@@ -3,23 +3,25 @@
 		<h2 class="main-title">{{=it.currentcategory.name}}</h2>
 		<ul class="main-products-list clear-fix" id="ulproducts">
 
-			{{~ it.currentcategory.products:currentproduct}}
-				<li>
-					<a href="/{{=it.currentcategory.url}}/{{=currentproduct.url}}">
-						<img class="prodimg" src="/admin/productspictures/{{=currentproduct.id}}" alt="">
-					</a>
-					<h3 class="main-product-title">
-						<a href="/{{=it.currentcategory.url}}/{{=currentproduct.url}}">{{=currentproduct.description}}</a>
-					</h3>
-					<p class="main-product-description">
-						<a href="/{{=it.currentcategory.url}}/{{=currentproduct.url}}">Descripción mas larga</a>
-					</p>
-					<div class="product-prices">
-						{{~ currentproduct.productformats:currentproductformat}}
-							<p>{{=currentproductformat.retaildescription}} <span class="price-con">${{=currentproductformat.retail}}</span>, {{=currentproductformat.wholesaledescription}}<span class="price-con">${{=currentproductformat.wholesale}}</span></p>
-						{{~}}
-					</div>
-				</li>
+			{{~ it.currentcategory.products:product}}
+				{{?product.is_visible}}
+					<li>
+						<a href="/{{=it.currentcategory.url}}/{{=product.url}}">
+							<img class="prodimg" src="/admin/productspictures/{{=product.id}}" alt="{{=product.name}}">
+						</a>
+						<h3 class="main-product-title">
+							<a href="/{{=it.currentcategory.url}}/{{=product.url}}">{{=product.name}}</a>
+						</h3>
+						<p class="main-product-description">
+							<a href="/{{=it.currentcategory.url}}/{{=product.url}}">Descripción mas larga</a>
+						</p>
+						<div class="product-prices">
+							{{~ product.productformats:productformat}}
+								<p>{{=productformat.retaildescription}} <span class="price-con">${{=productformat.retail}}</span>, {{=productformat.wholesaledescription}}<span class="price-con">${{=productformat.wholesale}}</span></p>
+							{{~}}
+						</div>
+					</li>
+				{{?}}
 			{{~}}
 		</ul>
 	</div>
