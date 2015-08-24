@@ -828,12 +828,14 @@ p.main-product-description {
 }
 
 .product-prices p {
-	margin: 4px 0;
+	margin: 0px 0;
+	font-size: 11px;
+	text-align: left;
 }
 
 .product-prices p span.price-con {
 	font-weight: 600;
-	font-size: 22px;
+	font-size: 13px;
 }
 
 /* Authentication Page */

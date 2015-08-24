@@ -45,12 +45,30 @@
 			}
 			req.logger.debug('Products readed:'+products.length);
 			async.each(products, function(product, callback) {
+				
+				req.logger.info("===================================================================");
+				req.logger.info(JSON.stringify(product));
+				req.logger.info("===================================================================");
+				
+				
 				product.getProductsFormats().order('retail').limit(3).run(function(err,productformats) {
 					if(err) {
 						return callback(err);
 					}
 					productformats.forEach(function(productformat) {
-						productformat.description = productformat.fullDescription();
+						var retaildescription		= '';
+						var wholesaledescription	= '';
+						if(productformat.quantity===1) {
+							retaildescription += product.packaging.name;
+						}
+						else {
+							retaildescription += productformat.quantity + product.packaging.name + 's';
+						}
+						retaildescription		+= ' de ' + productformat.format + ' a ';
+						wholesaledescription	+= productformat.units + ' ' + product.packaging.name + 's a ';
+						
+						productformat.retaildescription		= retaildescription;
+						productformat.wholesaledescription	= wholesaledescription;
 					});
 					req.logger.debug("Product:"+product.description+" Formats readed:"+productformats.length);
 					ld.merge(product, {productformats:productformats});

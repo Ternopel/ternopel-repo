@@ -16,7 +16,7 @@
 					</p>
 					<div class="product-prices">
 						{{~ currentproduct.productformats:currentproductformat}}
-							<p>{{=currentproductformat.description}}</p>
+							<p>{{=currentproductformat.retaildescription}} <span class="price-con">${{=currentproductformat.retail}}</span>, {{=currentproductformat.wholesaledescription}}<span class="price-con">${{=currentproductformat.wholesale}}</span></p>
 						{{~}}
 					</div>
 				</li>
