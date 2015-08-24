@@ -1,0 +1,39 @@
+<section class="main-content">
+	<div class="main-slider">
+		<div class="slider-container">
+			<ul class="slider-images">
+				<li><a href="#"><img src="{{=it.app_resources}}/images/slide-img.png" alt="slide image"></a></li>
+			</ul>
+		</div>
+		<div class="slider-btn-container">
+			<ul class="slider-btns">
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#" class="active-slide">3</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="main-products">
+		<h2 class="main-title">Ofertas</h2>
+		<ul class="main-products-list clear-fix" id="ulproducts">
+			{{~ it.offersproducts:offersproduct}}
+				<li>
+					<a href="/{{=offersproduct.category.url}}/{{=offersproduct.url}}">
+						<img class="prodimg" src="/admin/productspictures/{{=offersproduct.id}}">
+					</a>
+					<h3 class="main-product-title">
+						<a href="/{{=offersproduct.category.url}}/{{=offersproduct.url}}">{{=offersproduct.name}}</a>
+					</h3>
+					<p class="main-product-description">
+						<a href="/{{=offersproduct.category.url}}/{{=offersproduct.url}}">Descripción mas larga</a>
+					</p>
+					<div class="product-prices">
+						{{~ offersproduct.productformats:productformat}}
+							<p>{{=productformat.retaildescription}} <span class="price-con">${{=productformat.retail}}</span>, {{=productformat.wholesaledescription}}<span class="price-con">${{=productformat.wholesale}}</span></p>
+						{{~}}
+					</div>
+				</li>
+			{{~}}		
+		</ul>
+	</div>
+</section>

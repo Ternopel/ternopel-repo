@@ -731,6 +731,11 @@ span.compress {
 	float: left;
 }
 
+.discount-small {
+	width: 44px;
+	float: left;
+}
+
 .discount-image a {
 	padding: 20px 10px;
 	display: inline-block;

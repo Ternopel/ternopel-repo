@@ -54,7 +54,12 @@ module.exports = {
 						page_to_render='category';
 					}
 					else {
-						page_to_render='sales';
+						if(req.params.search) {
+							page_to_render='search';
+						}
+						else {
+							page_to_render='offers';
+						}
 					}
 				}
 				req.logger.info("We will render:"+page_to_render);
@@ -103,25 +108,16 @@ module.exports = {
 				else {
 					return callback();
 				}
-			
 			},
 			function(callback) {
-				if(pageinfo.page_to_render==='sales') {
-					req.logger.info('-------------------> Get Sales Info');
-					var filter		= ld.merge({is_visible:true});
-					if(!req.params.search) {
-						ld.merge(filter,{is_offer:true});
-						ld.merge(pageinfo,{is_offer:true});
-					}
-					else {
-						ld.merge(pageinfo,{is_offer:false});
-						ld.merge(pageinfo,{searchinput:req.params.search});
-					}
-					modelsutil.getProducts(req,res,next,filter,req.params.search,function(err,offers) {
+				if(pageinfo.page_to_render==='offers') {
+					req.logger.info('-------------------> Get Offers Info');
+					modelsutil.getProducts(req,res,next,{is_visible:true, is_offer:true},null,function(err,offersproducts) {
 						if(err) {
 							return callback(err);
 						}
-						ld.merge(pageinfo,{offers:offers});
+						req.logger.info('Offers found:'+offersproducts.lenght);
+						ld.merge(pageinfo,{offersproducts:offersproducts});
 						return callback();
 					});
 				}
@@ -130,12 +126,45 @@ module.exports = {
 				}
 			},
 			function(callback) {
+				if(pageinfo.page_to_render==='search') {
+					req.logger.info('-------------------> Get Search Info');
+					ld.merge(pageinfo,{searchinput:req.params.search});
+					req.logger.info('Search with criteria:'+req.params.search);
+					modelsutil.getProducts(req,res,next,{is_visible:true},req.params.search,function(err,searchproducts) {
+						if(err) {
+							return callback(err);
+						}
+						req.logger.info('Search found:'+searchproducts.length);
+						ld.merge(pageinfo,{searchproducts:searchproducts});
+						return callback();
+					});
+				}
+				else {
+					return callback();
+				}
+			},
+			function(callback) {
+				req.logger.info('-------------------> Get Left toolbar information');
 				get_categories_info(req,res,next,function(err,categories) {
 					if(err) {
 						return callback(err);
 					}
+					req.logger.info('Filling left toolback categories');
 					ld.merge(pageinfo,{categories:categories});
-					return callback();
+					
+					if(pageinfo.page_to_render!=='offers') {
+						req.logger.info('Getting offers');
+						modelsutil.getProducts(req,res,next,{is_visible:true, is_offer:true},null,function(err,offersproducts) {
+							if(err) {
+								return callback(err);
+							}
+							ld.merge(pageinfo,{offersproducts:offersproducts});
+							return callback();
+						});
+					}
+					else {
+						return callback();
+					}
 				});
 			}
 		], 

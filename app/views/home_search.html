@@ -1,0 +1,25 @@
+<section class="main-content">
+	<div class="main-products">
+		<h2 class="main-title">Resultado de búsqueda: {{=it.searchinput}}</h2>
+		<ul class="main-products-list clear-fix" id="ulproducts">
+			{{~ it.searchproducts:searchproduct}}
+				<li>
+					<a href="/{{=searchproduct.category.url}}/{{=searchproduct.url}}">
+						<img class="prodimg" src="/admin/productspictures/{{=searchproduct.id}}">
+					</a>
+					<h3 class="main-product-title">
+						<a href="/{{=searchproduct.category.url}}/{{=searchproduct.url}}">{{=searchproduct.name}}</a>
+					</h3>
+					<p class="main-product-description">
+						<a href="/{{=searchproduct.category.url}}/{{=searchproduct.url}}">Descripción mas larga</a>
+					</p>
+					<div class="product-prices">
+						{{~ searchproduct.productformats:productformat}}
+							<p>{{=productformat.retaildescription}} <span class="price-con">${{=productformat.retail}}</span>, {{=productformat.wholesaledescription}}<span class="price-con">${{=productformat.wholesale}}</span></p>
+						{{~}}
+					</div>
+				</li>
+			{{~}}		
+		</ul>
+	</div>
+</section>

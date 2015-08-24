@@ -37,18 +37,22 @@
 			</ul>
 		</section>
 		<section class="descuentos-aside clear-fix">
-			<h2 class="aside-title">Descuentos</h2>
-			<div class="discount-image">
-				<a href="#"><img src="{{=it.app_resources}}/images/discount-product.jpg" alt=""></a>
-			</div>
-			<div class="discount-details">
-				<ul>
-					<li class="item-name"><span class="discount-tag">10%</span><a href="#">Vasos de Plastico Irrompibles 100cc Moca</a></li>
-					<li class="old-price">1,84 €</li>
-					<li class="discount-price">1,47 €</li>
-				</ul>
-			</div>
-			<p><a href="#">&gt;&gt; Todos los descuentos</a></p>
+		
+			<h2 class="aside-title">Ofertas</h2>
+			{{~ it.offersproducts:offersproduct}}
+				<div class="discount-image">
+					<a href="/{{=offersproduct.category.url}}/{{=offersproduct.url}}">
+						<img src="/admin/productspictures/{{=offersproduct.id}}" alt="" class="discount-small">
+					</a>
+				</div>
+				<div class="discount-details">
+					<ul>
+						<li class="item-name"><a href="/{{=offersproduct.category.url}}/{{=offersproduct.url}}">{{=offersproduct.name}}</a></li>
+						<li class="old-price">1,84 €</li>
+					</ul>
+				</div>
+			{{~}}		
+			<p><a href="/">&gt;&gt; Todos las ofertas</a></p>
 		</section>
 		<section class="contactar-aside">
 			<h2 class="aside-title">Contactar</h2>
@@ -85,7 +89,11 @@
 		{{#def.load('home_product.html')}}
 	{{?}}
 
-	{{? it.page_to_render === 'sales'}}
-		{{#def.load('home_sales.html')}}
+	{{? it.page_to_render === 'offers'}}
+		{{#def.load('home_offers.html')}}
+	{{?}}
+
+	{{? it.page_to_render === 'search'}}
+		{{#def.load('home_search.html')}}
 	{{?}}
 </section>

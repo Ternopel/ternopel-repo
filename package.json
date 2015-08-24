@@ -57,11 +57,11 @@
     "db_port": "5432",
     "db_user": "postgres",
     "db_password": "Pilarcita1",
-    "db_show_sql": "false",
+    "db_show_sql": "true",
     "db_liquibase_xml": "liquibase.xml",
     "test_app_port": "3001",
     "test_db_database": "ternopel_test",
-    "test_db_show_sql": "true",
+    "test_db_show_sql": "false",
     "test_db_liquibase_xml": "liquibase_test.xml",
     "test_app_products_imgs_dir": "./products/testimages"
   },

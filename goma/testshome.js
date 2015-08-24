@@ -8,7 +8,7 @@ var request		= require('supertest'),
 
 (function (testshome) {
 
-	testshome.getSales = function (done) {
+	testshome.getOffers = function (done) {
 		
 		var waterfall = require('async-waterfall');
 		waterfall([ 
@@ -39,7 +39,7 @@ var request		= require('supertest'),
 		});
 	};
 
-	testshome.getSalesWithSearch = function (done) {
+	testshome.getSearch = function (done) {
 		
 		var waterfall = require('async-waterfall');
 		waterfall([ 
