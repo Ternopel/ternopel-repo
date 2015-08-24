@@ -108,9 +108,14 @@ module.exports = {
 			function(callback) {
 				if(pageinfo.page_to_render==='sales') {
 					req.logger.info('-------------------> Get Sales Info');
-					var filter = ld.merge({is_offer:true,is_visible:true});
+					var filter		= ld.merge({is_visible:true});
 					if(!req.params.search) {
 						ld.merge(filter,{is_offer:true});
+						ld.merge(pageinfo,{is_offer:true});
+					}
+					else {
+						ld.merge(pageinfo,{is_offer:false});
+						ld.merge(pageinfo,{searchinput:req.params.search});
 					}
 					modelsutil.getProducts(req,res,next,filter,req.params.search,function(err,offers) {
 						if(err) {

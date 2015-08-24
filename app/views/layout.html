@@ -59,14 +59,28 @@
 							<li><a href="#">Contacto</a></li>
 							<li><a href="#">Descuentos</a></li>
 							<li><a href="#">Carrito</a></li>
-							<li class="main-search"><input type="text" class="search-input" name="homesearchinput"><button name="homesearchbutton" class="search-btn">Search</button></li>
+							<li class="main-search">
+								{{?it.is_offer}}
+									<input type="text" class="search-input" name="homesearchinput" />
+								{{??}}
+									<input type="text" class="search-input" name="homesearchinput" value="{{=it.searchinput}}" />
+								{{?}}
+								<button name="homesearchbutton" class="search-btn">Search</button>
+							</li>
 						{{?}}
 					{{??}}	
 						<li><a href="/">Inicio</a>
 						<li><a href="#">Contacto</a></li>
 						<li><a href="#">Descuentos</a></li>
 						<li><a href="#">Carrito</a></li>
-						<li class="main-search"><input type="text" class="search-input" name="homesearchinput"><button name="homesearchbutton" class="search-btn">Search</button></li>
+						<li class="main-search">
+							{{?it.is_offer}}
+								<input type="text" class="search-input" name="homesearchinput" />
+							{{??}}
+								<input type="text" class="search-input" name="homesearchinput" value="{{=it.searchinput}}" />
+							{{?}}
+							<button name="homesearchbutton" class="search-btn">Search</button>
+						</li>
 					{{?}}					
 				</ul>
 			</nav>

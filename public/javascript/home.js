@@ -25,6 +25,13 @@ $(function () {
 });
 
 $(function () {
+	
+	$("input[name='homesearchinput']").keypress(function (e) {
+		if (e.which == 13) {
+			$("button[name='homesearchbutton']").click();
+		}
+	});
+	
 	$("button[name='homesearchbutton']").click(function () {
 		var searchvalue		=$("input[name='homesearchinput']").val();
 		if(searchvalue) {
