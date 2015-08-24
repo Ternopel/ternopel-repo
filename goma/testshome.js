@@ -39,6 +39,37 @@ var request		= require('supertest'),
 		});
 	};
 
+	testshome.getSalesWithSearch = function (done) {
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+		           function(callback) {
+		        	   logger.info('Executing get to server');
+		        	   request("http://localhost:"+config.test_app_port)
+		        	   .get('/')
+		        	   .expect(200)
+		        	   .end(function(err, res){
+		        		   expect(res.text).toInclude('Bolsa de banditas elásticas');
+		        		   return callback(err,res);
+		        	   });
+		           },
+		           function(res,callback) {
+		        	   logger.info('Executing get to server');
+		        	   request("http://localhost:"+config.test_app_port)
+		        	   .get('/search/bolsa')
+		        	   .set('cookie', 'ter_token=notoken')
+		        	   .expect(200)
+		        	   .end(function(err, res){
+		        		   return callback(err,res);
+		        	   });
+		           }
+		           
+		           ], 
+		           function(err) {
+			return done(err);
+		});
+	};
+	
 	testshome.getCategory = function (done) {
 		var waterfall = require('async-waterfall');
 		waterfall([ 

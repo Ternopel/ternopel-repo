@@ -50,6 +50,7 @@
 		app.get		( '/logout',							controllers.logout.get_logout);
 
 		app.get		( '/',									controllers.home.get_home);
+		app.get		( '/search/:search',					controllers.home.get_home);
 		app.get		( '/:category',							controllers.home.get_home);
 		app.get		( '/:category/:product',				controllers.home.get_home);
 	};

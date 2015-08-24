@@ -94,7 +94,8 @@ describe('Users creation', function() {
 	
 	// home tests
 	if(runTests) {
-		it('Plain home', testshome.getPlainHome);
+		it('Get sales', testshome.getSales);
+		it('Get sales with search', testshome.getSalesWithSearch);
 		it('Get category', testshome.getCategory);
 		it('Get product', testshome.getProduct);
 		it('Get no existing category', testshome.getNoExistingCategory);

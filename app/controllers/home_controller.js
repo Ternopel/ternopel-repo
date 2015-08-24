@@ -90,7 +90,7 @@ module.exports = {
 						var currentcategory = categories[0];
 						var filter = ld.merge({category_id:currentcategory.id});
 						
-						modelsutil.getProducts(req,res,next,filter, function(err,products) {
+						modelsutil.getProducts(req,res,next,filter,null,function(err,products) {
 							if(err) {
 								return callback(err);
 							}
@@ -109,7 +109,10 @@ module.exports = {
 				if(pageinfo.page_to_render==='sales') {
 					req.logger.info('-------------------> Get Sales Info');
 					var filter = ld.merge({is_offer:true,is_visible:true});
-					modelsutil.getProducts(req,res,next,filter, function(err,offers) {
+					if(!req.params.search) {
+						ld.merge(filter,{is_offer:true});
+					}
+					modelsutil.getProducts(req,res,next,filter,req.params.search,function(err,offers) {
 						if(err) {
 							return callback(err);
 						}

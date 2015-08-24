@@ -37,13 +37,17 @@
 		});
 	};
 
-	modelsutil.getProducts = function (req,res,next,filter,getcallback) {
+	modelsutil.getProducts = function (req,res,next,filter,search,getcallback) {
 		
 		var async		= require('async'),
 			ld			= require('lodash');
 		
 		req.logger.info('Entering to get_products');
-		req.models.products.find(filter,['name'],function(err,products) {
+		var productsfind	= req.models.products.find(filter,['name']);
+		if(search) {
+			productsfind.where('lower(name) ilike ?',['%'+search+'%']);
+		}
+		productsfind.run(function(err,products) {
 			if(err) {
 				return next(err);
 			}
