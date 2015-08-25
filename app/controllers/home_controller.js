@@ -93,9 +93,8 @@ module.exports = {
 							return callback('Esta categoria no está más disponible');
 						}
 						var currentcategory = categories[0];
-						var filter = ld.merge({category_id:currentcategory.id});
-						
-						modelsutil.getProducts(req,res,next,filter,null,function(err,products) {
+						var filters = ld.merge({filter:{is_visible:true,category_id:currentcategory.id},formatslimit:3,});
+						modelsutil.getProducts(req,res,next,filters,function(err,products) {
 							if(err) {
 								return callback(err);
 							}
@@ -112,7 +111,8 @@ module.exports = {
 			function(callback) {
 				if(pageinfo.page_to_render==='offers') {
 					req.logger.info('-------------------> Get Offers Info');
-					modelsutil.getProducts(req,res,next,{is_visible:true, is_offer:true},null,function(err,offersproducts) {
+					var filters = ld.merge({filter:{is_visible:true,is_offer:true},formatslimit:3});
+					modelsutil.getProducts(req,res,next,filters,function(err,offersproducts) {
 						if(err) {
 							return callback(err);
 						}
@@ -130,7 +130,8 @@ module.exports = {
 					req.logger.info('-------------------> Get Search Info');
 					ld.merge(pageinfo,{searchinput:req.params.search});
 					req.logger.info('Search with criteria:'+req.params.search);
-					modelsutil.getProducts(req,res,next,{is_visible:true},req.params.search,function(err,searchproducts) {
+					var filters = ld.merge({filter:{is_visible:true},search:req.params.search,formatslimit:3});
+					modelsutil.getProducts(req,res,next,filters,function(err,searchproducts) {
 						if(err) {
 							return callback(err);
 						}
@@ -152,19 +153,15 @@ module.exports = {
 					req.logger.info('Filling left toolback categories');
 					ld.merge(pageinfo,{categories:categories});
 					
-					if(pageinfo.page_to_render!=='offers') {
-						req.logger.info('Getting offers');
-						modelsutil.getProducts(req,res,next,{is_visible:true, is_offer:true},null,function(err,offersproducts) {
-							if(err) {
-								return callback(err);
-							}
-							ld.merge(pageinfo,{offersproducts:offersproducts});
-							return callback();
-						});
-					}
-					else {
+					req.logger.info('Getting offers');
+					var filters = ld.merge({filter:{is_visible:true,is_offer:true},formatslimit:1,productslimit:2});
+					modelsutil.getProducts(req,res,next,filters,function(err,limitedoffersproducts) {
+						if(err) {
+							return callback(err);
+						}
+						ld.merge(pageinfo,{limitedoffersproducts:limitedoffersproducts});
 						return callback();
-					}
+					});
 				});
 			}
 		], 

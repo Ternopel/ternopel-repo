@@ -37,15 +37,18 @@
 		});
 	};
 
-	modelsutil.getProducts = function (req,res,next,filter,search,getcallback) {
+	modelsutil.getProducts = function (req,res,next,filters,getcallback) {
 		
 		var async		= require('async'),
 			ld			= require('lodash');
 		
 		req.logger.info('Entering to get_products');
-		var productsfind	= req.models.products.find(filter,['name']);
-		if(search) {
-			productsfind.where('lower(name) ilike ?',['%'+search+'%']);
+		var productsfind	= req.models.products.find(filters.filter,['name']);
+		if(filters.search) {
+			productsfind.where('lower(name) ilike ?',['%'+filters.search+'%']);
+		}
+		if(filters.productslimit) {
+			productsfind.limit(filters.productslimit);
 		}
 		productsfind.run(function(err,products) {
 			if(err) {
@@ -53,7 +56,11 @@
 			}
 			req.logger.debug('Products readed:'+products.length);
 			async.each(products, function(product, callback) {
-				product.getProductsFormats().order('retail').limit(3).run(function(err,productformats) {
+				var productsformatsfind = product.getProductsFormats().order('retail');
+				if(filters.formatslimit) {
+					productsformatsfind.limit(filters.formatslimit);
+				}
+				productsformatsfind.run(function(err,productformats) {
 					if(err) {
 						return callback(err);
 					}
