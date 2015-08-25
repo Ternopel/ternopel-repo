@@ -43,7 +43,6 @@ module.exports = {
 				req.logger.debug('Searching for existing user');
 				req.models.users.find({email_address: email_address}, function(err,user) {
 					if(err) {
-						req.logger.debug('Error in search:'+err);
 						return callback(err);
 					}
 					req.logger.debug('Is registration:'+is_registration+' y user length:'+user.length);

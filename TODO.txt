@@ -3,5 +3,4 @@
 - Mejorar la pagina de llamaremos al CUCO
 - Pedir icono central nuevo
 - Login Facebook
-- Validacion largo campo de search con error rojo abajo
 - Mejorar lista ofertas.

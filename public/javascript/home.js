@@ -35,7 +35,12 @@ $(function () {
 	$("button[name='homesearchbutton']").click(function () {
 		var searchvalue		=$("input[name='homesearchinput']").val();
 		if(searchvalue) {
-			window.location.href = '/search/'+searchvalue;
+			if(searchvalue.length<3) {
+				show_error_messages({responseText:"[{\"param\":\"general\",\"msg\":\"Descripción de producto debe tener más de dos caracteres.\"}]"});
+			}
+			else {
+				window.location.href = '/search/'+searchvalue;
+			}
 		}
 		else {
 			window.location.href = '/';

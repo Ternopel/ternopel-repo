@@ -45,7 +45,6 @@ module.exports = {
 				req.logger.info('Reading packaging');
 				req.models.packaging.find({},['name'],function(err,packaging) {
 					if(err) {
-						req.logger.error('Error:'+err);
 						return callback(err);
 					}
 					req.logger.debug('Packaging readed:'+packaging.length);
@@ -57,7 +56,6 @@ module.exports = {
 				req.logger.info('Reading categories');
 				req.models.categories.find({},['name'],function(err,categories) {
 					if(err) {
-						req.logger.error('Error:'+err);
 						return callback(err);
 					}
 					req.logger.debug('Categories readed:'+categories.length);
@@ -69,7 +67,6 @@ module.exports = {
 		function(err) {
 			req.logger.info("Rendering page");
 			if(err) {
-				req.logger.error("Rendering page error:"+err);
 				return next(err);
 			}
 			req.logger.info("Rendering page with NO ERROR");

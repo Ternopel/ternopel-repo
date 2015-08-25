@@ -1109,3 +1109,8 @@ input[type=button].zoom-in-btn, input[type=button].zoom-out-btn {
 	line-height: 400px;
 	background: rgba(0,0,0,0.7);
 }
+
+.generalerror {
+	color: red;
+	font-size: 18px;
+}

@@ -67,8 +67,7 @@ $(function () {
 							$("span[name='"+trid+"-save-span']").show();
 						} 
 						else {
-							alert('Imagen debe ser mayor a 452x x 300px');
-//								show_error_messages({responseText:[{param:'general',msg:'Imagen debe ser mayor a 452x x 300px'}]});
+							show_error_messages({responseText:"[{\"param\":\"general\",\"msg\":\"Imagen debe ser mayor a 452x x 300px.\"}]"});
 						}
 					}
 				};
