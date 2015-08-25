@@ -4,3 +4,4 @@
 - Pedir icono central nuevo
 - Login Facebook
 - Mejorar lista ofertas.
+- Manejo de https. Como hacerlo ?
