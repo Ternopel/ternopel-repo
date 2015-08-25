@@ -7,6 +7,7 @@ CREATE SEQUENCE products_formats_sequence start with 1000;
 CREATE SEQUENCE roles_sequence start with 1000;
 CREATE SEQUENCE users_sequence start with 1000;
 CREATE SEQUENCE users_sessions_sequence start with 1000;
+CREATE SEQUENCE banners_sequence start with 1000;
 
 /* Create Tables */
 
@@ -96,6 +97,16 @@ CREATE TABLE users_sessions
 	CONSTRAINT zintro_user_sessions_pkey PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
+CREATE TABLE banners
+(
+	id bigint DEFAULT nextval('banners_sequence') NOT NULL,
+	position int4 NOT NULL UNIQUE,
+	content_type varchar(255) NOT NULL,
+	last_update timestamp NOT NULL,
+	product_id bigint,
+	category_id bigint,
+	PRIMARY KEY (id)
+) WITHOUT OIDS;
 
 
 /* Create Foreign Keys */
@@ -143,5 +154,21 @@ ALTER TABLE users_sessions
 	ON DELETE RESTRICT
 ;
 
+ALTER TABLE banners
+	ADD FOREIGN KEY (product_id)
+	REFERENCES products (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
 
+ALTER TABLE banners
+	ADD FOREIGN KEY (category_id)
+	REFERENCES categories (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+ALTER TABLE banners 
+	ADD CONSTRAINT banners_reference 
+	CHECK ( product_id is not null or category_id is not null );
 

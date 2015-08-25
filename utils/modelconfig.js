@@ -31,6 +31,7 @@
 				require('../app/models/roles.js')(orm,db,models,logger);
 				require('../app/models/users.js')(orm,db,models,logger);
 				require('../app/models/userssessions.js')(orm,db,models,logger);
+				require('../app/models/banners.js')(orm,db,models,logger);
 
 				return callback(app,db);
 			}

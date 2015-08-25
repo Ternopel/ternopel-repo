@@ -50,6 +50,7 @@
     "app_port": "3000",
     "app_resources": "//localhost:3000",
     "app_products_imgs_dir": "./products/images",
+    "app_banners_imgs_dir": "./banners/images",
     "db_database": "ternopel",
     "db_protocol": "postgres",
     "db_driver": "org.postgresql.Driver",
@@ -63,7 +64,8 @@
     "test_db_database": "ternopel_test",
     "test_db_show_sql": "false",
     "test_db_liquibase_xml": "liquibase_test.xml",
-    "test_app_products_imgs_dir": "./products/testimages"
+    "test_app_products_imgs_dir": "./products/testimages",
+    "test_app_banners_imgs_dir": "./banners/testimages"
   },
   "author": "Maximiliano Carrizo"
 }

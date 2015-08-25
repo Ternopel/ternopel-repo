@@ -35,6 +35,10 @@
 		app.put		( '/admin/productsformats',				controllers.productsformats.put_productsformats);
 		app.delete	( '/admin/productsformats',				controllers.productsformats.delete_productsformats);
 
+		app.get		( '/admin/banners',						restrict);
+		app.get		( '/admin/banners',						controllers.banners.get_banners);
+		app.put		( '/admin/banners',						controllers.banners.put_banners);
+
 		var multipart			= require('connect-multiparty');
 		var multipartMiddleware = multipart();
 		

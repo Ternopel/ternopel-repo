@@ -49,7 +49,7 @@ module.exports = {
 				}
 			});
 		});
-},
+	},
 	get_productspictures: function(req, res, next) {
 		req.logger.info("En GET products pictures");
 		var id			= req.params.id;
