@@ -40,7 +40,7 @@
 //		app.get		( '/admin/banners/add',					controllers.banners.get_add_page);
 //		app.get		( '/admin/banners/edit/:id',			controllers.banners.get_edit_page);
 //		app.put		( '/admin/banners',						controllers.banners.put_banners);
-		app.get		( '/admin/bannerx/:id',					controllers.banners.get_picture);
+		app.get		( '/admin/posters/:id',					controllers.banners.get_picture);
 
 		var multipart			= require('connect-multiparty');
 		var multipartMiddleware = multipart();
