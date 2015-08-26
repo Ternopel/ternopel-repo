@@ -1,14 +1,12 @@
-<script src='/javascript/crud.js'></script>
-<script src='/javascript/categories.js'></script>
 <section class="page-container clear-fix">
 	{{#def.load('admin_menu.html')}}
 	
 	<section class="main-content">
 		<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 		<h1>Gestión de Carteles</h1>
-		<input type='button' id='addBanner' value='Agregar Cartel' ></input>
+		<a href="/admin/banners/add">Agregar Cartel</a>
 		<br/>
-		<table id='bannersTable' summary='/admin/banners'>
+		<table summary='/admin/banners'>
 			<thead>
 				<tr>
 					<th><h4>Id</h4></th>
@@ -16,10 +14,11 @@
 				</tr>
 			</thead>
 			{{~ it.banners:banner}}
-			<tr name='{{=banner.id}}'>
-				<td name='id' style='width: 50px;'>{{=banner.id}}</td>
-				<td><input name='remove' type='button' value='Borrar'></input></td>
-			</tr>
+				<tr name='{{=banner.id}}'>
+					<td name='id' style='width: 50px;'>{{=banner.id}}</td>
+					<td><a href="/admin/banners/edit/{{=banner.id}}">Editar</a></td>
+					<td><input name='remove' type='button' value='Borrar'></input></td>
+				</tr>
 			{{~}}
 			
 		</table>

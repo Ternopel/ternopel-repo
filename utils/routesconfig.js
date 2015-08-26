@@ -35,9 +35,12 @@
 		app.put		( '/admin/productsformats',				controllers.productsformats.put_productsformats);
 		app.delete	( '/admin/productsformats',				controllers.productsformats.delete_productsformats);
 
-		app.get		( '/admin/banners',						restrict);
-		app.get		( '/admin/banners',						controllers.banners.get_banners);
-		app.put		( '/admin/banners',						controllers.banners.put_banners);
+//		app.get		( '/admin/banners',						restrict);
+//		app.get		( '/admin/banners',						controllers.banners.get_banners);
+//		app.get		( '/admin/banners/add',					controllers.banners.get_add_page);
+//		app.get		( '/admin/banners/edit/:id',			controllers.banners.get_edit_page);
+//		app.put		( '/admin/banners',						controllers.banners.put_banners);
+		app.get		( '/admin/bannerx/:id',					controllers.banners.get_picture);
 
 		var multipart			= require('connect-multiparty');
 		var multipartMiddleware = multipart();

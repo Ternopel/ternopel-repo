@@ -1,11 +1,12 @@
 'use strict';
 
-function make_form_post(url, formid, successcallback,errorcallback) {
+function make_form(url, formid, successcallback,errorcallback) {
 	console.log("Submitting form");
-	var formdata = $( '#'+formid ).serialize();
+	var form = $( '#'+formid );
+	var formdata = form.serialize();
 	$.ajax({
 		url : url,
-		type : 'POST',
+		type : form.attr('method'),
 		data : formdata,
 		success : successcallback,
 		error: errorcallback

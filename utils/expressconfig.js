@@ -88,6 +88,12 @@
 		
 		logger.debug("Setting 'winston' error logger");
 		app.use(logger.expressErrorLogger);
+		
+		process.on('uncaughtException', function (err) {
+			logger.error((new Date).toUTCString() + ' uncaughtException:', err.message)
+			logger.error(err.stack)
+			process.exit(1)
+		})		
 	};
 
 })(module.exports);
