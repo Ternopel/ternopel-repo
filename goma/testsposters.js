@@ -7,9 +7,9 @@ var request		= require('supertest'),
 	config		= require(__dirname+"/../utils/config")(),
 	fs			= require('fs');
 
-(function (testsbanners) {
+(function (testsposters) {
 
-	testsbanners.createBanner = function (done) {
+	testsposters.createPoster = function (done) {
 
 		var waterfall = require('async-waterfall');
 		waterfall([ 
@@ -39,13 +39,13 @@ var request		= require('supertest'),
 					});
 			}, 
 			function(res,callback) {
-				logger.info('Creating banner');
+				logger.info('Creating poster');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
 					if(err) {
 						return callback(err,res);
 					}
 					request("http://localhost:"+config.test_app_port)
-						.put('/admin/banners')
+						.put('/admin/posters')
 						.set('cookie', utils.getcookies(res))
 						.send({
 							'is_product' : 'true',
@@ -62,13 +62,13 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
-				logger.info('Creating banner');
+				logger.info('Creating poster');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
 					if(err) {
 						return callback(err,res);
 					}
 					request("http://localhost:"+config.test_app_port)
-					.put('/admin/banners')
+					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'is_product' : 'true',
@@ -86,13 +86,13 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
-				logger.info('Creating banner');
+				logger.info('Creating poster');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
 					if(err) {
 						return callback(err,res);
 					}
 					request("http://localhost:"+config.test_app_port)
-					.put('/admin/banners')
+					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'is_product' : 'false',
@@ -110,13 +110,13 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
-				logger.info('Creating banner');
+				logger.info('Creating poster');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
 					if(err) {
 						return callback(err,res);
 					}
 					request("http://localhost:"+config.test_app_port)
-					.put('/admin/banners')
+					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'is_product' : 'false',
@@ -136,7 +136,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)
-					.get('/admin/banners')
+					.get('/admin/posters')
 					.set('cookie', utils.getcookies(res))
 					.expect(200)
 					.end(function(err, res){

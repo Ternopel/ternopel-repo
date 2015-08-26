@@ -1,5 +1,5 @@
 <script src='/javascript/imagecrop.min.js'></script>
-<script src='/javascript/banners.js'></script>
+<script src='/javascript/posters.js'></script>
 
 {{?it.method==='PUT'}}
 	<h1>Alta de Carteles</h1>
@@ -7,12 +7,12 @@
 	<h1>Edición de Carteles</h1>
 {{?}}
 
-<form id='banners_form' method="{{=it.method}}">
+<form id='posters_form' method="{{=it.method}}">
 	<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 	<input type="hidden" name="picture_type" id="picture_type" />
 	<input type="hidden" name="picture_data" id="picture_data" />
 	{{?it.method==='POST'}}
-		<input type="hidden" name="banner_id" value="{{=it.banner.id}}" />
+		<input type="hidden" name="poster_id" value="{{=it.poster.id}}" />
 	{{?}}
 	<div class='crudForm'>
 
@@ -22,6 +22,7 @@
 				<div name="spinner" class="spinner" style="display:none">Cargando...</div>
 			</div>
 			<div class="action clear-fix">
+				<div class='errorMsg' id='type_error'></div>
 				<span name="upload-btn" class="upload-btn"><span name="upload-label" class="upload-label">Subir foto</span><input type="file" name="picture" accept="image/*" /></span>
 				<input type="button" class="crop-btn" name="btnCrop" value="Crop" style="float: right;display:none">
 				<input type="button" class="zoom-in-btn" name="btnZoomIn" value="+" style="float: right;display:none">
@@ -33,7 +34,7 @@
 		<div class='form2Cols'>
 			<span class='formItem'> 
 				<label>Posición</label> 
-				<input type='text' name='position' value="{{=it.banner.position}}"></input>
+				<input type='text' name='position' value="{{=it.poster.position}}"></input>
 				<div class='errorMsg' id='position_error'></div>
 			</span> 
 		</div>

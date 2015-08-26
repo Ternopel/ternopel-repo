@@ -16,7 +16,7 @@ var testshome				= require(__dirname+'/../goma/testshome');
 var testscategories			= require(__dirname+'/../goma/testscategories');
 var testsproducts			= require(__dirname+'/../goma/testsproducts');
 var testsproductsformats	= require(__dirname+'/../goma/testsproductsformats');
-var testsbanners			= require(__dirname+'/../goma/testsbanners');
+var testsposters			= require(__dirname+'/../goma/testsposters');
 
 describe('Users creation', function() {
 	
@@ -30,7 +30,7 @@ describe('Users creation', function() {
 		config.db_show_sql					= config.test_db_show_sql;
 		config.db_liquibase_xml				= config.test_db_liquibase_xml;
 		config.app_products_imgs_dir		= config.test_app_products_imgs_dir;
-		config.app_banners_imgs_dir			= config.test_app_banners_imgs_dir;
+		config.app_posters_imgs_dir			= config.test_app_posters_imgs_dir;
 		
 		logger.info("Initiating app");
 		app.init(logger,config, function(app,pdb) {
@@ -65,7 +65,7 @@ describe('Users creation', function() {
 
 	var runTests=false;
 
-	it('Create banner', testsbanners.createBanner);
+	it('Create poster', testsposters.createPoster);
 	
 	// admin products pictures tests
 	if(runTests) {

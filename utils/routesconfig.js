@@ -35,12 +35,13 @@
 		app.put		( '/admin/productsformats',				controllers.productsformats.put_productsformats);
 		app.delete	( '/admin/productsformats',				controllers.productsformats.delete_productsformats);
 
-//		app.get		( '/admin/banners',						restrict);
-//		app.get		( '/admin/banners',						controllers.banners.get_banners);
-//		app.get		( '/admin/banners/add',					controllers.banners.get_add_page);
-//		app.get		( '/admin/banners/edit/:id',			controllers.banners.get_edit_page);
-//		app.put		( '/admin/banners',						controllers.banners.put_banners);
-		app.get		( '/admin/posters/:id',					controllers.banners.get_picture);
+		app.get		( '/admin/posters',						restrict);
+		app.get		( '/admin/posters',						controllers.posters.get_posters);
+		app.get		( '/admin/posters/add',					controllers.posters.get_add_page);
+		app.get		( '/admin/posters/edit/:id',			controllers.posters.get_edit_page);
+		app.post	( '/admin/posters',						controllers.posters.post_posters);
+		app.put		( '/admin/posters',						controllers.posters.put_posters);
+		app.get		( '/admin/posters/picture/:id',			controllers.posters.get_picture);
 
 		var multipart			= require('connect-multiparty');
 		var multipartMiddleware = multipart();

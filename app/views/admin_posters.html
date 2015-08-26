@@ -4,19 +4,21 @@
 	<section class="main-content">
 		<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 		<h1>Gestión de Carteles</h1>
-		<a href="/admin/banners/add">Agregar Cartel</a>
+		<a href="/admin/posters/add">Agregar Cartel</a>
 		<br/>
-		<table summary='/admin/banners'>
+		<table summary='/admin/posters'>
 			<thead>
 				<tr>
 					<th><h4>Id</h4></th>
+					<th><h4>Posición</h4></th>
 					<th><h4></h4></th>
 				</tr>
 			</thead>
-			{{~ it.banners:banner}}
-				<tr name='{{=banner.id}}'>
-					<td name='id' style='width: 50px;'>{{=banner.id}}</td>
-					<td><a href="/admin/banners/edit/{{=banner.id}}">Editar</a></td>
+			{{~ it.posters:poster}}
+				<tr name='{{=poster.id}}'>
+					<td name='id' style='width: 50px;'>{{=poster.id}}</td>
+					<td name='position' style='width: 50px;'>{{=poster.position}}</td>
+					<td><a href="/admin/posters/edit/{{=poster.id}}">Editar</a></td>
 					<td><input name='remove' type='button' value='Borrar'></input></td>
 				</tr>
 			{{~}}

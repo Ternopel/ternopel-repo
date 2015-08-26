@@ -1,58 +1,58 @@
 'use strict';
 
+function send_form(form) {
+	var csrf			= $("input[name='_csrf']").val();
+	var position		= $("input[name='position']").val();
+	var poster_id		= $("input[name='poster_id']").val();
+	var img_data		= $("div[name='cropped'] img").attr('src');
+	var formdata;
+	if (img_data) {
+		console.log('Picture has data to send');
+		var picture_regex	= /data:(.*);base64,(.*)/;
+		var type			= img_data.replace(picture_regex, '$1');
+		var data			= img_data.replace(picture_regex, '$2');
+		formdata			= {id:poster_id, _csrf:csrf, product_id:1, type:type, data:data, is_product:true, position:position};
+	}
+	else {
+		console.log('Picture didnt changed');
+		formdata			= {id:poster_id, _csrf:csrf, product_id:1, is_product:true, position:position};
+	}
+	$.ajax({
+		url : '/admin/posters',
+		type : form.attr('method'),
+		data : formdata,
+		success : function (entity) {
+			console.log('Success:'+entity);
+			window.location.href	= '/admin/posters';
+		},
+		error : function(errorresponse) {
+			console.log('Error:'+errorresponse);
+			show_error_messages(errorresponse);
+		}
+	});
+}
+
 $(function() {
-	var form = $('#banners_form');
+	var form = $('#posters_form');
 	form.find('input[type="submit"]').click(function() {
 		clear_error_fields(form);
 		console.log("Submitting form");
-
-		$("input[name='btnCrop']").click().promise().done(function () {
-			console.log('After crop button firing');
-			
-			var img_data	= $("div[name='cropped'] img").attr('src');
-			if (img_data) {
-				
-				console.log('Picture has data to send');
-				var csrf			= $("input[name='_csrf']").val();
-				var position		= $("input[name='position']").val();
-				var picture_regex	= /data:(.*);base64,(.*)/;
-				var type			= img_data.replace(picture_regex, '$1');;
-				var data			= img_data.replace(picture_regex, '$2');
-
-				var formdata	={_csrf:csrf, product_id:1, type:type, data:data, is_product:true, position:position};
-				
-				$.ajax({
-					url : '/admin/banners',
-					type : form.attr('method'),
-					data : formdata,
-					success : function (entity) {
-						console.log(entity);
-						window.location.href	= '/admin/banners';
-					},
-					error : function(errorresponse) {
-						show_error_messages(errorresponse);
-					}
-				});
-			}
-		});		
+		
+		if($("input[name='btnZoomIn']").is(":visible")) {
+			$("input[name='btnCrop']").click().promise().done(function () {
+				send_form(form);
+			});		
+		}
+		else {
+			send_form(form);
+		}
 		return false;
 	});
 });
-
-
-
-
-
-
-
 	
 $(function() {
-	var banner_id	= $("input[name='banner_id']").val();
+	var poster_id	= $("input[name='poster_id']").val();
 	var milliseconds=new Date().getTime();
-	if(banner_id) {
-		$("div[name='upload-photo-container']").attr('style', 'background: url(/admin/banners/'+banner_id+'?a='+milliseconds+'); ');
-	}
-
 	var options = {
 		imageBox: "div[name='imageBox']",
 		thumbBox: "div[name='thumbBox']",
@@ -116,6 +116,10 @@ $(function() {
 		console.log('Zoom out');
 		cropper.zoomOut();
 	});
+	
+	if(poster_id) {
+		$("div[name='upload-photo-container']").attr('style', 'background: url(/admin/posters/picture/'+poster_id+'?a='+milliseconds+'); ');
+	}
 });
 	
 	

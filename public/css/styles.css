@@ -469,15 +469,15 @@ a:hover, a:active {
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #2b2b2b;  
+   color: #2b2b2b;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #2b2b2b;  
+   color: #2b2b2b;
 }
 
-:-ms-input-placeholder {  
-   color: #2b2b2b;  
+:-ms-input-placeholder {
+   color: #2b2b2b;
 }
 
 /* Header */
@@ -507,8 +507,12 @@ a:hover, a:active {
 
 .header-details {
 	float: right;
-	padding: 20px;
+	padding: 20px 20px 0;
 	width: 210px;
+}
+
+.header-details ul {
+	margin: 14px 0;
 }
 
 .header-details ul li {
@@ -580,9 +584,9 @@ ul.sub-menu-list {
 	background: rgba(0, 0, 0, 0.7);
 	width: 180px;
 	position: absolute;
-    top: 36px;
-    left: 17px;
-    z-index: 1;
+	top: 36px;
+	left: 17px;
+	z-index: 1;
 }
 
 ul.sub-menu-list > li {
@@ -691,7 +695,7 @@ ul.aside-menu > li > a {
 	display: inline-block
 }
 
-ul.aside-menu > li > a.aside-active {
+ul.aside-menu > li > a.aside-active, ul.aside-sub-menu li a.aside-active {
 	color: #d41b29;
 }
 
@@ -728,11 +732,6 @@ span.compress {
 
 .discount-image {
 	width: 60px;
-	float: left;
-}
-
-.discount-small {
-	width: 44px;
 	float: left;
 }
 

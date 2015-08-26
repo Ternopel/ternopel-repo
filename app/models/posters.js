@@ -2,8 +2,8 @@
 
 module.exports = function (orm, db, models,logger) {
 
-	logger.debug("Configuring banners");
-	models.banners = db.define("banners", { 
+	logger.debug("Configuring posters");
+	models.posters = db.define("posters", { 
 			id:				{ type: 'serial', key: true}, 
 			content_type: 	{ type: 'text', required: true },
 			last_update: 	{ type: 'date', size:4, required: true },
@@ -18,8 +18,8 @@ module.exports = function (orm, db, models,logger) {
 		}
 	);	
 	
-	logger.debug("Configuring banners relations");
-	models.banners.hasOne("category",models.categories,{ reverse: "banners" });
-	models.banners.hasOne("product",models.products,{ reverse: "banners" });
-	logger.debug("Banners relations configured");
+	logger.debug("Configuring posters relations");
+	models.posters.hasOne("category",models.categories,{ reverse: "posters" });
+	models.posters.hasOne("product",models.products,{ reverse: "posters" });
+	logger.debug("Posters relations configured");
 };
