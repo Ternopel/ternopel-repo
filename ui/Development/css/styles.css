@@ -507,8 +507,12 @@ a:hover, a:active {
 
 .header-details {
 	float: right;
-	padding: 20px;
+	padding: 20px 20px 0;
 	width: 210px;
+}
+
+.header-details ul {
+	margin: 14px 0;
 }
 
 .header-details ul li {
@@ -691,7 +695,7 @@ ul.aside-menu > li > a {
 	display: inline-block
 }
 
-ul.aside-menu > li > a.aside-active {
+ul.aside-menu > li > a.aside-active, ul.aside-sub-menu li a.aside-active {
 	color: #d41b29;
 }
 
