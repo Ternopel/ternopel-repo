@@ -1,13 +1,11 @@
-- Pedir a Mike que resalte categoria / producto elegido
 - Ver para que se usa el is_registration
 - Mejorar la pagina de llamaremos al CUCO
-- Pedir icono central nuevo
 - Login Facebook
 - Mejorar lista ofertas.
 - Manejo de https. Como hacerlo ?
-- Agregar filtro en productos por categoria, ofertas y visibles.
 - Refactor de forms
+- COmprimir imagenes
 
-Prod start and stop
+research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
     "stop": "forever stopall",
