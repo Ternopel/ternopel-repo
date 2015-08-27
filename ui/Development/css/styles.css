@@ -736,6 +736,11 @@ span.compress {
 	float: left;
 }
 
+.discount-small {
+	width: 44px;
+	float: left;
+}
+
 .discount-image a {
 	padding: 20px 10px;
 	display: inline-block;
@@ -756,7 +761,7 @@ span.compress {
 
 .discount-details ul li.discount-price {
 	color: #d41b29;
-	font-size: 14px
+	font-size: 12px
 }
 
 .descuentos-aside p {

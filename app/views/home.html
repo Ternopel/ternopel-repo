@@ -39,21 +39,27 @@
 		<section class="descuentos-aside clear-fix">
 		
 			<h2 class="aside-title">Ofertas</h2>
+
 			{{~ it.limitedoffersproducts:limitedoffersproduct}}
-				<div class="discount-image">
-					<a href="/{{=limitedoffersproduct.category.url}}/{{=limitedoffersproduct.url}}">
-						<img src="/admin/productspictures/{{=limitedoffersproduct.id}}" alt="" class="discount-small">
-					</a>
-				</div>
-				<div class="discount-details">
-					<ul>
-						<li class="item-name"><a href="/{{=limitedoffersproduct.category.url}}/{{=limitedoffersproduct.url}}">{{=limitedoffersproduct.name}}</a></li>
-						{{~ limitedoffersproduct.productformats:productformat}}
-							<li class="discount-price">{{=productformat.retaildescription}} ${{=productformat.retail}}</li>
-						{{~}}
-					</ul>
+				<div class="discount-container clear-fix">
+					<div class="discount-image">
+						<a href="/{{=limitedoffersproduct.category.url}}/{{=limitedoffersproduct.url}}">
+							<img src="/admin/productspictures/{{=limitedoffersproduct.id}}" class="discount-small">
+						</a>
+					</div>
+					<div class="discount-details">
+						<ul>
+							<li class="item-name">
+								<a href="/{{=limitedoffersproduct.category.url}}/{{=limitedoffersproduct.url}}">{{=limitedoffersproduct.name}}</a>
+							</li>
+							{{~ limitedoffersproduct.productformats:productformat}}
+								<li class="discount-price">{{=productformat.retaildescription}} ${{=productformat.retail}}</li>
+							{{~}}
+						</ul>
+					</div>
 				</div>
 			{{~}}		
+			
 			<p><a href="/">&gt;&gt; Todos las ofertas</a></p>
 		</section>
 		<section class="contactar-aside">

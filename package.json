@@ -5,7 +5,7 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "forever -a -l ./ternopel.log start ./server.js",
+    "start": "supervisor ./server.js",
     "stop": "forever stopall",
     "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -u exports -R spec --recursive"
   },
@@ -30,7 +30,6 @@
     "express-session": "^1.11.2",
     "express-validator": "^2.10.0",
     "express-winston": "^0.3.1",
-    "forever": "^0.14.2",
     "html": "0.0.10",
     "istanbul": "^0.3.14",
     "jsreport": "^0.7.0",
@@ -42,6 +41,7 @@
     "serve-favicon": "~2.2.1",
     "soda": "^0.2.5",
     "supertest": "^1.0.1",
+    "supervisor": "^0.7.1",
     "winston": "^1.0.0"
   },
   "config": {
