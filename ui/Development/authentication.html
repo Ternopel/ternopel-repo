@@ -85,17 +85,17 @@
 						<h3 class="form-header">Registro Nuevo Cliente</h3>
 						<p>Escriba su correo electronico para crear su cuenta</p>
 						<form>
-							<label>Correo Electronico</label>
-							<input type="email" class="customer-email" name="">
+							<label>Correo Electronico<span class="form-error">Required</span></label>
+							<input type="email" class="customer-email form-error-input" name="">
 							<button type="button" class="form-btn">Registro Nuevo Cliente</button>
 						</form>
 					</div>
 					<div class="returning-customer">
 						<h3 class="form-header">Ya Soy Cliente</h3>
 						<form>
-							<label>Correo Electronico</label>
+							<label>Correo Electronico<span class="form-error">Required</span></label>
 							<input type="email" class="customer-email" name="">
-							<label>Contrasena</label>
+							<label>Contrasena<span class="form-error">Required</span></label>
 							<input type="password" class="customer-password" name="">
 							<a href="#" class="forgot-password">Ha olvidado su contrasena?</a>
 							<button type="button" class="form-btn">Autentificacion</button>
