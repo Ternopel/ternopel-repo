@@ -955,6 +955,17 @@ a.forgot-password {
 	display: inline-block;
 }
 
+.form-error {
+	float: right;
+	color: #e05a65;
+	text-transform: none;
+	font-size: 13px;
+}
+
+.form-error-input {
+	border: 1px solid #e05a65 !important;
+}
+
 
 /* Footer */
 

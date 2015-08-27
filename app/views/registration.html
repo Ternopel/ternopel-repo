@@ -1,43 +1,35 @@
 <script src='/javascript/registration.js' ></script>
-<div class='middleSection'>
-	<div class='content'>
-		<h1>Browser Calls</h1>
-		<form id='registration_form' method="post">
-			<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
-			<input type='hidden' name='is_registration' value='{{=it.is_registration}}'>
-			<div class='crudForm'>
-				<div class='form2Cols'>
-					<span class='formItem'> 
-						<label>Usuario</label> 
-						<input type='text' name='email_address'></input>
-						<div class='errorMsg' id='email_address_error' ></div>
-					</span> 
-					<span class='formItem'> 
-						<label>Clave</label> 
-						<input type='password' name='password'></input>
-						<div class='errorMsg' id='password_error' ></div>
-					</span> 
-					{{?it.is_registration}}
-						<span class='formItem'> 
-							<label>Apellido</label> 
-							<input type='text' name='last_name'></input>
-							<div class='errorMsg' id='last_name_error' ></div>
-						</span> 
-						<span class='formItem'> 
-							<label>Nombre</label> 
-							<input type='text' name='first_name'></input>
-							<div class='errorMsg' id='first_name_error' ></div>
-						</span> 
-					{{?}}	
-				</div>
+<section class="page-container clear-fix">
+	<section class="authentication-section">
+		<div class="authentication-forms clear-fix">
+			<h2 class="main-title">Autentificación</h2>
+			<div class="new-customer">
+				<h3 class="form-header">Registro Nuevo Cliente</h3>
+				<p>Escriba su correo electronico para crear su cuenta</p>
+				<form>
+					<label>Correo Electronico<span class="form-error">Required</span></label>
+					<input type="email" class="customer-email form-error-input" name="">
+					<button type="button" class="form-btn">Registro Nuevo Cliente</button>
+				</form>
 			</div>
-			<div class='buttons'>
-				{{?it.is_registration}}
-					<input id='submit' type='submit' value='Registrarse' />
-				{{??}}
-					<input id='submit' type='submit' value='Ingresar' />
-				{{?}}	
+			<div class="returning-customer">
+				<h3 class="form-header">Ya Soy Cliente</h3>
+				<form id='registration_form' method="post">
+					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+					<input type='hidden' name='is_registration' value='{{=it.is_registration}}'>
+				
+					<label>Correo Electronico<span class="form-error" id="email_address_error"></span></label>
+					<input type="text" class="customer-email" name="email_address">
+
+					<label>Contraseña<span class="form-error" id='password_error'></span></label>
+					<input type="password" class="customer-password" name="password">
+
+					<a href="#" class="forgot-password">Ha olvidado su contraseña?</a>
+					<button type="submit" class="form-btn" id="submit">Autentificación</button>
+				</form>
 			</div>
-		</form>		
-	</div>
-</div>
+		</div>
+	</section>
+</section>
+
+

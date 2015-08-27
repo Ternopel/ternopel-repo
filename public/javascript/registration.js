@@ -2,7 +2,7 @@
 
 $(function() {
 	var $form = $('#registration_form');
-	$form.find('input[type="submit"]').click(function() {
+	$form.find('button[type="submit"]').click(function() {
 		clear_error_fields($form);
 		make_form('/registration','registration_form',
 			function (successresponse) {

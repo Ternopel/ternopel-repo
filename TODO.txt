@@ -7,3 +7,7 @@
 - Manejo de https. Como hacerlo ?
 - Agregar filtro en productos por categoria, ofertas y visibles.
 - Refactor de forms
+
+Prod start and stop
+    "start": "forever -a -l ./ternopel.log start ./server.js",
+    "stop": "forever stopall",
