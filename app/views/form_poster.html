@@ -37,6 +37,23 @@
 				<input type='text' name='position' value="{{=it.poster.position}}"></input>
 				<div class='errorMsg' id='position_error'></div>
 			</span> 
+			<span class='formItem'> 
+				<label>Tipo Cartel</label> 
+				<input type='radio' name='is_product' value="true" checked="checked">Producto</input>
+				<input type='radio' name='is_product' value="false">Categoría</input>
+				<div class='errorMsg' id='is_product_error'></div>
+			</span> 
+			<span class='formItem' name="category"> 
+				<select>
+					{{~ it.categories:category}}
+						<option value="{{=category.id}}">{{=category.name}}</option>
+					{{~}}
+				</select> 				
+			</span> 
+			
+			
+			
+			
 		</div>
 		
 		

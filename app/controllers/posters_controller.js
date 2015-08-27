@@ -69,6 +69,18 @@ function save_or_update_posters(method, req, res, next) {
 					return utils.send_ajax_error(req,res,err);
 				}			
 				poster.position = req.body.position;
+				if(req.body.is_product==='true') {
+					req.logger.info("*********************************************");
+					req.logger.info("1");
+					req.logger.info("*********************************************");
+					poster.product_id	= req.body.product_id;
+				}
+				else {
+					req.logger.info("*********************************************");
+					req.logger.info("1");
+					req.logger.info("*********************************************");
+					poster.category_id	= req.body.category_id;
+				}
 				poster.save(function(err) {
 					if(err) {
 						return utils.send_ajax_error(req,res,err);
@@ -98,9 +110,21 @@ module.exports = {
 		
 	get_add_page: function(req, res, next) {
 		req.logger.info('En GET ADD PAGE');
-		var poster = ld.merge({position:''});
+		var poster		= ld.merge({position:''});
 		var pageinfo	= ld.merge(req.pageinfo, {method:'PUT',csrfToken: req.csrfToken(),poster:poster});
-		res.render('form_poster.html',pageinfo);
+		req.models.categories.find({},['name'],function(err,categories) {
+			if(err) {
+				return next(err);
+			}
+			ld.merge(pageinfo, {categories:categories});
+			req.logger.debug('Categories readed:'+categories.length);
+			req.logger.info("******************************************************");
+			req.logger.info(JSON.stringify(pageinfo));
+			req.logger.info("******************************************************");
+			
+			
+			res.render('form_poster.html',pageinfo);
+		});
 	},		
 
 	get_edit_page: function(req, res, next) {
