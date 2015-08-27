@@ -23,7 +23,7 @@ function show_error_messages(errors) {
 			$("#" + error.param + "_error").html(error.msg);
 		}
 		else {
-			$("input[name='" + error.param+"']").attr("class", "required");
+			$("input[name='" + error.param+"']").attr("class", "form-error-input");
 			$("#" + error.param+"_error").html(error.msg);
 		}
 	});
@@ -32,13 +32,18 @@ function show_error_messages(errors) {
 
 function clear_notification_toolbar() {
 	console.log("Clearing notification toolbar");
-	$("div[id='notifications']").hide();
+	$("section[id='notifications']").hide();
 }
 
 function clear_error_fields(form) {
 	clear_notification_toolbar();
+	
 	console.log("Clearing form fields");
-	form.find(":input").attr("class", "gogog");
+	form.find(":input").removeClass("form-error-input");
+	$('.form-error').each(function(elem) {
+		$(this).text(''); 
+	});
+	
 }
 
 function sneak_links(ul_to_sneak,description) {
