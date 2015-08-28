@@ -52,7 +52,8 @@ module.exports = {
 		var product_id;
 		if(req.body.is_product) {
 			if(req.body.is_product==='true') {
-				product_id	= req.body.product_id;
+				category_id	= req.body.product_id.split('_')[0];
+				product_id	= req.body.product_id.split('_')[1];
 				req.assert('product_id', 'El código de producto es requerido').notEmpty();
 			}
 			else {

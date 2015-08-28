@@ -55,7 +55,7 @@
 			<span class='formItem' name="product"> 
 				<select name="product_id">
 					{{~ it.products:product}}
-						<option value="{{=product.id}}">{{=product.name}}</option>
+						<option value="{{=product.category_id}}_{{=product.id}}">{{=product.name}}</option>
 					{{~}}
 				</select>
 			</span> 

@@ -103,8 +103,8 @@ CREATE TABLE posters
 	position int4 NOT NULL UNIQUE,
 	content_type varchar(255) NOT NULL,
 	last_update timestamp NOT NULL,
+	category_id bigint NOT NULL,
 	product_id bigint,
-	category_id bigint,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
@@ -167,8 +167,4 @@ ALTER TABLE posters
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
-
-ALTER TABLE posters 
-	ADD CONSTRAINT posters_reference 
-	CHECK ( product_id is not null or category_id is not null );
 

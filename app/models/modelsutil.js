@@ -109,13 +109,13 @@
 				return getcallback(err);
 			}
 			posters.forEach(function(poster) {
-				if(poster.category_id) {
-					poster.origin	= 'Categoría:'+poster.category.name;
-					poster.url		= poster.category.url;
+				if(poster.product_id) {
+					poster.origin	= 'Producto:'+poster.product.name;
+					poster.url		= poster.category.url+"/"+poster.product.url;
 				}
 				else {
-					poster.origin	= 'Producto:'+poster.product.name;
-					poster.url		= poster.product.url;
+					poster.origin	= 'Categoría:'+poster.category.name;
+					poster.url		= poster.category.url;
 				}
 			});
 			return getcallback(null,posters);

@@ -8,6 +8,7 @@
 - Corregir Reporte
 - Mandar correos
 - Usar views para busquedas especiales
+- Verificar que haya al menos un cartel para mostrarlos
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
