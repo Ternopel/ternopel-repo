@@ -1234,3 +1234,8 @@ input[type=button].zoom-in-btn, input[type=button].zoom-out-btn {
 	color: red;
 	font-size: 18px;
 }
+
+.slider-img {
+	width: 678px;
+	height: 300px;
+}

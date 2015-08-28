@@ -14,13 +14,13 @@ module.exports = {
 
 		modelsutil.getCategories(req,res,next,function(err,categories) {
 			if(err) {
-				return mycallback(err);
+				return next(err);
 			}
 			ld.merge(pageinfo, {categories:categories});
 			req.logger.debug('Categories readed:'+categories.length);
 			req.models.products.find({is_visible:true},['name'],function(err,products) {
 				if(err) {
-					return mycallback(err);
+					return next(err);
 				}
 				req.logger.debug('Products readed:'+products.length);
 				ld.merge(pageinfo, {products:products});
@@ -29,45 +29,12 @@ module.exports = {
 		});
 	},		
 
-	get_edit_page: function(req, res, next) {
-		req.logger.info('En GET EDIT PAGE');
-		req.models.posters.get(req.params.id,function(err,poster) {
-			if(err) {
-				next(err);
-			}
-			var pageinfo	= ld.merge(req.pageinfo, {method:'POST',csrfToken: req.csrfToken(),poster:poster});
-			modelsutil.getCategories(req,res,next,function(err,categories) {
-				if(err) {
-					return mycallback(err);
-				}
-				ld.merge(pageinfo, {categories:categories});
-				req.logger.debug('Categories readed:'+categories.length);
-				req.models.products.find({is_visible:true},['name'],function(err,products) {
-					if(err) {
-						return mycallback(err);
-					}
-					req.logger.debug('Products readed:'+products.length);
-					ld.merge(pageinfo, {products:products});
-					res.render('form_poster.html',pageinfo);
-				});
-			});
-		});
-	},		
-		
 	get_posters: function(req, res, next) {
 		req.logger.info('En GET posters');
-		req.models.posters.find({},['position'],function(err,posters) {
+		modelsutil.getPosters(req,res,next,function(err,posters) {
 			if(err) {
 				return next(err);
 			}
-			posters.forEach(function(poster) {
-				if(poster.category_id) {
-					poster.origin	= 'Categoría:'+poster.category.name;
-				}
-				else {
-					poster.origin	= 'Producto:'+poster.product.name;
-				}
-			});
 			var pageinfo	= ld.merge(req.pageinfo, {posters:posters, csrfToken: req.csrfToken()});
 			res.render('admin_posters.html',pageinfo);
 		});

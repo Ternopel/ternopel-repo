@@ -118,7 +118,13 @@ module.exports = {
 						}
 						req.logger.info('Offers found:'+offersproducts.lenght);
 						ld.merge(pageinfo,{offersproducts:offersproducts});
-						return callback();
+						modelsutil.getPosters(req,res,next,function(err,posters) {
+							if(err) {
+								return next(err);
+							}
+							var pageinfo	= ld.merge(req.pageinfo, {posters:posters, csrfToken: req.csrfToken()});
+							return callback();
+						});
 					});
 				}
 				else {

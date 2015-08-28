@@ -100,4 +100,27 @@
 			});
 		});
 	};
+	
+	
+	modelsutil.getPosters = function (req,res,next,getcallback) {
+
+		req.models.posters.find({},['position'],function(err,posters) {
+			if(err) {
+				return getcallback(err);
+			}
+			posters.forEach(function(poster) {
+				if(poster.category_id) {
+					poster.origin	= 'Categoría:'+poster.category.name;
+					poster.url		= poster.category.url;
+				}
+				else {
+					poster.origin	= 'Producto:'+poster.product.name;
+					poster.url		= poster.product.url;
+				}
+			});
+			return getcallback(null,posters);
+		});
+	};
+	
+	
 })(module.exports);

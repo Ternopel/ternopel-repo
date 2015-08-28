@@ -1,8 +1,16 @@
+<script src='/javascript/jquery.jcarousellite.js'></script>
+<script src='/javascript/offers.js'></script>
 <section class="main-content">
 	<div class="main-slider">
 		<div class="slider-container">
 			<ul class="slider-images">
-				<li><a href="#"><img src="{{=it.app_resources}}/images/slide-img.png" alt="slide image"></a></li>
+				{{~ it.posters:poster}}
+					<li>
+						<a href="{{=poster.url}}">
+							<img src="/admin/posters/picture/{{=poster.id}}" class="slider-img">
+						</a>
+					</li>
+				{{~}}
 			</ul>
 		</div>
 		<div class="slider-btn-container">
