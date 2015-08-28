@@ -4,7 +4,8 @@
 - Mejorar lista ofertas.
 - Manejo de https. Como hacerlo ?
 - Refactor de forms
-- COmprimir imagenes
+- Comprimir imagenes
+- Corregir Reporte
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
