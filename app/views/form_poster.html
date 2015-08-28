@@ -43,23 +43,23 @@
 				<input type='radio' name='is_product' value="false">Categoría</input>
 				<div class='errorMsg' id='is_product_error'></div>
 			</span> 
-			<span class='formItem' name="category"> 
-				<select>
+			<span class='formItem' name="category" style="display:none"> 
+				<select name="category_id">
 					{{~ it.categories:category}}
-						<option value="{{=category.id}}">{{=category.name}}</option>
+						{{?category.is_visible}}
+							<option value="{{=category.id}}">{{=category.name}}</option>
+						{{?}}
 					{{~}}
-				</select> 				
+				</select>
 			</span> 
-			
-			
-			
-			
+			<span class='formItem' name="product"> 
+				<select name="product_id">
+					{{~ it.products:product}}
+						<option value="{{=product.id}}">{{=product.name}}</option>
+					{{~}}
+				</select>
+			</span> 
 		</div>
-		
-		
-		
-		
-		
 	</div>
 	<div class='buttons'>
 		<input id='submit' type='submit' value='Grabar'></input>

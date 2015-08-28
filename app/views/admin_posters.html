@@ -1,3 +1,4 @@
+<script src='/javascript/posters.js'></script>
 <section class="page-container clear-fix">
 	{{#def.load('admin_menu.html')}}
 	
@@ -11,6 +12,7 @@
 				<tr>
 					<th><h4>Id</h4></th>
 					<th><h4>Posición</h4></th>
+					<th><h4>Origen</h4></th>
 					<th><h4></h4></th>
 				</tr>
 			</thead>
@@ -18,7 +20,7 @@
 				<tr name='{{=poster.id}}'>
 					<td name='id' style='width: 50px;'>{{=poster.id}}</td>
 					<td name='position' style='width: 50px;'>{{=poster.position}}</td>
-					<td><a href="/admin/posters/edit/{{=poster.id}}">Editar</a></td>
+					<td name='position' style='width: 250px;'>{{=poster.origin}}</td>
 					<td><input name='remove' type='button' value='Borrar'></input></td>
 				</tr>
 			{{~}}

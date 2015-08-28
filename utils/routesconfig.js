@@ -38,10 +38,9 @@
 		app.get		( '/admin/posters',						restrict);
 		app.get		( '/admin/posters',						controllers.posters.get_posters);
 		app.get		( '/admin/posters/add',					controllers.posters.get_add_page);
-		app.get		( '/admin/posters/edit/:id',			controllers.posters.get_edit_page);
-		app.post	( '/admin/posters',						controllers.posters.post_posters);
 		app.put		( '/admin/posters',						controllers.posters.put_posters);
 		app.get		( '/admin/posters/picture/:id',			controllers.posters.get_picture);
+		app.delete	( '/admin/posters',						controllers.posters.delete_posters);
 
 		var multipart			= require('connect-multiparty');
 		var multipartMiddleware = multipart();

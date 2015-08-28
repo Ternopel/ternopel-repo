@@ -5,6 +5,8 @@ function send_form(form) {
 	var position		= $("input[name='position']").val();
 	var poster_id		= $("input[name='poster_id']").val();
 	var is_product		= $('input[name=is_product]:checked', '#posters_form').val()
+	var product_id		= $("select[name='product_id']").val();
+	var category_id		= $("select[name='category_id']").val();
 	var img_data		= $("div[name='cropped'] img").attr('src');
 	var formdata;
 	if (img_data) {
@@ -12,11 +14,11 @@ function send_form(form) {
 		var picture_regex	= /data:(.*);base64,(.*)/;
 		var type			= img_data.replace(picture_regex, '$1');
 		var data			= img_data.replace(picture_regex, '$2');
-		formdata			= {id:poster_id, _csrf:csrf, product_id:1, type:type, data:data, is_product:is_product, position:position};
+		formdata			= {id:poster_id, _csrf:csrf, product_id:product_id, category_id:category_id, type:type, data:data, is_product:is_product, position:position};
 	}
 	else {
 		console.log('Picture didnt changed');
-		formdata			= {id:poster_id, _csrf:csrf, product_id:1, is_product:is_product, position:position};
+		formdata			= {id:poster_id, _csrf:csrf, product_id:product_id, category_id:category_id, is_product:is_product, position:position};
 	}
 	$.ajax({
 		url : '/admin/posters',
@@ -35,13 +37,13 @@ function send_form(form) {
 
 $(function() {
 	$('input:radio[name=is_product]').change(function () {
-
-		alert(this.value);
-		if(this.value == 'true') {
-			alert("true");
-		}
 		if(this.value == 'false') {
-			alert("false");
+			$('span[name=category]').show();
+			$('span[name=product]').hide();
+		}
+		if(this.value == 'true') {
+			$('span[name=category]').hide();
+			$('span[name=product]').show();
 		}
 	});
 });
@@ -63,7 +65,39 @@ $(function() {
 		return false;
 	});
 });
+
+$(function() {
+	$('input[type="reset"]').click(function() {
+		window.location.href	= '/admin/posters';
+		return false;
+	});
+});
+
+$(function() {
 	
+	$('input[name="remove"]').click(function() {
+		var tr			=$(this).parent().parent();
+		var trid		=tr.attr('name');
+		var csrf		=$("input[name='_csrf']").val();	
+		
+		var formdata={id:trid, _csrf:csrf};
+		console.log('Data to send:'+JSON.stringify(formdata));
+		clear_notification_toolbar();
+		$.ajax({
+			url : '/admin/posters',
+			type : 'DELETE',
+			data : formdata,
+			success : function (successresponse) {
+				window.location.href	= '/admin/posters';
+			},
+			error : function(errorresponse) {
+				show_error_messages(errorresponse);
+			}
+		});
+		return false;
+	});
+});
+
 $(function() {
 	var poster_id	= $("input[name='poster_id']").val();
 	var milliseconds=new Date().getTime();

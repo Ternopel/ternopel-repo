@@ -19,7 +19,7 @@ module.exports = function (orm, db, models,logger) {
 	);	
 	
 	logger.debug("Configuring posters relations");
-	models.posters.hasOne("category",models.categories,{ reverse: "posters" });
-	models.posters.hasOne("product",models.products,{ reverse: "posters" });
+	models.posters.hasOne("category",models.categories,{ reverse: "posters",autoFetch:true });
+	models.posters.hasOne("product",models.products,{ reverse: "posters",autoFetch:true });
 	logger.debug("Posters relations configured");
 };

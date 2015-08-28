@@ -6,6 +6,8 @@
 - Refactor de forms
 - Comprimir imagenes
 - Corregir Reporte
+- Mandar correos
+- Usar views para busquedas especiales
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
