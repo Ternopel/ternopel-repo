@@ -1,14 +1,13 @@
 - Ver para que se usa el is_registration
 - Mejorar la pagina de llamaremos al CUCO
 - Login Facebook
-- Mejorar lista ofertas.
 - Manejo de https. Como hacerlo ?
 - Refactor de forms
-- Comprimir imagenes
 - Corregir Reporte
 - Mandar correos
 - Usar views para busquedas especiales
-- Verificar que haya al menos un cartel para mostrarlos
+- Sacar carteles en /ofertas
+- Grabar imagenes en tamaño correcto
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
