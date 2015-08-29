@@ -1,4 +1,4 @@
-<script src='/javascript/jquery.jcarousel.min.js'></script>
+<script src='/javascript/jquery.anoslide.js'></script>
 <script src='/javascript/offers.js'></script>
 <section class="main-content">
 	<div class="main-slider">
@@ -6,7 +6,7 @@
 			<ul class="slider-images">
 				{{~ it.posters:poster}}
 					<li>
-						<a href="{{=poster.url}}">
+						<a href="{{=poster.url}}" name="slider-{{=poster.id}}">
 							<img src="/admin/posters/picture/{{=poster.id}}" class="slider-img">
 						</a>
 					</li>
@@ -15,9 +15,11 @@
 		</div>
 		<div class="slider-btn-container">
 			<ul class="slider-btns">
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#" class="active-slide">3</a></li>
+				{{~ it.posters:poster}}
+					<li>
+						<a href="{{=poster.url}}">1</a>
+					</li>
+				{{~}}
 			</ul>
 		</div>
 	</div>
