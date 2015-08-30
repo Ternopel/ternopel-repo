@@ -59,3 +59,8 @@ function sneak_links(ul_to_sneak,description) {
 		tabs[i].onclick = sneaky.sneak;
 	}
 }
+
+function sneak_link(element) {
+	var sneaky = new ScrollSneak(location.hostname);
+	element.onclick = sneaky.sneak;
+}

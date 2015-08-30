@@ -9,6 +9,10 @@ $(function () {
 	sneak_links(document.getElementById('ulproducts'),'products');
 });
 
+$(function () {
+	sneak_links(document.getElementById('uloffers'),'offers');
+});
+
 // expand
 $(function () {
 	$("span[name='expand']").click(function () {
