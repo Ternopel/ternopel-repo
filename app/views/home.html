@@ -6,7 +6,7 @@
 <!-- 		</section> -->
 		<section class="category-aside">
 			<h2 class="aside-title">Categorias</h2>
-			<ul class="aside-menu" id="ulcategories">
+			<ul class="aside-menu" name="ulcategories">
 			
 				{{~ it.categories:category}}
 					{{?category.is_visible}}
@@ -48,7 +48,7 @@
 						</a>
 					</div>
 					<div class="discount-details">
-						<ul>
+						<ul name="uloffers">
 							<li class="item-name">
 								<a href="/{{=limitedoffersproduct.category.url}}/{{=limitedoffersproduct.url}}">{{=limitedoffersproduct.name}}</a>
 							</li>
@@ -59,7 +59,7 @@
 					</div>
 				</div>
 			{{~}}		
-			<ul id="uloffers">
+			<ul name="ulalloffers">
 				<li>
 					<p><a id="alloffers" href="/?posters=false">&gt;&gt; Todas las ofertas</a></p>
 				</li>

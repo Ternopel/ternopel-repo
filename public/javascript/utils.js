@@ -46,21 +46,15 @@ function clear_error_fields(form) {
 	
 }
 
-function sneak_links(ul_to_sneak,description) {
-	if(!ul_to_sneak) {
+function sneak_lis(lis,description) {
+	if(!lis) {
 		return;
 	}
 	console.log('Sneaking ul of '+description);
 	var sneaky = new ScrollSneak(location.hostname);
-	var tabs = ul_to_sneak.getElementsByTagName('li');
 	var i = 0;
-	var len = tabs.length;
+	var len = lis.length;
 	for (; i < len; i++) {
-		tabs[i].onclick = sneaky.sneak;
+		lis[i].onclick = sneaky.sneak;
 	}
-}
-
-function sneak_link(element) {
-	var sneaky = new ScrollSneak(location.hostname);
-	element.onclick = sneaky.sneak;
 }

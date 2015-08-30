@@ -2,15 +2,19 @@
 
 // links scrolling automatically
 $(function () {
-	sneak_links(document.getElementById('ulcategories'),'categories');
+	sneak_lis($("ul[name='ulcategories'] li"),'categories');
 });
 
 $(function () {
-	sneak_links(document.getElementById('ulproducts'),'products');
+	sneak_lis($("ul[name='ulproducts'] li"),'products');
 });
 
 $(function () {
-	sneak_links(document.getElementById('uloffers'),'offers');
+	sneak_lis($("ul[name='uloffers'] li"),'all offers');
+});
+
+$(function () {
+	sneak_lis($("ul[name='ulalloffers'] li"),'alloffers');
 });
 
 // expand
