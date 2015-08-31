@@ -41,9 +41,6 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating product picture');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
-					if(err) {
-						return callback(err,res);
-					}
 					request("http://localhost:"+config.test_app_port)
 						.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 						.set('cookie', utils.getcookies(res))
@@ -60,9 +57,6 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Updating product picture');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
-					if(err) {
-						return callback(err,res);
-					}
 					request("http://localhost:"+config.test_app_port)
 						.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 						.set('cookie', utils.getcookies(res))

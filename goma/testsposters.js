@@ -41,9 +41,6 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating poster');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
-					if(err) {
-						return callback(err,res);
-					}
 					request("http://localhost:"+config.test_app_port)
 						.put('/admin/posters')
 						.set('cookie', utils.getcookies(res))
@@ -64,9 +61,6 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating poster');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
-					if(err) {
-						return callback(err,res);
-					}
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -88,9 +82,6 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating poster');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
-					if(err) {
-						return callback(err,res);
-					}
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -112,9 +103,6 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating poster');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
-					if(err) {
-						return callback(err,res);
-					}
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -122,6 +110,28 @@ var request		= require('supertest'),
 						'is_product' : 'false',
 						'category_id' : '1',
 						'position' : '2',
+						'type' : 'image/jpeg',
+						'data' : data,
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('created');
+						return callback(err,res);
+					});
+				});
+			},
+			function(res,callback) {
+				logger.info('Creating poster');
+				fs.readFile(__dirname + '/logo2.jpg', function (err, data) {
+					request("http://localhost:"+config.test_app_port)
+					.put('/admin/posters')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'is_product' : 'true',
+						'category_id' : '1',
+						'product_id' : '1',
+						'position' : '3',
 						'type' : 'image/jpeg',
 						'data' : data,
 						'_csrf' : utils.getcsrf(res)
