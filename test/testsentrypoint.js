@@ -16,6 +16,7 @@ var testshome				= require(__dirname+'/../goma/testshome');
 var testscategories			= require(__dirname+'/../goma/testscategories');
 var testsproducts			= require(__dirname+'/../goma/testsproducts');
 var testsproductsformats	= require(__dirname+'/../goma/testsproductsformats');
+var testsproductspictures	= require(__dirname+'/../goma/testsproductspictures');
 var testsposters			= require(__dirname+'/../goma/testsposters');
 
 describe('Users creation', function() {
@@ -63,9 +64,11 @@ describe('Users creation', function() {
 		});
 	});	
 
-	var runTests=false;
-
-	it('Create poster', testsposters.createPoster);
+	var runTests=true;
+	
+	if(runTests) {
+		it('Create poster', testsposters.createPoster);
+	}
 	
 	// admin products pictures tests
 	if(runTests) {
@@ -98,6 +101,7 @@ describe('Users creation', function() {
 	// home tests
 	if(runTests) {
 		it('Get Offers', testshome.getOffers);
+		it('Get No Posters', testshome.getNoPosters);
 		it('Get Search', testshome.getSearch);
 		it('Get category', testshome.getCategory);
 		it('Get product', testshome.getProduct);

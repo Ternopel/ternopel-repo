@@ -148,4 +148,22 @@ var request		= require('supertest'),
 		});
 	};
 	
+	testshome.getNoPosters = function (done) {
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+		           function(callback) {
+		        	   logger.info('Executing get to server');
+		        	   request("http://localhost:"+config.test_app_port)
+		        	   .get('/?posters=false')
+		        	   .expect(200)
+		        	   .end(function(err, res){
+		        		   return callback(err,res);
+		        	   });
+		           }
+		           ], 
+		           function(err) {
+			return done(err);
+		});
+	};
+	
 })(module.exports);

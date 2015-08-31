@@ -106,20 +106,12 @@ module.exports = {
 		req.logger.info("Getting poster info");
 		req.models.posters.get(id,function(err,poster) {
 			
-			if(err && err.literalCode!=='NOT_FOUND') {
+			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}			
 
-			var picture_name;
-			var content_type;
-			if(err && err.literalCode==='NOT_FOUND') {
-				picture_name='./public/images/default-img.jpg';
-				content_type='image/jpeg';
-			}	
-			else {
-				picture_name=req.config.app_posters_imgs_dir+"/"+id;
-				content_type=poster.content_type;
-			}
+			var picture_name=req.config.app_posters_imgs_dir+"/"+id;
+			var content_type=poster.content_type;
 			
 			req.logger.info("Reading image "+picture_name);
 			fs.readFile(picture_name, function (err, data) {

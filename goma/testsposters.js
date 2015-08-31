@@ -56,7 +56,7 @@ var request		= require('supertest'),
 						})
 						.expect(500)
 						.end(function(err,newres) {
-							expect(newres.text).toInclude('El tipo de archivo es requerido');
+							expect(newres.text).toInclude('Por favor, cargue el archivo');
 							return callback(err,res);
 						});
 				});
@@ -139,10 +139,43 @@ var request		= require('supertest'),
 					.get('/admin/posters')
 					.set('cookie', utils.getcookies(res))
 					.expect(200)
-					.end(function(err, res){
-//						expect(res.text).toInclude('Agregar Categoría');
+					.end(function(err, newres){
 						return callback(err,res);
 					});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+				.get('/admin/posters/picture/2')
+				.set('cookie', utils.getcookies(res))
+				.expect(200)
+				.end(function(err, newres){
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+				.get('/admin/posters/add')
+				.set('cookie', utils.getcookies(res))
+				.expect(200)
+				.end(function(err, newres){
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+				.delete('/admin/posters')
+				.set('cookie', utils.getcookies(res))
+				.send({
+						'id' : '1',
+						'_csrf' : utils.getcsrf(res)
+				})
+				.expect(200)
+				.end(function(err, res){
+					return callback(err,res);
+				});
 			}
 		], 
 		function(err) {
