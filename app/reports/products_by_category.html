@@ -1,37 +1,43 @@
 
-<br>
-<table>
-	{{for categories}}
-	<tr>
-		<td><h4>Categor&iacute;a:{{:name}}</h4></td>
-	</tr>
-	<tr>
-		<td>
-			<table style='border-style:solid'>
-				<tr >
-					<th style='text-align: left;'><h5>Nombre</h5></th>
-					<th style='text-align: left;'><h5>Formatos</h5></th>
-				</tr>
-				{{for products}}
-				<tr>
-					<td><h6>{{:name}}</h6></td>
-					<td>
-						<table>
-							<tr><td><h6>Formato1</h6></td></tr>
-							<tr><td><h6>Formato2</h6></td></tr>
-							<tr><td><h6>Formato3</h6></td></tr>
-							<tr><td><h6>Formato4</h6></td></tr>
-							<tr><td><h6>Formato5</h6></td></tr>
-							<tr><td><h6>Formato6</h6></td></tr>
-						</table>
-					</td>
-				</tr>
-				{{/for}}
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td></td>
-	</tr>
-	{{/for}}
-</table>
+<html>
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	</head>
+	<body>
+		<br>
+		<table>
+			{{for categories}}
+				{{if is_visible == true}}
+					<tr>
+						<td><h4>Categor&iacute;a:{{:name}}</h4></td>
+					</tr>
+					<tr>
+						<td>
+							<table style='border-style:solid'>
+								<tr >
+									<th style='text-align: left;'><h5>Nombre</h5></th>
+									<th style='text-align: left;'><h5>Formatos</h5></th>
+								</tr>
+								{{for products}}
+								<tr>
+									<td><h6>{{:name}}</h6></td>
+									<td>
+										<table>
+											{{for productformats}}
+												<tr><td><h6>{{:retaildescription}} ${{:retail}}, {{:wholesaledescription}} ${{:wholesale}}</h6></td></tr>
+											{{/for}}
+										</table>
+									</td>
+								</tr>
+								{{/for}}
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+					</tr>
+				{{/if}}
+			{{/for}}
+		</table>
+	</body>
+</html>

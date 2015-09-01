@@ -93,7 +93,7 @@ module.exports = {
 							return callback('Esta categoria no está más disponible');
 						}
 						var currentcategory = categories[0];
-						var filters = ld.merge({filter:{is_visible:true,category_id:currentcategory.id},formatslimit:3,});
+						var filters = ld.merge({filter:{is_visible:true,category_id:currentcategory.id},formatslimit:3});
 						modelsutil.getProducts(req,res,next,filters,function(err,products) {
 							if(err) {
 								return callback(err);

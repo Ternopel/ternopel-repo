@@ -64,7 +64,7 @@ describe('Users creation', function() {
 		});
 	});	
 
-	var runTests=true;
+	var runTests=false;
 	
 	if(runTests) {
 		it('Create poster', testsposters.createPoster);
@@ -126,8 +126,8 @@ describe('Users creation', function() {
  	
  	// Report test
 	if(runTests) {
-		it('Report', testreport.getReport);
 	}
+	it('Report', testreport.getReport);
 
  	after(function (){
 		logger.info('Stopping server');

@@ -15,14 +15,16 @@
 			req.logger.debug('Categories readed:'+categories.length);
 			async.each(categories, function(category, callback) {
 				category.is_visible	= false;
-				category.getProducts().order('name').run(function(err,products) {
+				
+				var filters = ld.merge({filter:{category_id:category.id}});
+				modelsutil.getProducts(req,res,next,filters,function(err,products) {
 					if(err) {
 						return callback(err);
 					}
 					if(products.length>0) {
 						category.is_visible	= true;
 					}
-					req.logger.debug("Category:"+category.name+" "+category.is_visible+" Products readed:"+products.length);
+					req.logger.info("Category:"+category.name+" "+category.is_visible+" Products readed:"+products.length);
 					ld.merge(category, {products:products});
 					return callback();
 				});
