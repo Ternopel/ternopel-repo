@@ -3,29 +3,33 @@
 (function (routesconfig) {
 		
 	function restrict(req, res, next) {
-		if (req.pageinfo.is_logged_in === true && req.pageinfo.is_admin === true) {
-			next();
-		} 
+		if (req.path.indexOf("/admin")===(0)) {
+			if(req.pageinfo.is_logged_in === true && req.pageinfo.is_admin === true) {
+				next();
+			}
+			else {
+				next('Usted no tiene permisos para ver esta página. Vayase de aquí o llamaremos al CUCO !');
+			}
+		}
 		else {
-			next('Usted no tiene permisos para ver esta página. Vayase de aquí o llamaremos al CUCO !');
+			next();
 		}
 	}	
 
 	var controllers = require('../app/controllers/controller');
 	routesconfig.init = function (app) {
 		
+		app.use		(restrict);
+		
 		app.get		( '/health',							controllers.health.get_health);
 
-		app.get		( '/admin',								restrict);
 		app.get		( '/admin',								controllers.admin.get_admin);
 		
-		app.get		( '/admin/categories',					restrict);
 		app.get		( '/admin/categories',					controllers.categories.get_categories);
 		app.post	( '/admin/categories',					controllers.categories.post_categories);
 		app.put		( '/admin/categories',					controllers.categories.put_categories);
 		app.delete	( '/admin/categories',					controllers.categories.delete_categories);
 
-		app.get		( '/admin/products',					restrict);
 		app.get		( '/admin/products',					controllers.products.get_products);
 		app.post	( '/admin/products',					controllers.products.post_products);
 		app.put		( '/admin/products',					controllers.products.put_products);
@@ -35,17 +39,16 @@
 		app.put		( '/admin/productsformats',				controllers.productsformats.put_productsformats);
 		app.delete	( '/admin/productsformats',				controllers.productsformats.delete_productsformats);
 
-		app.get		( '/admin/posters',						restrict);
 		app.get		( '/admin/posters',						controllers.posters.get_posters);
 		app.get		( '/admin/posters/add',					controllers.posters.get_add_page);
 		app.put		( '/admin/posters',						controllers.posters.put_posters);
-		app.get		( '/admin/posters/picture/:id',			controllers.posters.get_picture);
+		app.get		( '/images/posters/picture/:id',		controllers.posters.get_picture);
 		app.delete	( '/admin/posters',						controllers.posters.delete_posters);
 
 		var multipart			= require('connect-multiparty');
 		var multipartMiddleware = multipart();
 		
-		app.get		( '/admin/productspictures/:id',		controllers.productspictures.get_productspictures);
+		app.get		( '/images/productspictures/:id',		controllers.productspictures.get_productspictures);
 		app.post	( '/admin/productspictures',			multipartMiddleware,controllers.productspictures.post_productspictures);
 		
 		app.get		( '/report',							controllers.report.get_report);

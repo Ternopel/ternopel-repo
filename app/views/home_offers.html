@@ -8,7 +8,7 @@
 					{{~ it.posters:poster}}
 						<li>
 							<a href="{{=poster.url}}" name="slider-{{=poster.id}}">
-								<img src="/admin/posters/picture/{{=poster.id}}" class="slider-img">
+								<img src="/images/posters/picture/{{=poster.id}}" class="slider-img">
 							</a>
 						</li>
 					{{~}}
@@ -31,7 +31,7 @@
 			{{~ it.offersproducts:offersproduct}}
 				<li>
 					<a href="/{{=offersproduct.category.url}}/{{=offersproduct.url}}">
-						<img class="prodimg" src="/admin/productspictures/{{=offersproduct.id}}">
+						<img class="prodimg" src="/images/productspictures/{{=offersproduct.id}}">
 					</a>
 					<h3 class="main-product-title">
 						<a href="/{{=offersproduct.category.url}}/{{=offersproduct.url}}">{{=offersproduct.name}}</a>

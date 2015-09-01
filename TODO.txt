@@ -8,7 +8,6 @@
 - Mandar correos
 - Usar views para busquedas especiales
 - Grabar imagenes en tamaño correcto
-- Verificar permisos en todas las paginas y mover las imagenes de posters y productos a otro url
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",

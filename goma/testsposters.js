@@ -156,7 +156,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)
-				.get('/admin/posters/picture/2')
+				.get('/images/posters/picture/2')
 				.set('cookie', utils.getcookies(res))
 				.expect(200)
 				.end(function(err, newres){
