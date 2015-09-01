@@ -7,7 +7,7 @@
 		var async		= require('async'),
 			ld			= require('lodash');
 		
-		req.logger.info('Entering to get_categories');
+		req.logger.debug('Entering to get_categories');
 		req.models.categories.find({},['name'],function(err,categories) {
 			if(err) {
 				return next(err);
@@ -44,7 +44,7 @@
 		var async		= require('async'),
 			ld			= require('lodash');
 		
-		req.logger.info('Entering to get_products');
+		req.logger.debug('Entering to get_products');
 		var productsfind	= req.models.products.find(filters.filter,['name']);
 		if(filters.search) {
 			productsfind.where('lower(name) ilike ?',['%'+filters.search+'%']);
