@@ -34,7 +34,7 @@ module.exports = {
 						content: content,
 						engine: "jsrender",
 						phantom: {
-							header: "<table> <tr> <td><h1>Listado de Productos por Categor&iacute;a<h1></td> <td style='text-align: right; width:350px;'><h1>Ternopel</h1></td> </tr> </table>",
+							header: "<h2 style='background-color: lightGray'>Listado de Productos por Categor&iacute;a</h2>",
 							footer: "<div style='text-align:center'>Página {#pageNum} de {#numPages}</div>",
 							orientation: "portrait",
 							width: "600px"

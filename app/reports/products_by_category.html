@@ -3,25 +3,28 @@
 <table>
 	{{for categories}}
 	<tr>
-		<td><h2>Categor&iacute;a:{{:name}}</h2></td>
+		<td><h4>Categor&iacute;a:{{:name}}</h4></td>
 	</tr>
 	<tr>
 		<td>
-			<table>
-				<tr>
-					<th style='text-align: left;'>Nombre</th>
-					<th>Precio x Menor</th>
-					<th>Packaging</th>
-					<th>Unidades</th>
-					<th>Precio x Mayor</th>
+			<table style='border-style:solid'>
+				<tr >
+					<th style='text-align: left;'><h5>Nombre</h5></th>
+					<th style='text-align: left;'><h5>Formatos</h5></th>
 				</tr>
 				{{for products}}
 				<tr>
-					<td>{{:description}}</td>
-					<td style='text-align: right;'>$ {{:retail}}</td>
-					<td style='text-align: right;'>{{:packaging}}</td>
-					<td style='text-align: right;'>{{:units}}</td>
-					<td style='text-align: right;'>$ {{:wholesale}}</td>
+					<td><h6>{{:name}}</h6></td>
+					<td>
+						<table>
+							<tr><td><h6>Formato1</h6></td></tr>
+							<tr><td><h6>Formato2</h6></td></tr>
+							<tr><td><h6>Formato3</h6></td></tr>
+							<tr><td><h6>Formato4</h6></td></tr>
+							<tr><td><h6>Formato5</h6></td></tr>
+							<tr><td><h6>Formato6</h6></td></tr>
+						</table>
+					</td>
 				</tr>
 				{{/for}}
 			</table>
