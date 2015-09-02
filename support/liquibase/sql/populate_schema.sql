@@ -7,8 +7,8 @@ INSERT INTO users (email_address,first_name,last_name,password,role_id) VALUES
 ('mcarrizo@gmail.com','Maxi','Client','5c969619',2),
 ('smarmo@ternopel.com','Sergio','Admin','42929c',1),
 ('smarmo@gmail.com','Sergio','Client','42929c',2),
-('sergiy@ternopel.com','Sergiy','Gorodilovsky','42929c17b653',1),
-('sergiygor2010@hotmail.com','Sergiy','Gorodilovsky','42929c17b653',2);
+('sergiy@ternopel.com','Sergiy','Gorodilovsky','5c969619',1),
+('sergiygor2010@hotmail.com','Sergiy','Gorodilovsky','5c969619',2);
 
 INSERT INTO categories (id,name,url) VALUES 
 (1,'Bandas elásticas','bandas-elasticas'),
