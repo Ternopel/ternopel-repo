@@ -1,41 +1,62 @@
 'use strict';
 
+function fillProductFormat(product,productformat) {
+	var retaildescription		= '';
+	var wholesaledescription	= '';
+	if(productformat.quantity===1) {
+		retaildescription += product.packaging.name;
+	}
+	else {
+		retaildescription += productformat.quantity + ' ' + product.packaging.name + 's';
+	}
+	retaildescription		+= ' de ' + productformat.format + ' a ';
+	wholesaledescription	+= productformat.units + ' ' + product.packaging.name + 's a ';
+	
+	productformat.retaildescription		= retaildescription;
+	productformat.wholesaledescription	= wholesaledescription;
+}
+
 (function (modelsutil) {
 
 	modelsutil.getCategories = function (req,res,next,getcallback) {
 	
-		var async		= require('async'),
-			ld			= require('lodash');
+		var ld = require('lodash');
 		
-		req.logger.debug('Entering to get_categories');
-		req.models.categories.find({},['name'],function(err,categories) {
+		req.logger.info("Getting all categories");
+		req.db.driver.execQuery("select * from plain_info order by c_name, p_name, pf_retail",function(err,records) {
+			req.logger.info("Records found:"+records.length);
 			if(err) {
-				return next(err);
+				return getcallback(err);
 			}
-			req.logger.debug('Categories readed:'+categories.length);
-			async.each(categories, function(category, callback) {
-				category.is_visible	= false;
+			var c_name = '';
+			var p_name = '';
+			var categories	= [];
+			records.forEach(function(record) {
+				if(record.c_name !== c_name) {
+					req.logger.debug('----------> New category:'+record.c_name);
+					var category		= ld.merge({id: record.c_id,name:record.c_name, url:record.c_url});
+					category.products	= [];
+					categories.push(category);
+					c_name = record.c_name;
+				}
 				
-				var filters = ld.merge({filter:{category_id:category.id}});
-				modelsutil.getProducts(req,res,next,filters,function(err,products) {
-					if(err) {
-						return callback(err);
-					}
-					if(products.length>0) {
-						category.is_visible	= true;
-					}
-					req.logger.info("Category:"+category.name+" "+category.is_visible+" Products readed:"+products.length);
-					ld.merge(category, {products:products});
-					return callback();
-				});
-			}, function(err) {
-				if(err) {
-					getcallback(err);
+				if(record.p_name !== p_name) {
+					req.logger.debug('----------> New product:'+record.p_name);
+					var lastcategory		= categories[categories.length - 1];
+					var packaging			= ld.merge({id: record.pk_id,name:record.pk_name});
+					var product				= ld.merge({id: record.p_id,name:record.p_name, url:record.p_url,is_visible: record.p_is_visible, is_offer: record.p_is_offer, packaging:packaging});
+					product.productsformats = [];
+					lastcategory.products.push(product);
+					p_name = record.p_name;
 				}
-				else {
-					return getcallback(null,categories);
-				}
+				var lastproduct		= categories[categories.length - 1].products[categories[categories.length - 1].products.length - 1];
+				var productformat	= ld.merge({id:record.pf_id, format:record.pf_format, quantity:record.pf_quantity, units:record.pf_units, wholesale:record.pf_wholesale, retail:record.pf_retail});
+				fillProductFormat(lastproduct,productformat);
+				lastproduct.productsformats.push(productformat);
+			
 			});
+			req.logger.debug(JSON.stringify(categories));
+			return getcallback(null,categories);
 		});
 	};
 

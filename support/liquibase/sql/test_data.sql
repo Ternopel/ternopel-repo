@@ -1,3 +1,25 @@
+CREATE VIEW plain_info AS
+SELECT	pf.id AS pf_id,
+		pf.format AS pf_format,
+		pf.quantity AS pf_quantity,
+		pf.units AS pf_units,
+		pf.wholesale AS pf_wholesale,
+		pf.retail AS pf_retail,
+		p.id AS p_id,
+		p.name AS p_name,
+		p.url AS p_url,
+		p.is_visible AS p_is_visible,
+		p.is_offer AS p_is_offer,
+		c.id AS c_id,
+		c.name AS c_name,
+		c.url AS c_url,
+		pk.id AS pk_id,
+		pk.name AS pk_name
+FROM		products_formats pf, products p, categories c, packaging pk
+WHERE	pf.product_id	= p.id	AND
+		p.category_id	= c.id	AND
+		p.packaging_id	= pk.id;
+
 INSERT INTO roles (id,name) VALUES 
 (1,'admin'),
 (2,'client');

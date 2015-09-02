@@ -46,9 +46,7 @@
 			<span class='formItem' name="category" style="display:none"> 
 				<select name="category_id">
 					{{~ it.categories:category}}
-						{{?category.is_visible}}
-							<option value="{{=category.id}}">{{=category.name}}</option>
-						{{?}}
+						<option value="{{=category.id}}">{{=category.name}}</option>
 					{{~}}
 				</select>
 			</span> 

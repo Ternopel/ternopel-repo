@@ -9,30 +9,28 @@
 			<ul class="aside-menu" name="ulcategories">
 			
 				{{~ it.categories:category}}
-					{{?category.is_visible}}
-						<li name="{{=category.url}}">
-							{{?category.selected}}
-								<span name="compress" class="compress"></span>
-								<a href="/{{=category.url}}" class="aside-active">{{=category.name}}</a>
-								<ul class="aside-sub-menu">
-									{{~ category.products:product}}
-										{{?product.is_visible}}
-											<li>
-												{{?product.selected}}
-													<a class="aside-active" href="/{{=category.url}}/{{=product.url}}">{{=product.name}}</a>
-												{{??}}
-													<a href="/{{=category.url}}/{{=product.url}}">{{=product.name}}</a>
-												{{?}}
-											</li>
-										{{?}}
-									{{~}}
-								</ul>
-							{{??}}
-								<span name="expand" class="expand"></span>
-								<a href="/{{=category.url}}">{{=category.name}}</a>
-							{{?}}
-						</li>
-					{{?}}
+					<li name="{{=category.url}}">
+						{{?category.selected}}
+							<span name="compress" class="compress"></span>
+							<a href="/{{=category.url}}" class="aside-active">{{=category.name}}</a>
+							<ul class="aside-sub-menu">
+								{{~ category.products:product}}
+									{{?product.is_visible}}
+										<li>
+											{{?product.selected}}
+												<a class="aside-active" href="/{{=category.url}}/{{=product.url}}">{{=product.name}}</a>
+											{{??}}
+												<a href="/{{=category.url}}/{{=product.url}}">{{=product.name}}</a>
+											{{?}}
+										</li>
+									{{?}}
+								{{~}}
+							</ul>
+						{{??}}
+							<span name="expand" class="expand"></span>
+							<a href="/{{=category.url}}">{{=category.name}}</a>
+						{{?}}
+					</li>
 				{{~}}
 			</ul>
 		</section>

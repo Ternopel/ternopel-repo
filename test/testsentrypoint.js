@@ -46,25 +46,29 @@ describe('Users creation', function() {
 	beforeEach(function(done) {
 		logger.info('---------------- Starting test -----------------');
 		logger.info("Dropping model");
-		db.drop(function(err) {
+		db.driver.execQuery("DROP VIEW if exists plain_info",function(err,data) {
 			if(err) {
 				return done(err);
 			}
-			db.driver.execQuery('drop table databasechangelog', function(err,data) {
-				logger.info("Creating model");
-				db.sync(function(err) {
-					config.app_run_liquibase	= 'true';
-					logger.info("Running liquibase");
-					liquibase.init(logger,config);
+			
+			db.drop(function(err) {
+				if(err) {
 					return done(err);
+				}
+				db.driver.execQuery('drop table databasechangelog', function(err,data) {
+					logger.info("Creating model");
+					db.sync(function(err) {
+						config.app_run_liquibase	= 'true';
+						logger.info("Running liquibase");
+						liquibase.init(logger,config);
+						return done(err);
+					});
 				});
 			});
-			
-			
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 	
 	if(runTests) {
 		it('Create poster', testsposters.createPoster);
@@ -126,8 +130,8 @@ describe('Users creation', function() {
  	
  	// Report test
 	if(runTests) {
+		it('Report', testreport.getReport);
 	}
-	it('Report', testreport.getReport);
 
  	after(function (){
 		logger.info('Stopping server');

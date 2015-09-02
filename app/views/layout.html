@@ -102,9 +102,7 @@
 						<h4>Categorias</h4>
 						<ul>
 							{{~ it.categories:category}}
-								{{?category.is_visible}}
-									<li><a href="/{{=category.url}}">{{=category.name}}</a></li>
-								{{?}}
+								<li><a href="/{{=category.url}}">{{=category.name}}</a></li>
 							{{~}}
 						</ul>
 					</div>

@@ -7,36 +7,34 @@
 		<br>
 		<table>
 			{{for categories}}
-				{{if is_visible == true}}
-					<tr>
-						<td><h4>Categor&iacute;a:{{:name}}</h4></td>
-					</tr>
-					<tr>
-						<td>
-							<table style='border-style:solid'>
-								<tr >
-									<th style='text-align: left;'><h5>Nombre</h5></th>
-									<th style='text-align: left;'><h5>Formatos</h5></th>
-								</tr>
-								{{for products}}
-								<tr>
-									<td><h6>{{:name}}</h6></td>
-									<td>
-										<table>
-											{{for productformats}}
-												<tr><td><h6>{{:retaildescription}} ${{:retail}}, {{:wholesaledescription}} ${{:wholesale}}</h6></td></tr>
-											{{/for}}
-										</table>
-									</td>
-								</tr>
-								{{/for}}
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td></td>
-					</tr>
-				{{/if}}
+				<tr>
+					<td><h4>Categor&iacute;a:{{:name}}</h4></td>
+				</tr>
+				<tr>
+					<td>
+						<table style='border-style:solid'>
+							<tr >
+								<th style='text-align: left;'><h5>Nombre</h5></th>
+								<th style='text-align: left;'><h5>Formatos</h5></th>
+							</tr>
+							{{for products}}
+							<tr>
+								<td><h6>{{:name}}</h6></td>
+								<td>
+									<table>
+										{{for productsformats}}
+											<tr><td><h6>{{:retaildescription}} ${{:retail}}, {{:wholesaledescription}} ${{:wholesale}}</h6></td></tr>
+										{{/for}}
+									</table>
+								</td>
+							</tr>
+							{{/for}}
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+				</tr>
 			{{/for}}
 		</table>
 	</body>
