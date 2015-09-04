@@ -7,7 +7,8 @@ var app			= require(__dirname+'/../app.js'),
 
 var request		= require('supertest'),
 	server,
-	db;
+	db,
+	models;
 
 var testsregistration		= require(__dirname+'/../goma/testregistration');
 var testreport				= require(__dirname+'/../goma/testreport');
@@ -26,6 +27,7 @@ describe('Users creation', function() {
 	before(function(done) {
 		
 		config.app_run_liquibase			= 'false';
+		config.app_cron						= 'false';
 		config.app_port						= config.test_app_port;
 		config.db_database					= config.test_db_database;
 		config.db_show_sql					= config.test_db_show_sql;
@@ -34,8 +36,9 @@ describe('Users creation', function() {
 		config.app_posters_imgs_dir			= config.test_app_posters_imgs_dir;
 		
 		logger.info("Initiating app");
-		app.init(logger,config, function(app,pdb) {
+		app.init(logger,config, function(app,pdb,pmodels) {
 			db		= pdb;
+			models	= pmodels;
 			server	= app.listen(config.test_app_port, function() {
 				logger.info('Listening on port:'+server.address().port);
 				return done();

@@ -123,7 +123,8 @@ module.exports = {
 			function(user,callback) {
 				req.logger.debug('Registracion de usuario !');
 				req.logger.info('Registrando user '+email_address);
-				req.models.registrations.create({	email_address:	email_address},function(err,registration) {
+				var token	= require('node-uuid').v1();
+				req.models.registrations.create({	email_address:	email_address, token:token },function(err,registration) {
 					return callback(err,registration);
 				});
 			}
