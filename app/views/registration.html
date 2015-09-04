@@ -6,17 +6,19 @@
 			<div class="new-customer">
 				<h3 class="form-header">Registro Nuevo Cliente</h3>
 				<p>Escriba su correo electrónico para crear su cuenta</p>
-				<form>
-					<label>Correo Electronico<span class="form-error"></span></label>
-					<input type="email" class="customer-email" name="">
-					<button type="button" class="form-btn">Registro Nuevo Cliente</button>
+				<form id="registration_form" method="post">
+					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+					
+					<label>Correo Electronico<span class="form-error" id="registration_email_address_error"></span></label>
+					<input type="text" class="customer-email" name="registration_email_address">
+					
+					<button type="button" class="form-btn" name="registration">Registro Nuevo Cliente</button>
 				</form>
 			</div>
 			<div class="returning-customer">
 				<h3 class="form-header">Ya Soy Cliente</h3>
-				<form id='registration_form' method="post">
+				<form id='login_form' method="post">
 					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
-					<input type='hidden' name='is_registration' value='{{=it.is_registration}}'>
 				
 					<label>Correo Electronico<span class="form-error" id="email_address_error"></span></label>
 					<input type="text" class="customer-email" name="email_address">
@@ -25,7 +27,7 @@
 					<input type="password" class="customer-password" name="password">
 
 					<a href="#" class="forgot-password">Ha olvidado su contraseña?</a>
-					<button type="submit" class="form-btn" id="submit">Autentificación</button>
+					<button type="submit" class="form-btn" name="login">Autentificación</button>
 				</form>
 			</div>
 		</div>

@@ -5,31 +5,21 @@ var cipher	= require('../../utils/cipher'),
 	ld		= require('lodash');
 
 module.exports = {
-	get_registration: function(req, res, next) {
-		var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken(), is_registration:true });
-		res.render('registration.html',pageinfo);
-	},
+	
 	get_login: function(req, res, next) {
-		var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken(), is_registration:false });
+		var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken() });
 		res.render('registration.html',pageinfo);
 	},
-	post_registration: function(req, res, next) {
+	
+	post_login: function(req, res, next) {
 
 		var email_address	= req.body.email_address;
 		var password		= req.body.password;
-		var last_name		= req.body.last_name;
-		var first_name		= req.body.first_name;
-		var is_registration	= req.body.is_registration;
 		req.logger.debug('User trying to register:'+req.body.email_address);
 		
 		req.logger.debug("Defining validators");
 		req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
 		req.assert('password', 'La clave es requerida').notEmpty();
-		req.assert('is_registration', 'Parametro de tipo de registracion es requerido').notEmpty();
-		if(is_registration==='true') {
-			req.assert('last_name', 'El apellido es requerido').notEmpty();
-			req.assert('first_name', 'El nombre es requerido').notEmpty();
-		}
 
 		req.logger.info("Executing validation");
 		var valerrors = req.validationErrors();
@@ -45,47 +35,22 @@ module.exports = {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.debug('Is registration:'+is_registration+' y user length:'+user.length);
-					if(is_registration==='true') {
-						if(user.length===1) {
-							return callback('Usuario ya existente');
-						}
-						else {
-							return callback(null,null);
-						}
-					}
-					if(is_registration==='false') {
-						if(user.length===0) {
-							return callback('Usuario/Clave inválido');
-						}
-						else {
-							return callback(null,user[0]);
-						}
-					}
-					return callback('No se puede evaluar parametro is_registration');
-				});
-			}, 
-			function(user,callback) {
-				req.logger.debug('Creacion de usuario o login !');
-				if(is_registration==='true') {
-					req.logger.info('Creando user '+email_address);
-					req.models.users.create({	email_address:	email_address,
-												password:		cipher.encrypt(password), 
-												role_id:		req.constants.CUSTOMER_ID,
-												last_name:		last_name,
-												first_name:		first_name},function(err,user) {
-						return callback(err,user);
-					});
-				}
-
-				if(is_registration==='false') {
-					req.logger.info('Evaluando claves');
-					if(user.password !== cipher.encrypt(password)) {
+					if(user.length===0) {
 						return callback('Usuario/Clave inválido');
 					}
 					else {
-						return callback(null,user);
+						return callback(null,user[0]);
 					}
+				});
+			}, 
+			function(user,callback) {
+				req.logger.debug('Login !');
+				req.logger.info('Evaluando claves');
+				if(user.password !== cipher.encrypt(password)) {
+					return callback('Usuario/Clave inválido');
+				}
+				else {
+					return callback(null,user);
 				}
 			},
 			function(user,callback) {
@@ -100,19 +65,78 @@ module.exports = {
 			}
 		], 
 		function(err, user) {
-			req.logger.debug('Finalizacion de registration');
+			req.logger.debug('Finalizacion de login');
 			if(err) {
 				req.logger.debug('Error por enviar al cliente:'+err);
 				return utils.send_ajax_error(req,res,err);
 			}
 			else {
-				req.logger.debug('Registracion o login exitoso !');
+				req.logger.debug('Login exitoso !');
 				if(user.isAdmin()) {
 					return res.status(200).send('success_admin');
 				}
 				if(!user.isAdmin()) {
 					return res.status(200).send('success_client');
 				}
+			}
+		});
+	},
+	
+	post_registration: function(req, res, next) {
+		
+		var email_address	= req.body.registration_email_address;
+		req.logger.debug('User trying to register:'+req.body.registration_email_address);
+		
+		req.logger.debug("Defining validators");
+		req.assert('registration_email_address', 'El email ingresado es incorrecto').isEmail();
+		
+		req.logger.info("Executing validation");
+		var valerrors = req.validationErrors();
+		if(valerrors) {
+			return utils.send_ajax_validation_errors(req,res,valerrors);
+		}
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				req.logger.debug('Searching for existing user');
+				req.models.users.find({email_address: email_address}, function(err,user) {
+					if(err) {
+						return callback(err);
+					}
+					if(user.length===1) {
+						return callback('Usuario ya existente');
+					}
+					else {
+						req.models.registrations.find({email_address: email_address}, function(err,registration) {
+							if(err) {
+								return callback(err);
+							}
+							if(registration.length===1) {
+								return callback('Usuario ya registrado para confirmar');
+							}
+							return callback(null,null);
+						});
+					}
+				});
+			}, 
+			function(user,callback) {
+				req.logger.debug('Registracion de usuario !');
+				req.logger.info('Registrando user '+email_address);
+				req.models.registrations.create({	email_address:	email_address},function(err,registration) {
+					return callback(err,registration);
+				});
+			}
+		], 
+		function(err, user) {
+			req.logger.debug('Finalizacion de registration');
+			if(err) {
+				req.logger.debug('Error por enviar al cliente:'+err);
+				return utils.send_ajax_error(req,res,err);
+			}
+			else {
+				req.logger.debug('Registracion exitosa !');
+				return res.status(200).send('success_registration');
 			}
 		});
 	}

@@ -6,6 +6,7 @@ CREATE SEQUENCE products_sequence start with 1000;
 CREATE SEQUENCE products_formats_sequence start with 1000;
 CREATE SEQUENCE roles_sequence start with 1000;
 CREATE SEQUENCE users_sequence start with 1000;
+CREATE SEQUENCE registrations_sequence start with 1000;
 CREATE SEQUENCE users_sessions_sequence start with 1000;
 CREATE SEQUENCE posters_sequence start with 1000;
 
@@ -87,6 +88,12 @@ CREATE TABLE users
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
+CREATE TABLE registrations
+(
+	id bigint DEFAULT nextval('registrations_sequence') NOT NULL,
+	email_address varchar(256) NOT NULL UNIQUE,
+	PRIMARY KEY (id)
+) WITHOUT OIDS;
 
 CREATE TABLE users_sessions
 (

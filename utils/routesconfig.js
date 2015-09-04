@@ -53,9 +53,9 @@
 		
 		app.get		( '/report',							controllers.report.get_report);
 
-		app.get		( '/registration',						controllers.registration.get_registration);
-		app.post	( '/registration',						controllers.registration.post_registration);
 		app.get		( '/login',								controllers.registration.get_login);
+		app.post	( '/login',								controllers.registration.post_login);
+		app.post	( '/registration',						controllers.registration.post_registration);
 		
 		app.get		( '/logout',							controllers.logout.get_logout);
 

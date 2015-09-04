@@ -116,11 +116,11 @@ describe('Users creation', function() {
 	// Registration tests
 	if(runTests) {
 		it('Admin with no permissions', testsregistration.adminWithNoPermissions);
-		it('Users registration and login OK', testsregistration.registerNewUser);
-		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
-		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
-		it('Register existing user', testsregistration.registerExistingUser);
 		it('Admin login', testsregistration.adminLogin);
+		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
+		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
+		it('Register existing user', testsregistration.registerNewUser);
+		it('Client login', testsregistration.clientLogin);
 	}
 	 	
  	// Health check

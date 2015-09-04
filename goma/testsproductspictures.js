@@ -24,13 +24,12 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Posting info to server:'+utils.getcsrf(res));
 				request("http://localhost:"+config.test_app_port)
-					.post('/registration')
+					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'email_address' : 'mcarrizo@ternopel.com',
 						'password' : 'maxi',
-						'_csrf' : utils.getcsrf(res),
-						'is_registration': 'false'
+						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(200)
 					.end(function(err,newres) {
@@ -73,7 +72,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Getting product picture');
 				request("http://localhost:"+config.test_app_port)
-				.get('/admin/productspictures/1')
+				.get('/images/productspictures/1')
 				.expect(200)
 				.end(function(err,newres) {
 					return callback(err,res);
@@ -82,7 +81,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Getting non existing product picture with default picture');
 				request("http://localhost:"+config.test_app_port)
-				.get('/admin/productspictures/2')
+				.get('/images/productspictures/2')
 				.expect(200)
 				.end(function(err,newres) {
 					return callback(err,res);

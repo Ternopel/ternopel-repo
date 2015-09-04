@@ -8,6 +8,7 @@ var request		= require('supertest'),
 
 (function (testsregistration) {
 
+	/*
 	testsregistration.registerNewUser = function (done) {
 		
 		var waterfall = require('async-waterfall');
@@ -99,6 +100,7 @@ var request		= require('supertest'),
 			return done(err);
 		});
 	};
+	*/
 	
 	testsregistration.registerNewUserFieldsRequired = function (done) {
 		
@@ -118,16 +120,11 @@ var request		= require('supertest'),
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
-						'email_address' : 'nicasio@gmail.com',
-						'password' : 'nicasio',
-						'confirm_password' : 'nicasio',
-						'_csrf' : utils.getcsrf(res),
-						'is_registration': 'true'
+						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(500)
 					.end(function(err,newres) {
-						expect(newres.text).toInclude('El apellido es requerido');
-						expect(newres.text).toInclude('El nombre es requerido');
+						expect(newres.text).toInclude('El email ingresado es incorrecto');
 						return callback(err,res);
 					});
 			}
@@ -152,13 +149,12 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Posting info to server');
 				request("http://localhost:"+config.test_app_port)
-					.post('/registration')
+					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'email_address' : 'nicasio@gmail.com',
 						'password' : 'nicasio',
-						'_csrf' : utils.getcsrf(res),
-						'is_registration': 'false'
+						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(500)
 					.end(function(err,newres) {
@@ -169,13 +165,27 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Posting info to server');
 				request("http://localhost:"+config.test_app_port)
-					.post('/registration')
+					.post('/login')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'nicasio@gmail.com',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('La clave es requerida');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'email_address' : 'mcarrizo@gmail.com',
 						'password' : 'nicasio',
-						'_csrf' : utils.getcsrf(res),
-						'is_registration': 'false'
+						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(500)
 					.end(function(err,newres) {
@@ -204,13 +214,12 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Posting info to server');
 				request("http://localhost:"+config.test_app_port)
-					.post('/registration')
+					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'email_address' : 'mcarrizo@ternopel.com',
 						'password' : 'maxi',
-						'_csrf' : utils.getcsrf(res),
-						'is_registration': 'false'
+						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(200)
 					.end(function(err,newres) {
@@ -234,14 +243,67 @@ var request		= require('supertest'),
 		});
 	};	
 	
-	testsregistration.registerExistingUser = function (done) {
+	testsregistration.clientLogin = function (done) {
 		
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)
-					.get('/registration')
+					.get('/login')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/login')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'mcarrizo@gmail.com',
+						'password' : 'maxi',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success_client');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/')
+					.set('cookie', utils.getcookies(res))
+					.end(function(err, res){
+						expect(res.text).toInclude('Maxi Client');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Executing logout to server');
+				request("http://localhost:"+config.test_app_port)
+				.get('/logout')
+				.expect(302)
+				.end(function(err, res){
+					return callback(err);
+				});
+			}
+		], 
+		function(err) {
+			return done(err);
+		});
+	};		
+	
+	testsregistration.registerNewUser = function (done) {
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
 					});
@@ -252,20 +314,45 @@ var request		= require('supertest'),
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
-						'first_name' : 'Maximiliano',
-						'last_name' : 'Carrizo',
-						'email_address' : 'mcarrizo@gmail.com',
-						'password' : 'maxito',
-						'confirm_password' : 'maxito',
-						'_csrf' : utils.getcsrf(res),
-						'is_registration': 'true'
+						'registration_email_address' : 'mcarrizo@gmail.com',
+						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(500)
 					.end(function(err,newres) {
 						expect(newres.text).toInclude('Usuario ya existente');
 						return callback(err,res);
 					});
-			},			
+			},
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/registration')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'registration_email_address' : 'nicasio@gmail.com',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success_registration');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/registration')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'registration_email_address' : 'nicasio@gmail.com',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Usuario ya registrado para confirmar');
+						return callback(err,res);
+					});
+			}
 		], 
 		function(err) {
 			return done(err);
