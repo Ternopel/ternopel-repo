@@ -77,6 +77,10 @@ INSERT INTO packaging (id,name) VALUES
 (4,'Rollo'),
 (5,'Kilo');
 
+/* Registrations */
+INSERT INTO registrations (email_address,token,sent) 
+VALUES ('demostenes1509@gmail.com','3041bd90-5397-11e5-9650-9bf126a5d21f',false);
+
 /* Bandas elasticas */
 INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
 (1,2,'Bolsa de banditas elásticas','bolsa-bandas-elasticas',false,true,true);
@@ -244,4 +248,3 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 /* Caja de madera */
 INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
 (7,1,'Caja de madera','caja-madera',false,true,false);
-

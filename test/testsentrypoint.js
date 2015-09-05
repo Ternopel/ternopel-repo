@@ -7,8 +7,7 @@ var app			= require(__dirname+'/../app.js'),
 
 var request		= require('supertest'),
 	server,
-	db,
-	models;
+	db;
 
 var testsregistration		= require(__dirname+'/../goma/testregistration');
 var testreport				= require(__dirname+'/../goma/testreport');
@@ -19,6 +18,7 @@ var testsproducts			= require(__dirname+'/../goma/testsproducts');
 var testsproductsformats	= require(__dirname+'/../goma/testsproductsformats');
 var testsproductspictures	= require(__dirname+'/../goma/testsproductspictures');
 var testsposters			= require(__dirname+'/../goma/testsposters');
+var testsendemail			= require(__dirname+'/../goma/testssendemail');
 
 describe('Users creation', function() {
 	
@@ -36,9 +36,11 @@ describe('Users creation', function() {
 		config.app_posters_imgs_dir			= config.test_app_posters_imgs_dir;
 		
 		logger.info("Initiating app");
-		app.init(logger,config, function(app,pdb,pmodels) {
+		app.init(logger,config, function(app,pdb,models) {
 			db		= pdb;
-			models	= pmodels;
+			
+			testsendemail.setModels(models);
+			
 			server	= app.listen(config.test_app_port, function() {
 				logger.info('Listening on port:'+server.address().port);
 				return done();
@@ -72,6 +74,10 @@ describe('Users creation', function() {
 	});	
 
 	var runTests=true;
+	
+	if(runTests) {
+		it('Send registration email', testsendemail.sendMail);
+	}
 	
 	if(runTests) {
 		it('Create poster', testsposters.createPoster);
@@ -122,8 +128,8 @@ describe('Users creation', function() {
 		it('Admin login', testsregistration.adminLogin);
 		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
 		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
-		it('Register existing user', testsregistration.registerNewUser);
 		it('Client login', testsregistration.clientLogin);
+		it('Register existing user', testsregistration.registerNewUser);
 	}
 	 	
  	// Health check

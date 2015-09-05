@@ -108,15 +108,7 @@ module.exports = {
 						return callback('Usuario ya existente');
 					}
 					else {
-						req.models.registrations.find({email_address: email_address}, function(err,registration) {
-							if(err) {
-								return callback(err);
-							}
-							if(registration.length===1) {
-								return callback('Usuario ya registrado para confirmar');
-							}
-							return callback(null,null);
-						});
+						return callback(null,null);
 					}
 				});
 			}, 
@@ -124,7 +116,7 @@ module.exports = {
 				req.logger.debug('Registracion de usuario !');
 				req.logger.info('Registrando user '+email_address);
 				var token	= require('node-uuid').v1();
-				req.models.registrations.create({	email_address:	email_address, token:token },function(err,registration) {
+				req.models.registrations.create({	email_address:	email_address, token:token, sent:false },function(err,registration) {
 					return callback(err,registration);
 				});
 			}

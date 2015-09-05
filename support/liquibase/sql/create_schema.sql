@@ -91,8 +91,9 @@ CREATE TABLE users
 CREATE TABLE registrations
 (
 	id bigint DEFAULT nextval('registrations_sequence') NOT NULL,
-	email_address varchar(256) NOT NULL UNIQUE,
+	email_address varchar(256) NOT NULL,
 	token varchar(255) NOT NULL UNIQUE,
+	sent boolean NOT NULL default false,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
