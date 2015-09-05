@@ -1,4 +1,4 @@
-- Corregir Reporte
+- Corregir Reporte ( VER PORQUE CARAJO QUEDA COLGADO EN PROD )
 
 - Mejorar la pagina de llamaremos al CUCO
 - Login Facebook
