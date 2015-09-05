@@ -9,7 +9,22 @@ module.exports = {
 	get_login: function(req, res, next) {
 		req.logger.info("Getting login page");
 		var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken() });
-		res.render('registration.html',pageinfo);
+		res.render('login.html',pageinfo);
+	},
+	
+	get_registration: function(req, res, next) {
+		req.logger.info("Getting registration page");
+		req.models.registrations.find({token:req.params.token},function(err,registrations) {
+			if(err) {
+				return next(err);
+			}
+			if(registrations.length==0) {
+				return next('Su token es inválido !');
+			}
+			var registration = registrations[0];
+			var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken(), email_address:registration.email_address });
+			res.render('registration.html',pageinfo);
+		});
 	},
 	
 	get_mail_sent: function(req, res, next) {

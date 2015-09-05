@@ -56,6 +56,7 @@
 		app.get		( '/login',								controllers.registration.get_login);
 		app.get		( '/mailsent/:email',					controllers.registration.get_mail_sent);
 		app.post	( '/login',								controllers.registration.post_login);
+		app.get		( '/registration/:token',				controllers.registration.get_registration);
 		app.post	( '/registration',						controllers.registration.post_registration);
 		
 		

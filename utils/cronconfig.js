@@ -29,7 +29,7 @@
 					from: "Información Ternopel <info@ternopel.com>",
 					to: "<"+registration.email_address+">", 
 					subject: "Confirmación de registración en Papelera Ternopel ✔", 
-					html: "Bienvenido a Papelera Ternopel !!<br/> Por favor, haga <a href='"+url+"/confirm_registration/"+registration.token+"'>click aqui</a> para confirmar su correo. Gracias !"
+					html: "Bienvenido a Papelera Ternopel !!<br/> Por favor, haga <a href='"+url+"/registration/"+registration.token+"'>click aqui</a> para confirmar su correo. Gracias !"
 				}, function(error, response){
 					if(error){
 						return mycallback(error);
