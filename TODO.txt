@@ -17,3 +17,7 @@ Pendientes Mike !
     1) Small thing. Can you add a yellow band in the top of the layout saying "En construcción" ( Under construction )
 	2) Pedirle lo del ojito
 	3) La tabla del reporte
+
+	SSL
+	
+	http://greengeckodesign.com:8880/blog/2013/06/15/creating-an-ssl-certificate-for-node-dot-js/
