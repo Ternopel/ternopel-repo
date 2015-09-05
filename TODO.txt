@@ -7,6 +7,7 @@
 - Usar views para busquedas especiales
 - Grabar imagenes en tamaño correcto
 - Fixear release.sh
+- Sacar registracion.js de la pantalla de sentmail
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
