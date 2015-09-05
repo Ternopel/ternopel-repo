@@ -11,3 +11,8 @@
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
     "stop": "forever stopall",
+
+Pendientes Mike !
+    1) Small thing. Can you add a yellow band in the top of the layout saying "En construcción" ( Under construction )
+	2) Pedirle lo del ojito
+	3) La tabla del reporte

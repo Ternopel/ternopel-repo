@@ -33,6 +33,82 @@ module.exports = {
 		res.render('mailsent.html',pageinfo);
 	},
 	
+	post_confirm: function(req, res, next) {
+
+		var email_address	= req.body.email_address;
+		var first_name		= req.body.first_name;
+		var last_name		= req.body.last_name;
+		var password		= req.body.password;
+		req.logger.debug('User trying to register:'+req.body.email_address);
+		
+		req.logger.debug("Defining validators");
+		req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
+		req.assert('password', 'La clave es requerida').notEmpty();
+		req.assert('first_name', 'Nombre es requerido').notEmpty();
+		req.assert('last_name', 'Apellido es requerido').notEmpty();
+
+		req.logger.info("Executing validation");
+		var valerrors = req.validationErrors();
+		if(valerrors) {
+			return utils.send_ajax_validation_errors(req,res,valerrors);
+		}
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				req.logger.debug('Searching for existing user');
+				req.models.users.find({email_address: email_address}, function(err,user) {
+					if(err) {
+						return callback(err);
+					}
+					if(user.length===1) {
+						return callback('Usuario/Clave existente');
+					}
+					else {
+						return callback(null,user[0]);
+					}
+				});
+			}, 
+			function(user,callback) {
+				req.logger.info('Creando user '+email_address);
+				req.models.users.create({	email_address:	email_address,
+											password:		cipher.encrypt(password), 
+											role_id:		req.constants.CUSTOMER_ID,
+											last_name:		last_name,
+											first_name:		first_name},function(err,user) {
+					return callback(err,user);
+				});				
+			},
+			function(user,callback) {
+				req.logger.info('Assigning user to session');
+				req.usersession.setUser(user,function(err) {
+					if(err) {
+						callback(err);
+					}
+					req.logger.info('Complete session:'+JSON.stringify(req.usersession));
+					return callback(err,user);
+				});
+			}
+		], 
+		function(err, user) {
+			req.logger.debug('Finalizacion de creacion de usuario');
+			if(err) {
+				req.logger.debug('Error por enviar al cliente:'+err);
+				return utils.send_ajax_error(req,res,err);
+			}
+			else {
+				req.logger.debug('Login exitoso !');
+				return res.status(200).send('success_client');
+			}
+		});
+	},	
+	
+	
+	
+	
+	
+	
+	
 	post_login: function(req, res, next) {
 
 		var email_address	= req.body.email_address;
