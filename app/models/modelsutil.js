@@ -132,6 +132,8 @@ function fillProductFormat(product,productformat) {
 				return getcallback(err);
 			}
 			posters.forEach(function(poster) {
+				
+				
 				if(poster.product_id) {
 					poster.origin	= 'Producto:'+poster.product.name;
 					poster.url		= poster.category.url+"/"+poster.product.url;
@@ -140,6 +142,7 @@ function fillProductFormat(product,productformat) {
 					poster.origin	= 'Categoría:'+poster.category.name;
 					poster.url		= poster.category.url;
 				}
+				req.logger.info(JSON.stringify(poster));
 			});
 			return getcallback(null,posters);
 		});

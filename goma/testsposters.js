@@ -65,7 +65,7 @@ var request		= require('supertest'),
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'is_product' : 'true',
-						'product_id' : '1',
+						'product_id' : '1_1',
 						'position' : '1',
 						'type' : 'image/jpeg',
 						'data' : data,
@@ -128,8 +128,7 @@ var request		= require('supertest'),
 					.set('cookie', utils.getcookies(res))
 					.send({
 						'is_product' : 'true',
-						'category_id' : '1',
-						'product_id' : '1',
+						'product_id' : '2_1',
 						'position' : '3',
 						'type' : 'image/jpeg',
 						'data' : data,
@@ -171,7 +170,7 @@ var request		= require('supertest'),
 				.end(function(err, newres){
 					return callback(err,res);
 				});
-			},
+			}, 
 			function(res,callback) {
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)

@@ -25,12 +25,7 @@ $(function() {
 	$form.find('button[name="registration"]').click(function() {
 		clear_error_fields($form);
 		make_form('/registration','registration_form', function (successresponse) {
-//			if ('success_admin'===successresponse) {
-//				window.location.href	= '/admin';
-//			} 
-//			if ('success_client'===successresponse) {
-				window.location.href	= '/';
-//			} 
+			window.location.href	= '/mailsent/'+successresponse;
 		},
 		function (errorresponse) {
 			show_error_messages(errorresponse);

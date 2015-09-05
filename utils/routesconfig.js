@@ -54,8 +54,10 @@
 		app.get		( '/report',							controllers.report.get_report);
 
 		app.get		( '/login',								controllers.registration.get_login);
+		app.get		( '/mailsent/:email',					controllers.registration.get_mail_sent);
 		app.post	( '/login',								controllers.registration.post_login);
 		app.post	( '/registration',						controllers.registration.post_registration);
+		
 		
 		app.get		( '/logout',							controllers.logout.get_logout);
 

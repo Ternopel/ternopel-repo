@@ -1,13 +1,12 @@
 - Corregir Reporte
 
-- Ver para que se usa el is_registration
 - Mejorar la pagina de llamaremos al CUCO
 - Login Facebook
 - Manejo de https. Como hacerlo ?
 - Refactor de forms
-- Mandar correos
 - Usar views para busquedas especiales
 - Grabar imagenes en tamaño correcto
+- Fixear release.sh
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",

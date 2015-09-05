@@ -74,7 +74,6 @@ describe('Users creation', function() {
 	});	
 
 	var runTests=true;
-	
 	if(runTests) {
 		it('Send registration email', testsendemail.sendMail);
 	}

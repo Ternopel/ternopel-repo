@@ -240,10 +240,19 @@ var request		= require('supertest'),
 					})
 					.expect(200)
 					.end(function(err,newres) {
-						expect(newres.text).toBe('success_registration');
+						expect(newres.text).toBe('nicasio@gmail.com');
 						return callback(err,res);
 					});
-			}
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/mailsent/nicasio@gmail.com')
+					.end(function(err, newres){
+						expect(newres.text).toInclude('Se ha enviado un correo de confirmación a <b>nicasio@gmail.com</b>');
+						return callback(err,res);
+					});
+			} 
 		], 
 		function(err) {
 			return done(err);

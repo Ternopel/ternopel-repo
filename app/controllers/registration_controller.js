@@ -7,8 +7,15 @@ var cipher	= require('../../utils/cipher'),
 module.exports = {
 	
 	get_login: function(req, res, next) {
+		req.logger.info("Getting login page");
 		var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken() });
 		res.render('registration.html',pageinfo);
+	},
+	
+	get_mail_sent: function(req, res, next) {
+		req.logger.info("Getting mail sent page");
+		var pageinfo = ld.merge(req.pageinfo, { email: req.params.email });
+		res.render('mailsent.html',pageinfo);
 	},
 	
 	post_login: function(req, res, next) {
@@ -129,7 +136,7 @@ module.exports = {
 			}
 			else {
 				req.logger.debug('Registracion exitosa !');
-				return res.status(200).send('success_registration');
+				return res.status(200).send(email_address);
 			}
 		});
 	}
