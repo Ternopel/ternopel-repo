@@ -127,8 +127,9 @@ describe('Users creation', function() {
 		it('Admin login', testsregistration.adminLogin);
 		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
 		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
-		it('Client login', testsregistration.clientLogin);
 		it('Register existing user', testsregistration.registerNewUser);
+		it('Confirm User', testsregistration.confirmUser);
+		it('Client login', testsregistration.clientLogin);
 	}
 	 	
  	// Health check

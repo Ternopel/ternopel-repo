@@ -7,7 +7,145 @@ var request		= require('supertest'),
 	config		= require(__dirname+"/../utils/config")();
 
 (function (testsregistration) {
+	
 
+	testsregistration.confirmUser = function (done) {
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/registration/3041bd90-5397-11e5-9650-9bf126a5d211')
+					.expect(200)
+					.end(function(err, res){
+						expect(res.text).toInclude('Su token es inválido !');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/registration/3041bd90-5397-11e5-9650-9bf126a5d21f')
+					.expect(200)
+					.end(function(err, res){
+						expect(res.text).toInclude('demostenes1509@gmail.com');
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/confirm')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'first_name' : 'Nicasio',
+						'last_name' : 'Oronio',
+						'email_address' : 'mcarrizo@gmail.com',
+						'password' : 'nicasio',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Usuario/Clave existente');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/confirm')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'first_name' : 'Nicasio',
+						'last_name' : 'Oronio',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('El email ingresado es incorrecto');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/confirm')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'first_name' : 'Nicasio',
+						'last_name' : 'Oronio',
+						'email_address' : 'demostenes1509@gmail.com',
+						'password' : 'nicasio',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success_client');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/')
+					.set('cookie', utils.getcookies(res))
+					.end(function(err, res){
+						expect(res.text).toInclude('Nicasio Oronio');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+				.get('/logout')
+				.expect(302)
+				.end(function(err, res){
+					return callback(err);
+				});
+			},
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/login')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/login')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'demostenes1509@gmail.com',
+						'password' : 'nicasio',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success_client');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/')
+					.set('cookie', utils.getcookies(res))
+					.end(function(err, res){
+						expect(res.text).toInclude('Nicasio Oronio');
+						return callback(err,res);
+					});
+			}
+		], 
+		function(err) {
+			return done(err);
+		});
+	};
+
+
+	
 	testsregistration.registerNewUserFieldsRequired = function (done) {
 		
 		var waterfall = require('async-waterfall');
@@ -161,6 +299,53 @@ var request		= require('supertest'),
 						return callback(err,res);
 					});
 			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/login')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'mcarrizo@gmail.com',
+						'password' : 'maxito',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Usuario/Clave inválido');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/login')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'password' : 'maxito',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('El email ingresado es incorrecto');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/login')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'mcarrizo1@gmail.com',
+						'password' : 'maxito',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Usuario/Clave inválido');
+						return callback(err,res);
+					});
+			},
 			function(res,callback) {
 				logger.info('Posting info to server');
 				request("http://localhost:"+config.test_app_port)

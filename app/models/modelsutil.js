@@ -114,26 +114,18 @@ function fillProductFormat(product,productformat) {
 					});
 				});
 			}, function(err) {
-				if(err) {
-					getcallback(err);
-				}
-				else {
-					return getcallback(null,products);
-				}
+				return getcallback(err,products);
 			});
 		});
 	};
 	
 	
 	modelsutil.getPosters = function (req,res,next,getcallback) {
-
 		req.models.posters.find({},['position'],function(err,posters) {
 			if(err) {
 				return getcallback(err);
 			}
 			posters.forEach(function(poster) {
-				
-				
 				if(poster.product_id) {
 					poster.origin	= 'Producto:'+poster.product.name;
 					poster.url		= poster.category.url+"/"+poster.product.url;

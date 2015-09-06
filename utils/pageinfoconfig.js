@@ -22,7 +22,7 @@
 			if(err) {
 				return next(err);
 			}
-			req.logger.debug('User is NOT logged IN !!');
+			req.logger.info('User is NOT logged IN !!');
 			req.usersession		= usersession;
 			req.pageinfo	= {is_logged_in:false};
 			req.logger.info('Created session:'+JSON.stringify(req.usersession));
@@ -33,12 +33,13 @@
 	
 	var updatesession = function(req,res,next,usersession) {
 		req.logger.debug("Session:"+JSON.stringify(usersession));
-		req.logger.debug('User is logged in:'+usersession.isLogged());
+		req.logger.info('User is logged in:'+usersession.isLogged());
 		if(usersession.isLogged()===true) {
 			usersession.getUser(function (err, user) {
 				if(err) {
 					next(err);
 				}
+				req.logger.info('User logged in:'+user.fullName());
 				req.pageinfo = {is_logged_in:true, full_name: user.fullName(), is_admin: user.isAdmin()};
 				savesession(req,next,usersession);
 			});
