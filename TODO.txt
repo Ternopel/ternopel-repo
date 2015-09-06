@@ -6,7 +6,6 @@
 - Refactor de forms
 - Usar views para busquedas especiales
 - Grabar imagenes en tamaño correcto
-- TEsts de confirm
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
