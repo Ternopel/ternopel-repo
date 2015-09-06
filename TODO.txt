@@ -6,7 +6,6 @@
 - Refactor de forms
 - Usar views para busquedas especiales
 - Grabar imagenes en tamaño correcto
-- Fixear release.sh
 - Sacar registracion.js de la pantalla de sentmail
 
 research Prod start and stop
