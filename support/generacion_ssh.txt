@@ -1,0 +1,33 @@
+1) Generamos nuestra clave privada:
+
+openssl genrsa -out my-private-key.pem 2048
+
+2) Generamos el requerimiento para un certificado y lo mandamos a una autoridad certificante
+
+3) Vamos a recibir de la autoridad certificante varios archivos crt
+
+Certificates chain:
+AddTrustExternalCARoot.crt
+COMODORSAAddTrustCA.crt
+COMODORSADomainValidationSecureServerCA.crt
+
+4) Los convierto a los archivos recibidos a formato PEM
+
+openssl x509 -inform PEM -in www_papeleraternopel_com.crt -out www_papeleraternopel_com.pem
+
+5) Una vez convertidos a formato PEM, concateno los tres certificates chain
+
+cat COMODORSADomainValidationSecureServerCA.pem >> chain.pem
+cat COMODORSAAddTrustCA.pem >> chain.pem
+cat AddTrustExternalCARoot.pem >> chain.pem
+
+6) Entonces:
+
+Public Key Certificate:
+www_papeleraternopel_com.pem
+
+Certificate Chain:	
+chain.pem
+
+Private Key: 
+my-private-key.pem
