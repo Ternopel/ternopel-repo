@@ -21,7 +21,7 @@
 			
 			var async	= require('async');
 			var url		= "http://"+config.app_proxy_host;
-			if(config.app_proxy_port!=80) {
+			if(config.app_proxy_port!==80) {
 				url	+=":"+config.app_proxy_port;
 			}
 			async.each(registrations, function(registration, mycallback) {
@@ -52,7 +52,7 @@
 		if(config.app_cron === 'true') {
 			logger.debug("Cron is enabled");
 			var CronJob = require('cron').CronJob;
-			new CronJob('0 * * * * *', function() {
+			var GmailJob = new CronJob('0 * * * * *', function() {
 				logger.info('You will see this message every minute');
 				cronconfig.sendregistrationmails(logger,config,models,function(err) {
 					if(err) {

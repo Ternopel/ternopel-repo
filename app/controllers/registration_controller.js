@@ -18,7 +18,7 @@ module.exports = {
 			if(err) {
 				return next(err);
 			}
-			if(registrations.length==0) {
+			if(registrations.length===0) {
 				return next('Su token es inválido !');
 			}
 			var registration = registrations[0];
