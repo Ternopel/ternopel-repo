@@ -59,7 +59,8 @@
 		app.get		( '/registration/:token',				controllers.registration.get_registration);
 		app.post	( '/registration',						controllers.registration.post_registration);
 		app.post	( '/confirm',							controllers.registration.post_confirm);
-		
+
+		app.get		( '/privacy/datapolicy',				controllers.privacy.get_data_policy);
 		
 		app.get		( '/logout',							controllers.logout.get_logout);
 

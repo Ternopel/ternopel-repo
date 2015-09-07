@@ -5,7 +5,7 @@
 	</head>
 	<body>
 		<br>
-		<table>
+		<table style="font-family: Helvetica, Arial;">
 			{{for categories}}
 				<tr>
 					<td><h4>Categor&iacute;a:{{:name}}</h4></td>
@@ -18,16 +18,16 @@
 								<th style='text-align: left;'><h5>Formatos</h5></th>
 							</tr>
 							{{for products}}
-							<tr>
-								<td><h6>{{:name}}</h6></td>
-								<td>
-									<table>
-										{{for productsformats}}
-											<tr><td><h6>{{:retaildescription}} ${{:retail}}, {{:wholesaledescription}} ${{:wholesale}}</h6></td></tr>
-										{{/for}}
-									</table>
-								</td>
-							</tr>
+								<tr>
+									<td valign="top"><h6 style="margin-top:3px;">{{:name}}</h6></td>
+									<td>
+										<table>
+											{{for productsformats}}
+												<tr><td><h6 style="margin: 0;">{{:retaildescription}} ${{:retail}}, {{:wholesaledescription}} ${{:wholesale}}</h6></td></tr>
+											{{/for}}
+										</table>
+									</td>
+								</tr>
 							{{/for}}
 						</table>
 					</td>

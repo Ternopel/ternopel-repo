@@ -93,7 +93,7 @@
 							<input type="text" placeholder="su email"><button class="subscribe-btn">Enviar</button>
 						</div>
 						<div class="subscribe-checkbox">
-							<input type="checkbox"><span>He leido y estoy conforme con la <a href="#">Politica de proteccion de Datos</a></span>
+							<input type="checkbox"><span>He leido y estoy conforme con la <a href="/privacy/datapolicy">Política de protección de Datos</a></span>
 						</div>
 					</div>
 				</section>
@@ -107,30 +107,32 @@
 						</ul>
 					</div>
 					<div class="footer-links">
-						<h4>Infomacion</h4>
+						<h4>Informacion</h4>
 						<ul>
 							<li><a href="#">Contacte con nostros</a></li>
-							<li><a href="#">Envios y Devoluciones</a></li>
+							<li><a href="#">Envíos y Devoluciones</a></li>
 							<li><a href="#">Quienes somos</a></li>
-							<li><a href="#">Avisio legal</a></li>
+							<li><a href="#">Aviso legal</a></li>
 							<li><a href="#">Condiciones generales</a></li>
 							<li><a href="#">Formas de pago</a></li>
-							<li><a href="#">Proteccion de datos</a></li>
-							<li><a href="#">Politica de Cookies</a></li>
-							<li><a href="#">Descuentos</a></li>
+							<li><a href="/privacy/datapolicy">Protección de datos</a></li>
+							<li><a href="/privacy/datapolicy">Política de Cookies</a></li>
+							<li><a href="/?posters=false">Ofertas</a></li>
 							<li><a href="#">Preguntas Frecuentes</a></li>
 							<li><a href="#">Mapa del sitito</a></li>
 						</ul>
 					</div>
-					<div class="footer-links">
-						<h4>Mi Cuenta</h4>
-						<ul>
-							<li><a href="#">Mis pedidos</a></li>
-							<li><a href="#">Mis vales descuento</a></li>
-							<li><a href="#">Mis direcciones</a></li>
-							<li><a href="#">Mis datos presonales</a></li>
-						</ul>
-					</div>
+					{{?it.is_logged_in}}
+						<div class="footer-links">
+							<h4>Mi Cuenta</h4>
+							<ul>
+								<li><a href="#">Mis pedidos</a></li>
+								<li><a href="#">Mis vales descuento</a></li>
+								<li><a href="#">Mis direcciones</a></li>
+								<li><a href="#">Mis datos presonales</a></li>
+							</ul>
+						</div>
+					{{?}}
 					<div class="footer-links">
 						<h4>Contacte Con Nosotros</h4>
 						<ul>
