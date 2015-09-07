@@ -86,17 +86,26 @@
 			</nav>
 			{{=it.body}}
 			<footer class="main-footer">
-				<section class="footer-subscribe clear-fix">
-					<p>Subscribe a nuestras novedades y ofertas</p>
-					<div class="subscribe-form">
-						<div class="subscribe-input clear-fix">
-							<input type="text" placeholder="su email"><button class="subscribe-btn">Enviar</button>
+				{{?!it.is_logged_in}}
+					<section class="footer-subscribe clear-fix">
+						<p>Subscribe a nuestras novedades y ofertas</p>
+						<div class="subscribe-form">
+						
+							<form id="mailing_form" method="post">
+								<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+								<div class="subscribe-input clear-fix">
+									<span class="form-error" id="email_address_error"></span>
+									<input type="text" name="email_address">
+									<button class="subscribe-btn" name="mailingbutton">Enviar</button>
+								</div>
+								<div class="subscribe-checkbox">
+									<span class="form-error" id="mailing_read_privacy_error"></span>
+									<input type="checkbox" name="mailing_read_privacy"><span>He leido y estoy conforme con la <a href="/privacy/datapolicy">Política de protección de Datos</a></span>
+								</div>
+							</form>
 						</div>
-						<div class="subscribe-checkbox">
-							<input type="checkbox"><span>He leido y estoy conforme con la <a href="/privacy/datapolicy">Política de protección de Datos</a></span>
-						</div>
-					</div>
-				</section>
+					</section>
+				{{?}}
 				<section class="footer-columns clear-fix">
 					<div class="footer-links">
 						<h4>Categorias</h4>

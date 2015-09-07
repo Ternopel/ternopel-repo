@@ -78,7 +78,7 @@ INSERT INTO packaging (id,name) VALUES
 (5,'Kilo');
 
 /* Registrations */
-INSERT INTO registrations (email_address,token,sent) 
+INSERT INTO registrations (email_address,token,verified) 
 VALUES ('demostenes1509@gmail.com','3041bd90-5397-11e5-9650-9bf126a5d21f',false);
 
 /* Bandas elasticas */

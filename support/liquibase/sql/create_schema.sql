@@ -9,6 +9,7 @@ CREATE SEQUENCE users_sequence start with 1000;
 CREATE SEQUENCE registrations_sequence start with 1000;
 CREATE SEQUENCE users_sessions_sequence start with 1000;
 CREATE SEQUENCE posters_sequence start with 1000;
+CREATE SEQUENCE mailing_sequence start with 1000;
 
 /* Create Tables */
 
@@ -93,7 +94,16 @@ CREATE TABLE registrations
 	id bigint DEFAULT nextval('registrations_sequence') NOT NULL,
 	email_address varchar(256) NOT NULL,
 	token varchar(255) NOT NULL UNIQUE,
-	sent boolean NOT NULL default false,
+	verified boolean NOT NULL default false,
+	PRIMARY KEY (id)
+) WITHOUT OIDS;
+
+CREATE TABLE mailing
+(
+	id bigint DEFAULT nextval('mailing_sequence') NOT NULL,
+	email_address varchar(256) NOT NULL,
+	token varchar(255) NOT NULL UNIQUE,
+	verified boolean NOT NULL default false,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
@@ -155,7 +165,6 @@ ALTER TABLE users
 	ON DELETE RESTRICT
 ;
 
-
 ALTER TABLE users_sessions
 	ADD FOREIGN KEY (user_id)
 	REFERENCES users (id)
@@ -194,7 +203,7 @@ SELECT	pf.id AS pf_id,
 		c.url AS c_url,
 		pk.id AS pk_id,
 		pk.name AS pk_name
-FROM		products_formats pf, products p, categories c, packaging pk
+FROM	products_formats pf, products p, categories c, packaging pk
 WHERE	pf.product_id	= p.id	AND
 		p.category_id	= c.id	AND
 		p.packaging_id	= pk.id;

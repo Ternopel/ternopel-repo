@@ -2,9 +2,9 @@
 
 module.exports = function (orm, db, models,logger) {
 
-	logger.debug("Configuring registrations");
+	logger.debug("Configuring mailing");
 	var constants = require('../../utils/constants');
-	models.registrations = db.define("registrations", { 
+	models.mailing = db.define("mailing", { 
 			id:				{ type: 'serial', key: true}, 
 			token:		 	{ type: 'text', required: true },
 			email_address: 	{ type: 'text', required: true },

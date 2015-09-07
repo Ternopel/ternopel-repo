@@ -405,7 +405,7 @@ var request		= require('supertest'),
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
-						'registration_email_address' : 'mcarrizo@gmail.com',
+						'email_address' : 'mcarrizo@gmail.com',
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(500)
@@ -420,7 +420,7 @@ var request		= require('supertest'),
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
-						'registration_email_address' : 'nicasio@gmail.com',
+						'email_address' : 'nicasio@gmail.com',
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(200)
@@ -443,6 +443,65 @@ var request		= require('supertest'),
 			return done(err);
 		});
 	};	
+
+	testsregistration.registerNewMailingUser = function (done) {
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/login')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/mailing')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'mcarrizo@gmail.com',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Debe marcar que ha leído las Políticas de Privacidad');
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/mailing')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'nicasio@gmail.com',
+						'mailing_read_privacy' : 'true',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('nicasio@gmail.com');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/mailsent/nicasio@gmail.com')
+					.end(function(err, newres){
+						expect(newres.text).toInclude('Se ha enviado un correo de confirmación a <b>nicasio@gmail.com</b>');
+						return callback(err,res);
+					});
+			}
+		], 
+		function(err) {
+			return done(err);
+		});
+	};	
+	
 	
 	testsregistration.adminWithNoPermissions = function (done) {
 		

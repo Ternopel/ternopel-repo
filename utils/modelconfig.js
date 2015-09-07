@@ -33,6 +33,7 @@
 				require('../app/models/userssessions.js')(orm,db,models,logger);
 				require('../app/models/posters.js')(orm,db,models,logger);
 				require('../app/models/registrations.js')(orm,db,models,logger);
+				require('../app/models/mailing.js')(orm,db,models,logger);
 
 				return callback(app,db,models);
 			}

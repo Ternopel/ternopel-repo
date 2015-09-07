@@ -4,6 +4,73 @@ var cipher	= require('../../utils/cipher'),
 	utils	= require('./utils'),
 	ld		= require('lodash');
 
+
+function save_email(req, res, next, is_registration) {
+
+	var email_address			= req.body.email_address;
+	var mailing_read_privacy	= req.body.mailing_read_privacy;
+	req.logger.debug('User trying to register:'+req.body.email_address);
+	
+	req.logger.debug("Defining validators");
+	req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
+	if(is_registration===false) {
+		req.assert('mailing_read_privacy', 'Debe marcar que ha leído las Políticas de Privacidad').notEmpty();
+	}
+	
+	req.logger.info("Executing validation");
+	var valerrors = req.validationErrors();
+	if(valerrors) {
+		return utils.send_ajax_validation_errors(req,res,valerrors);
+	}
+	
+	var waterfall = require('async-waterfall');
+	waterfall([ 
+		function(callback) {
+			req.logger.debug('Searching for existing user');
+			req.models.users.find({email_address: email_address}, function(err,user) {
+				if(err) {
+					return callback(err);
+				}
+				if(user.length===1) {
+					return callback('Usuario ya existente');
+				}
+				else {
+					return callback(null,null);
+				}
+			});
+		}, 
+		function(user,callback) {
+			if(is_registration===true) {
+				req.logger.debug('Registracion de usuario !');
+				req.logger.info('Registrando user '+email_address);
+				var token	= require('node-uuid').v1();
+				req.models.registrations.create({	email_address:	email_address, token:token, verified:false },function(err,registration) {
+					return callback(err,registration);
+				});
+			}
+			else {
+				req.logger.debug('Mailing de usuario !');
+				req.logger.info('Mailing user '+email_address);
+				var token	= require('node-uuid').v1();
+				req.models.mailing.create({	email_address:	email_address, token:token, verified:false },function(err,mailing) {
+					return callback(err,mailing);
+				});
+			}
+		}
+	], 
+	function(err, user) {
+		req.logger.debug('Finalizacion de registration');
+		if(err) {
+			req.logger.debug('Error por enviar al cliente:'+err);
+			return utils.send_ajax_error(req,res,err);
+		}
+		else {
+			req.logger.debug('Registracion exitosa !');
+			return res.status(200).send(email_address);
+		}
+	});
+}
+
 module.exports = {
 	
 	get_login: function(req, res, next) {
@@ -103,12 +170,6 @@ module.exports = {
 		});
 	},	
 	
-	
-	
-	
-	
-	
-	
 	post_login: function(req, res, next) {
 
 		var email_address	= req.body.email_address;
@@ -181,54 +242,10 @@ module.exports = {
 	},
 	
 	post_registration: function(req, res, next) {
-		
-		var email_address	= req.body.registration_email_address;
-		req.logger.debug('User trying to register:'+req.body.registration_email_address);
-		
-		req.logger.debug("Defining validators");
-		req.assert('registration_email_address', 'El email ingresado es incorrecto').isEmail();
-		
-		req.logger.info("Executing validation");
-		var valerrors = req.validationErrors();
-		if(valerrors) {
-			return utils.send_ajax_validation_errors(req,res,valerrors);
-		}
-		
-		var waterfall = require('async-waterfall');
-		waterfall([ 
-			function(callback) {
-				req.logger.debug('Searching for existing user');
-				req.models.users.find({email_address: email_address}, function(err,user) {
-					if(err) {
-						return callback(err);
-					}
-					if(user.length===1) {
-						return callback('Usuario ya existente');
-					}
-					else {
-						return callback(null,null);
-					}
-				});
-			}, 
-			function(user,callback) {
-				req.logger.debug('Registracion de usuario !');
-				req.logger.info('Registrando user '+email_address);
-				var token	= require('node-uuid').v1();
-				req.models.registrations.create({	email_address:	email_address, token:token, sent:false },function(err,registration) {
-					return callback(err,registration);
-				});
-			}
-		], 
-		function(err, user) {
-			req.logger.debug('Finalizacion de registration');
-			if(err) {
-				req.logger.debug('Error por enviar al cliente:'+err);
-				return utils.send_ajax_error(req,res,err);
-			}
-			else {
-				req.logger.debug('Registracion exitosa !');
-				return res.status(200).send(email_address);
-			}
-		});
+		return save_email(req, res, next, true);
+	},
+	
+	post_mailing: function(req, res, next) {
+		return save_email(req, res, next, false);
 	}
 };

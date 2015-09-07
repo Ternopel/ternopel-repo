@@ -14,7 +14,7 @@
 			}
 		});		
 		
-		models.registrations.find({sent:false},function(err,registrations) {
+		models.registrations.find({verified:false},function(err,registrations) {
 			if(err) {
 				return callback(err);
 			}
@@ -36,7 +36,7 @@
 					}
 					else{
 						logger.info("Message sent: " + response.message);
-						registration.sent = true;
+						registration.verified = true;
 						registration.save(function(err) {
 							return mycallback(err);
 						});

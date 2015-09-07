@@ -55,3 +55,20 @@ $(function () {
 		}
 	});
 });
+
+
+$(function () {
+	var $form = $('#mailing_form');
+	$form.find('button[name="mailingbutton"]').click(function() {
+		clear_error_fields($form);
+		make_form('/mailing','mailing_form', 
+			function (successresponse) {
+				window.location.href	= '/mailsent/'+successresponse;
+			},
+			function (errorresponse) {
+				show_error_messages(errorresponse);
+			}
+		);
+		return false;
+	});
+});
