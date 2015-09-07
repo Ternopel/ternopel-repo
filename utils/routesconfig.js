@@ -3,7 +3,7 @@
 (function (routesconfig) {
 		
 	function restrict(req, res, next) {
-		if (req.path.indexOf("/admin")===(0)) {
+		if (req.path.indexOf("/admin")===(0) || req.path.indexOf("/report")===(0)) {
 			if(req.pageinfo.is_logged_in === true && req.pageinfo.is_admin === true) {
 				next();
 			}
