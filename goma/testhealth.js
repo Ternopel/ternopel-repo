@@ -9,8 +9,8 @@ var request		= require('supertest'),
 (function (testhealth) {
 
 	testhealth.getHealth = function (done) {
-		logger.info('Executing get to server');
-		request("http://localhost:"+config.test_app_port)
+		logger.info('Executing get to server:');
+		request("http://localhost:"+config.test_app_http_port)
 			.get('/health')
 			.expect(200)
 			.end(function(err, res){

@@ -15,7 +15,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -23,7 +23,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server:'+utils.getcsrf(res));
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -40,7 +40,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating product picture');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
-					request("http://localhost:"+config.test_app_port)
+					request("http://localhost:"+config.test_app_http_port)
 						.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 						.set('cookie', utils.getcookies(res))
 						.field('product_id', '1')
@@ -56,7 +56,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Updating product picture');
 				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
-					request("http://localhost:"+config.test_app_port)
+					request("http://localhost:"+config.test_app_http_port)
 						.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 						.set('cookie', utils.getcookies(res))
 						.field('product_id', '1')
@@ -71,7 +71,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Getting product picture');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/images/productspictures/1')
 				.expect(200)
 				.end(function(err,newres) {
@@ -80,7 +80,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Getting non existing product picture with default picture');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/images/productspictures/2')
 				.expect(200)
 				.end(function(err,newres) {

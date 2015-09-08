@@ -5,29 +5,36 @@ var logger		= require("./utils/logger"),
 	cronconfig	= require("./utils/cronconfig"),
 	app			= require("./app.js"),
 	fs			= require('fs'),
-	http		= require('http');
-//	https		= require('https');
+	http		= require('http'),
+	https		= require('https');
 	
-//var options = {
-//	key: fs.readFileSync('support/key/server.key'),
-//	cert: fs.readFileSync('support/key/server.crt'),
-//	ca: fs.readFileSync('support/key/ca.crt'),
-//	requestCert: true,
-//	rejectUnauthorized: false
-//};
+var options = {
+	key: fs.readFileSync('support/key/server.key'),
+	cert: fs.readFileSync('support/key/server.crt'),
+	ca: fs.readFileSync('support/key/ca.crt'),
+	requestCert: true,
+	rejectUnauthorized: false
+};
 
 logger.info("Creating express app");
 app.init(logger,config, function(app,db,models) {
 	
-	
-	logger.info("Creating server");
-//	var server = https.createServer(options);
-	var server = http.createServer();
-	server.on('request',app);
+	logger.info("Creating server https");
+	var serverhttps = https.createServer(options);
+	serverhttps.on('request',app);
 
-	logger.info("Starting server");
-	server.listen(config.app_port,function() {
-		logger.info('Listening on port:'+server.address().port);
+	logger.info("Creating server http");
+	var serverhttp = http.createServer();
+	serverhttp.on('request',app);
+	
+	logger.info("Starting server https");
+	serverhttps.listen(config.app_https_port,function() {
+		logger.info('Listening https on port:'+serverhttps.address().port);
+	});
+	
+	logger.info("Starting server http");
+	serverhttp.listen(config.app_http_port,function() {
+		logger.info('Listening http on port:'+serverhttp.address().port);
 	});
 	
 	logger.info("Configuring cron");

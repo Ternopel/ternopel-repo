@@ -29,7 +29,8 @@ describe('Users creation', function() {
 		
 		config.app_run_liquibase			= 'false';
 		config.app_cron						= 'false';
-		config.app_port						= config.test_app_port;
+		config.app_redirect_to_https		= 'false';
+		config.app_http_port				= config.test_app_http_port;
 		config.db_database					= config.test_db_database;
 		config.db_show_sql					= config.test_db_show_sql;
 		config.db_liquibase_xml				= config.test_db_liquibase_xml;
@@ -42,7 +43,7 @@ describe('Users creation', function() {
 			
 			testsendemail.setModels(models);
 			
-			server	= app.listen(config.test_app_port, function() {
+			server	= app.listen(config.app_http_port, function() {
 				logger.info('Listening on port:'+server.address().port);
 				return done();
 			});
