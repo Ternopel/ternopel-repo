@@ -19,6 +19,7 @@ var testsproductsformats	= require(__dirname+'/../goma/testsproductsformats');
 var testsproductspictures	= require(__dirname+'/../goma/testsproductspictures');
 var testsposters			= require(__dirname+'/../goma/testsposters');
 var testsendemail			= require(__dirname+'/../goma/testssendemail');
+var testprivacy				= require(__dirname+'/../goma/testprivacy');
 
 describe('Users creation', function() {
 	
@@ -136,6 +137,10 @@ describe('Users creation', function() {
  	// Health check
 	if(runTests) {
 		it('Health check', testhealth.getHealth);
+	}
+
+	if(runTests) {
+		it('Privacy', testprivacy.getPrivacy);
 	}
  	
  	// Report test

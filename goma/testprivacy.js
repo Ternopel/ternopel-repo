@@ -6,15 +6,15 @@ var request		= require('supertest'),
 	logger		= require(__dirname+'/../utils/logger'),
 	config		= require(__dirname+"/../utils/config")();
 
-(function (testhealth) {
+(function (testprivacy) {
 
-	testhealth.getHealth = function (done) {
+	testprivacy.getPrivacy = function (done) {
 		logger.info('Executing get to server');
 		request("http://localhost:"+config.test_app_port)
-			.get('/health')
+			.get('/privacy/datapolicy')
 			.expect(200)
 			.end(function(err, res){
-				expect(res.text).toBe('OK');
+				expect(res.text).toInclude('Declaración de Política de Privacidad de PapeleraTernopel');
 				return done(err);
 			});
 	};
