@@ -10,7 +10,7 @@ var request		= require('supertest'),
 
 	testprivacy.getPrivacy = function (done) {
 		logger.info('Executing get to server');
-		request("http://localhost:"+config.test_app_http_port)
+		request("http://localhost:"+config.test_app_port)
 			.get('/privacy/datapolicy')
 			.expect(200)
 			.end(function(err, res){

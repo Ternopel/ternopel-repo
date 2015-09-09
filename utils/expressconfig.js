@@ -4,22 +4,6 @@
 
 	expressconfig.init = function (app, express, logger, config) {
 		
-		if(config.app_redirect_to_https==='true') {
-			logger.debug("Forward to https if request comes from http");
-			app.use(function(req,res,next) {
-				if (!/https/.test(req.protocol)){
-					var port="";
-					if(config.app_https_port!==443) {
-						port=":"+config.app_https_port;
-					}
-					res.redirect(301,"https://"+req.hostname+port+ req.url);
-				} 
-				else {
-					return next();
-				}
-			});
-		}
-		
 		logger.debug("Setting 'winston' logger");
 		app.use(logger.expressLogger);
 		app.use(function(req, res, next) {

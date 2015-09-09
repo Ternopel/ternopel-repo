@@ -14,7 +14,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_http_port)
+				request("http://localhost:"+config.test_app_port)
 					.get('/')
 					.expect(200)
 					.end(function(err, res){
@@ -24,7 +24,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_http_port)
+				request("http://localhost:"+config.test_app_port)
 					.get('/')
 					.set('cookie', 'ter_token=notoken')
 					.expect(200)
@@ -45,7 +45,7 @@ var request		= require('supertest'),
 		waterfall([ 
 		           function(callback) {
 		        	   logger.info('Executing get to server');
-		        	   request("http://localhost:"+config.test_app_http_port)
+		        	   request("http://localhost:"+config.test_app_port)
 		        	   .get('/')
 		        	   .expect(200)
 		        	   .end(function(err, res){
@@ -55,7 +55,7 @@ var request		= require('supertest'),
 		           },
 		           function(res,callback) {
 		        	   logger.info('Executing get to server');
-		        	   request("http://localhost:"+config.test_app_http_port)
+		        	   request("http://localhost:"+config.test_app_port)
 		        	   .get('/search/bolsa')
 		        	   .set('cookie', 'ter_token=notoken')
 		        	   .expect(200)
@@ -75,7 +75,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_http_port)
+				request("http://localhost:"+config.test_app_port)
 					.get('/bandas-elasticas')
 					.expect(200)
 					.end(function(err, res){
@@ -95,7 +95,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_http_port)
+				request("http://localhost:"+config.test_app_port)
 					.get('/no-existing-category')
 					.expect(200)
 					.end(function(err, res){
@@ -114,7 +114,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_http_port)
+				request("http://localhost:"+config.test_app_port)
 					.get('/bandas-elasticas/bolsa-bandas-elasticas')
 					.expect(200)
 					.end(function(err, res){
@@ -134,7 +134,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_http_port)
+				request("http://localhost:"+config.test_app_port)
 					.get('/no-existing-category/no-existing-product')
 					.expect(200)
 					.end(function(err, res){
@@ -151,17 +151,17 @@ var request		= require('supertest'),
 	testshome.getNoPosters = function (done) {
 		var waterfall = require('async-waterfall');
 		waterfall([ 
-		           function(callback) {
-		        	   logger.info('Executing get to server');
-		        	   request("http://localhost:"+config.test_app_http_port)
-		        	   .get('/?posters=false')
-		        	   .expect(200)
-		        	   .end(function(err, res){
-		        		   return callback(err,res);
-		        	   });
-		           }
-		           ], 
-		           function(err) {
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/?posters=false')
+					.expect(200)
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}
+		], 
+		function(err) {
 			return done(err);
 		});
 	};
