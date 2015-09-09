@@ -12,7 +12,7 @@
 					if(config.app_https_port!==443) {
 						port=":"+config.app_https_port;
 					}
-					res.redirect("https://"+req.hostname+port+ req.url);
+					res.redirect(301,"https://"+req.hostname+port+ req.url);
 				} 
 				else {
 					return next();
