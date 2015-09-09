@@ -7,6 +7,11 @@
 		logger.debug("Setting 'winston' logger");
 		app.use(logger.expressLogger);
 		app.use(function(req, res, next) {
+			
+			logger.info("==================================");
+			logger.info(JSON.stringify(req.headers));
+			logger.info("==================================");
+			
 			req.logger	= logger;
 			req.config	= config;
 			next();
