@@ -4,14 +4,19 @@
 
 	expressconfig.init = function (app, express, logger, config) {
 		
+		logger.debug("Forward to https if request comes from http ( Amazon only ! )");
+		app.use(function(req,res,next) {
+			if(req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto']==='http') {
+				res.redirect("https://"+req.host+req.url);
+			}
+			else {
+				return next();
+			}
+		});
+		
 		logger.debug("Setting 'winston' logger");
 		app.use(logger.expressLogger);
 		app.use(function(req, res, next) {
-			
-			logger.info("==================================");
-			logger.info(JSON.stringify(req.headers));
-			logger.info("==================================");
-			
 			req.logger	= logger;
 			req.config	= config;
 			next();
