@@ -2,10 +2,12 @@
 
 - Mejorar la pagina de llamaremos al CUCO
 - Login Facebook
-- Manejo de https. Como hacerlo ?
 - Refactor de forms
-- Usar views para busquedas especiales
 - Grabar imagenes en tamaño correcto
+- Agregar fecha de nacimiento, 
+	- Check Recibir novedades de ternopel
+	- Check Ofertas y promociones especiales
+	
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
