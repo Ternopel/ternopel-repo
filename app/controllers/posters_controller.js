@@ -108,7 +108,19 @@ module.exports = {
 			
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
-			}			
+			}
+			
+			var ifModifiedSince = req.headers['If-Modified-Since'];
+			if(ifModifiedSince) {
+				var ifModifiedSinceDate = new Date(ifModifiedSince);
+				req.logger.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+				req.logger.info(ifModifiedSinceDate);
+				req.logger.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+			}
+			
+			req.logger.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+			req.logger.info(JSON.stringify(poster.last_update));
+			req.logger.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
 			var picture_name=req.config.app_posters_imgs_dir+"/"+id;
 			var content_type=poster.content_type;

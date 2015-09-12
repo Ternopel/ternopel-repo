@@ -7,6 +7,7 @@
 - Agregar fecha de nacimiento, 
 	- Check Recibir novedades de ternopel
 	- Check Ofertas y promociones especiales
+- Usar el audit en chrome para optimizar la pagina ( agregar las properties de cache en las imagenes )	
 	
 
 research Prod start and stop
@@ -15,8 +16,6 @@ research Prod start and stop
 
 Pendientes Mike !
     1) Small thing. Can you add a yellow band in the top of the layout saying "En construcción" ( Under construction )
-	2) Pedirle lo del ojito
-	3) La tabla del reporte
 
 	SSL
 	
