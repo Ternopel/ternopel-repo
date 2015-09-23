@@ -20,8 +20,8 @@
 			}
 			
 			var async	= require('async');
-			var url		= "http://"+config.app_proxy_host;
-			if(config.app_proxy_port!==80) {
+			var url		= "https://"+config.app_proxy_host;
+			if(config.app_proxy_port!==443) {
 				url	+=":"+config.app_proxy_port;
 			}
 			async.each(registrations, function(registration, mycallback) {
