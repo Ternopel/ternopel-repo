@@ -1,0 +1,75 @@
+<section class="page-container clear-fix">
+	{{#def.load('admin_menu.html')}}
+	<section class="authentication-section">
+		<div class="authentication-forms clear-fix">
+			<h2 class="main-title">{{=it.operation}} de Producto</h2>
+			<div class="new-customer">
+				<h3 class="form-header">Complete sus datos</h3>
+				<form id='confirm_form' method="post">
+					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+				
+					<label>Nombre<span class="form-error" id="name_error"></span></label>
+					<input type="text" class="customer-email" name="name" value="{{=it.currentproduct.name}}" >
+
+					<label>Url<span class="form-error" id="url_error"></span></label>
+					<input type="text" class="customer-email" name="url" value="{{=it.currentproduct.url}}" >
+
+					<label>Es visible ?</label>
+					{{?it.currentproduct.is_visible}}
+						<input type="checkbox" name="is_visible" checked="checked"/>
+					{{??}}
+						<input type="checkbox" name="is_visible" />
+					{{?}}
+					
+					<label>Es oferta ?</label>
+					{{?it.currentproduct.is_offer}}
+						<input type="checkbox" name="is_offer" checked="checked"/>
+					{{??}}
+						<input type="checkbox" name="is_offer" />
+					{{?}}
+					
+					<label>Categoría<span class="form-error" id="category_id_error"></span></label>
+					<select>
+						{{~ it.categories:category}}
+							{{? category.id === it.currentproduct.category_id}}
+								<option value="{{=category.id}}" selected="selected">{{=category.name}}</option>
+							{{??}}
+								<option value="{{=category.id}}">{{=category.name}}</option>
+							{{?}}
+						{{~}}
+					</select> 				
+					
+					<label>Packaging<span class="form-error" id="packaging_id_error"></span></label>
+					<select>
+						{{~ it.packaging:packaging}}
+							{{? packaging.id === it.currentproduct.packaging_id}}
+								<option value="{{=packaging.id}}" selected="selected">{{=packaging.name}}</option>
+							{{??}}
+								<option value="{{=packaging.id}}">{{=packaging.name}}</option>
+							{{?}}
+						{{~}}
+					</select> 				
+					
+					
+
+
+
+					<!-- 
+					<label>Apellido<span class="form-error" id='last_name_error'></span></label>
+					<input type="text" class="customer-email" name="last_name">
+
+					<label>Nombre<span class="form-error" id='first_name_error'></span></label>
+					<input type="text" class="customer-email" name="first_name">
+
+					<label>Contraseña<span class="form-error" id='password_error'></span></label>
+					<input type="password" class="customer-password" name="password">
+
+					<button type="submit" class="form-btn" name="confirm">Registración</button>
+					 -->
+				</form>
+			</div>
+		</div>
+	</section>
+
+
+</section>

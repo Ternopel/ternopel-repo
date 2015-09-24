@@ -1,4 +1,12 @@
 <div class='content'>
+
+	{{?it.is_logged_in}}
+		{{?it.is_admin}}
+			<a href="/admin/products/edit?productid={{=it.currentproduct.id}}">Editar Producto</a>
+		{{?}}
+	{{?}}	
+
+
 	<h1>{{=it.currentproduct.name}}</h1>
 	<img src="/images/products/{{=it.currentproduct.id}}.jpg" width="200px" height="200px"></img>
 </div>

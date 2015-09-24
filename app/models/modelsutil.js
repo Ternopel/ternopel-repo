@@ -88,19 +88,7 @@ function fillProductFormat(product,productformat) {
 						return callback(err);
 					}
 					productformats.forEach(function(productformat) {
-						var retaildescription		= '';
-						var wholesaledescription	= '';
-						if(productformat.quantity===1) {
-							retaildescription += product.packaging.name;
-						}
-						else {
-							retaildescription += productformat.quantity + product.packaging.name + 's';
-						}
-						retaildescription		+= ' de ' + productformat.format + ' a ';
-						wholesaledescription	+= productformat.units + ' ' + product.packaging.name + 's a ';
-						
-						productformat.retaildescription		= retaildescription;
-						productformat.wholesaledescription	= wholesaledescription;
+						fillProductFormat(product,productformat);
 					});
 					req.logger.debug("Product:"+product.name+" Formats readed:"+productformats.length);
 					ld.merge(product, {productformats:productformats});

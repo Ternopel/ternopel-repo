@@ -1,4 +1,11 @@
 <section class="main-content">
+
+	{{?it.is_logged_in}}
+		{{?it.is_admin}}
+			<a href="/admin/products/add?categoryid={{=it.currentcategory.id}}">Crear Producto</a>
+		{{?}}
+	{{?}}	
+
 	<div class="main-products">
 		<h2 class="main-title">{{=it.currentcategory.name}}</h2>
 		<ul class="main-products-list clear-fix" id="ulproducts">

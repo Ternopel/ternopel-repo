@@ -5,6 +5,7 @@ module.exports = {
 	admin:				require('./admin_controller'),
 	categories:			require('./categories_controller'),
 	products:			require('./products_controller'),
+	newproducts:		require('./new_products_controller'),
 	productsformats:	require('./productsformats_controller'),
 	productspictures:	require('./productspictures_controller'),
 	report:				require('./report_controller'),

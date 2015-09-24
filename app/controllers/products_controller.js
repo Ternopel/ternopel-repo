@@ -5,7 +5,7 @@ var utils	= require('./utils');
 module.exports = {
 	get_products: function(req, res, next) {
 		if(typeof req.query.search === 'undefined') {
-			return next('No se encontro parámetro de búsqueda');
+			return next('No se encontró parámetro de búsqueda');
 		}
 		var ld			= require('lodash');
 		var pageinfo	= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(),search: req.query.search});
@@ -226,10 +226,6 @@ module.exports = {
 			req.logger.debug('Returning success');
 			return res.status(200).send('success');
 		});
-		
-		
-		
-		
 	}
 };
 
