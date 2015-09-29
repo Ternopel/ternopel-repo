@@ -98,6 +98,14 @@ module.exports = {
 		}
 		
 		get_product(req,res,next,false);
+	},
+	
+	post_edit_product: function(req, res, next) {
+		
+	},
+	
+	put_edit_product: function(req, res, next) {
+		
 	}
 };
 

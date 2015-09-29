@@ -156,4 +156,28 @@ $(function () {
 	});
 });
 
+function submitForm(formid) {
+	
+	$.ajax({
+		url : form.attr('action'),
+		type : form.attr('method'),
+		data: form.serialize(),
+		success : function (entity) {
+			console.log(entity);
+			window.location.reload(true);
+		},
+		error : function(errorresponse) {
+			show_error_messages(errorresponse);
+		}
+	});
+}
+
+
+//Add product
+$(function () {
+	alert('ACA1');
+	$("button[name='saveProduct']").click(function () {
+		submitForm('save_product');
+	});
+});
 

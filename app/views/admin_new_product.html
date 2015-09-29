@@ -1,3 +1,7 @@
+<script src='/javascript/imagecrop.min.js'></script>
+<script src='/javascript/crud.js'></script>
+<script src='/javascript/products.js'></script>
+
 <section class="page-container clear-fix">
 	{{#def.load('admin_menu.html')}}
 	<section class="authentication-section">
@@ -5,7 +9,7 @@
 			<h2 class="main-title">{{=it.operation}} de Producto</h2>
 			<div class="new-customer">
 				<h3 class="form-header">Complete sus datos</h3>
-				<form id='confirm_form' method="post">
+				<form id='save_product' method="{{=it.method}}" action="/admin/products">
 					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 				
 					<label>Nombre<span class="form-error" id="name_error"></span></label>
@@ -50,22 +54,7 @@
 						{{~}}
 					</select> 				
 					
-					
-
-
-
-					<!-- 
-					<label>Apellido<span class="form-error" id='last_name_error'></span></label>
-					<input type="text" class="customer-email" name="last_name">
-
-					<label>Nombre<span class="form-error" id='first_name_error'></span></label>
-					<input type="text" class="customer-email" name="first_name">
-
-					<label>Contraseña<span class="form-error" id='password_error'></span></label>
-					<input type="password" class="customer-password" name="password">
-
-					<button type="submit" class="form-btn" name="confirm">Registración</button>
-					 -->
+					<button type="submit" class="form-btn" name="saveProduct">Grabar</button>
 				</form>
 			</div>
 		</div>
