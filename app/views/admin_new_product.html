@@ -33,7 +33,7 @@
 					{{?}}
 					
 					<label>Categoría<span class="form-error" id="category_id_error"></span></label>
-					<select>
+					<select name="category_id">
 						{{~ it.categories:category}}
 							{{? category.id === it.currentproduct.category_id}}
 								<option value="{{=category.id}}" selected="selected">{{=category.name}}</option>
@@ -44,7 +44,7 @@
 					</select> 				
 					
 					<label>Packaging<span class="form-error" id="packaging_id_error"></span></label>
-					<select>
+					<select name="packaging_id">
 						{{~ it.packaging:packaging}}
 							{{? packaging.id === it.currentproduct.packaging_id}}
 								<option value="{{=packaging.id}}" selected="selected">{{=packaging.name}}</option>

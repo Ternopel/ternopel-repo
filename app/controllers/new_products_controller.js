@@ -51,6 +51,7 @@ var get_product = function(req, res, next, is_new) {
 					return callback(err);
 				}
 				req.logger.debug('Packaging readed:'+packaging.length);
+				packaging.unshift(ld.merge({id:"", name:"Ingrese packaging"}));
 				ld.merge(pageinfo, {packaging:packaging});
 				return callback();
 			});
@@ -62,6 +63,8 @@ var get_product = function(req, res, next, is_new) {
 					return callback(err);
 				}
 				req.logger.debug('Categories readed:'+categories.length);
+				categories.unshift(ld.merge({id:"", name:"Ingrese categoría"}));
+				req.logger.info(JSON.stringify(categories));
 				ld.merge(pageinfo, {categories:categories});
 				return callback();
 			});
@@ -101,6 +104,18 @@ module.exports = {
 	},
 	
 	post_edit_product: function(req, res, next) {
+		
+		req.logger.info("En POST products");
+
+		req.assert('name',			'Nombre es requerido').notEmpty();
+		req.assert('url',			'Url es requerido').notEmpty();
+		req.assert('category_id',	'Seleccione categoría').notEmpty();
+		req.assert('packaging_id',	'Seleccione packaging').notEmpty();
+
+		var valerrors = req.validationErrors();
+		if(valerrors) {
+			return utils.send_ajax_validation_errors(req,res,valerrors);
+		}
 		
 	},
 	
