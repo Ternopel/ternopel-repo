@@ -158,6 +158,7 @@ $(function () {
 
 function submitForm(formid) {
 	
+	var form=$('form#'+formid);
 	$.ajax({
 		url : form.attr('action'),
 		type : form.attr('method'),
@@ -175,8 +176,7 @@ function submitForm(formid) {
 
 //Add product
 $(function () {
-	alert('ACA1');
-	$("button[name='saveProduct']").click(function () {
+	$("input[name='saveProduct']").click(function () {
 		submitForm('save_product');
 	});
 });
