@@ -5,14 +5,13 @@ var cipher	= require('../../utils/cipher'),
 	ld		= require('lodash');
 
 
-function save_email(req, res, next, is_registration) {
+function save_email(req, res, next, email_field, email_address, is_registration) {
 
-	var email_address			= req.body.email_address;
 	var mailing_read_privacy	= req.body.mailing_read_privacy;
 	req.logger.debug('User trying to register:'+req.body.email_address);
 	
 	req.logger.debug("Defining validators");
-	req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
+	req.assert(email_field, 'El email ingresado es incorrecto').isEmail();
 	if(is_registration===false) {
 		req.assert('mailing_read_privacy', 'Debe marcar que ha leído las Políticas de Privacidad').notEmpty();
 	}
@@ -242,10 +241,10 @@ module.exports = {
 	},
 	
 	post_registration: function(req, res, next) {
-		return save_email(req, res, next, true);
+		return save_email(req, res, next, 'regis_email_address', req.body.regis_email_address, true);
 	},
 	
 	post_mailing: function(req, res, next) {
-		return save_email(req, res, next, false);
+		return save_email(req, res, next, 'email_address', req.body.email_address, false);
 	}
 };

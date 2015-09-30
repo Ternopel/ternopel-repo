@@ -1,13 +1,12 @@
 'use strict';
 
-function make_form(url, formid, successcallback,errorcallback) {
+function make_form(formid, successcallback,errorcallback) {
 	console.log("Submitting form");
-	var form = $( '#'+formid );
-	var formdata = form.serialize();
+	var form = $('form#'+formid);
 	$.ajax({
-		url : url,
+		url : form.attr('action'),
 		type : form.attr('method'),
-		data : formdata,
+		data : form.serialize(),
 		success : successcallback,
 		error: errorcallback
 	});
@@ -23,7 +22,11 @@ function show_error_messages(errors) {
 			$("#" + error.param + "_error").html(error.msg);
 		}
 		else {
-			$("input[name='" + error.param+"']").attr("class", "form-error-input");
+			var input = $("input[name='" + error.param+"']");
+			if(!input.length) {
+				input = $("select[name='" + error.param+"']");
+			}
+			input.attr("class", "form-error-input");
 			$("#" + error.param+"_error").html(error.msg);
 		}
 	});

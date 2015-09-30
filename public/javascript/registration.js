@@ -5,10 +5,9 @@ $(function() {
 });
 
 $(function() {
-	var $form = $('#confirm_form');
-	$form.find('button[name="confirm"]').click(function() {
-		clear_error_fields($form);
-		make_form('/confirm','confirm_form', 
+	var form = $('#confirm_form');
+	form.find('button[name="confirm"]').click(function() {
+		make_form('confirm_form', 
 			function (successresponse) {
 				if ('success_admin'===successresponse) {
 					window.location.href	= '/admin';
@@ -26,10 +25,9 @@ $(function() {
 });
 
 $(function() {
-	var $form = $('#login_form');
-	$form.find('button[name="login"]').click(function() {
-		clear_error_fields($form);
-		make_form('/login','login_form', 
+	var form = $('#login_form');
+	form.find('button[name="login"]').click(function() {
+		make_form('login_form', 
 			function (successresponse) {
 				if ('success_admin'===successresponse) {
 					window.location.href	= '/admin';
@@ -47,10 +45,9 @@ $(function() {
 });
 
 $(function() {
-	var $form = $('#registration_form');
-	$form.find('button[name="registration"]').click(function() {
-		clear_error_fields($form);
-		make_form('/registration','registration_form', 
+	var form = $('#registration_form');
+	form.find('button[name="registration"]').click(function() {
+		make_form('registration_form', 
 			function (successresponse) {
 				window.location.href	= '/mailsent/'+successresponse;
 			},

@@ -7,7 +7,7 @@
 			<h2 class="main-title">Registración</h2>
 			<div class="new-customer">
 				<h3 class="form-header">Complete sus datos</h3>
-				<form id='confirm_form' method="post">
+				<form id='confirm_form' method="post" action="/confirm">
 					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 				
 					<label>Correo Electronico<span class="form-error" id="email_address_error"></span></label>

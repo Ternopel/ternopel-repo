@@ -156,28 +156,18 @@ $(function () {
 	});
 });
 
-function submitForm(formid) {
-	
-	var form=$('form#'+formid);
-	$.ajax({
-		url : form.attr('action'),
-		type : form.attr('method'),
-		data: form.serialize(),
-		success : function (entity) {
-			console.log(entity);
-			window.location.reload(true);
-		},
-		error : function(errorresponse) {
-			show_error_messages(errorresponse);
-		}
-	});
-}
-
-
 //Add product
 $(function () {
 	$("input[name='saveProduct']").click(function () {
-		submitForm('save_product');
+		make_form('save_product', 
+			function (successresponse) {
+				console.log(entity);
+				window.location.reload(true);
+			},
+			function (errorresponse) {
+				show_error_messages(errorresponse);
+			}
+		);
 	});
 });
 

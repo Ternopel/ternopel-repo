@@ -20,11 +20,6 @@ var get_product = function(req, res, next, is_new) {
 		function(callback) {
 			if(is_new) {
 				var currentproduct = ld.merge({category_id:Number(req.query.categoryid), name:'', is_visible:true, is_offer:false, url:''});
-				
-				req.logger.info('=================================================================');
-				req.logger.info(JSON.stringify(currentproduct));
-				req.logger.info('=================================================================');
-				
 				ld.merge(pageinfo, {currentproduct:currentproduct});
 				return callback();
 			}
@@ -81,8 +76,19 @@ var get_product = function(req, res, next, is_new) {
 	
 };
 
+var save_product = function(req, res, next, is_new) {
+	
+	req.assert('name',			'Nombre es requerido').notEmpty();
+	req.assert('url',			'Url es requerido').notEmpty();
+	req.assert('category_id',	'Seleccione categoría').notEmpty();
+	req.assert('packaging_id',	'Seleccione packaging').notEmpty();
 
-
+	var valerrors = req.validationErrors();
+	if(valerrors) {
+		return utils.send_ajax_validation_errors(req,res,valerrors);
+	}
+	
+};
 
 module.exports = {
 	get_add_product: function(req, res, next) {
@@ -106,20 +112,14 @@ module.exports = {
 	post_edit_product: function(req, res, next) {
 		
 		req.logger.info("En POST products");
-
-		req.assert('name',			'Nombre es requerido').notEmpty();
-		req.assert('url',			'Url es requerido').notEmpty();
-		req.assert('category_id',	'Seleccione categoría').notEmpty();
-		req.assert('packaging_id',	'Seleccione packaging').notEmpty();
-
-		var valerrors = req.validationErrors();
-		if(valerrors) {
-			return utils.send_ajax_validation_errors(req,res,valerrors);
-		}
+		save_product(req,res,next,false);
 		
 	},
 	
 	put_edit_product: function(req, res, next) {
+
+		req.logger.info("En PUT products");
+		save_product(req,res,next,true);
 		
 	}
 };
