@@ -3,6 +3,7 @@
 function make_form(formid, successcallback,errorcallback) {
 	console.log("Submitting form");
 	var form = $('form#'+formid);
+	clear_error_fields(form);
 	$.ajax({
 		url : form.attr('action'),
 		type : form.attr('method'),

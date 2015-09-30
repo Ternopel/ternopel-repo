@@ -158,7 +158,8 @@ $(function () {
 
 //Add product
 $(function () {
-	$("input[name='saveProduct']").click(function () {
+	$("button[name='saveProduct']").click(function (event) {
+		event.preventDefault();
 		make_form('save_product', 
 			function (successresponse) {
 				console.log(entity);
