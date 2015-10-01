@@ -11,6 +11,7 @@
 				<h3 class="form-header">Complete sus datos</h3>
 				<form id='save_product' method="{{=it.method}}" action="/admin/products">
 					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+					<input type='hidden' name='id' value='{{=it.currentproduct.id}}'>
 				
 					<label>Nombre<span class="form-error" id="name_error"></span></label>
 					<input type="text" class="customer-email" name="name" value="{{=it.currentproduct.name}}" >
@@ -22,14 +23,14 @@
 					{{?it.currentproduct.is_visible}}
 						<input type="checkbox" name="is_visible" checked="checked"/>
 					{{??}}
-						<input type="checkbox" name="is_visible" />
+						<input type="checkbox" name="is_visible"/>
 					{{?}}
 					
 					<label>Es oferta ?</label>
 					{{?it.currentproduct.is_offer}}
 						<input type="checkbox" name="is_offer" checked="checked"/>
 					{{??}}
-						<input type="checkbox" name="is_offer" />
+						<input type="checkbox" name="is_offer"/>
 					{{?}}
 					
 					<label>Categoría<span class="form-error" id="category_id_error"></span></label>

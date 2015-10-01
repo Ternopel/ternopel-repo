@@ -9,6 +9,7 @@
 	- Check Ofertas y promociones especiales
 - Usar el audit en chrome para optimizar la pagina ( agregar las properties de cache en las imagenes )	
 - Mailing no esta terminado. No envia el correo !	
+- Marcar con ROJO los productos no visibles pero que el admin los vea !
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",

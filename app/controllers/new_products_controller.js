@@ -19,7 +19,7 @@ var get_product = function(req, res, next, is_new) {
 	waterfall([ 
 		function(callback) {
 			if(is_new) {
-				var currentproduct = ld.merge({category_id:Number(req.query.categoryid), name:'', is_visible:true, is_offer:false, url:''});
+				var currentproduct = ld.merge({id:0, category_id:Number(req.query.categoryid), name:'', is_visible:true, is_offer:false, url:''});
 				ld.merge(pageinfo, {currentproduct:currentproduct});
 				return callback();
 			}
@@ -78,6 +78,7 @@ var get_product = function(req, res, next, is_new) {
 
 var save_product = function(req, res, next, is_new) {
 	
+	req.assert('id',			'Id es requerido').notEmpty();
 	req.assert('name',			'Nombre es requerido').notEmpty();
 	req.assert('url',			'Url es requerido').notEmpty();
 	req.assert('category_id',	'Seleccione categoría').notEmpty();
@@ -87,7 +88,74 @@ var save_product = function(req, res, next, is_new) {
 	if(valerrors) {
 		return utils.send_ajax_validation_errors(req,res,valerrors);
 	}
-	
+
+	var waterfall = require('async-waterfall');
+	waterfall([ 
+		function(callback) {
+			var filter={or:[{name: req.body.name}, {url: req.body.url}]};
+			req.logger.info("Searching using filter:"+JSON.stringify(filter));
+			req.models.products.find(filter, function(err,products) {
+				if(err) {
+					return callback(err);
+				}
+				if(products.length===1) {
+					if(is_new) {
+						return callback('El valor asignado al nombre o url existe en otro registro ('+products[0].id+')');
+					}
+					else if ( Number(products[0].id) !== Number(req.body.id) ) {
+						return callback(products[0].id+' '+req.body.id+' El valor asignado al nombre o url existe en otro registro ('+products[0].id+')');
+					}
+				}
+				return callback();
+			});
+		},
+		function(callback) {
+			if(is_new) {
+				var product = {};
+				return callback(null,product);
+			}
+			else {
+				req.logger.info("Getting id:"+req.body.id);
+				req.models.products.get(req.body.id,function(err,product) {
+					return callback(err,product);
+				});
+			}
+		},
+		function(product,callback) {
+			ld.merge(product,{name:req.body.name,url:req.body.url,category_id:Number(req.body.category_id),packaging_id:Number(req.body.packaging_id),show_format:true});
+			if(req.body.is_visible==='on') {
+				ld.merge(product,{is_visible:true});
+			}
+			else {
+				ld.merge(product,{is_visible:false});
+			}
+			if(req.body.is_offer==='on') {
+				ld.merge(product,{is_offer:true});
+			}
+			else {
+				ld.merge(product,{is_offer:false});
+			}
+			if(is_new) {
+				req.logger.info("Creating product:"+JSON.stringify(product));
+				req.models.products.create(product,function(err,product) {
+					return callback(err);
+				});
+			}
+			else {
+				req.logger.info("Updating product:"+JSON.stringify(product));
+				product.save(function(err) {
+					return callback(err);
+				});
+			}
+		}
+	], 
+	function(err) {
+		if(err) {
+			return utils.send_ajax_error(req,res,err);
+		}
+		req.logger.debug('Returning success');
+		return res.status(200).send('success');
+	});	
 };
 
 module.exports = {
