@@ -912,7 +912,7 @@ h3.form-header {
 	margin: 0 0 5px;
 }
 
-.authentication-forms input {
+.authentication-forms input[type=text], .authentication-forms input[type=email], .authentication-forms input[type=password] {
 	display: block;
 	border: 1px solid #959595;
 	-webkit-border-radius: 4px;
@@ -927,6 +927,18 @@ h3.form-header {
 .authentication-forms input:focus {
 	-webkit-box-shadow: none;
 	box-shadow: none;
+}
+
+label.form-check, label.form-select {
+	margin: 0 0 20px 0;
+}
+
+label.form-check input {
+	margin: 0 0 0 20px;
+}
+
+label.form-select select {
+	margin: 0 0 0 20px;
 }
 
 .form-btn {
