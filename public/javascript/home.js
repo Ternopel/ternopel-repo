@@ -3,18 +3,15 @@
 // links scrolling automatically
 $(function () {
 	sneak_lis($("ul[name='ulcategories'] li"),'categories');
-});
-
-$(function () {
 	sneak_lis($("ul[name='ulproducts'] li"),'products');
-});
-
-$(function () {
 	sneak_lis($("ul[name='uloffers'] li"),'all offers');
-});
-
-$(function () {
 	sneak_lis($("ul[name='ulalloffers'] li"),'alloffers');
+	
+	var editProductAnchor=$("a[name='editProduct']");
+	if(editProductAnchor.length) {
+		alert('VER ESTO');
+		sneak_element(editProductAnchor);
+	}
 });
 
 // expand

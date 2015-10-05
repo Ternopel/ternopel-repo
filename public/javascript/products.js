@@ -156,14 +156,14 @@ $(function () {
 	});
 });
 
-//Add product
+// Save product
 $(function () {
 	$("button[name='saveProduct']").click(function (event) {
 		event.preventDefault();
 		make_form('save_product', 
-			function (successresponse) {
-				console.log(entity);
-				window.location.reload(true);
+			function (url) {
+				console.log(url);
+				window.location.href = url;
 			},
 			function (errorresponse) {
 				show_error_messages(errorresponse);

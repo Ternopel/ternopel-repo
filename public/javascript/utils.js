@@ -50,15 +50,19 @@ function clear_error_fields(form) {
 	
 }
 
+function sneak_element(element) {
+	var sneaky = new ScrollSneak(location.hostname);
+	element.onclick = sneaky.sneak;
+}
+
 function sneak_lis(lis,description) {
 	if(!lis) {
 		return;
 	}
 	console.log('Sneaking ul of '+description);
-	var sneaky = new ScrollSneak(location.hostname);
 	var i = 0;
 	var len = lis.length;
 	for (; i < len; i++) {
-		lis[i].onclick = sneaky.sneak;
+		sneak_element(lis[i]);
 	}
 }

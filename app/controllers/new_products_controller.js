@@ -138,23 +138,33 @@ var save_product = function(req, res, next, is_new) {
 			if(is_new) {
 				req.logger.info("Creating product:"+JSON.stringify(product));
 				req.models.products.create(product,function(err,product) {
-					return callback(err);
+					return callback(err,product);
 				});
 			}
 			else {
 				req.logger.info("Updating product:"+JSON.stringify(product));
 				product.save(function(err) {
-					return callback(err);
+					return callback(err,product);
 				});
 			}
-		}
+		},
+		function(product,callback) {
+			var filters = ld.merge({filter:{id:product.id}});
+			modelsutil.getProducts(req,res,next,filters,function(err,products) {
+				if(err) {
+					return callback(err);
+				}
+				var currentproduct = products[0];
+				return callback(null, '/'+currentproduct.category.url + '/' +currentproduct.url);
+			});
+		}		
 	], 
-	function(err) {
+	function(err,url) {
 		if(err) {
 			return utils.send_ajax_error(req,res,err);
 		}
-		req.logger.debug('Returning success');
-		return res.status(200).send('success');
+		req.logger.debug('Returning url');
+		return res.status(200).send(url);
 	});	
 };
 

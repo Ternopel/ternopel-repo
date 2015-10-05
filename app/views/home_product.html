@@ -2,7 +2,7 @@
 
 	{{?it.is_logged_in}}
 		{{?it.is_admin}}
-			<a href="/admin/products/edit?productid={{=it.currentproduct.id}}">Editar Producto</a>
+			<a href="/admin/products/edit?productid={{=it.currentproduct.id}}" name="editProduct">Editar Producto</a>
 		{{?}}
 	{{?}}	
 
