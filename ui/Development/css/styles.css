@@ -979,6 +979,248 @@ a.forgot-password {
 	border: 1px solid #e05a65 !important;
 }
 
+/* Product Page */
+
+.product-image-col {
+	width: 48%;
+	float: left;
+	margin: 0 0 80px 0;
+}
+
+.product-details-col {
+	width: 46%;
+	float: left;
+	margin: 0 0 80px 4%;
+}
+
+.product-image-container {
+	border: 1px solid #ddd;
+	text-align: center;
+}
+
+a.enlarge-product-btn {
+	color: #2b2b2b;
+	display: inline-block;
+	padding: 10px 46px 10px 14px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	background: url(../images/enlarge-icon.png) no-repeat 140px center #ddd;
+	margin: 0 0 20px;
+}
+
+.product-thumbnail-container {
+	text-align: center;
+	margin: 14px 0;
+}
+
+.product-thumbnail-container a img {
+	border: 1px solid #ddd;
+}
+
+.product-thumbnail-container a.active-thumbnail img, .product-thumbnail-container a img:hover {
+	border: 1px solid #444;
+}
+
+.product-thumbnail-container a:first-child img {
+	float: left;
+}
+
+.product-thumbnail-container a:last-child img {
+	float: right;
+}
+
+.product-details-col h2 {
+	font-size: 22px;
+	font-weight: 600;
+	margin: 0 0 20px;
+}
+
+.product-discount-text {
+	color: #d41b29;
+}
+
+.product-info ul.info-list li {
+	background: #2b2b2b;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	font-size: 15px;
+	font-weight: 600;
+	text-align: center;
+	color: #fff;
+	display: inline-block;
+	padding: 10px 0;
+	width: 100px;
+	text-transform: uppercase;
+}
+
+.product-info  {
+	text-align: center;
+	margin: 0 0 20px;
+}
+
+.product-info ul.info-list li:first-child {
+	float: left;
+}
+
+.product-info ul.info-list li:last-child {
+	float: right;
+}
+
+.product-content-details ul li {
+	line-height: 26px;
+}
+
+.product-content-details ul {
+	padding: 0 0 20px 40px;
+	border-bottom: 1px solid #ddd;
+}
+
+li.format-a {
+	padding: 0 0 0 16px;
+}
+
+li.format-b {
+	padding: 0 0 0 77px;
+}
+
+li.quantity {
+	padding: 0 0 0 6px;
+}
+
+li.quantity input {
+	width: 60px;
+	padding: 5px 5px;
+	margin: 10px 0;
+	border: 1px solid #ddd;
+	text-align: center;
+}
+
+button.quantity-plus, button.quantity-minus {
+	width: 30px;
+	padding: 5px;
+	text-indent: -9999px;
+	border: 1px solid #ddd;
+}
+
+li.quantity input:hover, button.quantity-plus:hover, button.quantity-minus:hover {
+	border: 1px solid #444;
+}
+
+button.quantity-plus {
+	background: url(../images/quantity-plus-icon.png) no-repeat center center #fff;
+	margin: 0 6px;
+}
+
+button.quantity-minus {
+	background: url(../images/quantity-minus-icon.png) no-repeat center center #fff;
+}
+
+.buy-section {
+	text-align: center;
+}
+
+.buy-section .product-price {
+	font-weight: 600;
+	font-size: 28px;
+}
+
+.buy-section .product-price span {
+	font-size: 18px;
+	font-weight: 400;
+	margin: 0 0 0 5px;
+}
+
+a.add-to-basket {
+	background: url(../images/cart-btn.png) no-repeat 12px center #0c6be8;
+	border: none;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 12px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	padding: 12px 14px 12px 44px;
+	font-weight: 500;
+}
+
+.product-details-section {
+	float: left;
+	margin: 0 0 60px;
+}
+
+.product-details-section h2, .product-rotator-section h2 {
+	border-bottom: 1px solid #ddd;
+	margin: 0 0 20px;
+	padding: 0 0 6px;
+}
+
+.product-details-section ul li {
+	font-size: 14px;
+	margin: 0 0 16px;
+}
+
+.product-details-section ul li span {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+ul li span.utilities-title {
+	font-weight: 600;
+	font-size: 16px;
+	display: block;
+	margin: 0 0 14px;
+}
+
+.product-rotator-section {
+	position: relative;
+	float: left;
+	width: 100%;
+}
+
+ul.product-rotator {
+	text-align: center;
+	width: 94%;
+	margin: 0 auto;
+}
+
+ul.product-rotator li {
+	display: inline-block;
+	width: 140px;
+	margin: 0 10px;
+}
+
+ul.product-rotator li p {
+	font-size: 22px;
+	font-weight: 600;
+	text-align: center;
+}
+
+ul.product-rotator li p span {
+	font-size: 15px;
+	font-weight: 200;
+}
+
+.product-rotator-section a.rotator-left-btn, .product-rotator-section a.rotator-right-btn {
+	text-indent: -9999px;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+}
+
+.product-rotator-section a.rotator-left-btn {
+	background: url(../images/product-arw-left.png) no-repeat center center;
+	position: absolute;
+	left: 0;
+	top: 30%;
+}
+
+.product-rotator-section a.rotator-right-btn {
+	background: url(../images/product-arw-right.png) no-repeat center center;
+	position: absolute;
+	right: 0;
+	top: 30%;
+}
+
+
 
 /* Footer */
 
