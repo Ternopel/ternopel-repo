@@ -912,7 +912,7 @@ h3.form-header {
 	margin: 0 0 5px;
 }
 
-.authentication-forms input[type=text], .authentication-forms input[type=email], .authentication-forms input[type=password] {
+.authentication-forms input[type=text], .authentication-forms input[type=email], .authentication-forms input[type=password], .authentication-forms textarea {
 	display: block;
 	border: 1px solid #959595;
 	-webkit-border-radius: 4px;

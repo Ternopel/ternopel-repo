@@ -6,12 +6,6 @@ $(function () {
 	sneak_lis($("ul[name='ulproducts'] li"),'products');
 	sneak_lis($("ul[name='uloffers'] li"),'all offers');
 	sneak_lis($("ul[name='ulalloffers'] li"),'alloffers');
-	
-	var editProductAnchor=$("a[name='editProduct']");
-	if(editProductAnchor.length) {
-		alert('VER ESTO');
-		sneak_element(editProductAnchor);
-	}
 });
 
 // expand

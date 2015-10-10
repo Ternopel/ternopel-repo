@@ -19,7 +19,7 @@ var get_product = function(req, res, next, is_new) {
 	waterfall([ 
 		function(callback) {
 			if(is_new) {
-				var currentproduct = ld.merge({id:0, category_id:Number(req.query.categoryid), name:'', is_visible:true, is_offer:false, url:''});
+				var currentproduct = ld.merge({id:0, category_id:Number(req.query.categoryid), name:'', is_visible:true, is_offer:false, url:'',description:''});
 				ld.merge(pageinfo, {currentproduct:currentproduct});
 				return callback();
 			}
@@ -80,6 +80,7 @@ var save_product = function(req, res, next, is_new) {
 	
 	req.assert('id',			'Id es requerido').notEmpty();
 	req.assert('name',			'Nombre es requerido').notEmpty();
+	req.assert('description',	'Descripción es requerida').notEmpty();
 	req.assert('url',			'Url es requerido').notEmpty();
 	req.assert('category_id',	'Seleccione categoría').notEmpty();
 	req.assert('packaging_id',	'Seleccione packaging').notEmpty();
@@ -122,7 +123,7 @@ var save_product = function(req, res, next, is_new) {
 			}
 		},
 		function(product,callback) {
-			ld.merge(product,{name:req.body.name,url:req.body.url,category_id:Number(req.body.category_id),packaging_id:Number(req.body.packaging_id),show_format:true});
+			ld.merge(product,{name:req.body.name,description:req.body.description,url:req.body.url,category_id:Number(req.body.category_id),packaging_id:Number(req.body.packaging_id),show_format:false});
 			if(req.body.is_visible==='on') {
 				ld.merge(product,{is_visible:true});
 			}

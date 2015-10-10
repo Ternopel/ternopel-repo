@@ -1,12 +1,90 @@
+<!-- 
 <div class='content'>
-
-	{{?it.is_logged_in}}
-		{{?it.is_admin}}
-			<a href="/admin/products/edit?productid={{=it.currentproduct.id}}" name="editProduct">Editar Producto</a>
-		{{?}}
-	{{?}}	
-
-
 	<h1>{{=it.currentproduct.name}}</h1>
 	<img src="/images/products/{{=it.currentproduct.id}}.jpg" width="200px" height="200px"></img>
 </div>
+ -->
+ 
+<section class="main-content clear-fix">
+	<section class="product-image-col">
+
+		{{?it.is_logged_in}}
+			{{?it.is_admin}}
+				<a href="/admin/products/edit?productid={{=it.currentproduct.id}}" name="editProduct">Editar Producto</a>
+			{{?}}
+		{{?}}	
+
+
+		<div class="product-image-container">
+			<a href=""><img src="/images/productspictures/{{=it.currentproduct.id}}"></a>
+			<a href="" class="enlarge-product-btn">Ver mas grande</a>
+		</div>
+		<div class="product-thumbnail-container">
+			<a href="" class="active-thumbnail"><img src="/images/product-thumbnail.png"></a>
+			<a href=""><img src="/images/product-thumbnail.png"></a>
+			<a href=""><img src="/images/product-thumbnail.png"></a>
+		</div>
+	</section>
+	<section class="product-details-col">
+		<h2>{{=it.currentproduct.name}}</h2>
+		<p>{{=it.currentproduct.description}}</p>
+		<p><span class="product-discount-text">AHORRO del 20% comprando la caja completa.</span></p>
+		<div class="product-info">
+			<ul class="info-list">
+				<li>Envio Gratis</li>
+				<li>Entregas 24/72h</li>
+				<li>Pago 100% Seguro</li>
+			</ul>
+		</div>
+		<div class="product-content-details">
+			<ul>
+				<li class="item-reference">Referencia: 5112</li>
+				<li class="format-a">Formato <input type="radio"> Paquete 100 Uds</li>
+				<li class="format-b"><span><input type="radio"> Caja 4.800 Uds</span></li>
+				<li class="quantity">Cantitdad <input type="text"><button class="quantity-plus">Add</button><button class="quantity-minus">Minus</button></li>
+			</ul>
+		</div>
+		<div class="buy-section">
+			<p class="product-price">1,78€<span>IVA includio</span></p>
+			<a href="" class="add-to-basket">Anadir al carrito</a>
+		</div>
+	</section>
+	<section class="product-details-section">
+		<h2 class="main-title">Mas</h2>
+			<ul>
+				<li><span class="utilities-title">Utilities:</span>She must have hidden the plans in the escape pod. Send a detachment down to retrieve them, and see to it personally, Commander. There'll be no one to stop us this time! But with the blast shield down, I can't even see! How am I supposed to fight? Escape is not his plan. I must face him, alone.</li>
+				<li><span>Capacidad: </span>80 CC</li>
+				<li><span>Color: </span>Blanco</li>
+				<li><span>Material: </span>Polipropileno alimentario (PP)</li>
+				<li><span>Caja: </span>De 4.800 Uds. distribuidas en 48 paquetes de 100 unidades</span></li>
+			</ul>
+	</section>
+	<section class="product-rotator-section">
+		<h2 class="main-title">Tambien puede que necesites...</h2>
+		<a href="" class="rotator-left-btn">left</a>
+		<ul class="product-rotator clear-fix">
+			<li>
+				<a href=""><img src="/images/rotator-product.png"></a>
+				<a href="">Cucharas Catering Degustacion Arco Transparente</a>
+				<p>1,25€ <span>con IVA</span></p>
+			</li>
+			<li>
+				<a href=""><img src="/images/rotator-product.png"></a>
+				<a href="">Cucharas Catering Degustacion Arco Transparente</a>
+				<p>1,25€ <span>con IVA</span></p>
+			</li>
+			<li>
+				<a href=""><img src="/images/rotator-product.png"></a>
+				<a href="">Cucharas Catering Degustacion Arco Transparente</a>
+				<p>1,25€ <span>con IVA</span></p>
+			</li>
+			<li>
+				<a href=""><img src="/images/rotator-product.png"></a>
+				<a href="">Cucharas Catering Degustacion Arco Transparente</a>
+				<p>1,25€ <span>con IVA</span></p>
+			</li>
+		</ul>
+		<a href="" class="rotator-right-btn">right</a>
+	</section>
+
+</section>

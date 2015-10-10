@@ -24,7 +24,6 @@ var get_categories_info = function(req, res, next, mycallback) {
 			var j=0,jlen=0;
 			for (j=0,jlen=products.length;j<jlen;++j) {
 				var product = products[j];
-
 				if(product.url === req.params.product) {
 					ld.merge(product,{selected: true});
 				}
@@ -162,7 +161,7 @@ module.exports = {
 						return callback(err);
 					}
 					req.logger.info('Filling left toolback categories');
-					ld.merge(pageinfo,{categories:categories});
+					ld.merge(pageinfo,{menu_categories:categories});
 					
 					req.logger.info('Getting offers');
 					var filters = ld.merge({filter:{is_visible:true,is_offer:true},formatslimit:1,productslimit:2});

@@ -35,6 +35,7 @@ CREATE TABLE products
 	category_id bigint NOT NULL,
 	packaging_id bigint NOT NULL,
 	name varchar(255) NOT NULL UNIQUE,
+	description varchar(4096) NOT NULL,
 	url varchar(255) NOT NULL UNIQUE,
 	show_format boolean NOT NULL default false,
 	is_visible boolean NOT NULL default false,

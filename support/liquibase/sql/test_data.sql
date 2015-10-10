@@ -82,8 +82,8 @@ INSERT INTO registrations (email_address,token,verified)
 VALUES ('demostenes1509@gmail.com','3041bd90-5397-11e5-9650-9bf126a5d21f',false);
 
 /* Bandas elasticas */
-INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
-(1,2,'Bolsa de banditas elásticas','bolsa-bandas-elasticas',false,true,true);
+INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
+(1,2,'Bolsa de banditas elásticas','Bolsa de banditas elásticas','bolsa-bandas-elasticas',false,true,true);
 
 INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
 (1,'1000 gramos',10,576,65,2),
@@ -91,8 +91,8 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 (1,'100 gramos',10,80,10,2);
 
 /* Bolsas economicas */
-INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
-(5,3,'Bolsas de camisetas económicas','bolsas-camisetas-economicas',false,true,false);
+INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
+(5,3,'Bolsas de camisetas económicas','Bolsas de camisetas económicas','bolsas-camisetas-economicas',false,true,false);
 
 INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
 (2,'20X30 blanca ',100,250.0,7.0,1),
@@ -106,8 +106,8 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 (2,'60X80 blanca ',100,203.0,45.0,1);
 
 /* Bolsas reforzadas */
-INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
-(5,2,'Bolsas de camisetas reforzadas','bolsas-camisetas-reforzadas',false,true,false);
+INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
+(5,2,'Bolsas de camisetas reforzadas','Bolsas de camisetas reforzadas','bolsas-camisetas-reforzadas',false,true,false);
 
 INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
 (3,'20X30 (reforzada) blanca',100,350.0,8.0,1),
@@ -119,8 +119,8 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 (3,'60X80 (reforzada) blanca',100,495.0,55.0,1);
 
 /* Bolsas consorcio */
-INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
-(5,5,'Bolsas de consorcio','bolsas-consorcio',false,true,false);
+INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
+(5,5,'Bolsas de consorcio','Bolsas de consorcio','bolsas-consorcio',false,true,false);
 
 INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
 (4,'60X90 CMS X 10 ',10,240.0,8.0,1),
@@ -130,8 +130,8 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 (4,'80X110CMS X 50 reforzada',50,960.0,140.0,1);
 
 /* Bolsas residuos */
-INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
-(5,2,'Bolsas de residuos','bolsas-residuos',false,true,true);
+INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
+(5,2,'Bolsas de residuos','Bolsas de residuos','bolsas-residuos',false,true,true);
 
 INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
 (5,'45X60 X 10 ',10,260.0,3.0,1),
@@ -140,8 +140,8 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 (5,'50X70 X170 aprox/ reforzada (rollo)',1,120.0,125.0,1);
 
 /* Bolsas papel sulfito */
-INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
-(5,2,'Bolsas de papel sulfito','bolsas-papel-sulfito',false,true,false);
+INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
+(5,2,'Bolsas de papel sulfito','Bolsas de papel sulfito','bolsas-papel-sulfito',false,true,false);
 
 INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
 (6,'BOLSA Nº 1 ',100,198.0,11.0,1),
@@ -159,8 +159,8 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 (6,'BOLSA Nº 8',100,324.0,36.0,1);
 
 /* Bolsas polipropileno */
-INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
-(5,2,'Bolsas de polipropileno','bolsas-polipropileno',false,true,false);
+INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
+(5,2,'Bolsas de polipropileno','Bolsas de polipropileno','bolsas-polipropileno',false,true,false);
 
 INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
 (7,'BOLSA PP 5 X 20 CMS.',100,45.0,5.0,1),
@@ -218,8 +218,8 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 
 
 /* Productos de Aluminio */
-INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
-(2,3,'Productos de Aluminio','productos-aluminio',false,true,false);
+INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
+(2,3,'Productos de Aluminio','Productos de Aluminio','productos-aluminio',false,true,false);
 
 INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
 (8,'BANDEJA F 50',100,768.0,105.0,1),
@@ -246,5 +246,5 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 (8,'CENICERO DE ALUMINIO',100,161.0,35.0,1);
 
 /* Caja de madera */
-INSERT INTO products (category_id,packaging_id,name,url,show_format,is_visible,is_offer) VALUES 
-(7,1,'Caja de madera','caja-madera',false,true,false);
+INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
+(7,1,'Caja de madera','Caja de madera','caja-madera',false,true,false);

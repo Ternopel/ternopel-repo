@@ -30,18 +30,15 @@
 		app.put		( '/admin/categories',					controllers.categories.put_categories);
 		app.delete	( '/admin/categories',					controllers.categories.delete_categories);
 
-		/*
 		app.get		( '/admin/products',					controllers.products.get_products);
 		app.post	( '/admin/products',					controllers.products.post_products);
 		app.put		( '/admin/products',					controllers.products.put_products);
 		app.delete	( '/admin/products',					controllers.products.delete_products);
-		*/
 		
 		app.get		( '/admin/products/add',				controllers.newproducts.get_add_product);
 		app.get		( '/admin/products/edit',				controllers.newproducts.get_edit_product);
-		app.post	( '/admin/products',					controllers.newproducts.post_edit_product);
-		app.put		( '/admin/products',					controllers.newproducts.put_edit_product);
-
+		app.post	( '/admin/products/save',				controllers.newproducts.post_edit_product);
+		app.put		( '/admin/products/save',				controllers.newproducts.put_edit_product);
 		
 		app.post	( '/admin/productsformats',				controllers.productsformats.post_productsformats);
 		app.put		( '/admin/productsformats',				controllers.productsformats.put_productsformats);

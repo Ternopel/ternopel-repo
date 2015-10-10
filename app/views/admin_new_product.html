@@ -9,54 +9,61 @@
 			<h2 class="main-title">{{=it.operation}} de Producto</h2>
 			<div class="new-customer">
 				<h3 class="form-header">Complete sus datos</h3>
-				<form id='save_product' method="{{=it.method}}" action="/admin/products">
+				<form id='save_product' method="{{=it.method}}" action="/admin/products/save">
 					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 					<input type='hidden' name='id' value='{{=it.currentproduct.id}}'>
 				
 					<label>Nombre<span class="form-error" id="name_error"></span></label>
 					<input type="text" class="customer-email" name="name" value="{{=it.currentproduct.name}}" >
 
-					<label>Url<span class="form-error" id="url_error"></span></label>
-					<input type="text" class="customer-email" name="url" value="{{=it.currentproduct.url}}" >
+					<label>Descripción<span class="form-error" id="description_error"></span></label>
+					<textarea type="text" class="customer-email" name="description" >{{=it.currentproduct.description}}</textarea>
 
-					<label>Es visible ?</label>
-					{{?it.currentproduct.is_visible}}
-						<input type="checkbox" name="is_visible" checked="checked"/>
-					{{??}}
-						<input type="checkbox" name="is_visible"/>
-					{{?}}
+					<label>Url<span class="form-error" id="url_error"></span></label>
+					<input type="text" class="customer-email" name="url" value="{{=it.currentproduct.url}}" />
+
+					<label class="form-check">Es visible ?
+						{{?it.currentproduct.is_visible}}
+							<input type="checkbox" name="is_visible" checked="checked" class="form-check"/>
+						{{??}}
+							<input type="checkbox" name="is_visible" class="form-check"/>
+						{{?}}
+					</label>
 					
-					<label>Es oferta ?</label>
-					{{?it.currentproduct.is_offer}}
-						<input type="checkbox" name="is_offer" checked="checked"/>
-					{{??}}
-						<input type="checkbox" name="is_offer"/>
-					{{?}}
+					<label class="form-check">Es oferta ?
+						{{?it.currentproduct.is_offer}}
+							<input type="checkbox" name="is_offer" checked="checked" class="form-check"/>
+						{{??}}
+							<input type="checkbox" name="is_offer" class="form-check"/>
+						{{?}}
+					</label>
 					
-					<label>Categoría<span class="form-error" id="category_id_error"></span></label>
-					<select name="category_id">
-						{{~ it.categories:category}}
-							{{? category.id === it.currentproduct.category_id}}
-								<option value="{{=category.id}}" selected="selected">{{=category.name}}</option>
-							{{??}}
-								<option value="{{=category.id}}">{{=category.name}}</option>
-							{{?}}
-						{{~}}
-					</select> 				
+					<label class="form-select">Categoría<span class="form-error" id="category_id_error"></span>
+						<select name="category_id">
+							{{~ it.categories:category}}
+								{{? category.id === it.currentproduct.category_id}}
+									<option value="{{=category.id}}" selected="selected">{{=category.name}}</option>
+								{{??}}
+									<option value="{{=category.id}}">{{=category.name}}</option>
+								{{?}}
+							{{~}}
+						</select>
+					</label>
 					
-					<label>Packaging<span class="form-error" id="packaging_id_error"></span></label>
-					<select name="packaging_id">
-						{{~ it.packaging:packaging}}
-							{{? packaging.id === it.currentproduct.packaging_id}}
-								<option value="{{=packaging.id}}" selected="selected">{{=packaging.name}}</option>
-							{{??}}
-								<option value="{{=packaging.id}}">{{=packaging.name}}</option>
-							{{?}}
-						{{~}}
-					</select> 				
+					<label class="form-select">Packaging<span class="form-error" id="packaging_id_error"></span>
+						<select name="packaging_id">
+							{{~ it.packaging:packaging}}
+								{{? packaging.id === it.currentproduct.packaging_id}}
+									<option value="{{=packaging.id}}" selected="selected">{{=packaging.name}}</option>
+								{{??}}
+									<option value="{{=packaging.id}}">{{=packaging.name}}</option>
+								{{?}}
+							{{~}}
+						</select>
+					</label>
 					
+					<button class="form-btn" name="cancelProduct" onclick="history.back(); return false;">Cancelar</button>
 					<button class="form-btn" name="saveProduct">Grabar</button>
-					<button class="form-btn" name="cancelProduct">Cancelar</button>
 				</form>
 			</div>
 		</div>
