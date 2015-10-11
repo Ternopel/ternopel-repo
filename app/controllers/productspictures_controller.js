@@ -1,7 +1,9 @@
 'use strict';
 
-var utils	= require('./utils'),
-	fs		= require('fs');
+var utils		= require('./utils'),
+	ld			= require('lodash'),
+	modelsutil	= require('../models/modelsutil'),
+	fs			= require('fs');
 
 module.exports = {
 	post_productspictures: function(req, res, next) {
@@ -9,6 +11,65 @@ module.exports = {
 		var product_id	= req.body.product_id;
 		var type		= req.body.type;
 		var data		= req.body.data;
+		
+		req.logger.info("Id:"+product_id);
+		req.logger.info("type:"+type);
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				var picture_name=req.config.app_products_imgs_dir+"/"+product_id;
+				req.logger.info('Writing picture:'+picture_name);
+				fs.writeFile(picture_name, data,'base64',function (err) {
+					return callback(err);
+				});
+			},
+			function(callback) {
+				req.models.productspictures.get(product_id,function(err,productpicture) {
+					// Not found !
+					if(err && err.literalCode!=='NOT_FOUND') {
+						return callback(err);
+					}
+					return callback(null,productpicture);
+				});
+			},
+			function(productpicture,callback) {
+				if(productpicture) {
+					productpicture.content_type	= type;
+					productpicture.last_update	= new Date();
+					
+					req.logger.info('Updating product picture');
+					productpicture.save(function(err) {
+						return callback(err);
+					});
+				}
+				else {
+					req.logger.info('Creating product picture');
+					req.models.productspictures.create({id:	product_id,last_update:	new Date(),content_type: type}, function(err,productpicture) {
+						return callback(err);
+					});
+				}
+			},
+			function(callback) {
+				var filters = ld.merge({filter:{id:product_id}});
+				modelsutil.getProducts(req,res,next,filters,function(err,products) {
+					if(err) {
+						return callback(err);
+					}
+					var currentproduct = products[0];
+					return callback(null, '/'+currentproduct.category.url + '/' +currentproduct.url);
+				});
+			}		
+		], 
+		function(err,url) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			req.logger.debug('Returning url');
+			return res.status(200).send(url);
+		});	
+
+		/*
 		
 		req.logger.info("Id:"+product_id);
 		req.logger.info("type:"+type);
@@ -49,6 +110,7 @@ module.exports = {
 				}
 			});
 		});
+		*/
 	},
 	get_productspictures: function(req, res, next) {
 		req.logger.info("En GET products pictures");

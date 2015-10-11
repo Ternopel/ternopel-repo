@@ -64,10 +64,9 @@ $(function () {
 		cropper.zoomOut();
 	});
 	
-	/*
 	$("input[name='save']").click(function () {
 		console.log('Saving picture');
-		var csrf		=$("input[name=''_csrf']").val();
+		var csrf		=$("input[name='_csrf']").val();
 		
 		$("input[name='btnCrop']").click().promise().done(function () {
 			console.log('After crop button firing');
@@ -79,15 +78,14 @@ $(function () {
 				var type			= img_data.replace(picture_regex, '$1');
 				var data			= img_data.replace(picture_regex, '$2');
 				
-				var formdata	={_csrf:csrf, product_id:trid, type:type, data:data};
+				var formdata	={_csrf:csrf, product_id:productid, type:type, data:data};
 				$.ajax({
 					url : '/admin/productspictures',
 					type : 'POST',
 					data : formdata,
-					success : function (entity) {
-						console.log(entity);
-						$("#showpicture_"+trid).click();
-						$('tr[name=''+trid+'_picture]').hide();
+					success : function (url) {
+						console.log(url);
+						window.location.href = url;
 					},
 					error : function(errorresponse) {
 						show_error_messages(errorresponse);
@@ -96,5 +94,4 @@ $(function () {
 			}
 		});
 	});
-	*/
 });
