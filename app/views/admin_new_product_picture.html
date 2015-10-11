@@ -1,0 +1,36 @@
+<script src='/javascript/imagecrop.min.js'></script>
+<script src='/javascript/crud.js'></script>
+<script src='/javascript/newproducts.js'></script>
+
+<section class="page-container clear-fix">
+	{{#def.load('admin_menu.html')}}
+	<section class="authentication-section">
+		<div class="authentication-forms clear-fix">
+			<h2 class="main-title">Gestión de Foto de Producto</h2>
+			<div class="new-customer" style="width: 582px; min-height: 450px;">
+				<h3 class="form-header">Complete sus datos</h3>
+				<form id='save_product_picture' method="POST" action="/admin/products/picture/save">
+					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+					<input type='hidden' name='id' value='{{=it.currentproduct.id}}'>
+				
+					<div name="upload-photo-container" class="upload-photo-container"> 
+						<div name="imageBox" class="imageBox">
+							<div name="thumbBox" class="thumbBox"></div>
+							<div name="spinner" class="spinner" style="display:none">Cargando...</div>
+						</div>
+						<div class="action clear-fix">
+							<span name="upload-btn"><span name="upload-label" >Subir foto</span><input type="file" name="picture" accept="image/*" /></span>
+							<span name="save-span" class="change-btn" style="display:none"><span class="upload-label">Grabar foto</span><input type="button" name="saveProductPicture"/></span>
+							<input type="button" class="crop-btn" name="btnCrop" value="Crop" style="float: right;display:none">
+							<input type="button" class="zoom-in-btn" name="btnZoomIn" value="+" style="float: right;display:none">
+							<input type="button" class="zoom-out-btn" name="btnZoomOut" value="-" style="float: right;display:none">
+						</div>
+						<div name="cropped" class="cropped" style="display:none"></div>
+					</div>				
+				</form>
+			</div>
+		</div>
+	</section>
+
+
+</section>

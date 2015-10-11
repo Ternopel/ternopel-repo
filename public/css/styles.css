@@ -1386,7 +1386,7 @@ th {
 }
 
 .imageBox .thumbBox {
-	height: 288px;
+	height: 300px;
 	box-sizing: border-box;
 }
 
@@ -1405,6 +1405,8 @@ th {
 	margin: 34px 10% 0;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
+	width: 452px;
+	height: 300px;
 }
 
 .upload-photo-container .action {
@@ -1495,22 +1497,6 @@ input[type=button].zoom-in-btn, input[type=button].zoom-out-btn {
 	overflow: hidden;
 	background-repeat: no-repeat;
 	cursor: move;
-}
-
-.imageBox .thumbBox {
-	height: 288px;
-	box-sizing: border-box;
-}
-
-.imageBox .spinner {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	text-align: center;
-	line-height: 400px;
-	background: rgba(0,0,0,0.7);
 }
 
 .generalerror {

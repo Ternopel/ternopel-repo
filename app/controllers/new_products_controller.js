@@ -200,7 +200,18 @@ module.exports = {
 		req.logger.info("En PUT products");
 		save_product(req,res,next,true);
 		
-	}
+	},
+	
+	get_edit_product_picture: function(req, res, next) {
+		
+		if(typeof req.query.productid === 'undefined') {
+			return next('No se encontró Id del Producto');
+		}
+		
+		var currentproduct	= ld.merge({id:req.query.productid});
+		var pageinfo		= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(), currentproduct: currentproduct});
+		res.render('admin_new_product_picture.html',pageinfo);
+	},
 };
 
 

@@ -1,19 +1,13 @@
-<!-- 
-<div class='content'>
-	<h1>{{=it.currentproduct.name}}</h1>
-	<img src="/images/products/{{=it.currentproduct.id}}.jpg" width="200px" height="200px"></img>
-</div>
- -->
- 
 <section class="main-content clear-fix">
 	<section class="product-image-col">
 
 		{{?it.is_logged_in}}
 			{{?it.is_admin}}
-				<a href="/admin/products/edit?productid={{=it.currentproduct.id}}" name="editProduct">Editar Producto</a>
+				<a href="/admin/products/edit?productid={{=it.currentproduct.id}}">Editar Producto</a>
+				 &nbsp;
+				<a href="/admin/products/picture/edit?productid={{=it.currentproduct.id}}">Editar Foto</a>
 			{{?}}
 		{{?}}	
-
 
 		<div class="product-image-container">
 			<a href=""><img src="/images/productspictures/{{=it.currentproduct.id}}"></a>
