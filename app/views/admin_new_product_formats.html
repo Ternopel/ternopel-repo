@@ -1,0 +1,39 @@
+<script src='/javascript/imagecrop.min.js'></script>
+<script src='/javascript/crud.js'></script>
+<script src='/javascript/newproducts.js'></script>
+
+<section class="page-container clear-fix">
+	{{#def.load('admin_menu.html')}}
+	<section class="authentication-section">
+		<div class="authentication-forms clear-fix">
+			<h2 class="main-title">Gestión de Formatos de Producto</h2>
+			<div class="new-customer" style="width: 658px; min-height: 490px;">
+				<h3 class="form-header">Complete sus datos</h3>
+				
+				<table style="margin-top: 6px; margin-left: 6px;">
+					<tr style="height: 32px;">
+						<th>Formato</th>
+						<th style="padding-left: 10px;">Unidades</th>
+						<th style="padding-left: 10px;">Cantidad</th>
+						<th style="padding-left: 10px;">Prc. Minorista</th>
+						<th style="padding-left: 10px;">Prc. Mayorista</th>
+						<th></th>
+					</tr>
+					{{~ it.currentproduct.productformats:productformat}}
+						<tr name='{{=productformat.id}}'>
+							<td name='format'><span>{{=productformat.format}}</span></td>
+							<td name='units'><span>{{=productformat.units}}</span></td>
+							<td name='quantity'><span>{{=productformat.quantity}}</span></td>
+							<td name='retail'><span>{{=productformat.retail}}</span></td>
+							<td name='wholesale'><span>{{=productformat.wholesale}}</span></td>
+						</tr>
+					{{~}}
+				</table>
+				
+				<button class="form-btn" style="margin-right: 30px;" onclick="history.back(); return false;">Volver</button>
+			</div>
+		</div>
+	</section>
+
+
+</section>

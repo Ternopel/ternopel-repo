@@ -212,6 +212,23 @@ module.exports = {
 		var pageinfo		= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(), currentproduct: currentproduct});
 		res.render('admin_new_product_picture.html',pageinfo);
 	},
+	
+	get_edit_product_formats: function(req, res, next) {
+		
+		if(typeof req.query.productid === 'undefined') {
+			return next('No se encontró Id del Producto');
+		}
+		
+		var filters = ld.merge({filter:{id:req.query.productid}});
+		modelsutil.getProducts(req,res,next,filters,function(err,products) {
+			if(err) {
+				return callback(err);
+			}
+			var currentproduct	= products[0];
+			var pageinfo		= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(), currentproduct: currentproduct});
+			res.render('admin_new_product_formats.html',pageinfo);
+		});
+	}
 };
 
 

@@ -40,6 +40,7 @@
 		app.post	( '/admin/products/save',				controllers.newproducts.post_edit_product);
 		app.put		( '/admin/products/save',				controllers.newproducts.put_edit_product);
 		app.get		( '/admin/products/picture/edit',		controllers.newproducts.get_edit_product_picture);
+		app.get		( '/admin/products/formats/edit',		controllers.newproducts.get_edit_product_formats);
 		
 		app.post	( '/admin/productsformats',				controllers.productsformats.post_productsformats);
 		app.put		( '/admin/productsformats',				controllers.productsformats.put_productsformats);
