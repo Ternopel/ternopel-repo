@@ -11,7 +11,7 @@ $(function () {
 		var OriginalContent = $(this).text();
  
 		$(this).addClass("cellEditing");
-		$(this).html("<input type='text' value='"+OriginalContent+"' style='width:400px;' name='colvalue'/><div class='errorMsg' id='colvalue_error'></div>");
+		$(this).html("<input type='text' value='"+OriginalContent+"' style='width:60px;' name='colvalue'/><div class='errorMsg' id='colvalue_error'></div>");
 		$(this).children().first().focus();
 
 		$(this).children().first().keypress(function (e) {

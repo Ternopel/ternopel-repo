@@ -9,8 +9,9 @@
 			<h2 class="main-title">Gestión de Formatos de Producto</h2>
 			<div class="new-customer" style="width: 658px; min-height: 490px;">
 				<h3 class="form-header">Complete sus datos</h3>
+				<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 				
-				<table style="margin-top: 6px; margin-left: 6px;">
+				<table id='productsFormatsTable' style="margin-top: 6px; margin-left: 6px;" summary='/admin/productsformats'>
 					<tr style="height: 32px;">
 						<th>Formato</th>
 						<th style="padding-left: 10px;">Unidades</th>
