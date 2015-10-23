@@ -107,7 +107,7 @@ public class Importer {
 				
 			}
 			renglon++;
-			System.out.println(renglon);
+			logger.info(renglon);
 		}
 		
 		logger.warn("Categorias insertados:"+categorias.size());
