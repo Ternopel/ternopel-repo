@@ -1,3 +1,5 @@
+<script src='/javascript/jquery.bpopup.min.js'></script>
+<script src='/javascript/products.js'></script>
 <section class="main-content clear-fix">
 	<section class="product-image-col">
 
@@ -12,14 +14,21 @@
 		{{?}}	
 
 		<div class="product-image-container">
-			<a href=""><img src="/images/productspictures/{{=it.currentproduct.id}}"></a>
-			<a href="" class="enlarge-product-btn">Ver mas grande</a>
+			<a href="" name="productimage">
+				<img src="/images/productspictures/{{=it.currentproduct.id}}" style="width: 300px; height: 200px;">
+			</a>
+			<a href="" name="productimagehidden" style="display:none;">
+				<img src="/images/productspictures/{{=it.currentproduct.id}}" style="width: 600px; height: 450px; " >
+			</a>
+			<a href="" name="productimage" class="enlarge-product-btn">Ver mas grande</a>
 		</div>
+		<!-- 
 		<div class="product-thumbnail-container">
 			<a href="" class="active-thumbnail"><img src="/images/product-thumbnail.png"></a>
 			<a href=""><img src="/images/product-thumbnail.png"></a>
 			<a href=""><img src="/images/product-thumbnail.png"></a>
 		</div>
+		 -->
 	</section>
 	<section class="product-details-col">
 		<h2>{{=it.currentproduct.name}}</h2>
@@ -34,7 +43,6 @@
 		</div>
 		<div class="product-content-details">
 			<ul>
-				<li class="item-reference">Referencia: 5112</li>
 				<li class="format-a">Formato <input type="radio"> Paquete 100 Uds</li>
 				<li class="format-b"><span><input type="radio"> Caja 4.800 Uds</span></li>
 				<li class="quantity">Cantitdad <input type="text"><button class="quantity-plus">Add</button><button class="quantity-minus">Minus</button></li>
@@ -45,6 +53,8 @@
 			<a href="" class="add-to-basket">Anadir al carrito</a>
 		</div>
 	</section>
+	
+	<!-- 
 	<section class="product-details-section">
 		<h2 class="main-title">Mas</h2>
 			<ul>
@@ -82,5 +92,6 @@
 		</ul>
 		<a href="" class="rotator-right-btn">right</a>
 	</section>
+	 -->
 
 </section>

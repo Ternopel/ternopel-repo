@@ -172,3 +172,10 @@ $(function () {
 	});
 });
 
+// Save product
+$(function () {
+	$("a[name='productimage']").click(function (event) {
+		event.preventDefault();
+		$("a[name='productimagehidden']").bPopup();
+	});
+});
