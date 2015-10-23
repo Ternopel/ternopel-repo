@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ternopel</groupId>
+	<artifactId>importer</artifactId>
+	<version>1.0.0</version>
+	<name>Importer</name>
+	<packaging>jar</packaging>
+	
+	<properties>
+		<!-- Encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.6</jdk.version>	
+		
+		<commons-io.version>2.0.1</commons-io.version>
+		<commons-lang.version>2.6</commons-lang.version>
+		<testng.version>6.2.1</testng.version>
+		<log4j.version>1.2.15</log4j.version>
+		<postgres.version>9.3-1101-jdbc4</postgres.version>
+	
+		<maven-compiler-plugin.version>2.0.2</maven-compiler-plugin.version>
+		<maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
+		<maven-war-plugin.version>2.4</maven-war-plugin.version>
+		<maven-jar-plugin.version>2.3.1</maven-jar-plugin.version>
+		<maven-resources-plugin.version>2.5</maven-resources-plugin.version>
+		<tomcat7-maven-plugin.version>2.1</tomcat7-maven-plugin.version>
+		<cobertura-maven-plugin.version>2.5.2</cobertura-maven-plugin.version>
+		<maven-site-plugin.version>3.3</maven-site-plugin.version>
+		<maven-surefire-report-plugin.version>2.9</maven-surefire-report-plugin.version>
+		<maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
+		<maven-project-info-reports-plugin.version>2.4</maven-project-info-reports-plugin.version>
+		<maven-archetype.version>2.2</maven-archetype.version>
+		<maven-enforcer-plugin.version>1.0-beta-1</maven-enforcer-plugin.version>
+		<cargo-maven2-plugin.version>1.2.2</cargo-maven2-plugin.version>
+		<selenium-maven-plugin.version>2.3</selenium-maven-plugin.version>
+		<maven-license-plugin.version>1.10.b1</maven-license-plugin.version>
+		<maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
+		<maven-clean-plugin.version>2.4.1</maven-clean-plugin.version>
+		
+	</properties>	
+
+	<build>
+		<!-- We need this to ensure maven will copy Java Sources -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+			</resource>
+		</resources>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${maven-dependency-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-archetype-plugin</artifactId>
+				<version>${maven-archetype.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<inherited>true</inherited>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<compilerVersion>${jdk.version}</compilerVersion>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${maven-eclipse-plugin.version}</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven-resources-plugin.version}</version>
+			</plugin>
+
+		</plugins>		
+	</build>
+	
+	
+	
+	<!-- Project dependencies -->
+	<dependencies>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+
+		<!-- testng -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgres.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons-lang.version}</version>
+		</dependency>
+		
+		
+	</dependencies>
+</project>
