@@ -12,9 +12,9 @@ var _globals = {
 	load : function(file) {
 		var template = null;
 		// let's try loading content from cache
-		if (_globals.partialCache === true) {
-			template = _partialsCache[file];
-		}
+//		if (_globals.partialCache === true) {
+//			template = _partialsCache[file];
+//		}
 
 		// no content so let's load from file system 
 		if (template === null) {
@@ -22,9 +22,9 @@ var _globals = {
 		}
 
 		// let's cache the partial  
-		if (_globals.partialCache === true) {
-			_partialsCache[file] = template;
-		}
+//		if (_globals.partialCache === true) {
+//			_partialsCache[file] = template;
+//		}
 
 		return template;
 	}
@@ -36,18 +36,18 @@ function _renderFile(filename, options, cb) {
 	};
 
 	var template = _cache[filename];
-	if (template) {
-		return cb(null, template.call(_globals, options));
-	}
+//	if (template) {
+//		return cb(null, template.call(_globals, options));
+//	}
 
 	return fs.readFile(filename, 'utf8', function(err, str) {
 		if (err) {
 			return cb(err);
 		}
 		var template = doT.template(str, null, _globals);
-		if (options.cache) {
-			_cache[filename] = template;
-		}
+//		if (options.cache) {
+//			_cache[filename] = template;
+//		}
 		return cb(null, template.call(_globals, options));
 	});
 }
@@ -68,14 +68,14 @@ function _renderWithLayout(filename, layoutTemplate, options, cb) {
 
 exports.setGlobals = function(globals) {
 	'use strict';
-	for ( var f in _globals) {
-		if (globals[f] === null) {
-			globals[f] = _globals[f];
-		} else {
-			throw new Error("Your global uses reserved utility: " + f);
-		}
-	}
-	_globals = globals;
+//	for ( var f in _globals) {
+//		if (globals[f] === null) {
+//			globals[f] = _globals[f];
+//		} else {
+//			throw new Error("Your global uses reserved utility: " + f);
+//		}
+//	}
+//	_globals = globals;
 };
 
 exports.__express = function(filename, options, cb) {
@@ -84,18 +84,18 @@ exports.__express = function(filename, options, cb) {
 	};
 	var extension = path.extname(filename);
 
-	if (options.layout !== undefined && !options.layout) {
-		return _renderFile(filename, options, cb);
-	}
+//	if (options.layout !== undefined && !options.layout) {
+//		return _renderFile(filename, options, cb);
+//	}
 
 	var viewDir = options.settings.views;
 	_views_dir = viewDir;
 	var layoutFileName = path.join(viewDir, options.layout || 'layout' + extension);
 
 	var layoutTemplate = _cache[layoutFileName];
-	if (layoutTemplate) {
-		return _renderWithLayout(filename, layoutTemplate, options, cb);
-	}
+//	if (layoutTemplate) {
+//		return _renderWithLayout(filename, layoutTemplate, options, cb);
+//	}
 
 	return fs.readFile(layoutFileName, 'utf8', function(err, str) {
 		if (err) {
@@ -103,9 +103,9 @@ exports.__express = function(filename, options, cb) {
 		}
 
 		var layoutTemplate = doT.template(str, null, _globals);
-		if (options.cache) {
-			_cache[layoutFileName] = layoutTemplate;
-		}
+//		if (options.cache) {
+//			_cache[layoutFileName] = layoutTemplate;
+//		}
 
 		return _renderWithLayout(filename, layoutTemplate, options, cb);
 	});
