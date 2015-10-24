@@ -2,6 +2,7 @@
 
 
 function fillProductFormat(product,productformat) {
+//	var retaildescription		= ''+productformat.id+' ';
 	var retaildescription		= '';
 	var wholesaledescription	= '';
 	var begin					= '<span class="price-con">$';

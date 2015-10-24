@@ -5,20 +5,20 @@
 
 		{{?it.is_logged_in}}
 			{{?it.is_admin}}
-				<a href="/admin/products/edit?productid={{=it.currentproduct.id}}">Editar Producto</a>
+				<a href="/admin/products/edit?productid={{=it.detailedproduct.id}}">Editar Producto</a>
 				 &nbsp;
-				<a href="/admin/products/picture/edit?productid={{=it.currentproduct.id}}">Editar Foto</a>
+				<a href="/admin/products/picture/edit?productid={{=it.detailedproduct.id}}">Editar Foto</a>
 				 &nbsp;
-				<a href="/admin/products/formats/edit?productid={{=it.currentproduct.id}}">Editar Formatos</a>
+				<a href="/admin/products/formats/edit?productid={{=it.detailedproduct.id}}">Editar Formatos</a>
 			{{?}}
 		{{?}}	
 
 		<div class="product-image-container">
 			<a href="" name="productimage">
-				<img src="/images/productspictures/{{=it.currentproduct.id}}" style="width: 300px; height: 200px;">
+				<img src="/images/productspictures/{{=it.detailedproduct.id}}" style="width: 300px; height: 200px;">
 			</a>
 			<a href="" name="productimagehidden" style="display:none;">
-				<img src="/images/productspictures/{{=it.currentproduct.id}}" style="width: 600px; height: 450px; " >
+				<img src="/images/productspictures/{{=it.detailedproduct.id}}" style="width: 600px; height: 450px; " >
 			</a>
 			<a href="" name="productimage" class="enlarge-product-btn">Ver mas grande</a>
 		</div>
@@ -31,9 +31,9 @@
 		 -->
 	</section>
 	<section class="product-details-col">
-		<h2>{{=it.currentproduct.name}}</h2>
-		<p>{{=it.currentproduct.description}}</p>
-		<p><span class="product-discount-text">AHORRO del 20% comprando la caja completa.</span></p>
+		<h2>{{=it.detailedproduct.name}}</h2>
+		<p>{{=it.detailedproduct.description}}</p>
+<!-- 		<p><span class="product-discount-text">AHORRO del 20% comprando la caja completa.</span></p> -->
 		<div class="product-info">
 			<ul class="info-list">
 				<li>Envio Gratis</li>
@@ -42,11 +42,14 @@
 			</ul>
 		</div>
 		<div class="product-content-details">
+				{{~ it.detailedproduct.productformats:productformat}}
 			<ul>
-				<li class="format-a">Formato <input type="radio"> Paquete 100 Uds</li>
-				<li class="format-b"><span><input type="radio"> Caja 4.800 Uds</span></li>
-				<li class="quantity">Cantitdad <input type="text"><button class="quantity-plus">Add</button><button class="quantity-minus">Minus</button></li>
+					<li class="format-a"><span><input type="radio"> {{=productformat.retaildescription}}</span></li>
+					<li class="format-a"><span><input type="radio"> {{=productformat.wholesaledescription}}</span></li>
+					<li class="quantity">Cantidad <input type="text"><button class="quantity-plus">Add</button><button class="quantity-minus">Minus</button></li>
 			</ul>
+				{{~}}			
+			
 		</div>
 		<div class="buy-section">
 			<p class="product-price">1,78€<span>IVA includio</span></p>

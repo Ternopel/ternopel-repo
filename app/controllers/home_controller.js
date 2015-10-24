@@ -68,12 +68,18 @@ module.exports = {
 			function(callback) {
 				if(pageinfo.page_to_render==='product') {
 					req.logger.info('-------------------> Get Product Info');
-					req.models.products.find({url: req.params.product},function(err,products) {
+					
+					
+					var filters = ld.merge({filter:{url:req.params.product}});
+					modelsutil.getProducts(req,res,next,filters,function(err,products) {
+						if(err) {
+							return callback(err);
+						}
 						if(products.length===0) {
 							return callback('Este producto no está más disponible');
 						}
-						var currentproduct = products[0];
-						ld.merge(pageinfo,{currentproduct:currentproduct});
+						var detailedproduct = products[0];
+						ld.merge(pageinfo,{detailedproduct:detailedproduct});
 						return callback();
 					});
 				}

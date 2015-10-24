@@ -47,7 +47,7 @@
     "winston": "^1.0.0"
   },
   "config": {
-    "app_log_level": "debug",
+    "app_log_level": "info",
     "app_run_liquibase": "true",
     "app_proxy_host": "localhost",
     "app_proxy_port": "3000",
