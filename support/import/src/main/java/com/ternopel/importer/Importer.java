@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,6 +41,9 @@ public class Importer {
 		NumberFormat nf = NumberFormat.getInstance(Locale.ITALIAN);
 		
 		Connection connection=getConnection();
+
+		executeCommand(connection, "drop table if exists products_pictures_backup");
+		executeCommand(connection, "create table products_pictures_backup as select b.id as picture_id, a.id as product_id, c.name as category_name, a.name as product_name, b.content_type, b.last_update from products a, products_pictures b, categories c where a.id = b.product_id and a.category_id = c.id");
 		executeCommand(connection, "delete from products_formats");
 		executeCommand(connection, "delete from products_pictures");
 		executeCommand(connection, "delete from posters");
@@ -91,6 +95,7 @@ public class Importer {
 					if(products.get(categoria+producto)==null) {
 						Long id = getId(connection, "products_sequence");
 						insertProduct(connection, id, categorias.get(categoria), packagings.get(packaging), producto);
+						saveProductsPictureInfo(connection,categoria,producto,id);
 						products.put(categoria+producto,id);
 					}
 					
@@ -188,8 +193,39 @@ public class Importer {
 		preparedStatement.close();
 	}
 	
+	private void insertProductPicture(Connection conn,Long id,Long productId,String contentType,Date lastUpdate) throws Exception {
+		PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO products_pictures (id,product_id,content_type,last_update) VALUES (?,?,?,?)");
+		preparedStatement.setLong(1, id);
+		preparedStatement.setLong(2, productId);
+		preparedStatement.setString(3, contentType);
+		preparedStatement.setDate(4, lastUpdate);
+		preparedStatement .executeUpdate();		
+		preparedStatement.close();
+	}
+	
+	/**
+	 * @param description
+	 * @return
+	 */
 	private String getUrl(String description) {
 		return description.replaceAll(INVALID_CHARS, "-").replaceAll(INVALID_CHARS2, "").toLowerCase();
+	}
+	
+	/**
+	 * @param conn
+	 * @param categoria
+	 * @param producto
+	 * @throws Exception
+	 */
+	private void saveProductsPictureInfo(Connection conn, String categoria, String producto, Long productId) throws Exception {
+
+		PreparedStatement preparedStatement = conn.prepareStatement("select picture_id, content_type, last_update from products_pictures_backup where category_name = ? and product_name = ?");
+		preparedStatement.setString(1, categoria);
+		preparedStatement.setString(2, producto);
+		ResultSet rs = preparedStatement .executeQuery();
+		if(rs.next()) {
+			insertProductPicture(conn,rs.getLong(1),productId,rs.getString(2),rs.getDate(3));
+		}
 	}
 	
 	/**

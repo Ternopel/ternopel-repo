@@ -48,7 +48,7 @@ var request		= require('supertest'),
 						.field('data', data)
 						.expect(200)
 						.end(function(err,newres) {
-							expect(newres.text).toBe('created');
+							expect(newres.text).toBe('/bandas-elasticas/bolsa-bandas-elasticas');
 							return callback(err,res);
 						});
 				});
@@ -64,7 +64,7 @@ var request		= require('supertest'),
 						.field('data', data)
 						.expect(200)
 						.end(function(err,newres) {
-							expect(newres.text).toBe('updated');
+							expect(newres.text).toBe('/bandas-elasticas/bolsa-bandas-elasticas');
 							return callback(err,res);
 						});
 				});

@@ -16,4 +16,7 @@ module.exports = function (orm, db, models,logger) {
 			}
 		}
 	);	
+	
+	logger.debug("Configuring products pictures relations");
+	models.productspictures.hasOne("product",models.products,{ required: true, reverse: "productsPictures" });
 };

@@ -4,6 +4,7 @@ CREATE SEQUENCE packaging_sequence start with 1000;
 CREATE SEQUENCE categories_sequence start with 1000;
 CREATE SEQUENCE products_sequence start with 1000;
 CREATE SEQUENCE products_formats_sequence start with 1000;
+CREATE SEQUENCE products_pictures_sequence start with 1000;
 CREATE SEQUENCE roles_sequence start with 1000;
 CREATE SEQUENCE users_sequence start with 1000;
 CREATE SEQUENCE registrations_sequence start with 1000;
@@ -45,7 +46,8 @@ CREATE TABLE products
 
 CREATE TABLE products_pictures
 (
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval('products_pictures_sequence') NOT NULL,
+	product_id bigint NOT NULL UNIQUE,
 	content_type varchar(255) NOT NULL,
 	last_update timestamp NOT NULL,
 	PRIMARY KEY (id)
@@ -146,7 +148,7 @@ ALTER TABLE products
 ;
 
 ALTER TABLE products_pictures
-	ADD FOREIGN KEY (id)
+	ADD FOREIGN KEY (product_id)
 	REFERENCES products (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT

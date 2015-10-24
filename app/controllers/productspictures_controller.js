@@ -18,19 +18,17 @@ module.exports = {
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				var picture_name=req.config.app_products_imgs_dir+"/"+product_id;
-				req.logger.info('Writing picture:'+picture_name);
-				fs.writeFile(picture_name, data,'base64',function (err) {
-					return callback(err);
-				});
-			},
-			function(callback) {
-				req.models.productspictures.get(product_id,function(err,productpicture) {
+				req.models.productspictures.find({product_id:product_id},function(err,productspictures) {
 					// Not found !
-					if(err && err.literalCode!=='NOT_FOUND') {
+					if(err) {
 						return callback(err);
 					}
-					return callback(null,productpicture);
+					if(productspictures.length===1) {
+						return callback(null,productspictures[0]);
+					}
+					else {
+						return callback(null,null);
+					}
 				});
 			},
 			function(productpicture,callback) {
@@ -40,18 +38,25 @@ module.exports = {
 					
 					req.logger.info('Updating product picture');
 					productpicture.save(function(err) {
-						return callback(err);
+						return callback(err,productpicture);
 					});
 				}
 				else {
 					req.logger.info('Creating product picture');
-					req.models.productspictures.create({id:	product_id,last_update:	new Date(),content_type: type}, function(err,productpicture) {
-						return callback(err);
+					req.models.productspictures.create({product_id:	product_id,last_update:	new Date(),content_type: type}, function(err,productpicture) {
+						return callback(err,productpicture);
 					});
 				}
 			},
-			function(callback) {
-				var filters = ld.merge({filter:{id:product_id}});
+			function(productpicture, callback) {
+				var picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id;
+				req.logger.info('Writing picture:'+picture_name);
+				fs.writeFile(picture_name, data,'base64',function (err) {
+					return callback(err,productpicture);
+				});
+			},
+			function(productpicture,callback) {
+				var filters = ld.merge({filter:{id:productpicture.product_id}});
 				modelsutil.getProducts(req,res,next,filters,function(err,products) {
 					if(err) {
 						return callback(err);
@@ -68,69 +73,27 @@ module.exports = {
 			req.logger.debug('Returning url');
 			return res.status(200).send(url);
 		});	
-
-		/*
-		
-		req.logger.info("Id:"+product_id);
-		req.logger.info("type:"+type);
-		
-		var picture_name=req.config.app_products_imgs_dir+"/"+product_id;
-		req.logger.info('Writing picture:'+picture_name);
-		fs.writeFile(picture_name, data,'base64',function (err) {
-			if(err) {
-				return utils.send_ajax_error(req,res,err);
-			}
-			req.models.productspictures.get(product_id,function(err,productpicture) {
-				// Not found !
-				if(err && err.literalCode!=='NOT_FOUND') {
-					return utils.send_ajax_error(req,res,err);
-				}
-				if(productpicture) {
-					productpicture.content_type	= type;
-					productpicture.last_update	= new Date();
-					
-					req.logger.info('Updating product picture');
-					productpicture.save(function(err) {
-						if(err) {
-							return utils.send_ajax_error(req,res,err);
-						}
-						req.logger.debug("Sending product picture ack to browser:");
-						return res.status(200).send('updated');
-					});
-				}
-				else {
-					req.logger.info('Creating product picture');
-					req.models.productspictures.create({id:	product_id,last_update:	new Date(),content_type: type}, function(err,productpicture) {
-						if(err) {
-							return utils.send_ajax_error(req,res,err);
-						}
-						req.logger.debug("Sending product picture ack to browser:");
-						return res.status(200).send('created');
-					});
-				}
-			});
-		});
-		*/
 	},
 	get_productspictures: function(req, res, next) {
 		req.logger.info("En GET products pictures");
-		var id			= req.params.id;
+		var product_id			= req.params.id;
 		
 		req.logger.info("Getting product info");
-		req.models.productspictures.get(id,function(err,productpicture) {
+		req.models.productspictures.find({product_id:product_id},function(err,productspictures) {
 			
-			if(err && err.literalCode!=='NOT_FOUND') {
+			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}			
 
 			var picture_name;
 			var content_type;
-			if(err && err.literalCode==='NOT_FOUND') {
+			if(productspictures.length===0) {
 				picture_name='./public/images/default-img.jpg';
 				content_type='image/jpeg';
 			}	
 			else {
-				picture_name=req.config.app_products_imgs_dir+"/"+id;
+				var productpicture = productspictures[0];
+				picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id;
 				content_type=productpicture.content_type;
 			}
 			
@@ -142,7 +105,7 @@ module.exports = {
 				req.logger.info("Preparing picture metadata");
 				res.setHeader('Content-Type', content_type);
 				res.setHeader('Content-Length', data.length);
-				res.setHeader('Content-Disposition', 'inline; filename='+id);
+				res.setHeader('Content-Disposition', 'inline; filename='+product_id);
 				
 				req.logger.info("Sending picture to browser");
 				return res.send(data);
