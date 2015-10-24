@@ -95,7 +95,7 @@ INSERT INTO products (category_id,packaging_id,name,description,url,show_format,
 (5,3,'Bolsas de camisetas económicas','Bolsas de camisetas económicas','bolsas-camisetas-economicas',false,true,false);
 
 INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
-(2,'20X30 blanca ',100,250.0,7.0,1),
+(2,'20X30 blanca ',0.4,250.0,7.0,1),
 (2,'30X40 blanca ',100,144.0,8.0,1),
 (2,'30X40 (color) tiburon',100,105.0,8.0,1),
 (2,'40X50 (color) reforzada',100,200.0,11.0,1),

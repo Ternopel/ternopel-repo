@@ -32,7 +32,6 @@
 
 		app.get		( '/admin/products',					controllers.products.get_products);
 		app.post	( '/admin/products',					controllers.products.post_products);
-		app.put		( '/admin/products',					controllers.products.put_products);
 		app.delete	( '/admin/products',					controllers.products.delete_products);
 		
 		app.get		( '/admin/products/add',				controllers.newproducts.get_add_product);

@@ -158,25 +158,6 @@ module.exports = {
 		});
 	},
 
-	put_products: function(req, res, next) {
-		req.logger.info('En PUT products');
-		var milli=new Date().getTime();
-		req.logger.info('Creating product');
-		req.models.products.create({	name:			'A Insert Product Text here '+milli,
-										url:			'A Insert Product url here'+milli,
-										show_format:	false,
-										is_visible:		false,
-										is_offer:		false,
-										category_id:	1,
-										packaging_id:	1},function(err,product) {
-			if(err) {
-				return utils.send_ajax_error(req,res,err);
-			}
-			req.logger.debug("Sending product to browser:"+JSON.stringify(product));
-			return res.status(200).send(product);
-		});
-	},
-	
 	delete_products: function(req, res, next) {
 		req.logger.info('En DELETE products');
 		

@@ -21,7 +21,7 @@ var testsposters			= require(__dirname+'/../goma/testsposters');
 var testsendemail			= require(__dirname+'/../goma/testssendemail');
 var testprivacy				= require(__dirname+'/../goma/testprivacy');
 
-describe('Users creation', function() {
+describe('Test Suite', function() {
 	
 	this.timeout(0);
 
@@ -98,9 +98,13 @@ describe('Users creation', function() {
 	// admin products tests
 	if(runTests) {
 		it('Get products', testsproducts.getProducts);
+		it('Get products formats', testsproducts.getProductFormats);
+		it('Get products picture', testsproducts.getProductPicture);
 		it('Delete product', testsproducts.deleteProduct);
 		it('Create product', testsproducts.createProduct);
 		it('Update product', testsproducts.updateProduct);
+		it('Get Admin products', testsproducts.getAdminProducts);
+		it('Update Admin products', testsproducts.updateAdminProduct);
 	}	
 	
 	// admin categories tests
@@ -130,7 +134,7 @@ describe('Users creation', function() {
 		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
 		it('Confirm User', testsregistration.confirmUser);
 		it('Client login', testsregistration.clientLogin);
-		it('Register new user', testsregistration.registerNewUser);
+//		it('Register new user', testsregistration.registerNewUser);
 		it('Register new mailing user', testsregistration.registerNewMailingUser);
 	}
 	 	

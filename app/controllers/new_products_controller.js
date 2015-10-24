@@ -19,7 +19,7 @@ var get_product = function(req, res, next, is_new) {
 	waterfall([ 
 		function(callback) {
 			if(is_new) {
-				var currentproduct = ld.merge({id:0, category_id:Number(req.query.categoryid), name:'', is_visible:true, is_offer:false, url:'',description:''});
+				var currentproduct = ld.merge({category_id:Number(req.query.categoryid), name:'', is_visible:true, is_offer:false, url:'',description:''});
 				ld.merge(pageinfo, {currentproduct:currentproduct});
 				return callback();
 			}
@@ -59,7 +59,6 @@ var get_product = function(req, res, next, is_new) {
 				}
 				req.logger.debug('Categories readed:'+categories.length);
 				categories.unshift(ld.merge({id:"", name:"Ingrese categoría"}));
-				req.logger.info(JSON.stringify(categories));
 				ld.merge(pageinfo, {categories:categories});
 				return callback();
 			});
@@ -78,7 +77,9 @@ var get_product = function(req, res, next, is_new) {
 
 var save_product = function(req, res, next, is_new) {
 	
-	req.assert('id',			'Id es requerido').notEmpty();
+	if(is_new===false) {
+		req.assert('id',			'Id es requerido').notEmpty();
+	}
 	req.assert('name',			'Nombre es requerido').notEmpty();
 	req.assert('description',	'Descripción es requerida').notEmpty();
 	req.assert('url',			'Url es requerido').notEmpty();
@@ -99,12 +100,16 @@ var save_product = function(req, res, next, is_new) {
 				if(err) {
 					return callback(err);
 				}
-				if(products.length===1) {
+				if(products.length>0) {
 					if(is_new) {
-						return callback('El valor asignado al nombre o url existe en otro registro ('+products[0].id+')');
+						return callback('El valor asignado al nombre o url existe en otro registro');
 					}
-					else if ( Number(products[0].id) !== Number(req.body.id) ) {
-						return callback(products[0].id+' '+req.body.id+' El valor asignado al nombre o url existe en otro registro ('+products[0].id+')');
+					else {
+						products.forEach(function(product) {
+							if ( Number(product.id) !== Number(req.body.id) ) {
+								return callback('El valor asignado al nombre o url existe en otro registro');
+							}
+						});
 					}
 				}
 				return callback();
@@ -208,21 +213,32 @@ module.exports = {
 			return next('No se encontró Id del Producto');
 		}
 		
-		var currentproduct	= ld.merge({id:req.query.productid});
-		var pageinfo		= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(), currentproduct: currentproduct});
-		res.render('admin_new_product_picture.html',pageinfo);
+		req.models.products.get(req.query.productid, function(err,product) {
+			if(err) {
+				return next('No se encontró Producto con id:'+req.query.productid);
+			}
+			var currentproduct	= ld.merge({id:req.query.productid});
+			var pageinfo		= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(), currentproduct: currentproduct});
+			res.render('admin_new_product_picture.html',pageinfo);
+		});
+		
 	},
 	
 	get_edit_product_formats: function(req, res, next) {
 		
+		req.logger.info("En GET product formats");
 		if(typeof req.query.productid === 'undefined') {
 			return next('No se encontró Id del Producto');
 		}
 		
+		req.logger.info("Obteniendo formatos de productos");
 		var filters = ld.merge({filter:{id:req.query.productid}});
 		modelsutil.getProducts(req,res,next,filters,function(err,products) {
 			if(err) {
-				return callback(err);
+				return next(err);
+			}
+			if(products.length===0) {
+				return next('No se encontró Producto con id:'+req.query.productid);
 			}
 			var currentproduct	= products[0];
 			var pageinfo		= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(), currentproduct: currentproduct});
