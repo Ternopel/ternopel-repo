@@ -21,3 +21,11 @@ Pendientes Mike !
 	SSL
 	
 	http://greengeckodesign.com:8880/blog/2013/06/15/creating-an-ssl-certificate-for-node-dot-js/
+
+Dump command
+
+pg_dump -U postgres ternopel > dump.sql
+
+scp -i /home/Maxi/keys/ternopel dump.sql ubuntu@node1.papeleraternopel.com:/home/ubuntu/dump.sql
+
+psql ternopel -h db.papeleraternopel.com -Upostgres < dump.sql

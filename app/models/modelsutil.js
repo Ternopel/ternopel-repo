@@ -13,7 +13,7 @@ function fillProductFormat(product,productformat) {
 	}
 	else if ( productformat.units === 1 ) {
 		// Ejemplo de esta condicion: Bandas elasticas
-		retaildescription += productformat.units.toFixed(2) +' '+product.packaging.name + ' de ' + productformat.format+' a '+begin+productformat.retail.toFixed(2)+end;
+		retaildescription += productformat.units +' '+product.packaging.name + ' de ' + productformat.format+' a '+begin+productformat.retail.toFixed(2)+end;
 	}
 	else {
 		// Ejemplo de esta condicion: Blondas de papel caladas
