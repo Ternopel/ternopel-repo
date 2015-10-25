@@ -7,7 +7,7 @@
 		logger.debug("Forward to https if request comes from http ( Amazon only ! )");
 		app.use(function(req,res,next) {
 			if(req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto']==='http') {
-				res.redirect("https://"+req.host+req.url);
+				res.redirect(301,"https://"+req.host+req.url);
 			}
 			else {
 				return next();
