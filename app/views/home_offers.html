@@ -41,7 +41,9 @@
 					</p>
 					<div class="product-prices">
 						{{~ offersproduct.productformats:productformat}}
-							<p>{{=productformat.retaildescription}} <span class="price-con">${{=productformat.retail}}</span>, {{=productformat.wholesaledescription}}<span class="price-con">${{=productformat.wholesale}}</span></p>
+							<p>{{=productformat.retaildescription}}</p>
+							<p>{{=productformat.wholesaledescription}}</p>
+							<br/>
 						{{~}}
 					</div>
 				</li>
