@@ -42,21 +42,21 @@
 			</ul>
 		</div>
 		<div class="product-content-details">
-				{{~ it.detailedproduct.productformats:productformat}}
-			<ul>
-					<li class="format-a"><span><input type="radio" name="pf_{{=productformat.id}}"> {{=productformat.retaildescription}}</span></li>
-					<li class="format-a"><span><input type="radio" name="pf_{{=productformat.id}}"> {{=productformat.wholesaledescription}}</span></li>
-					<li class="quantity">Cantidad <input type="text"><button class="quantity-plus">Add</button><button class="quantity-minus">Minus</button></li>
-			</ul>
-				{{~}}			
+			{{~ it.detailedproduct.productformats:productformat}}
+				<ul>
+					<li class="format-a"><span><input type="radio"> {{=productformat.retaildescription}}</span></li>
+					<li class="format-a"><span><input type="radio"> {{=productformat.wholesaledescription}}</span></li>
+					<li class="quantity">Cantidad 
+						<input type="text" name="calculateproductformat_{{=productformat.id}}" />
+						<p><input type="text" readonly="readonly" disabled="disabled"/> </p>
+						<a href="" class="add-to-basket">Carrito</a>
+					</li>
+				</ul>
+			{{~}}
 			
 		</div>
-		<div class="buy-section">
-			<p class="product-price">1,78€<span>IVA includio</span></p>
-			<a href="" class="add-to-basket">Anadir al carrito</a>
-		</div>
 	</section>
-	
+
 	<!-- 
 	<section class="product-details-section">
 		<h2 class="main-title">Mas</h2>

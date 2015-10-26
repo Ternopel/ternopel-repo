@@ -56,3 +56,22 @@ $(function () {
 		$("a[name='productimagehidden']").bPopup();
 	});
 });
+
+
+// Save product
+$(function () {
+	
+	$("input[name^='calculateproductformat_']").filter(function() {
+		
+		$(this).keyup(function (event) {
+			var keyCode = event.which;
+			if ((!((keyCode > 46 && keyCode < 58))) && keyCode != 0) {
+				event.preventDefault();
+			}
+			
+			alert('HOLA '+$(this).val());
+		});
+	});
+});
+
+
