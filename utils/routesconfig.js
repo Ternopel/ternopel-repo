@@ -57,6 +57,8 @@
 		app.get		( '/images/productspictures/:id',		controllers.productspictures.get_productspictures);
 		app.post	( '/admin/productspictures',			multipartMiddleware,controllers.productspictures.post_productspictures);
 		
+		app.get		( '/shoppingcart/pricecalculation',		controllers.shoppingcart.get_price_calculation);
+		
 		app.get		( '/report',							controllers.report.get_report);
 
 		app.get		( '/login',								controllers.registration.get_login);

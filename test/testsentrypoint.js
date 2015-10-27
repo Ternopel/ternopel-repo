@@ -20,6 +20,7 @@ var testsproductspictures	= require(__dirname+'/../goma/testsproductspictures');
 var testsposters			= require(__dirname+'/../goma/testsposters');
 var testsendemail			= require(__dirname+'/../goma/testssendemail');
 var testprivacy				= require(__dirname+'/../goma/testprivacy');
+var testshoppingcart		= require(__dirname+'/../goma/testshoppingcart');
 
 describe('Test Suite', function() {
 	
@@ -74,7 +75,10 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=true;
+	var runTests=false;
+	
+	it('Get Price Calculation', testshoppingcart.getPriceCalculation);
+
 	if(runTests) {
 		it('Send registration email', testsendemail.sendMail);
 	}
