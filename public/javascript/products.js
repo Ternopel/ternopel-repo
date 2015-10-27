@@ -78,7 +78,7 @@ $(function () {
 				type : 'GET',
 				success : function (price) {
 					console.log(price);
-					$("input[name='price_"+productformatid+"']").val(price);
+					$("span[name='price_"+productformatid+"']").text("$"+price);
 				},
 				error : function(errorresponse) {
 					show_error_messages(errorresponse);
