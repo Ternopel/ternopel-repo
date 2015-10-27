@@ -69,7 +69,21 @@ $(function () {
 				event.preventDefault();
 			}
 			
-			alert('HOLA '+$(this).val());
+			var productformatid = $(this).attr('alt');
+			
+			console.log($(this).val());
+			
+			$.ajax({
+				url : '/shoppingcart/pricecalculation?productformatid='+productformatid+'&quantity='+$(this).val(),
+				type : 'GET',
+				success : function (price) {
+					console.log(price);
+					$("input[name='price_"+productformatid+"']").val(price);
+				},
+				error : function(errorresponse) {
+					show_error_messages(errorresponse);
+				}
+			});
 		});
 	});
 });

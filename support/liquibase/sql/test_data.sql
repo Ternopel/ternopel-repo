@@ -86,9 +86,9 @@ INSERT INTO products (category_id,packaging_id,name,description,url,show_format,
 (1,2,'Bolsa de banditas elásticas','Bolsa de banditas elásticas','bolsa-bandas-elasticas',false,true,true);
 
 INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
-(1,'1000 gramos',10,576,65,2),
-(1,'500 gramos',10,300,33,1),
-(1,'100 gramos',10,80,10,2);
+(1,'1000 gramos',1,63,70,10),
+(1,'500 gramos',1,31.5,35,10),
+(1,'100 gramos',1,8,10,10);
 
 /* Bolsas economicas */
 INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 

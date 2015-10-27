@@ -38,10 +38,20 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Getting price calculation');
 				request("http://localhost:"+config.test_app_port)
-				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=1')
+				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=29')
 				.expect(200)
 				.end(function(err,res) {
-					expect(res.text).toBe('success');
+					expect(res.text).toBe('1890.00');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Getting price calculation');
+				request("http://localhost:"+config.test_app_port)
+				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=9')
+				.expect(200)
+				.end(function(err,res) {
+					expect(res.text).toBe('630.00');
 					return callback(err,res);
 				});
 			}

@@ -8,7 +8,7 @@ function fillProductFormat(product,productformat) {
 	var begin					= '<span class="price-con">$';
 	var end						= '</span>';
 	
-	if( ( productformat.units%1 ) !=0) {
+	if( ( productformat.units%1 ) !==0) {
 		// Ejemplo de esta condicion: Bobinas de papel diario
 		retaildescription += productformat.units.toFixed(2)+' '+product.packaging.name + 's de ' + productformat.format+' a '+begin+productformat.retail.toFixed(2)+end+' c/u';
 	}

@@ -39,10 +39,10 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 			});
 		}, 
 		function(user,callback) {
+			var token	= require('node-uuid').v1();
 			if(is_registration===true) {
 				req.logger.debug('Registracion de usuario !');
 				req.logger.info('Registrando user '+email_address);
-				var token	= require('node-uuid').v1();
 				req.models.registrations.create({	email_address:	email_address, token:token, verified:false },function(err,registration) {
 					return callback(err,registration);
 				});
@@ -50,7 +50,6 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 			else {
 				req.logger.debug('Mailing de usuario !');
 				req.logger.info('Mailing user '+email_address);
-				var token	= require('node-uuid').v1();
 				req.models.mailing.create({	email_address:	email_address, token:token, verified:false },function(err,mailing) {
 					return callback(err,mailing);
 				});
