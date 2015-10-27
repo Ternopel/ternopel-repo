@@ -44,8 +44,8 @@
 		<div class="product-content-details">
 			{{~ it.detailedproduct.productformats:productformat}}
 				<ul>
-					<li class="format-a"><span><input type="radio"> {{=productformat.retaildescription}}</span></li>
-					<li class="format-a"><span><input type="radio"> {{=productformat.wholesaledescription}}</span></li>
+					<li>{{=productformat.retaildescription}}</span></li>
+					<li>{{=productformat.wholesaledescription}}</span></li>
 					<li class="quantity">Cantidad 
 						<input type="text" name="calculateproductformat_{{=productformat.id}}" alt="{{=productformat.id}}">
 						<span class="product-price" name="price_{{=productformat.id}}"></span>
