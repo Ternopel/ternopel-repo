@@ -47,7 +47,6 @@ var request		= require('supertest'),
 			}
 		], 
 		function(err) {
-			logger.info('ACA4');
 			return done(err);
 		});
 	};

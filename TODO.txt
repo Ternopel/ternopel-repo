@@ -10,6 +10,7 @@
 - Usar el audit en chrome para optimizar la pagina ( agregar las properties de cache en las imagenes )	
 - Mailing no esta terminado. No envia el correo !	
 - Marcar con ROJO los productos no visibles pero que el admin los vea !
+- Validar con checkParam los lugares donde recibo query params en lugar de preguntar por no nulo
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
