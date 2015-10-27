@@ -75,11 +75,11 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 	
 	if(runTests) {
+		it('Get Price Calculation', testshoppingcart.getPriceCalculation);
 	}
-	it('Get Price Calculation', testshoppingcart.getPriceCalculation);
 	
 	if(runTests) {
 		it('Send registration email', testsendemail.sendMail);
