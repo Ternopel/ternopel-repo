@@ -78,10 +78,11 @@ $(function () {
 				type : 'GET',
 				success : function (price) {
 					console.log(price);
-					$("span[name='price_"+productformatid+"']").text("$"+price);
+					$("span[name='price_"+productformatid+"']").text("$ "+price);
 				},
 				error : function(errorresponse) {
-					show_error_messages(errorresponse);
+					$("span[name='price_"+productformatid+"']").text("");
+//					show_error_messages(errorresponse);
 				}
 			});
 		});

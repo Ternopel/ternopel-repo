@@ -1085,27 +1085,20 @@ a.enlarge-product-btn {
 }
 
 li.quantity input {
-	width: 40px;
+	width: 30px;
 	padding: 5px 5px;
 	margin: 10px 12px 10px 0;
 	border: 1px solid #ddd;
 	text-align: center;
 }
 
-button.quantity-plus, button.quantity-minus {
-	width: 30px;
-	padding: 5px;
-	text-indent: -9999px;
-	border: 1px solid #ddd;
-}
-
-li.quantity input:hover, button.quantity-plus:hover, button.quantity-minus:hover {
+li.quantity input:hover {
 	border: 1px solid #444;
 }
 
 .quantity .product-price {
 	font-weight: 600;
-	font-size: 22px;
+	font-size: 20px;
 	display: inline-block;
 }
 
@@ -1122,12 +1115,12 @@ a.add-to-basket {
 	font-size: 12px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
-	padding: 6px 14px;
+	padding: 6px 14px 6px 40px;
 	font-weight: 500;
-	background: #0c6be8;
+	background: url(../images/cart-btn.png) no-repeat 10px center #0c6be8;
 	float: right;
-    display: inline-block;
-    margin: 6px 0 0;
+	display: inline-block;
+	margin: 6px 0 0;
 }
 
 .add-to-basket:hover {
