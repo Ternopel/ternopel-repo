@@ -79,7 +79,7 @@ module.exports = {
 							return callback('Este producto no está más disponible');
 						}
 						var detailedproduct = products[0];
-						ld.merge(pageinfo,{detailedproduct:detailedproduct});
+						ld.merge(pageinfo,{detailedproduct:detailedproduct,csrfToken: req.csrfToken()});
 						return callback();
 					});
 				}

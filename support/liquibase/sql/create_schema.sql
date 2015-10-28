@@ -11,6 +11,7 @@ CREATE SEQUENCE registrations_sequence start with 1000;
 CREATE SEQUENCE users_sessions_sequence start with 1000;
 CREATE SEQUENCE posters_sequence start with 1000;
 CREATE SEQUENCE mailing_sequence start with 1000;
+CREATE SEQUENCE shopping_cart_sequence start with 1000;
 
 /* Create Tables */
 
@@ -119,6 +120,15 @@ CREATE TABLE users_sessions
 	CONSTRAINT zintro_user_sessions_pkey PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
+CREATE TABLE shopping_cart
+(
+	id bigint DEFAULT nextval('shopping_cart_sequence') NOT NULL,
+	user_session_id bigint NOT NULL,
+	product_format_id bigint NOT NULL,
+	quantity float8 NOT NULL,
+	CONSTRAINT shopping_cart_pkey PRIMARY KEY (id)
+) WITHOUT OIDS;
+
 CREATE TABLE posters
 (
 	id bigint DEFAULT nextval('posters_sequence') NOT NULL,
@@ -171,6 +181,20 @@ ALTER TABLE users
 ALTER TABLE users_sessions
 	ADD FOREIGN KEY (user_id)
 	REFERENCES users (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+ALTER TABLE shopping_cart
+	ADD FOREIGN KEY (user_session_id)
+	REFERENCES users_sessions (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+ALTER TABLE shopping_cart
+	ADD FOREIGN KEY (product_format_id)
+	REFERENCES products_formats (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

@@ -58,19 +58,19 @@ $(function () {
 });
 
 
-// Save product
+// Calculate price
 $(function () {
-	
-	$("input[name^='calculateproductformat_']").filter(function() {
-		
+	$("input[name^='quantity_']").filter(function() {
 		$(this).keyup(function (event) {
+			
+			clear_notification_toolbar();
+			
 			var keyCode = event.which;
 			if ((!((keyCode > 46 && keyCode < 58))) && keyCode != 0) {
 				event.preventDefault();
 			}
 			
 			var productformatid = $(this).attr('alt');
-			
 			console.log($(this).val());
 			
 			$.ajax({
@@ -82,9 +82,39 @@ $(function () {
 				},
 				error : function(errorresponse) {
 					$("span[name='price_"+productformatid+"']").text("");
-//					show_error_messages(errorresponse);
 				}
 			});
+		});
+	});
+});
+
+
+// Add to basket
+$(function () {
+	$("a[name^='addtocart_']").click(function(event) {
+		event.preventDefault();
+		
+		
+		var csrf			= $("input[name='_csrf']").val();
+		var productformatid = $(this).attr('alt');
+		var quantity		= $("input[name='quantity_"+productformatid+"']").val();
+		var formdata		= {_csrf:csrf, productformatid:productformatid,quantity:quantity};
+		
+		console.log('Data to send:'+JSON.stringify(formdata));
+		
+		$.ajax({
+			url : '/shoppingcart/addproducttocart',
+			type : 'POST',
+			data: formdata,
+			success : function (price) {
+				console.log(price);
+//				$("span[name='price_"+productformatid+"']").text("$ "+price);
+				show_error_messages({responseText:"[{\"param\":\"general\",\"msg\":\"Producto agregado al carrito !\"}]"});
+			},
+			error : function(errorresponse) {
+				console.log(errorresponse);
+//				$("span[name='price_"+productformatid+"']").text("");
+			}
 		});
 	});
 });

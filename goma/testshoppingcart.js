@@ -60,6 +60,39 @@ var request		= require('supertest'),
 			return done(err);
 		});
 	};
+
+	testshoppingcart.addProductToCart = function (done) {
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/login')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/shoppingcart/addproducttocart')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'productformatid' : '1',
+						'quantity' : '9',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success_admin');
+						return callback(err,res);
+					});
+			}
+		], 
+		function(err) {
+			return done(err);
+		});
+	};	
 	
 	
 })(module.exports);
