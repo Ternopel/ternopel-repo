@@ -35,7 +35,14 @@
 				<div class="header-details">
 					<ul>
 						<li><a href="#">Contacto</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Mapa sitio</a></li>
-						<li class="cart-box"><a href="#" class="header-cart">Carrito: vacio</a></li>
+						{{?it.cart_count===0}}
+							<li class="cart-box"><a href="#" class="header-cart">Carrito: Vacío</a></li>
+						{{??}}
+							<li class="cart-box"><a href="#" class="header-cart">Carrito: {{=it.cart_count}}</a></li>
+						{{?}}	
+							
+							
+							
 						{{?it.is_logged_in}}
 							<li><a href="#">Bienvenido, {{=it.full_name}} </a><a href="/logout" class="user-logout">Cerrar sesión</a></li>
 						{{??}}

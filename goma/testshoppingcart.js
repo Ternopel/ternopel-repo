@@ -73,7 +73,18 @@ var request		= require('supertest'),
 					});
 			}, 
 			function(res,callback) {
-				logger.info('Posting info to server');
+				logger.info('Getting products count for first time');
+				request("http://localhost:"+config.test_app_port)
+				.get('/shoppingcart/get_cart_count')
+				.set('cookie', utils.getcookies(res))
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toBe('0');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Adding product to cart');
 				request("http://localhost:"+config.test_app_port)
 					.post('/shoppingcart/addproducttocart')
 					.set('cookie', utils.getcookies(res))
@@ -84,9 +95,36 @@ var request		= require('supertest'),
 					})
 					.expect(200)
 					.end(function(err,newres) {
-						expect(newres.text).toBe('success_admin');
+						expect(newres.text).toBe('1');
 						return callback(err,res);
 					});
+			},
+			function(res,callback) {
+				logger.info('Adding product to cart');
+				request("http://localhost:"+config.test_app_port)
+				.post('/shoppingcart/addproducttocart')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'productformatid' : '1',
+					'quantity' : '9',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toBe('2');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Getting products count for second time');
+				request("http://localhost:"+config.test_app_port)
+				.get('/shoppingcart/get_cart_count')
+				.set('cookie', utils.getcookies(res))
+				.expect(200)
+				.end(function(err,res) {
+					expect(res.text).toBe('2');
+					return callback(err,res);
+				});
 			}
 		], 
 		function(err) {

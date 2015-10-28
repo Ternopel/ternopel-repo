@@ -75,12 +75,12 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 	
 	if(runTests) {
 		it('Get Price Calculation', testshoppingcart.getPriceCalculation);
+		it('Add product to cart', testshoppingcart.addProductToCart);
 	}
-	it('Add product to cart', testshoppingcart.addProductToCart);
 	
 	if(runTests) {
 		it('Send registration email', testsendemail.sendMail);
@@ -141,7 +141,6 @@ describe('Test Suite', function() {
 		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
 		it('Confirm User', testsregistration.confirmUser);
 		it('Client login', testsregistration.clientLogin);
-//		it('Register new user', testsregistration.registerNewUser);
 		it('Register new mailing user', testsregistration.registerNewMailingUser);
 	}
 	 	

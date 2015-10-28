@@ -10,7 +10,15 @@
 			}
 			req.logger.info("Assigning current session to request");
 			req.usersession = usersession;
-			return next();
+			
+			req.models.shoppingcart.count({user_session:usersession.id},function(err,count) {
+				if(err) {
+					return utils.send_ajax_error(req,res,err);
+				}
+				var ld = require('lodash');
+				req.pageinfo = ld.merge(req.pageinfo,{cart_count:count});
+				return next();
+			});
 		});
 	};
 	
@@ -24,7 +32,7 @@
 			}
 			req.logger.info('User is NOT logged IN !!');
 			req.usersession		= usersession;
-			req.pageinfo	= {is_logged_in:false};
+			req.pageinfo	= {is_logged_in:false, cart_count:0};
 			req.logger.info('Created session:'+JSON.stringify(req.usersession));
 			res.cookie("ter_token", token, { httpOnly: true, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
 			next();

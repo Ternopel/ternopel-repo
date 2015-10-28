@@ -58,6 +58,7 @@
 		app.post	( '/admin/productspictures',			multipartMiddleware,controllers.productspictures.post_productspictures);
 		
 		app.get		( '/shoppingcart/pricecalculation',		controllers.shoppingcart.get_price_calculation);
+		app.get		( '/shoppingcart/get_cart_count',		controllers.shoppingcart.get_cart_products_count);
 		app.post	( '/shoppingcart/addproducttocart',		controllers.shoppingcart.post_product_to_cart);
 		
 		app.get		( '/report',							controllers.report.get_report);
