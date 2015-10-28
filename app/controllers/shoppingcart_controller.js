@@ -71,7 +71,7 @@ module.exports = {
 				if(err) {
 					return utils.send_ajax_error(req,res,err);
 				}
-				req.models.shoppingcart.count({user_session:usersession.id},function(err,count) {
+				req.models.shoppingcart.count({user_session_id:usersession.id},function(err,count) {
 					if(err) {
 						return utils.send_ajax_error(req,res,err);
 					}
@@ -93,7 +93,7 @@ module.exports = {
 			req.logger.info("Getting user session");
 			
 			var usersession		= usersessions[0];
-			req.models.shoppingcart.count({user_session:usersession.id},function(err,count) {
+			req.models.shoppingcart.count({user_session_id:usersession.id},function(err,count) {
 				if(err) {
 					return utils.send_ajax_error(req,res,err);
 				}

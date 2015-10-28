@@ -11,7 +11,7 @@
 			req.logger.info("Assigning current session to request");
 			req.usersession = usersession;
 			
-			req.models.shoppingcart.count({user_session:usersession.id},function(err,count) {
+			req.models.shoppingcart.count({user_session_id:usersession.id},function(err,count) {
 				if(err) {
 					return utils.send_ajax_error(req,res,err);
 				}
