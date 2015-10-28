@@ -36,9 +36,9 @@
 					<ul>
 						<li><a href="#">Contacto</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Mapa sitio</a></li>
 						{{?it.cart_count===0}}
-							<li class="cart-box"><a href="#" class="header-cart">Carrito: Vacío</a></li>
+							<li class="cart-box"><a href="#" class="header-cart">Carrito: <span name="cart_count">Vacío</span></a></li>
 						{{??}}
-							<li class="cart-box"><a href="#" class="header-cart">Carrito: {{=it.cart_count}}</a></li>
+							<li class="cart-box"><a href="#" class="header-cart">Carrito: <span name="cart_count">{{=it.cart_count}}</span></a></li>
 						{{?}}	
 							
 							

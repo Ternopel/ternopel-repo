@@ -108,7 +108,7 @@ $(function () {
 			data: formdata,
 			success : function (price) {
 				console.log(price);
-//				$("span[name='price_"+productformatid+"']").text("$ "+price);
+				$("span[name='cart_count']").text(price);
 				show_error_messages({responseText:"[{\"param\":\"general\",\"msg\":\"Producto agregado al carrito !\"}]"});
 			},
 			error : function(errorresponse) {
