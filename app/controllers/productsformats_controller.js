@@ -11,11 +11,8 @@ module.exports = {
 		var colname		= req.body.colname;
 		var colvalue	= req.body.colvalue;
 		req.assert('colvalue',		'El valor es requerido').notEmpty();
-		if(	colname==='quantity' || colname==='units') {
-			req.assert('colvalue',		'El valor es un entero').isInt();
-		}
-		if(	colname==='retail' || colname==='wholesale') {
-			req.assert('colvalue',		'El valor es un importe').isFloat();
+		if(	colname==='retail' || colname==='wholesale' || colname==='quantity' || colname==='units' ) {
+			req.assert('colvalue', 'Formato inválido').isFloat();
 		}
 
 		var valerrors = req.validationErrors();

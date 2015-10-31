@@ -92,11 +92,13 @@ $(function () {
 // Add to basket
 $(function () {
 	$("a[name^='addtocart_']").click(function(event) {
+
+		
 		event.preventDefault();
 		
-		
+		var current			= $(this);
 		var csrf			= $("input[name='_csrf']").val();
-		var productformatid = $(this).attr('alt');
+		var productformatid = current.attr('alt');
 		var quantity		= $("input[name='quantity_"+productformatid+"']").val();
 		var formdata		= {_csrf:csrf, productformatid:productformatid,quantity:quantity};
 		
@@ -113,7 +115,8 @@ $(function () {
 			},
 			error : function(errorresponse) {
 				console.log(errorresponse);
-//				$("span[name='price_"+productformatid+"']").text("");
+			},
+			complete: function(status) {
 			}
 		});
 	});

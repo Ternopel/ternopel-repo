@@ -1123,6 +1123,20 @@ a.add-to-basket {
 	margin: 6px 0 0;
 }
 
+img.add-to-basket {
+	border: none;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 12px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	padding: 6px 0px 6px 40px;
+	font-weight: 500;
+	float: right;
+	display: inline-block;
+	margin: 0px 0 0;
+}
+
 .add-to-basket:hover {
 	background: #2884fd;
 	-webkit-transition: all 0.3s ease-in-out;

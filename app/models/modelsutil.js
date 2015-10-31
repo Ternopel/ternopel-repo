@@ -25,6 +25,10 @@ function fillProductFormat(product,productformat) {
 		
 	productformat.retaildescription		= retaildescription;
 	productformat.wholesaledescription	= wholesaledescription;
+	productformat.quantity				= productformat.quantity.toFixed(2);
+	productformat.units					= productformat.units.toFixed(2);
+	productformat.retail				= productformat.retail.toFixed(2);
+	productformat.wholesale				= productformat.wholesale.toFixed(2);
 }
 
 (function (modelsutil) {

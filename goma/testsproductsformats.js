@@ -236,6 +236,40 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Updating product');
 				request("http://localhost:"+config.test_app_port)
+				.post('/admin/productsformats')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'id' : '1',
+					'colname' : 'units',
+					'colvalue' : '0.4',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toBe('success');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Updating product');
+				request("http://localhost:"+config.test_app_port)
+				.post('/admin/productsformats')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'id' : '1',
+					'colname' : 'quantity',
+					'colvalue' : '0.4',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toBe('success');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Updating product');
+				request("http://localhost:"+config.test_app_port)
 					.post('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -279,7 +313,7 @@ var request		= require('supertest'),
 					})
 					.expect(500)
 					.end(function(err,newres) {
-						expect(newres.text).toInclude('El valor es un entero');
+						expect(newres.text).toInclude('Formato inválido');
 						return callback(err,res);
 					});
 			} 
