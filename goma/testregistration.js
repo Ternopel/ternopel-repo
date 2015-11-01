@@ -405,7 +405,7 @@ var request		= require('supertest'),
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
-						'email_address' : 'mcarrizo@gmail.com',
+						'regis_email_address' : 'mcarrizo@gmail.com',
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(500)
@@ -420,7 +420,7 @@ var request		= require('supertest'),
 					.post('/registration')
 					.set('cookie', utils.getcookies(res))
 					.send({
-						'email_address' : 'nicasio@gmail.com',
+						'regis_email_address' : 'nicasio@gmail.com',
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(200)
