@@ -1,6 +1,6 @@
 <script src='/javascript/imagecrop.min.js'></script>
 <script src='/javascript/crud.js'></script>
-<script src='/javascript/newproducts.js'></script>
+<script src='/javascript/products.js'></script>
 
 <section class="page-container clear-fix">
 	{{#def.load('admin_menu.html')}}
@@ -10,6 +10,7 @@
 			<div class="new-customer" style="width: 658px; min-height: 490px;">
 				<h3 class="form-header">Complete sus datos</h3>
 				<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+				<input type='hidden' name='id' value='{{=it.currentproduct.id}}'>
 				
 				<table id='productsFormatsTable' style="margin-top: 6px; margin-left: 6px;" summary='/admin/productsformats'>
 					<tr style="height: 32px;">
@@ -18,6 +19,7 @@
 						<th style="padding-left: 10px;">Cantidad</th>
 						<th style="padding-left: 10px;">Prc. Minorista</th>
 						<th style="padding-left: 10px;">Prc. Mayorista</th>
+						<th style="padding-left: 10px;"></th>
 						<th></th>
 					</tr>
 					{{~ it.currentproduct.productformats:productformat}}
@@ -27,11 +29,15 @@
 							<td name='quantity'><span>{{=productformat.quantity}}</span></td>
 							<td name='retail'><span>{{=productformat.retail}}</span></td>
 							<td name='wholesale'><span>{{=productformat.wholesale}}</span></td>
+							<td style="padding-left: 10px;"><input name='remove' type='button' value='Borrar'></td>
+							
 						</tr>
 					{{~}}
 				</table>
-				
+
+				<br/>
 				<button class="form-btn" style="margin-right: 30px;" onclick="history.back(); return false;">Volver</button>
+				<button class="form-btn" style="margin-right: 30px;" id="addProductFormat" name='{{=it.currentproduct.id}}'>Agregar</button>
 			</div>
 		</div>
 	</section>
