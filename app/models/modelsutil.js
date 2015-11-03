@@ -48,7 +48,7 @@ function fillProductFormat(product,productformat) {
 			var categories	= [];
 			records.forEach(function(record) {
 				if(record.c_name !== c_name) {
-					req.logger.debug('----------> New category:'+record.c_name);
+					req.logger.info('----------> New category:'+record.c_name);
 					var category		= ld.merge({id: record.c_id,name:record.c_name, url:record.c_url});
 					category.products	= [];
 					categories.push(category);
@@ -56,7 +56,7 @@ function fillProductFormat(product,productformat) {
 				}
 				
 				if(record.p_name !== p_name) {
-					req.logger.debug('----------> New product:'+record.p_name);
+					req.logger.info('----------> New product:'+record.p_name);
 					var lastcategory		= categories[categories.length - 1];
 					var packaging			= ld.merge({id: record.pk_id,name:record.pk_name});
 					var product				= ld.merge({id: record.p_id,name:record.p_name, url:record.p_url,is_visible: record.p_is_visible, is_offer: record.p_is_offer, packaging:packaging});
@@ -70,7 +70,6 @@ function fillProductFormat(product,productformat) {
 				lastproduct.productsformats.push(productformat);
 			
 			});
-			req.logger.debug(JSON.stringify(categories));
 			return getcallback(null,categories);
 		});
 	};
@@ -80,7 +79,7 @@ function fillProductFormat(product,productformat) {
 		var async		= require('async'),
 			ld			= require('lodash');
 		
-		req.logger.debug('Entering to get_products');
+		req.logger.info('Entering to get_products');
 		var productsfind	= req.models.products.find(filters.filter,['name']);
 		if(filters.search) {
 			productsfind.where('lower(name) ilike ?',['%'+filters.search+'%']);
@@ -92,30 +91,39 @@ function fillProductFormat(product,productformat) {
 			if(err) {
 				return next(err);
 			}
-			req.logger.debug('Products readed:'+products.length);
+			req.logger.info('Products readed:'+products.length);
 			async.each(products, function(product, callback) {
-				var productsformatsfind = product.getProductsFormats().order('retail');
-				if(filters.formatslimit) {
-					productsformatsfind.limit(filters.formatslimit);
-				}
-				productsformatsfind.run(function(err,productformats) {
+				req.models.packaging.get(product.packaging_id,function(err,packaging) {
 					if(err) {
 						return callback(err);
 					}
-					productformats.forEach(function(productformat) {
-						fillProductFormat(product,productformat);
-					});
-					req.logger.debug("Product:"+product.name+" Formats readed:"+productformats.length);
-					ld.merge(product, {productformats:productformats});
-					product.getCategory(function(err,category) {
+					ld.merge(product, {packaging:packaging});
+					var productsformatsfind = product.getProductsFormats().order('retail');
+					if(filters.formatslimit) {
+						productsformatsfind.limit(filters.formatslimit);
+					}
+					req.logger.info('Searching formats');
+					productsformatsfind.run(function(err,productformats) {
 						if(err) {
 							return callback(err);
 						}
-						req.logger.debug("Product:"+product.name+" Category:"+category.name);
-						ld.merge(product, {category:category});
-						return callback();
+						req.logger.info('Formats readed:'+productformats.length);
+						productformats.forEach(function(productformat) {
+							fillProductFormat(product,productformat);
+						});
+						req.logger.info("Product:"+product.name+" Formats readed:"+productformats.length);
+						ld.merge(product, {productformats:productformats});
+						product.getCategory(function(err,category) {
+							if(err) {
+								return callback(err);
+							}
+							req.logger.info("Product:"+product.name+" Category:"+category.name);
+							ld.merge(product, {category:category});
+							return callback();
+						});
 					});
 				});
+				
 			}, function(err) {
 				return getcallback(err,products);
 			});
@@ -124,22 +132,43 @@ function fillProductFormat(product,productformat) {
 	
 	
 	modelsutil.getPosters = function (req,res,next,getcallback) {
+		
+		var async		= require('async'),
+			ld			= require('lodash');
+
+		req.logger.info('Entering get posters');
 		req.models.posters.find({},['position'],function(err,posters) {
 			if(err) {
 				return getcallback(err);
 			}
-			posters.forEach(function(poster) {
-				if(poster.product_id) {
-					poster.origin	= 'Producto:'+poster.product.name;
-					poster.url		= poster.category.url+"/"+poster.product.url;
-				}
-				else {
-					poster.origin	= 'Categoría:'+poster.category.name;
-					poster.url		= poster.category.url;
-				}
-				req.logger.info(JSON.stringify(poster));
+			req.logger.info('Posters found:'+posters.length);
+			
+			async.each(posters, function(poster, callback) {
+				req.models.categories.get(poster.category_id,function(err,category) {
+					if(err) {
+						return callback(err);
+					}
+					ld.merge(poster, {category:category});
+					if(poster.product_id) {
+						req.models.products.get(poster.product_id,function(err,product) {
+							if(err) {
+								return callback(err);
+							}
+							ld.merge(poster, {product:product});
+							poster.origin	= 'Producto:'+poster.product.name;
+							poster.url		= poster.category.url+"/"+poster.product.url;
+							return callback();
+						});
+					}
+					else {
+						poster.origin	= 'Categoría:'+poster.category.name;
+						poster.url		= poster.category.url;
+						return callback();
+					}
+				});
+			}, function(err) {
+				return getcallback(err,posters);
 			});
-			return getcallback(null,posters);
 		});
 	};
 	

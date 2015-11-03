@@ -23,6 +23,6 @@ module.exports = function (orm, db, models,logger) {
 	
 	logger.debug("Configuring products relations");
 	models.products.hasOne("category",models.categories,{ required: true, reverse: "products" });
-	models.products.hasOne("packaging",models.packaging,{ required: true, reverse: "products", autoFetch:true });
+	models.products.hasOne("packaging",models.packaging,{ required: true, reverse: "products" });
 	logger.debug("Products relations configured");
 };

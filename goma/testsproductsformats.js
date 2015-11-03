@@ -110,7 +110,7 @@ var request		= require('supertest'),
 					})
 					.expect(200)
 					.end(function(err,newres) {
-						expect(newres.text).toInclude('INS FORMAT');
+						expect(newres.text).toInclude('"quantity":1');
 						return callback(err,res);
 					});
 			}

@@ -10,20 +10,14 @@ module.exports = {
 				req.logger.info('Reading template file');
 				var fs = require('fs');
 				fs.readFile('./app/reports/products_by_category.html', "utf8", function (err, content) {
-					if (err) {
-						return callback(err);
-					}
-					return callback(null,content);
+					return callback(err,content);
 				});
 			},
 			function(content,callback) {
 				var modelsutil	= require('../models/modelsutil');
 				req.logger.info('Reading categories');
 				modelsutil.getCategories(req,res,next,function(err,categories) {
-					if(err) {
-						return callback(err);
-					}
-					return callback(null,content,categories);
+					return callback(err,content,categories);
 				});
 			},
 			function(content,categories, callback) {
