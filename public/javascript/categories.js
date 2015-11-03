@@ -8,8 +8,10 @@ $(function () {
 });
 
 // Add hover efect to all images
+/*
 $(function () {
 	$("ul#ulproducts img").each(function(){
 		$(this).hoverpulse();
 	});
 });
+*/
