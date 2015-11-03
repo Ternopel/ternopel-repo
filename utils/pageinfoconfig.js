@@ -98,7 +98,13 @@
 			}
 			var ld = require('lodash');
 			req.pageinfo = ld.merge(req.pageinfo,{app_resources: req.config.app_resources});
-			next();
+			req.models.categories.find({},['name'],function(err,categories) {
+				if(err) {
+					return next(err);
+				}
+				req.pageinfo = ld.merge(req.pageinfo,{footer_categories: categories});
+				next();
+			});
 		});
 	};
 	
