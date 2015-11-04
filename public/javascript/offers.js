@@ -1,5 +1,4 @@
 $(function() {
-	console.log($('.slider-container ul').children().size());
 	if($('.slider-container ul').children().size()>0) {
 		$('.slider-container ul').anoSlide({
 			items: 1,
