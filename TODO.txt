@@ -9,15 +9,10 @@
 - Usar el audit en chrome para optimizar la pagina ( agregar las properties de cache en las imagenes )	
 - Marcar con ROJO los productos no visibles pero que el admin los vea !
 - Validar con checkParam los lugares donde recibo query params en lugar de preguntar por no nulo
+- Error que tira cuando le pego a la home desde el browser en la consola
+
+
 - CHange this:
-
-logger.debug("Configuring posters relations");
-	models.posters.hasOne("category",models.categories,{ reverse: "posters",autoFetch:true,required: true });
-	models.posters.hasOne("product",models.products,{ reverse: "posters",autoFetch:true });
-	logger.debug("Posters relations configured");
-	
-el autofetch MATA	
-
 
 research Prod start and stop
     "start": "forever -a -l ./ternopel.log start ./server.js",
