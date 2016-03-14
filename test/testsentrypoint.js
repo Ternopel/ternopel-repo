@@ -6,7 +6,7 @@ var app			= require(__dirname+'/../app.js'),
 	liquibase	= require(__dirname+'/../utils/liquibase');
 
 var request		= require('supertest'),
-	server,
+	server, 
 	db;
 
 var testsregistration		= require(__dirname+'/../goma/testregistration');
