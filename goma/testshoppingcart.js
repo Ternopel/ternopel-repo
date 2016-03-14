@@ -41,7 +41,7 @@ var request		= require('supertest'),
 				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=29')
 				.expect(200)
 				.end(function(err,res) {
-					expect(res.text).toBe('1890.00');
+					expect(res.text).toBe('7250.00');
 					return callback(err,res);
 				});
 			},
@@ -51,7 +51,7 @@ var request		= require('supertest'),
 				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=9')
 				.expect(200)
 				.end(function(err,res) {
-					expect(res.text).toBe('630.00');
+					expect(res.text).toBe('2250.00');
 					return callback(err,res);
 				});
 			}

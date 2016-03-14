@@ -284,12 +284,12 @@ var request		= require('supertest'),
 					.delete('/admin/products')
 					.set('cookie', utils.getcookies(res))
 					.send({
-						'id' : '1',
+						'id' : '7',
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(500)
 					.end(function(err,newres) {
-						expect(newres.text).toInclude('Este producto tiene 3 formatos asociados');
+						expect(newres.text).toInclude('Este producto tiene 52 formatos asociados');
 						expect(newres.text).toInclude('Borre primero los formatos');
 						return callback(err,res);
 					});

@@ -85,11 +85,6 @@ VALUES ('demostenes1509@gmail.com','3041bd90-5397-11e5-9650-9bf126a5d21f',false)
 INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
 (1,2,'Bolsa de banditas elásticas','Bolsa de banditas elásticas','bolsa-bandas-elasticas',false,true,true);
 
-INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
-(1,'1000 gramos',1,63,70,10),
-(1,'500 gramos',1,31.5,35,10),
-(1,'100 gramos',1,8,10,10);
-
 /* Bolsas economicas */
 INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
 (5,3,'Bolsas de camisetas económicas','Bolsas de camisetas económicas','bolsas-camisetas-economicas',false,true,false);
@@ -132,12 +127,6 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 /* Bolsas residuos */
 INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
 (5,2,'Bolsas de residuos','Bolsas de residuos','bolsas-residuos',false,true,true);
-
-INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity) VALUES 
-(5,'45X60 X 10 ',10,260.0,3.0,1),
-(5,'50X70 X 10',10,320.0,5.0,1),
-(5,'45X60 X160 aprox / reforzada (rollo)',1,120.0,125.0,1),
-(5,'50X70 X170 aprox/ reforzada (rollo)',1,120.0,125.0,1);
 
 /* Bolsas papel sulfito */
 INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
