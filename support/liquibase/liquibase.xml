@@ -11,4 +11,8 @@
 		<sqlFile path="support/liquibase/sql/populate_schema.sql" />
 	</changeSet>
 
+	<changeSet author="maximiliano.ezequiel.carrizo.barrera" id="recreate_view">
+		<sqlFile path="support/liquibase/sql/recreate_view.sql" />
+	</changeSet>
+
 </databaseChangeLog>

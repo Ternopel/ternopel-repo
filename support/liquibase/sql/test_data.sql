@@ -15,10 +15,11 @@ SELECT	pf.id AS pf_id,
 		c.url AS c_url,
 		pk.id AS pk_id,
 		pk.name AS pk_name
-FROM		products_formats pf, products p, categories c, packaging pk
-WHERE	pf.product_id	= p.id	AND
-		p.category_id	= c.id	AND
-		p.packaging_id	= pk.id;
+FROM		products p
+LEFT JOIN categories c ON p.category_id = c.id 
+LEFT JOIN packaging pk ON p.packaging_id = pk.id
+LEFT OUTER JOIN products_formats pf ON pf.product_id = p.id; 
+
 
 INSERT INTO roles (id,name) VALUES 
 (1,'admin'),
