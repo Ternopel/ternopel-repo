@@ -6,6 +6,8 @@ openssl genrsa -out my-private-key.pem 2048
 
 2) Generamos el requerimiento para un certificado y lo mandamos a una autoridad certificante
 
+openssl req -sha256 -new -key my-private-key.pem -out csr.pem
+
 3) Vamos a recibir de la autoridad certificante varios archivos crt
 
 Certificates chain:
