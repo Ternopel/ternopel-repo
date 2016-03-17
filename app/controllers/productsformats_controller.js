@@ -96,8 +96,8 @@ module.exports = {
 											product_id:		product_id,
 											quantity:		1,
 											units:			1,
-											retail:			1,
-											wholesale:	1},function(err,productformat) {
+											retail:			0,
+											wholesale:		0},function(err,productformat) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}

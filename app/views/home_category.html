@@ -26,8 +26,10 @@
 						<div class="product-prices">
 							{{~ product.productformats:productformat}}
 								<p>{{=productformat.retaildescription}}</p>
-								<p>{{=productformat.wholesaledescription}}</p>
-								<br/>
+								{{?productformat.wholesaledescription!==''}}
+									<p>{{=productformat.wholesaledescription}}</p>
+									<br/>
+								{{?}}								
 							{{~}}
 						</div>
 					</li>

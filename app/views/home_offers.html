@@ -43,8 +43,10 @@
 					<div class="product-prices">
 						{{~ offersproduct.productformats:productformat}}
 							<p>{{=productformat.retaildescription}}</p>
-							<p>{{=productformat.wholesaledescription}}</p>
-							<br/>
+							{{?productformat.wholesaledescription!==''}}
+								<p>{{=productformat.wholesaledescription}}</p>
+								<br/>
+							{{?}}
 						{{~}}
 					</div>
 				</li>

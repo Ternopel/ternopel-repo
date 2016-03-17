@@ -47,12 +47,14 @@
 			{{~ it.detailedproduct.productformats:productformat}}
 				<ul>
 					<li>{{=productformat.retaildescription}}</span></li>
-					<li>{{=productformat.wholesaledescription}}</span></li>
-					<li class="quantity">Cantidad 
-						<input type="text" name="quantity_{{=productformat.id}}" alt="{{=productformat.id}}">
-						<span class="product-price" name="price_{{=productformat.id}}"></span>
-						<a href="" class="add-to-basket" name="addtocart_{{=productformat.id}}" alt="{{=productformat.id}}">Carrito</a>
-					</li>
+					{{?productformat.wholesaledescription!==''}}
+						<li>{{=productformat.wholesaledescription}}</span></li>
+						<li class="quantity">Cantidad 
+							<input type="text" name="quantity_{{=productformat.id}}" alt="{{=productformat.id}}">
+							<span class="product-price" name="price_{{=productformat.id}}"></span>
+							<a href="" class="add-to-basket" name="addtocart_{{=productformat.id}}" alt="{{=productformat.id}}">Carrito</a>
+						</li>
+					{{?}}
 				</ul>
 			{{~}}
 			
