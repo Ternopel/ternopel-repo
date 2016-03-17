@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /privacy/datapolicy
+Disallow: /login
