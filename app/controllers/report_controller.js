@@ -16,7 +16,7 @@ module.exports = {
 			function(content,callback) {
 				var modelsutil	= require('../models/modelsutil');
 				req.logger.info('Reading categories');
-				modelsutil.getCategories(req,res,next,function(err,categories) {
+				modelsutil.getCategories(req,res,next,true,function(err,categories) {
 					return callback(err,content,categories);
 				});
 			},

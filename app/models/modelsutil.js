@@ -22,6 +22,9 @@ function fillProductFormat(product,productformat) {
 		}
 		if(productformat.retail !==0) {
 			retaildescription += ' a '+begin+productformat.retail.toFixed(2)+end+' c/u';
+		}
+		
+		if(productformat.retail !==0 && productformat.wholesale !== 0) {
 			wholesaledescription	+= productformat.quantity+' '+product.packaging.name+'s de '+begin+productformat.wholesale.toFixed(2)+end+' c/u a '+begin+(productformat.wholesale*productformat.quantity).toFixed(2)+end;
 		}
 		
@@ -36,12 +39,17 @@ function fillProductFormat(product,productformat) {
 
 (function (modelsutil) {
 
-	modelsutil.getCategories = function (req,res,next,getcallback) {
+	modelsutil.getCategories = function (req,res,next,getformatswithnoprice,getcallback) {
 	
 		var ld = require('lodash');
 		
 		req.logger.info("Getting all categories");
-		req.db.driver.execQuery("select * from plain_info order by c_name, p_name, pf_retail",function(err,records) {
+		var query = "select * from plain_info ";
+		if(getformatswithnoprice===true) {
+			query += "where pf_retail <> 0 ";
+		}
+		query += "order by c_name, p_name, pf_retail";
+		req.db.driver.execQuery(query,function(err,records) {
 			req.logger.info("Records found:"+records.length);
 			if(err) {
 				return getcallback(err);

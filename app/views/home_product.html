@@ -49,6 +49,8 @@
 					<li>{{=productformat.retaildescription}}</span></li>
 					{{?productformat.wholesaledescription!==''}}
 						<li>{{=productformat.wholesaledescription}}</span></li>
+					{{?}}
+					{{?productformat.retail!==0}}
 						<li class="quantity">Cantidad 
 							<input type="text" name="quantity_{{=productformat.id}}" alt="{{=productformat.id}}">
 							<span class="product-price" name="price_{{=productformat.id}}"></span>
