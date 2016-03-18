@@ -79,7 +79,7 @@ module.exports = {
 							return callback('Este producto no está más disponible');
 						}
 						var detailedproduct = products[0];
-						ld.merge(pageinfo,{detailedproduct:detailedproduct,csrfToken: req.csrfToken()});
+						ld.merge(pageinfo,{detailedproduct:detailedproduct,csrfToken: req.csrfToken(),page_title:'Papelera Ternopel - '+detailedproduct.name});
 						return callback();
 					});
 				}
@@ -104,7 +104,7 @@ module.exports = {
 								return callback(err);
 							}
 							ld.merge(currentcategory,{products:products});
-							ld.merge(pageinfo,{currentcategory:currentcategory});
+							ld.merge(pageinfo,{currentcategory:currentcategory, page_title:'Papelera Ternopel - '+currentcategory.name});
 							return callback();
 						});
 					});

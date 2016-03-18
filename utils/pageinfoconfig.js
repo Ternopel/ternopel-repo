@@ -32,7 +32,7 @@
 			}
 			req.logger.info('User is NOT logged IN !!');
 			req.usersession		= usersession;
-			req.pageinfo	= {is_logged_in:false, cart_count:0};
+			req.pageinfo		= {is_logged_in:false, cart_count:0};
 			req.logger.info('Created session:'+JSON.stringify(req.usersession));
 			res.cookie("ter_token", token, { httpOnly: true, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
 			next();
@@ -97,7 +97,7 @@
 				return next();
 			}
 			var ld = require('lodash');
-			req.pageinfo = ld.merge(req.pageinfo,{app_resources: req.config.app_resources});
+			req.pageinfo = ld.merge(req.pageinfo,{app_resources: req.config.app_resources, page_title: 'Papelera Ternopel'});
 			req.models.categories.find({},['name'],function(err,categories) {
 				if(err) {
 					return next(err);
