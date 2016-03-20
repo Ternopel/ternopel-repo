@@ -33,6 +33,29 @@ $(function () {
 	});
 });
 
+// Add product
+$(function () {
+	$("#cancelProductFormat").click(function () {
+		console.log('Add product format pressed');
+		var csrf		=$("input[name='_csrf']").val();
+		var product_id	=$(this).attr('name');
+		var formdata	={_csrf:csrf, product_id:product_id};
+		console.log('Data to send:'+JSON.stringify(formdata));
+		$.ajax({
+			url : '/admin/productsformats',
+			type : 'GET',
+			data : formdata,
+			success : function (entity) {
+				console.log(entity);
+				window.location.href = entity;
+			},
+			error : function(errorresponse) {
+				show_error_messages(errorresponse);
+			}
+		});
+	});
+});
+
 // Save product
 $(function () {
 	$("button[name='saveProduct']").click(function (event) {

@@ -41,6 +41,7 @@
 		app.get		( '/admin/products/picture/edit',		controllers.newproducts.get_edit_product_picture);
 		app.get		( '/admin/products/formats/edit',		controllers.newproducts.get_edit_product_formats);
 		
+		app.get		( '/admin/productsformats',				controllers.productsformats.get_productsformats);
 		app.post	( '/admin/productsformats',				controllers.productsformats.post_productsformats);
 		app.put		( '/admin/productsformats',				controllers.productsformats.put_productsformats);
 		app.delete	( '/admin/productsformats',				controllers.productsformats.delete_productsformats);

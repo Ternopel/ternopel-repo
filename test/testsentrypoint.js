@@ -97,6 +97,7 @@ describe('Test Suite', function() {
 	
 	// admin products formats tests
 	if(runTests) {
+		it('Get product format', testsproductsformats.getProductFormat);
 		it('Delete product format', testsproductsformats.deleteProductFormat);
 		it('Create product format', testsproductsformats.createProductFormat);
 		it('Update product format', testsproductsformats.updateProductFormat);

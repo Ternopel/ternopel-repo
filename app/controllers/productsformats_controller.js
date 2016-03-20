@@ -1,6 +1,8 @@
 'use strict';
 
-var utils	= require('./utils');
+var utils	= require('./utils'),
+	ld			= require('lodash'),
+	modelsutil	= require('../models/modelsutil');
 
 module.exports = {
 	post_productsformats: function(req, res, next) {
@@ -106,6 +108,32 @@ module.exports = {
 		});
 	},
 	
+	
+	get_productsformats: function(req, res, next) {
+		req.logger.info('En GET products formats');
+		var milli		= new Date().getTime();
+		var product_id	= req.query.product_id;
+		
+		req.assert('product_id', 'El producto es requerido').notEmpty();
+		req.logger.info("Executing validation");
+		var valerrors = req.validationErrors();
+		if(valerrors) {
+			return utils.send_ajax_validation_errors(req,res,valerrors);
+		}
+
+		req.logger.info("Getting product "+product_id);
+		var filters = ld.merge({filter:{id:product_id}});
+		modelsutil.getProducts(req,res,next,filters,function(err,products) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			if(products.length===0) {
+				return utils.send_ajax_error(req,res,'Este producto no está más disponible');
+			}
+			var detailedproduct = products[0];
+			return res.status(200).send("/"+detailedproduct.category.url+"/"+detailedproduct.url);
+		});
+	},
 	
 	
 	delete_productsformats: function(req, res, next) {
