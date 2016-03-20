@@ -97,7 +97,7 @@
 				return next();
 			}
 			var ld = require('lodash');
-			req.pageinfo = ld.merge(req.pageinfo,{app_resources: req.config.app_resources, page_title: 'Papelera Ternopel'});
+			req.pageinfo = ld.merge(req.pageinfo,{app_resources: req.config.app_resources, page_title: 'Papelera Ternopel',is_home:false});
 			req.models.categories.find({},['name'],function(err,categories) {
 				if(err) {
 					return next(err);

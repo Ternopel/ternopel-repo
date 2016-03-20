@@ -39,7 +39,7 @@ var get_categories_info = function(req, res, next, mycallback) {
 module.exports = {
 	get_home: function(req, res, next) {
 		req.logger.info("Home GET");
-		var pageinfo	= ld.merge(req.pageinfo);
+		var pageinfo	= ld.merge(req.pageinfo,{is_home:true});
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {

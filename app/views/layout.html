@@ -81,20 +81,14 @@
 							<li><a href="#">Contacto</a></li>
 							<li><a href="/?posters=false">Ofertas</a></li>
 							<li><a href="#">Carrito</a></li>
-							<li class="main-search">
-								{{?it.searchinput}}
-									<input type="text" class="search-input" name="homesearchinput" value="{{=it.searchinput}}" />
-								{{??}}
-									<input type="text" class="search-input" name="homesearchinput" />
-								{{?}}
-								<button name="homesearchbutton" class="search-btn">Search</button>
-							</li>
 						{{?}}
 					{{??}}	
 						<li><a href="/">Inicio</a>
 						<li><a href="#">Contacto</a></li>
 						<li><a href="/?posters=false">Ofertas</a></li>
 						<li><a href="#">Carrito</a></li>
+					{{?}}					
+					{{?it.is_home}}
 						<li class="main-search">
 							{{?it.searchinput}}
 								<input type="text" class="search-input" name="homesearchinput" value="{{=it.searchinput}}" />
@@ -103,7 +97,7 @@
 							{{?}}
 							<button name="homesearchbutton" class="search-btn">Search</button>
 						</li>
-					{{?}}					
+					{{?}}	
 				</ul>
 			</nav>
 			{{=it.body}}
