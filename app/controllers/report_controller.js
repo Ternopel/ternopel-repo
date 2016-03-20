@@ -21,7 +21,7 @@ module.exports = {
 				});
 			},
 			function(content,categories, callback) {
-				req.logger.info('Generating report');
+				req.logger.info('Generating report gif');
 				var jsreport = require('jsreport');
 				jsreport.render({
 					template: {
@@ -33,6 +33,10 @@ module.exports = {
 							footer: "<div style='text-align:center'>Página {#pageNum} de {#numPages}</div>",
 							orientation: "portrait",
 							width: "600px"
+						},
+						phantomImage: {
+							imageType: 'jpeg',
+							quality: 100
 						}
 					},
 					data: { 
