@@ -27,6 +27,7 @@ module.exports = {
 					template: {
 						content: content,
 						engine: "jsrender",
+						recipe: 'phantom-image',
 						phantom: {
 							header: "<h2 style='background-color: lightGray'>Listado de Productos por Categor&iacute;a</h2>",
 							footer: "<div style='text-align:center'>Página {#pageNum} de {#numPages}</div>",
