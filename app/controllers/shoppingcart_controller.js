@@ -100,6 +100,23 @@ module.exports = {
 				return res.status(200).send(''+count);
 			});
 		});
+	},
+
+	get_shopping_cart: function(req, res, next) {
+		req.logger.info("GET shopping cart");
+		var ter_token		= req.cookies.ter_token;
+		
+		req.logger.info("Getting user session");
+		req.models.userssessions.find({token: ter_token},function(err,usersessions) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			req.logger.info("Getting user session");
+			
+			var usersession		= usersessions[0];
+			req.logger.info("Rendering shopping_cart");
+			res.render('shopping_cart.html',req.pageinfo);
+		});
 	}
 };
 

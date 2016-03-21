@@ -9,7 +9,7 @@
 			<ul class="aside-menu" name="ulcategories">
 			
 				{{~ it.menu_categories:category}}
-					<li name="{{=category.url}}">
+					<li name="{{=category.url}}" class="categoryul">
 						{{?category.selected}}
 							<span name="compress" class="compress"></span>
 							<a href="/{{=category.url}}" class="aside-active">{{=category.name}}</a>

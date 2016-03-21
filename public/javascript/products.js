@@ -134,6 +134,7 @@ $(function () {
 			success : function (price) {
 				console.log(price);
 				$("span[name='cart_count']").text(price);
+				$("a[name='cart_a']").attr('href','/shoppingcart');
 				show_error_messages({responseText:"[{\"param\":\"general\",\"msg\":\"Producto agregado al carrito !\"}]"});
 			},
 			error : function(errorresponse) {

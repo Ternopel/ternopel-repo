@@ -61,6 +61,7 @@
 		app.get		( '/shoppingcart/pricecalculation',		controllers.shoppingcart.get_price_calculation);
 		app.get		( '/shoppingcart/get_cart_count',		controllers.shoppingcart.get_cart_products_count);
 		app.post	( '/shoppingcart/addproducttocart',		controllers.shoppingcart.post_product_to_cart);
+		app.get		( '/shoppingcart',						controllers.shoppingcart.get_shopping_cart);
 		
 		app.get		( '/report',							controllers.report.get_report);
 
@@ -80,6 +81,7 @@
 		app.get		( '/search/:search',					controllers.home.get_home);
 		app.get		( '/:category',							controllers.home.get_home);
 		app.get		( '/:category/:product',				controllers.home.get_home);
+
 	};
 	
 })(module.exports);
