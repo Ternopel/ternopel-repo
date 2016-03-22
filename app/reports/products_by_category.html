@@ -8,22 +8,22 @@
 		<table style="font-family: Helvetica, Arial;">
 			{{for categories}}
 				<tr>
-					<td><h4 style="height:4px;">Categor&iacute;a:{{:name}}</h4></td>
+					<td><h4 style="height:6px;">Categor&iacute;a:{{:name}}</h4></td>
 				</tr>
 				<tr>
 					<td>
 						<table style='border-style:solid'>
 							<tr >
-								<th style='text-align: left;'><h5 style='height:0px;'>Nombre</h5></th>
-								<th style='text-align: left;'><h5 style='height:0px;'>Formatos</h5></th>
+								<th style='text-align: left;'><p>Nombre</p></th>
+								<th style='text-align: left;'><p>Formatos</p></th>
 							</tr>
 							{{for products}}
 								<tr>
-									<td valign="top"><h6 style="margin-top:3px; height:0px;">{{:name}}</h6></td>
-									<td>
+									<td valign="top" style="height: 0px;"><p>{{:name}}<p></td>
+									<td >
 										<table>
 											{{for productsformats}}
-												<tr><td><h6 style="margin: 0;">{{:retaildescription}}</h6></td></tr>
+												<tr><td><p>{{:retaildescription}}</p></td></tr>
 											{{/for}}
 										</table>
 									</td>
