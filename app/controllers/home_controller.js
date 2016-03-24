@@ -6,7 +6,7 @@ var ld			= require('lodash'),
 // Getting information to render main menu
 var get_categories_info = function(req, res, next, mycallback) {
 	req.logger.info('Reading categories');
-	modelsutil.getCategories(req,res,next,false,function(err,categories) {
+	modelsutil.getCategories(req,res,next,{includeunique:true},function(err,categories) {
 		if(err) {
 			return mycallback(err);
 		}

@@ -238,3 +238,8 @@ INSERT INTO products_formats (product_id,format,units,wholesale,retail,quantity)
 /* Caja de madera */
 INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 
 (7,1,'Caja de madera','Caja de madera','caja-madera',false,true,false);
+
+/* Carrito de compras */
+INSERT INTO shopping_cart (quantity,user_session_id,product_format_id) VALUES 
+(9.0,1,1),
+(9.0,1,2);

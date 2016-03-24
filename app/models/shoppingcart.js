@@ -22,5 +22,5 @@ module.exports = function (orm, db, models,logger) {
 	
 	logger.debug("Configuring shopping cart relations");
 	models.shoppingcart.hasOne("user_session",models.userssessions, { required: true, alwaysValidate: true });
-	models.shoppingcart.hasOne("product_format",models.productformats, { required: true, alwaysValidate: true });
+	models.shoppingcart.hasOne("product_format",models.productformats, { required: true, alwaysValidate: true});
 };

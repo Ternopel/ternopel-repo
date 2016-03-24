@@ -12,7 +12,7 @@ module.exports = {
 		var poster		= ld.merge({position:''});
 		var pageinfo	= ld.merge(req.pageinfo, {method:'PUT',csrfToken: req.csrfToken(),poster:poster});
 
-		modelsutil.getCategories(req,res,next,false,function(err,categories) {
+		modelsutil.getCategories(req,res,next,{includeunique:true},function(err,categories) {
 			if(err) {
 				return next(err);
 			}

@@ -1,60 +1,99 @@
+<script src='/javascript/hideShowPassword.min.js'></script>
 <script src='/javascript/crud.js'></script>
+<script src='/javascript/shoppingcart.js'></script>
 <section class="page-container clear-fix">
 
 
-	<h2 class="main-title">Compra Rapida</h2>
+	<h2 class="main-title">Compra Rápida</h2>
 	<p>Completa los siguientes campos para realizar tu pedido</p>
 	<section class="cart-container clear-fix">
 		<div class="cart-header">
 			<ul class="cart-header-list">
-				<li class="data-title">Sus datos<a href="#">Ya esta registrado?</a></li>
-				<li class="shipping-title">Metodo de Envio</li>
-				<li class="payment-title">Metodo de Pago</li>
+				<li class="data-title">
+					Sus datos
+					{{?!it.is_logged_in}}
+						<a href="#" id="a_already_registered">Ya está registrado ?</a>
+						<a href="#" id="a_register" hidden="hidden">Regístrese !</a>
+					{{?}}
+				</li>
+				<li class="shipping-title">Método de Envío</li>
+				<li class="payment-title">Método de Pago</li>
 			</ul>
 		</div>
 		<div class="data-content clear-fix">
-			<form>
-				<label>Nombre*<span class="form-error">Required</span></label>
-				<input type="text" class="first-name" name="">
-				<label>Apellidos*<span class="form-error">Required</span></label>
-				<input type="text" class="last-name" name="">
-				<label>Correo Electronico*<span class="form-error">Required</span></label>
-				<input type="email" class="cart-email" name="">
-				<label>Confirmar Email*<span class="form-error">Required</span></label>
-				<input type="email" class="cart-confirm-email" name="">
-				<label class="cart-check"><input type="checkbox" class="form-check">Quiero personalizar Mi Contrasena</label>
-			</form>
+			{{?!it.is_logged_in}}
+				<form id="form_not_registered" >
+					<label>Correo Electrónico<span class='form-error' id='email_address_error'></span></label>
+					<input type="email" class="cart-email" name='email_address'>
+					
+					<label>Contraseña<span class="form-error" id='password_error'></span></label>
+					<input type="password" class="customer-password" name="password">
+
+					<label>Nombre<span class="form-error" id='first_name_error'></span></label>
+					<input type="text" class="first-name" name="first_name">
+
+					<label>Apellido<span class="form-error" id='last_name_error'></span></label>
+					<input type="text" class="last-name" name="last_name">
+					
+					<input type='hidden' name='already_registered' value='false'>
+				</form>
+				<form id="form_registered" hidden="true">
+					<label>Correo Electrónico<span class='form-error' id='email_address_error'></span></label>
+					<input type="email" class="cart-email" name='email_address'>
+					
+					<label>Contraseña<span class="form-error" id='password_error'></span></label>
+					<input type="password" class="customer-password" name="password">
+					
+					<input type='hidden' name='already_registered' value='true'>
+				</form>
+			{{??}}
+					<label>Correo Electrónico</label>
+					<input type="email" class="cart-email" readonly="readonly" value="{{=it.email_address}}">
+					
+					<label>Nombre</label>
+					<input type="text" class="first-name" readonly="readonly" value="{{=it.first_name}}">
+
+					<label>Apellido</label>
+					<input type="text" class="last-name" readonly="readonly" value="{{=it.last_name}}">
+			{{?}}
 			<div class="address-content">
-				<a href="#"class="shipping-tab active-tab">Direccion de envio</a>
-				<a href="#" class="billing-tab">Direccion de facturacion</a>
+				<a href="#"class="shipping-tab active-tab">Dirección de envío</a>
 				<form class="clear-fix">
-					<label>DNI/NIF/NIE (sin espacios ni guiones)**<span class="form-error">Required</span></label>
+					<label>Dirección<span class="form-error"></span></label>
 					<input type="text" class="" name="">
-					<label>Empresa</label>
-					<input type="text" class="" name="">
-					<label>Direccion*<span class="form-error">Required</span></label>
-					<input type="text" class="" name="">
-					<label class="address-select">Pais*
+					<label class="address-select address-select-right">Provincia
 						<select>
-							<option>Option 1</option>
-							<option>Option 2</option>
-							<option>Option 3</option>
-							<option>Option 4</option>
+							<option>Ciudad Autónoma de Buenos Aires</option>
+							<option>Buenos Aires</option>
+							<option>Catamarca</option>
+							<option>Chaco</option> 
+							<option>Chubut</option> 
+							<option>Córdoba</option> 
+							<option>Corrientes</option> 
+							<option>Entre Ríos</option> 
+							<option>Formosa</option> 
+							<option>Jujuy</option> 
+							<option>La Pampa</option> 
+							<option>La Rioja</option> 
+							<option>Mendoza</option> 
+							<option>Misiones</option> 
+							<option>Neuquén</option> 
+							<option>Río Negro</option> 
+							<option>Salta</option> 
+							<option>San Juan</option> 
+							<option>San Luis</option> 
+							<option>Santa Cruz</option> 
+							<option>Santa Fe</option> 
+							<option>Santiago del Estero</option> 
+							<option>Tierra del Fuego, Antártida e Islas del Atlntico Sur</option>
+							<option>Tucumán</option>
 						</select>
 					</label>
-					<label class="address-select address-select-right">Provincia*
-						<select>
-							<option>Option 1</option>
-							<option>Option 2</option>
-							<option>Option 3</option>
-							<option>Option 4</option>
-						</select>
-					</label>
-					<label>Codigo Postal*<span class="form-error">Required</span></label>
+					<label>Código Postal<span class="form-error"></span></label>
 					<input type="text" class="" name="">
-					<label>Ciudad*<span class="form-error">Required</span></label>
+					<label>Ciudad*<span class="form-error"></span></label>
 					<input type="text" class="" name="">
-					<label>Telefono*<span class="form-error">Required</span></label>
+					<label>Teléfono*<span class="form-error"></span></label>
 					<input type="tel" class="" name="">
 				</form>
 			</div>
@@ -64,8 +103,22 @@
 				<ul class="delivery-options">
 					<li class="clear-fix">
 						<input type="radio">
-						<p><strong>MRW / DHL</strong><span>Entrega en 24/72h</span></p>
+						<p><strong>RETIRO CLIENTE</strong><span>Entrega en 72h máximo</span></p>
 						<p><strong>GRATIS!</strong></p>
+					</li>
+				</ul>
+				<ul class="delivery-options">
+					<li class="clear-fix">
+						<input type="radio">
+						<p><strong>ENTREGA EN CABA</strong><span>Entrega en 72h máximo</span></p>
+						<p><strong>GRATIS!</strong></p>
+					</li>
+				</ul>
+				<ul class="delivery-options">
+					<li class="clear-fix">
+						<input type="radio">
+						<p><strong>ENCOMIENDA</strong><span>Entrega en 72h máximo</span></p>
+						<p><strong></strong></p>
 					</li>
 				</ul>
 			</div>
@@ -74,46 +127,48 @@
 					<li class="clear-fix">
 						<input type="radio">
 						<p><strong>Pago por transferencia bancaria</strong></p>
-						<p>Recibira el numero de cuenta tras finalizar el pedido</p>
+						<p>Recibirá el número de cuenta tras finalizar el pedido</p>
 					</li>
 					<li class="clear-fix">
 						<input type="radio">
-						<p><strong>Pago seguro con terjeta</strong></p>
+						<p><strong>Pago seguro con tarjeta</strong></p>
 					</li>
 					<li class="clear-fix">
 						<input type="radio">
 						<p><strong>Pago contrareembolso</strong></p>
-						<p>Usted paga la mercancia en el momento de la entrege, coste adicional: 7.11€</p>
+						<p>Usted paga la mercancía en el momento de la entrega, coste adicional: 7.11€</p>
 					</li>
 				</ul>
 			</div>
 			<div class="summary-section">
-				<h3>Resumen de Pedidio</h3>
+				<h3>Resumen de Pedido</h3>
 				<table class="summary-table">
 					<thead>
 						<tr>
 							<th></th>
-							<th>Description</th>
+							<th>Descripción</th>
 							<th>Precio unitario</th>
-							<th>Cant</th>
+							<th>Cantidad</th>
 							<th>Total</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><img src="images/cart-product-img.png" alt="image of product"></td>
-							<td><a href="#">Cucharas Catering Degustacion Arco Transparente</a></td>
-							<td>116,60 €</td>
-							<td><input type="text" class="summary-amount"><a href="#"><img src="images/cart-remove-icon.png" alt="trash can icon"></a></td>
-							<td>116,60 €</td>
-						</tr>
-						<tr>
-							<td><img src="images/cart-product-img.png" alt="image of product"></td>
-							<td><a href="#">Cucharas Catering Degustacion Arco Transparente</a></td>
-							<td>116,60 €</td>
-							<td><input type="text" class="summary-amount"><a href="#"><img src="images/cart-remove-icon.png" alt="trash can icon"></a></td>
-							<td>116,60 €</td>
-						</tr>
+						{{~ it.shoppingcart:element}}
+							<tr>
+								<td><img src="/images/productspictures/{{=element.product.id}}" alt="image of product"></td>
+								<td><a href="/{{=element.category.url}}/{{=element.product.url}}">{{=element.product.name}} en {{=element.productformat.retaildescription}}</a></td>
+								<td>$ {{=element.productformat.retail}}</td>
+								<td>
+									<input type="text" class="summary-amount" value="{{=element.quantity}}" alt="{{=element.productformat.id}}" name="quantity_{{=element.productformat.id}}"/>
+									<a href="#">
+										<img src="images/cart-remove-icon.png" alt="trash can icon">
+									</a>
+								</td>
+								<td>$ <span name="price_{{=element.productformat.id}}">{{=element.totalitem}}</span></td>
+							</tr>						
+						{{~}}
+						
+						<!-- 
 						<tr class="summary-totals">
 							<td colspan="4">Total productos (IVA incl.) :</td>
 							<td>116,60 €</td>
@@ -130,20 +185,21 @@
 							<td colspan="4">Total IVA :</td>
 							<td>23,20 €</td>
 						</tr>
+						 -->
 						<tr class="summary-totals">
 							<td colspan="4">Importe Total De Su Compra :</td>
-							<td>116,60 €</td>
+							<td><b>$ <span name="total">{{=it.totalcart}}</span></b></td>
 						</tr>
 					</tbody>
 				</table>
 				<div>
-					<p>Si desea dejarnos un comentario a cerca de su pedido, por favor indicalo a continuacion:</p>
+					<p>Si desea dejarnos un comentario a cerca de su pedido, por favor indiquelo a continuación:</p>
 					<textarea class="cart-textarea"></textarea>
-					<label class="form-check"><input type="checkbox">Acepto las condiciones generales de venta y politica de privacidad.</label>
+					<label class="form-check"><input type="checkbox">Acepto las condiciones generales de venta y política de privacidad.</label>
 				</div>
 				<div class="summary-btn-container clear-fix">
 					<button class="cart-continue-btn">Continuar Comprando</button>
-					<button class="cart-confirm-btn">Confirmar Pedidio</button>
+					<button class="cart-confirm-btn">Confirmar Pedido</button>
 				</div>
 			</div>
 		</div>

@@ -1,7 +1,7 @@
 'use strict';
 
 
-function fillProductFormat(product,productformat) {
+function fillProductFormat(product,productformat,filters) {
 	if(productformat.id) {
 		var retaildescription		= '';
 		var wholesaledescription	= '';
@@ -20,7 +20,7 @@ function fillProductFormat(product,productformat) {
 			// Ejemplo de esta condicion: Blondas de papel caladas
 			retaildescription += product.packaging.name +' '+ productformat.units + ' unid. de ' + productformat.format;
 		}
-		if(productformat.retail !==0) {
+		if(productformat.retail !==0 && filters.includeunique) {
 			retaildescription += ' a '+begin+productformat.retail.toFixed(2)+end+' c/u';
 		}
 		
@@ -39,14 +39,17 @@ function fillProductFormat(product,productformat) {
 
 (function (modelsutil) {
 
-	modelsutil.getCategories = function (req,res,next,getformatswithnoprice,getcallback) {
+	modelsutil.getCategories = function (req,res,next,filters,getcallback) {
 	
 		var ld = require('lodash');
 		
 		req.logger.info("Getting all categories");
 		var query = "select * from plain_info ";
-		if(getformatswithnoprice===true) {
+		if(filters.getformatswithnoprice) {
 			query += "where pf_retail <> 0 ";
+		}
+		if(filters.useformatid) {
+			query += "where pf_id = "+filters.useformatid;
 		}
 		query += "order by c_name, p_name, pf_retail";
 		req.db.driver.execQuery(query,function(err,records) {
@@ -77,7 +80,7 @@ function fillProductFormat(product,productformat) {
 				}
 				var lastproduct		= categories[categories.length - 1].products[categories[categories.length - 1].products.length - 1];
 				var productformat	= ld.merge({id:record.pf_id, format:record.pf_format, quantity:record.pf_quantity, units:record.pf_units, wholesale:record.pf_wholesale, retail:record.pf_retail});
-				fillProductFormat(lastproduct,productformat);
+				fillProductFormat(lastproduct,productformat,filters);
 				lastproduct.productsformats.push(productformat);
 			
 			});
@@ -120,7 +123,7 @@ function fillProductFormat(product,productformat) {
 						}
 						req.logger.info('Formats readed:'+productformats.length);
 						productformats.forEach(function(productformat) {
-							fillProductFormat(product,productformat);
+							fillProductFormat(product,productformat,{includeunique:true});
 						});
 						req.logger.info("Product:"+product.name+" Formats readed:"+productformats.length);
 						ld.merge(product, {productformats:productformats});
