@@ -75,14 +75,14 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 	
 	if(runTests) {
 		it('Get Price Calculation', testshoppingcart.getPriceCalculation);
 		it('Add product to cart', testshoppingcart.addProductToCart);
+		it('Get Shopping Cart Logged in', testshoppingcart.getShoppingCartLoggedIn);
 		it('Get Shopping Cart Unlogged in', testshoppingcart.getShoppingCartUnloggedIn);
 	}
-	it('Get Shopping Cart Logged in', testshoppingcart.getShoppingCartLoggedIn);
 	
 	if(runTests) {
 		it('Send registration email', testsendemail.sendMail);

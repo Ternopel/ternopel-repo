@@ -133,7 +133,7 @@ module.exports = {
 				}
 				else {
 					req.logger.info("User is NOT logged in");
-					return callback(usersession);
+					return callback(null,usersession);
 				}
 			},
 			function(usersession,callback) {
