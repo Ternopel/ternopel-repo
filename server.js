@@ -34,4 +34,4 @@ app.init(logger,config, function(app,db,models) {
 	cronconfig.init(logger, config, models); 
 });
 
-//require('jsreport').bootstrapper({ httpPort: 4000 }).start();
+require('jsreport').bootstrapper({ httpPort: 4000 }).start();
