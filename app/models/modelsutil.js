@@ -21,7 +21,10 @@ function fillProductFormat(product,productformat,filters) {
 			retaildescription += product.packaging.name +' '+ productformat.units + ' unid. de ' + productformat.format;
 		}
 		if(productformat.retail !==0 && filters.includeunique) {
-			retaildescription += ' a '+begin+productformat.retail.toFixed(2)+end+' c/u';
+			retaildescription += ' a '+begin+productformat.retail.toFixed(2)+end;
+			if ( productformat.units !== 1 ) {
+				retaildescription += ' c/u';
+			}
 		}
 		
 		if(productformat.retail !==0 && productformat.wholesale !== 0) {
