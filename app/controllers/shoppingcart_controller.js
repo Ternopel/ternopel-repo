@@ -5,10 +5,13 @@ var cipher	= require('../../utils/cipher'),
 	ld		= require('lodash');
 
 
-var validate_shopping_cart_params = function(req, res) {
+var validate_shopping_cart_params = function(req, res, incartval) {
 	
 	req.check('productformatid', 'Id de Formato de Producto es requerido').notEmpty();
 	req.check('quantity', 'Cantidad es requerida y numérica').notEmpty().isInt();
+	if(incartval===true) {
+		req.check('incart', 'Indique si esta en carrito de compras').notEmpty().isBoolean();
+	}
 	
 	req.logger.info("Validating fields");
 	return req.validationErrors();
@@ -18,12 +21,13 @@ module.exports = {
 	get_price_calculation: function(req, res, next) {
 		
 		req.logger.info("En GET price calculation");
-		var valerrors = validate_shopping_cart_params(req, res);
+		var valerrors = validate_shopping_cart_params(req, res, true);
 		if(valerrors) {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
 		var productformatid	= req.query.productformatid;
 		var quantity		= req.query.quantity;
+		var incart			= req.query.incart;
 		
 		req.logger.info("Calculating price");
 		req.models.productsformats.get(productformatid,function(err,productformat) {
@@ -42,15 +46,43 @@ module.exports = {
 			
 			var	price					= ( wholesale_price + retail_price ).toFixed(2);
 			req.logger.info("price:"+price);
+			req.logger.info("incart:"+incart);
 			
-			return res.status(200).send(price);
+			if(incart=='false') {
+				req.logger.info('Returning price to client');
+				return res.status(200).send(price);
+			}
+			else {
+				var ter_token		= req.cookies.ter_token;
+				req.logger.info("Reading user session with token:"+ter_token);
+				req.models.userssessions.find({token: ter_token},function(err,usersessions) {
+					if(err) {
+						return utils.send_ajax_error(req,res,err);
+					}
+					var usersession		= usersessions[0];
+					req.logger.info("Reading shopping cart");
+					req.models.shoppingcart.find({user_session_id:usersession.id, product_format_id: productformatid},function(err,shoppingcart) {
+						if(err) {
+							return utils.send_ajax_error(req,res,err);
+						}
+						req.logger.info("Updating shopping cart:"+JSON.stringify(shoppingcart[0]));
+						shoppingcart[0].save({quantity: quantity},function(err) {
+							if(err) {
+								return utils.send_ajax_error(req,res,err);
+							}
+							req.logger.info("Sending price to client");
+							return res.status(200).send(price);
+						});
+					});
+				});				
+			}
 		});
 	},
 	
 	post_product_to_cart: function(req, res, next) {
 		req.logger.info("En POST product format to shopping cart");
 		
-		var valerrors = validate_shopping_cart_params(req, res);
+		var valerrors = validate_shopping_cart_params(req, res, false);
 		if(valerrors) {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}

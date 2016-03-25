@@ -14,21 +14,21 @@
 				
 				<table id='productsFormatsTable' style="margin-top: 6px; margin-left: 6px;" summary='/admin/productsformats'>
 					<tr style="height: 32px;">
-						<th>Formato</th>
+						<th style="width: 225px;">Formato</th>
 						<th style="padding-left: 10px;">Unidades</th>
 						<th style="padding-left: 10px;">Cantidad</th>
-						<th style="padding-left: 10px;">Prc. Minorista</th>
-						<th style="padding-left: 10px;">Prc. Mayorista</th>
+						<th style="padding-left: 10px;">Prc.Minor.</th>
+						<th style="padding-left: 10px;">Prc.Mayor.</th>
 						<th style="padding-left: 10px;"></th>
 						<th></th>
 					</tr>
 					{{~ it.currentproduct.productformats:productformat}}
 						<tr name='{{=productformat.id}}'>
-							<td name='format'><span>{{=productformat.format}}</span></td>
-							<td name='units'><span>{{=productformat.units}}</span></td>
-							<td name='quantity'><span>{{=productformat.quantity}}</span></td>
-							<td name='retail'><span>{{=productformat.retail}}</span></td>
-							<td name='wholesale'><span>{{=productformat.wholesale}}</span></td>
+							<td name='format' style="text-align: left;"><label style="width:225px; background-color: lightgray;">{{=productformat.format}}</label></td>
+							<td name='units'><label style="width:82px; background-color: lightgray;">{{=productformat.units}}</label></td>
+							<td name='quantity'><label style="width:78px; background-color: lightgray;">{{=productformat.quantity}}</label></td>
+							<td name='retail'><label style="width:90px; background-color: lightgray;">{{=productformat.retail}}</label></td>
+							<td name='wholesale'><label style="width:90px; background-color: lightgray;">{{=productformat.wholesale}}</label></td>
 							<td style="padding-left: 10px;"><input name='remove' type='button' value='Borrar'></td>
 							
 						</tr>

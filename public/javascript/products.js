@@ -97,7 +97,7 @@ $(function () {
 			console.log($(this).val());
 			
 			$.ajax({
-				url : '/shoppingcart/pricecalculation?productformatid='+productformatid+'&quantity='+$(this).val(),
+				url : '/shoppingcart/pricecalculation?productformatid='+productformatid+'&quantity='+$(this).val()+'&incart=false',
 				type : 'GET',
 				success : function (price) {
 					console.log(price);

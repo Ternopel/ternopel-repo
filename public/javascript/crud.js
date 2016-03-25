@@ -1,7 +1,7 @@
 'use strict';
 
 $(function () {
-	$("td span").dblclick(function () {
+	$("td label").dblclick(function () {
 		
 		var tdname		=$(this).parent().attr('name');
 		var trid		=$(this).parent().parent().attr('name');
@@ -11,7 +11,7 @@ $(function () {
 		var OriginalContent = $(this).text();
  
 		$(this).addClass("cellEditing");
-		$(this).html("<input type='text' value='"+OriginalContent+"' style='width:60px;' name='colvalue'/><div class='errorMsg' id='colvalue_error'></div>");
+		$(this).html("<input type='text' value='"+OriginalContent+"' style='width:150px;' name='colvalue'/><div class='errorMsg' id='colvalue_error'></div>");
 		$(this).children().first().focus();
 
 		$(this).children().first().keypress(function (e) {
@@ -30,7 +30,7 @@ $(function () {
 					data : formdata,
 					success : function (successresponse) {
 							console.log('Asigning new value');
-							field.parent().html("<span>"+newvalue+"</span>");
+							field.parent().html("<label style='background-color: lightgray;'>"+newvalue+"</label>");
 							console.log('Change style');
 							field.parent().removeClass("cellEditing");
 					},
@@ -42,7 +42,7 @@ $(function () {
 		});
  
 		$(this).children().first().blur(function(){
-			$(this).parent().html("<span>"+OriginalContent+"</span>");
+			$(this).parent().html("<label style='background-color: lightgray;'>"+OriginalContent+"</label>");
 			$(this).parent().removeClass("cellEditing");
 			clear_notification_toolbar();
 		});

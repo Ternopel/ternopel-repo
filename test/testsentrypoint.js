@@ -78,10 +78,10 @@ describe('Test Suite', function() {
 	var runTests=true;
 	
 	if(runTests) {
-		it('Get Price Calculation', testshoppingcart.getPriceCalculation);
-		it('Add product to cart', testshoppingcart.addProductToCart);
 		it('Get Shopping Cart Logged in', testshoppingcart.getShoppingCartLoggedIn);
 		it('Get Shopping Cart Unlogged in', testshoppingcart.getShoppingCartUnloggedIn);
+		it('Get Price Calculation', testshoppingcart.getPriceCalculation);
+		it('Add product to cart', testshoppingcart.addProductToCart);
 	}
 	
 	if(runTests) {

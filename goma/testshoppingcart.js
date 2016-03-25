@@ -14,7 +14,7 @@ var request		= require('supertest'),
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				logger.info('Getting price calculation');
+				logger.info('Getting price calculation ONE');
 				request("http://localhost:"+config.test_app_port)
 					.get('/shoppingcart/pricecalculation')
 					.expect(500)
@@ -25,33 +25,44 @@ var request		= require('supertest'),
 					});
 			},
 			function(res,callback) {
-				logger.info('Getting price calculation');
+				logger.info('Getting price calculation TWO');
 				request("http://localhost:"+config.test_app_port)
-				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=A')
+				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=A&incart=false')
 				.expect(500)
-				.end(function(err,res) {
-					expect(res.text).toExclude('Id de Formato de Producto es requerido');
-					expect(res.text).toInclude('Cantidad es requerida y numérica');
+				.end(function(err,newres) {
+					expect(newres.text).toExclude('Id de Formato de Producto es requerido');
+					expect(newres.text).toInclude('Cantidad es requerida y numérica');
 					return callback(err,res);
 				});
 			},
 			function(res,callback) {
-				logger.info('Getting price calculation');
+				logger.info('Getting price calculation THREE');
 				request("http://localhost:"+config.test_app_port)
-				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=29')
+				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=29&incart=false')
 				.expect(200)
-				.end(function(err,res) {
-					expect(res.text).toBe('7250.00');
+				.end(function(err,newres) {
+					expect(newres.text).toBe('7250.00');
 					return callback(err,res);
 				});
 			},
 			function(res,callback) {
-				logger.info('Getting price calculation');
+				logger.info('Getting price calculation FOUR');
 				request("http://localhost:"+config.test_app_port)
-				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=9')
+				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=9&incart=false')
 				.expect(200)
-				.end(function(err,res) {
-					expect(res.text).toBe('2250.00');
+				.end(function(err,newres) {
+					expect(newres.text).toBe('2250.00');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Getting price calculation FIVE');
+				request("http://localhost:"+config.test_app_port)
+				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=7&incart=true')
+				.set('cookie', utils.getcookies(res))
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toBe('1750.00');
 					return callback(err,res);
 				});
 			}

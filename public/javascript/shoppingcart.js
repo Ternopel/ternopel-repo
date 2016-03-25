@@ -42,7 +42,7 @@ $(function () {
 			console.log($(this).val());
 			
 			$.ajax({
-				url : '/shoppingcart/pricecalculation?productformatid='+productformatid+'&quantity='+$(this).val(),
+				url : '/shoppingcart/pricecalculation?productformatid='+productformatid+'&quantity='+$(this).val()+'&incart=true',
 				type : 'GET',
 				success : function (price) {
 					$("span[name='price_"+productformatid+"']").text(price);

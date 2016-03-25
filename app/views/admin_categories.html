@@ -11,7 +11,6 @@
 		<table id='categoriesTable' summary='/admin/categories'>
 			<thead>
 				<tr>
-					<th><h4>Id</h4></th>
 					<th><h4>Nombre</h4></th>
 					<th><h4>Url</h4></th>
 					<th><h4></h4></th>
@@ -19,9 +18,8 @@
 			</thead>
 			{{~ it.categories:category}}
 			<tr name='{{=category.id}}'>
-				<td name='id' style='width: 50px;'>{{=category.id}}</td>
-				<td name='name' style='width: 500px;'><span>{{=category.name}}</span></td>
-				<td name='url' style='width: 500px;'><span>{{=category.url}}</span></td>
+				<td name='name' style='width: 500px; text-align: left;'><label>{{=category.name}}</label></td>
+				<td name='url' style='width: 500px; text-align: left;'><label>{{=category.url}}</label></td>
 				<td><input name='remove' type='button' value='Borrar'></input></td>
 			</tr>
 			{{~}}

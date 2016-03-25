@@ -25,8 +25,8 @@
 			</tr>
 			{{~ it.products:product}}
 			<tr name='{{=product.id}}'>
-				<td name='name' style='width: 500px;'><span>{{=product.name}}</span></td>
-				<td name='url' style='width: 500px;'><span>{{=product.url}}</span></td>
+				<td name='name' style='width: 500px; text-align: left;'><label>{{=product.name}}</label></td>
+				<td name='url' style='width: 500px; text-align: left;'><label>{{=product.url}}</label></td>
 				<td name='category_id' style='width: 500px;'>
 					<select>
 						{{~ it.categories:category}}
@@ -62,45 +62,7 @@
 						<input type='checkbox' name='isoffer1'>&nbsp;Oferta</input>
 					{{?}}
 				</td>
-				<td name='show_format' style="width:290px;">
-					{{? product.show_format === true}}
-						<input type='checkbox' name='formatscheck1' checked='checked'>&nbsp;Form.</input>
-					{{??}}
-						<input type='checkbox' name='formatscheck1'>&nbsp;Form.</input>
-					{{?}}
-				</td>
 				<td><input name='remove' type='button' value='Borrar'></input></td>
-			</tr>
-			{{? product.show_format === true}}
-			<tr name='{{=product.id}}_format'>
-			{{??}}
-			<tr name='{{=product.id}}_format' style='display:none;'>
-			{{?}}
-				<td colspan="4">
-					<br/>
-					<input type='button' id='addProductFormat' name='{{=product.id}}' value='Agregar Formato' ></input>
-					<br/>
-					<table id='productsFormatsTable' summary='/admin/productsformats'>
-						<tr>
-							<th><h4>Formato</h4></th>
-							<th><h4>Unidades</h4></th>
-							<th><h4>Cantidad</h4></th>
-							<th><h4>Precio Por Menor</h4></th>
-							<th><h4>Precio Por Mayor</h4></th>
-							<th><h4></h4></th>
-						</tr>
-						{{~ product.productsformats:productformat}}
-						<tr name='{{=productformat.id}}'>
-							<td name='format' style='width: 500px;'><span>{{=productformat.format}}</span></td>
-							<td name='units' style='width: 500px;'><span>{{=productformat.units}}</span></td>
-							<td name='quantity' style='width: 500px;'><span>{{=productformat.quantity}}</span></td>
-							<td name='retail' style='width: 500px;'><span>{{=productformat.retail}}</span></td>
-							<td name='wholesale' style='width: 500px;'><span>{{=productformat.wholesale}}</span></td>
-							<td><input name='remove' type='button' value='Borrar'></input></td>
-						</tr>
-						{{~}}
-					</table>
-				</td>
 			</tr>
 			<tr name='{{=product.id}}_picture' style='display:none;'>
 				<td colspan="4">
