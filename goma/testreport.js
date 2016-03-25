@@ -39,12 +39,22 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Obtanining report from server');
 				request("http://localhost:"+config.test_app_port)
-					.get('/report')
+					.get('/report-jpg')
 					.set('cookie', utils.getcookies(res))
 					.expect(200)
 					.end(function(err, res){
 						return callback(err,res);
 					});
+			},
+			function(res,callback) {
+				logger.info('Obtanining report from server');
+				request("http://localhost:"+config.test_app_port)
+				.get('/report-pdf')
+				.set('cookie', utils.getcookies(res))
+				.expect(200)
+				.end(function(err, res){
+					return callback(err,res);
+				});
 			}
 		], 
 		function(err) {

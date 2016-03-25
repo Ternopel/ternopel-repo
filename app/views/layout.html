@@ -74,19 +74,14 @@
 					{{?it.is_logged_in}}
 						{{?it.is_admin}}
 							<li><a href="/admin">Administrador</a></li>
-							<li><a href="/report" target="_blank">Listado</a></li>
 						{{??}}
 							<li><a href="/">Inicio</a>
 							<li><a href="#">Mi Cuenta</a></li>
 							<li><a href="#">Contacto</a></li>
-							<li><a href="/?posters=false">Ofertas</a></li>
-							<li><a href="#">Carrito</a></li>
 						{{?}}
 					{{??}}	
 						<li><a href="/">Inicio</a>
 						<li><a href="#">Contacto</a></li>
-						<li><a href="/?posters=false">Ofertas</a></li>
-						<li><a href="#">Carrito</a></li>
 					{{?}}					
 					{{?it.is_home}}
 						<li class="main-search">
@@ -98,6 +93,18 @@
 							<button name="homesearchbutton" class="search-btn">Search</button>
 						</li>
 					{{?}}	
+					<li><a href="/?posters=false">Ofertas</a></li>
+					{{?it.cart_count===0}}
+						<li><a href="#" name="cart_a">Carrito</a></li>
+					{{??}}
+						<li><a href="/shoppingcart" name="cart_a">Carrito</a></li>
+					{{?}}	
+					<li><a class="sub-menu-item" id="listado">Listado Precios</a>
+						<ul class="sub-menu-list" id="listadomenu">
+							<li><a href="/report-pdf" target="_blank">Reporte PDF</a></li>
+							<li><a href="/report-jpg" target="_blank">Reporte JPG</a></li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 			{{=it.body}}

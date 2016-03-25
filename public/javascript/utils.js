@@ -66,3 +66,19 @@ function sneak_lis(lis,description) {
 		sneak_element(lis[i]);
 	}
 }
+
+// Remove category
+$(function () {
+	$("#listado").click(function () {
+		if($("#listadomenu").is(':visible')){
+			console.log('MEC>1');
+			$("#listadomenu").hide();
+		}
+		else {
+			console.log('MEC>2');
+			$("#listadomenu").show();
+		}
+	});
+});
+
+

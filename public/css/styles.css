@@ -585,7 +585,7 @@ ul.sub-menu-list {
 	width: 180px;
 	position: absolute;
 	top: 36px;
-	left: 17px;
+	left: 180px;
 	z-index: 1;
 }
 
@@ -624,6 +624,7 @@ ul.main-nav li a:hover, ul.main-nav li a:active {
 ul.main-nav li a.sub-menu-item {
 	background: url(../images/nav-arrow.png) no-repeat right center;
 	padding: 0 24px 0 0;
+	color: #FFFFFF;
 }
 
 ul.main-nav li.main-search {

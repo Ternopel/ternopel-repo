@@ -3,7 +3,7 @@
 (function (routesconfig) {
 		
 	function restrict(req, res, next) {
-		if (req.path.indexOf("/admin")===(0) || req.path.indexOf("/report")===(0)) {
+		if (req.path.indexOf("/admin")===(0)) {
 			if(req.pageinfo.is_logged_in === true && req.pageinfo.is_admin === true) {
 				next();
 			}
@@ -63,7 +63,8 @@
 		app.post	( '/shoppingcart/addproducttocart',		controllers.shoppingcart.post_product_to_cart);
 		app.get		( '/shoppingcart',						controllers.shoppingcart.get_shopping_cart);
 		
-		app.get		( '/report',							controllers.report.get_report);
+		app.get		( '/report-pdf',						controllers.report.get_report_pdf);
+		app.get		( '/report-jpg',						controllers.report.get_report_jpg);
 
 		app.get		( '/login',								controllers.registration.get_login);
 		app.get		( '/mailsent/:email',					controllers.registration.get_mail_sent);
