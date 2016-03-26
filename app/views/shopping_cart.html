@@ -62,40 +62,40 @@
 				<form class="clear-fix">
 					<label>Dirección<span class="form-error"></span></label>
 					<input type="text" class="" name="">
-					<label class="address-select address-select-right">Provincia
-						<select>
-							<option>Ciudad Autónoma de Buenos Aires</option>
-							<option>Buenos Aires</option>
-							<option>Catamarca</option>
-							<option>Chaco</option> 
-							<option>Chubut</option> 
-							<option>Córdoba</option> 
-							<option>Corrientes</option> 
-							<option>Entre Ríos</option> 
-							<option>Formosa</option> 
-							<option>Jujuy</option> 
-							<option>La Pampa</option> 
-							<option>La Rioja</option> 
-							<option>Mendoza</option> 
-							<option>Misiones</option> 
-							<option>Neuquén</option> 
-							<option>Río Negro</option> 
-							<option>Salta</option> 
-							<option>San Juan</option> 
-							<option>San Luis</option> 
-							<option>Santa Cruz</option> 
-							<option>Santa Fe</option> 
-							<option>Santiago del Estero</option> 
-							<option>Tierra del Fuego, Antártida e Islas del Atlntico Sur</option>
-							<option>Tucumán</option>
-						</select>
-					</label>
-					<label>Código Postal<span class="form-error"></span></label>
-					<input type="text" class="" name="">
 					<label>Ciudad*<span class="form-error"></span></label>
 					<input type="text" class="" name="">
 					<label>Teléfono*<span class="form-error"></span></label>
 					<input type="tel" class="" name="">
+					<label>Código Postal<span class="form-error"></span></label>
+					<input type="text" class="" name="">
+					<label class="address-select address-select-right">Provincia
+						<select>
+							<option value="1">Ciudad Autónoma de Buenos Aires</option>
+							<option value="2">Buenos Aires</option>
+							<option value="3">Catamarca</option>
+							<option value="4">Chaco</option> 
+							<option value="5">Chubut</option> 
+							<option value="6">Córdoba</option> 
+							<option value="7">Corrientes</option> 
+							<option value="8">Entre Ríos</option> 
+							<option value="9">Formosa</option> 
+							<option value="10">Jujuy</option> 
+							<option value="11">La Pampa</option> 
+							<option value="12">La Rioja</option> 
+							<option value="13">Mendoza</option> 
+							<option value="14">Misiones</option> 
+							<option value="15">Neuquén</option> 
+							<option value="16">Río Negro</option> 
+							<option value="17">Salta</option> 
+							<option value="18">San Juan</option> 
+							<option value="19">San Luis</option> 
+							<option value="20">Santa Cruz</option> 
+							<option value="21">Santa Fe</option> 
+							<option value="22">Santiago del Estero</option> 
+							<option value="23">Tierra del Fuego, Antártida e Islas del Atlántico Sur</option>
+							<option value="24">Tucumán</option>
+						</select>
+					</label>
 				</form>
 			</div>
 		</div>
@@ -103,21 +103,21 @@
 			<div class="delivery-section">
 				<ul class="delivery-options">
 					<li class="clear-fix">
-						<input type="radio">
+						<input type="radio" name="delivery_type" checked="checked" value="1">
 						<p><strong>RETIRO CLIENTE</strong><span>Entrega en 72h máximo</span></p>
 						<p><strong>GRATIS!</strong></p>
 					</li>
 				</ul>
 				<ul class="delivery-options">
 					<li class="clear-fix">
-						<input type="radio">
+						<input type="radio" name="delivery_type" value="2">
 						<p><strong>ENTREGA EN CABA</strong><span>Entrega en 72h máximo</span></p>
 						<p><strong>GRATIS!</strong></p>
 					</li>
 				</ul>
 				<ul class="delivery-options">
 					<li class="clear-fix">
-						<input type="radio">
+						<input type="radio" name="delivery_type" value="3">
 						<p><strong>ENCOMIENDA</strong><span>Entrega en 72h máximo</span></p>
 						<p><strong></strong></p>
 					</li>
@@ -126,18 +126,18 @@
 			<div class="payment-section">
 				<ul class="payment-options">
 					<li class="clear-fix">
-						<input type="radio">
+						<input type="radio" name="payment_type" checked="checked" value="1">
+						<p><strong>Pago contrareembolso</strong></p>
+						<p>Usted paga la mercancía en el momento de la entrega, coste adicional: 7.11€</p>
+					</li>
+					<li class="clear-fix">
+						<input type="radio" name="payment_type" value="2">
 						<p><strong>Pago por transferencia bancaria</strong></p>
 						<p>Recibirá el número de cuenta tras finalizar el pedido</p>
 					</li>
 					<li class="clear-fix">
-						<input type="radio">
+						<input type="radio" name="payment_type" value="3">
 						<p><strong>Pago seguro con tarjeta</strong></p>
-					</li>
-					<li class="clear-fix">
-						<input type="radio">
-						<p><strong>Pago contrareembolso</strong></p>
-						<p>Usted paga la mercancía en el momento de la entrega, coste adicional: 7.11€</p>
 					</li>
 				</ul>
 			</div>

@@ -15,4 +15,8 @@
 		<sqlFile path="support/liquibase/sql/recreate_view.sql" />
 	</changeSet>
 
+	<changeSet author="maximiliano.ezequiel.carrizo.barrera" id="add_user_fields">
+		<sqlFile path="support/liquibase/sql/add_user_fields.sql" />
+	</changeSet>
+
 </databaseChangeLog>

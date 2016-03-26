@@ -9,7 +9,12 @@ module.exports = function (orm, db, models,logger) {
 			email_address: 	{ type: 'text', required: true, unique:true },
 			password: 		{ type: 'text', required: true },
 			first_name:		{ type: 'text', required: true },
-			last_name:		{ type: 'text', required: true }
+			last_name:		{ type: 'text', required: true },
+			address:		{ type: 'text', required: false },
+			city:			{ type: 'text', required: false },
+			telephone:		{ type: 'text', required: false },
+			zipcode:		{ type: 'number', size:4, required: false },
+			state:			{ type: 'number', size:4, required: false }
 		},
 		{
 			cache:	false,
