@@ -7,6 +7,7 @@
 	<h2 class="main-title">Compra Rápida</h2>
 	<p>Completa los siguientes campos para realizar tu pedido</p>
 	<section class="cart-container clear-fix">
+		<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 		<div class="cart-header">
 			<ul class="cart-header-list">
 				<li class="data-title">
@@ -154,13 +155,13 @@
 					</thead>
 					<tbody>
 						{{~ it.shoppingcart:element}}
-							<tr>
+							<tr id="shopping_cart_id_{{=element.id}}">
 								<td><img src="/images/productspictures/{{=element.product.id}}" alt="image of product"></td>
 								<td><a href="/{{=element.category.url}}/{{=element.product.url}}">{{=element.product.name}} en {{=element.productformat.retaildescription}}</a></td>
 								<td>$ {{=element.productformat.retail}}</td>
 								<td>
 									<input type="text" class="summary-amount" value="{{=element.quantity}}" alt="{{=element.productformat.id}}" name="quantity_{{=element.productformat.id}}"/>
-									<a href="#">
+									<a href="#" name="remove-shopping-cart" alt="{{=element.id}}">
 										<img src="images/cart-remove-icon.png" alt="trash can icon">
 									</a>
 								</td>

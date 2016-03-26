@@ -215,7 +215,37 @@ var request		= require('supertest'),
 		});
 	};	
 	
-	
+	testshoppingcart.deleteShoppingCart = function (done) {
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/login')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Delete shopping cart element');
+				request("http://localhost:"+config.test_app_port)
+				.delete('/shoppingcart/deleteshoppingcart')
+				.send({
+						'shopping_cart_id' : '1',
+						'_csrf' : utils.getcsrf(res)
+				})
+				.set('cookie', utils.getcookies(res))
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toInclude('OK');
+					return callback(err,res);
+				});
+			}
+		], 
+		function(err) {
+			return done(err);
+		});
+	};	
 	
 	
 })(module.exports);

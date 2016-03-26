@@ -26,6 +26,34 @@ $(function() {
 	});
 });
 
+$(function() {
+	$("a[name^='remove-shopping-cart']").click(function() {
+		console.log('Remove shopping cart pressed');
+		var id 			= $(this).attr('alt');
+		var csrf		= $("input[name='_csrf']").val();	
+		console.log('Id:'+id);
+		var formdata={shopping_cart_id:id, _csrf:csrf};
+		console.log('Data to send:'+JSON.stringify(formdata));
+		clear_notification_toolbar();
+		
+		$.ajax({
+			url : '/shoppingcart/deleteshoppingcart',
+			type : 'DELETE',
+			data : formdata,
+			success : function (successresponse) {
+				$("#shopping_cart_id_"+id).remove();
+			},
+			error : function(errorresponse) {
+				show_error_messages(errorresponse);
+			}
+		});
+		
+		
+		
+		return false;
+	});
+});
+
 // Calculate price
 $(function () {
 	$("input[name^='quantity_']").filter(function() {

@@ -201,8 +201,7 @@ module.exports = {
 						return callback(err);
 					}
 					else {
-						pageinfo = ld.merge(pageinfo,{totalcart:totalcart.toFixed(2)});
-						pageinfo = ld.merge(pageinfo,{shoppingcart:shoppingcart});
+						pageinfo = ld.merge(pageinfo,{totalcart:totalcart.toFixed(2),shoppingcart:shoppingcart,csrfToken: req.csrfToken()});
 						return callback();
 					}
 				});
@@ -216,9 +215,36 @@ module.exports = {
 			}
 			req.logger.info("Rendering page with NO ERROR");
 
-			
+			req.logger.info(JSON.stringify(pageinfo));
 			res.render('shopping_cart.html',pageinfo);	
 		});
+	},
+	
+	
+	delete_product_of_cart: function(req, res, next) {
+		req.logger.info("En DELETE shopping cart");
+		
+		req.check('shopping_cart_id', 'Id de Shopping Cart es requerido').notEmpty();
+		if(req.validationErrors()) {
+			return utils.send_ajax_validation_errors(req,res,valerrors);
+		}
+		var shopping_cart_id	= req.body.shopping_cart_id;
+		
+		req.logger.info("Getting shopping cart element:"+shopping_cart_id);
+		req.models.shoppingcart.get(shopping_cart_id,function(err,shoppingcart) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+
+			shoppingcart.remove(function(err,products) {
+				if(err) {
+					return callback(err);
+				}
+				req.logger.info("Category removed successfully");
+				return res.status(200).send('OK');
+			});
+		});
 	}
+	
 };
 
