@@ -82,6 +82,7 @@ describe('Test Suite', function() {
 		it('Get Shopping Cart Unlogged in', testshoppingcart.getShoppingCartUnloggedIn);
 		it('Get Price Calculation', testshoppingcart.getPriceCalculation);
 		it('Add product to cart', testshoppingcart.addProductToCart);
+		it('Delete Product of cart', testshoppingcart.deleteShoppingCart);
 	}
 	
 	if(runTests) {
