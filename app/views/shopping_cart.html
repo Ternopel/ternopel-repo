@@ -1,6 +1,6 @@
-<script src='/javascript/hideShowPassword.min.js'></script>
-<script src='/javascript/crud.js'></script>
-<script src='/javascript/shoppingcart.js'></script>
+<script src='{{=it.app_resources}}/javascript/hideShowPassword.min.js'></script>
+<script src='{{=it.app_resources}}/javascript/crud.js'></script>
+<script src='{{=it.app_resources}}/javascript/shoppingcart.js'></script>
 <section class="page-container clear-fix">
 
 
@@ -162,7 +162,7 @@
 								<td>
 									<input type="text" class="summary-amount" value="{{=element.quantity}}" alt="{{=element.productformat.id}}" name="quantity_{{=element.productformat.id}}"/>
 									<a href="#" name="remove-shopping-cart" alt="{{=element.id}}">
-										<img src="images/cart-remove-icon.png" alt="trash can icon">
+										<img src="{{=it.app_resources}}/images/cart-remove-icon.png" alt="trash can icon">
 									</a>
 								</td>
 								<td>$ <span name="price_{{=element.productformat.id}}" alt="price_{{=element.id}}">{{=element.totalitem}}</span></td>
