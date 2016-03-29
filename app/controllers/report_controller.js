@@ -25,8 +25,6 @@ function get_report(req, res, next, recipe) {
 			jsreport.render({
 				template: {
 					content: content,
-//						recipe: 'phantom-image',
-//						recipe: 'phantom-pdf',
 					recipe: recipe,
 					engine: "jsrender",
 					phantom: {
