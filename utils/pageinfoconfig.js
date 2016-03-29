@@ -64,7 +64,12 @@
 				return next();
 			}
 			req.logger.info("==================================");
-			req.logger.warn("New "+req.method+" to:"+req.path);
+			if(req.path.indexOf("/images")===0) {
+				req.logger.info(req.method+" to:"+req.path);
+			}
+			else {
+				req.logger.warn(req.method+" to:"+req.path);
+			}
 			req.logger.info("==================================");
 			
 			var ter_token = req.cookies.ter_token;
