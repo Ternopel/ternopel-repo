@@ -7,6 +7,8 @@ $(function () {
 		var trid		=$(this).parent().parent().attr('name');
 		var csrf		=$("input[name='_csrf']").val();
 		var urltopost	=$(this).parent().parent().parent().parent().attr('summary');
+		var size		=parseInt($(this).width())-100; 
+		console.log("TTUSIZE:"+size);
 		
 		var OriginalContent = $(this).text();
  
