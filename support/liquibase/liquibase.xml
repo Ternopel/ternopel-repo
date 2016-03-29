@@ -19,4 +19,8 @@
 		<sqlFile path="support/liquibase/sql/add_user_fields.sql" />
 	</changeSet>
 
+	<changeSet author="maximiliano.ezequiel.carrizo.barrera" id="add_sent_column">
+		<sqlFile path="support/liquibase/sql/add_sent_column.sql" />
+	</changeSet>
+
 </databaseChangeLog>
