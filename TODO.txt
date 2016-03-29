@@ -6,7 +6,6 @@
 - Agregar fecha de nacimiento, 
 	- Check Recibir novedades de ternopel
 	- Check Ofertas y promociones especiales
-- Usar el audit en chrome para optimizar la pagina ( agregar las properties de cache en las imagenes )	
 - Marcar con ROJO los productos no visibles pero que el admin los vea !
 - Validar con checkParam los lugares donde recibo query params en lugar de preguntar por no nulo
 - Corregir las fotos de los posters

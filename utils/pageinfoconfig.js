@@ -64,7 +64,7 @@
 				return next();
 			}
 			req.logger.info("==================================");
-			req.logger.info("New "+req.method+" to:"+req.path);
+			req.logger.warn("New "+req.method+" to:"+req.path);
 			req.logger.info("==================================");
 			
 			var ter_token = req.cookies.ter_token;
