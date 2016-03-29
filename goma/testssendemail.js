@@ -14,8 +14,14 @@ var request		= require('supertest'),
 		models = pmodels;
 	};
 	
-	testsendmail.sendMail = function (done) {
+	testsendmail.sendRegistrationMail = function (done) {
 		cronconfig.sendregistrationmails(logger,config,models,function(err) {
+			return done(err);
+		});
+	};
+	
+	testsendmail.sendMailingmails = function (done) {
+		cronconfig.sendmailingmails(logger,config,models,function(err) {
 			return done(err);
 		});
 	};

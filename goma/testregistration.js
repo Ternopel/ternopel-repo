@@ -34,6 +34,16 @@ var request		= require('supertest'),
 					});
 			}, 
 			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+				.get('/mailing/3041bd90-5397-11e5-9650-9bf126a5d21f')
+				.expect(200)
+				.end(function(err, res){
+					expect(res.text).toInclude('demostenes1509@gmail.com');
+					return callback(err,res);
+				});
+			}, 
+			function(res,callback) {
 				logger.info('Posting info to server');
 				request("http://localhost:"+config.test_app_port)
 					.post('/confirm')

@@ -86,7 +86,8 @@ describe('Test Suite', function() {
 	}
 	
 	if(runTests) {
-		it('Send registration email', testsendemail.sendMail);
+		it('Send registration email', testsendemail.sendRegistrationMail);
+		it('Send mailing email', testsendemail.sendMailingmails);
 	}
 	
 	if(runTests) {
@@ -142,11 +143,11 @@ describe('Test Suite', function() {
 		it('Admin with no permissions', testsregistration.adminWithNoPermissions);
 		it('Admin login', testsregistration.adminLogin);
 		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
-		it('Confirm User', testsregistration.confirmUser);
-		it('Client login', testsregistration.clientLogin);
 		it('Register new mailing user', testsregistration.registerNewMailingUser);
+		it('Client login', testsregistration.clientLogin);
 		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
 		it('Users registration ', testsregistration.registerNewUser);
+		it('Confirm User', testsregistration.confirmUser);
 	}
 	 	
  	// Health check

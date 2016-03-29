@@ -43,14 +43,14 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 			if(is_registration===true) {
 				req.logger.debug('Registracion de usuario !');
 				req.logger.info('Registrando user '+email_address);
-				req.models.registrations.create({	email_address:	email_address, token:token, verified:false },function(err,registration) {
+				req.models.registrations.create({	email_address:	email_address, token:token, verified:false, sent:false },function(err,registration) {
 					return callback(err,registration);
 				});
 			}
 			else {
 				req.logger.debug('Mailing de usuario !');
 				req.logger.info('Mailing user '+email_address);
-				req.models.mailing.create({	email_address:	email_address, token:token, verified:false },function(err,mailing) {
+				req.models.mailing.create({	email_address:	email_address, token:token, verified:false, sent:false },function(err,mailing) {
 					return callback(err,mailing);
 				});
 			}
@@ -87,14 +87,41 @@ module.exports = {
 				return next('Su token es inválido !');
 			}
 			var registration = registrations[0];
-			var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken(), email_address:registration.email_address });
-			res.render('registration.html',pageinfo);
+			registration.verified = true;
+			registration.save(function(err) {
+				if(err) {
+					return next(err);
+				}
+				var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken(), email_address:registration.email_address });
+				res.render('registration.html',pageinfo);
+			});
+		});
+	},
+	
+	get_mailing: function(req, res, next) {
+		req.logger.info("Getting mailing page");
+		req.models.mailing.find({token:req.params.token},function(err,mailings) {
+			if(err) {
+				return next(err);
+			}
+			if(mailings.length===0) {
+				return next('Su token es inválido !');
+			}
+			var mailing = mailings[0];
+			mailing.verified = true;
+			mailing.save(function(err) {
+				if(err) {
+					return next(err);
+				}
+				var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken(), message: 'Se enviarán listados de precios semanales a <b>'+mailing.email_address+'</b>' });
+				res.render('mailsent.html',pageinfo);
+			});
 		});
 	},
 	
 	get_mail_sent: function(req, res, next) {
 		req.logger.info("Getting mail sent page");
-		var pageinfo = ld.merge(req.pageinfo, { email: req.params.email });
+		var pageinfo = ld.merge(req.pageinfo, { message: 'Se ha enviado un correo de confirmación a <b>'+req.params.email+'</b>' });
 		res.render('mailsent.html',pageinfo);
 	},
 	

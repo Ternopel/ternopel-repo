@@ -64,13 +64,14 @@
 		app.delete	( '/shoppingcart/deleteshoppingcart',	controllers.shoppingcart.delete_product_of_cart);
 		app.get		( '/shoppingcart',						controllers.shoppingcart.get_shopping_cart);
 		
-		app.get		( '/report-pdf',						controllers.report.get_report_pdf);
-		app.get		( '/report-jpg',						controllers.report.get_report_jpg);
+		app.get		( '/report.pdf',						controllers.report.get_report_pdf);
+		app.get		( '/report.jpg',						controllers.report.get_report_jpg);
 
 		app.get		( '/login',								controllers.registration.get_login);
 		app.get		( '/mailsent/:email',					controllers.registration.get_mail_sent);
 		app.post	( '/login',								controllers.registration.post_login);
 		app.get		( '/registration/:token',				controllers.registration.get_registration);
+		app.get		( '/mailing/:token',					controllers.registration.get_mailing);
 		app.post	( '/registration',						controllers.registration.post_registration);
 		app.post	( '/confirm',							controllers.registration.post_confirm);
 		app.post	( '/mailing',							controllers.registration.post_mailing);
