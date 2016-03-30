@@ -25,7 +25,7 @@ var get_product = function(req, res, next, is_new) {
 			}
 			else {
 				var filters = ld.merge({filter:{id:req.query.productid}});
-				modelsutil.getProducts(req,res,next,filters,function(err,products) {
+				modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
 					if(err) {
 						return callback(err);
 					}
@@ -156,7 +156,7 @@ var save_product = function(req, res, next, is_new) {
 		},
 		function(product,callback) {
 			var filters = ld.merge({filter:{id:product.id}});
-			modelsutil.getProducts(req,res,next,filters,function(err,products) {
+			modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
 				if(err) {
 					return callback(err);
 				}
@@ -233,7 +233,7 @@ module.exports = {
 		
 		req.logger.info("Obteniendo formatos de productos");
 		var filters = ld.merge({filter:{id:req.query.productid}});
-		modelsutil.getProducts(req,res,next,filters,function(err,products) {
+		modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
 			if(err) {
 				return next(err);
 			}

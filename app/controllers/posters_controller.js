@@ -12,7 +12,7 @@ module.exports = {
 		var poster		= ld.merge({position:''});
 		var pageinfo	= ld.merge(req.pageinfo, {method:'PUT',csrfToken: req.csrfToken(),poster:poster});
 
-		modelsutil.getCategories(req,res,next,{includeunique:true},function(err,categories) {
+		modelsutil.getCategories(req.logger, req.db, {includeunique:true},function(err,categories) {
 			if(err) {
 				return next(err);
 			}
@@ -31,7 +31,7 @@ module.exports = {
 
 	get_posters: function(req, res, next) {
 		req.logger.info('En GET posters');
-		modelsutil.getPosters(req,res,next,function(err,posters) {
+		modelsutil.getPosters(req,function(err,posters) {
 			if(err) {
 				return next(err);
 			}

@@ -57,7 +57,7 @@ module.exports = {
 			},
 			function(productpicture,callback) {
 				var filters = ld.merge({filter:{id:productpicture.product_id}});
-				modelsutil.getProducts(req,res,next,filters,function(err,products) {
+				modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
 					if(err) {
 						return callback(err);
 					}

@@ -6,7 +6,7 @@ var ld			= require('lodash'),
 // Getting information to render main menu
 var get_categories_info = function(req, res, next, mycallback) {
 	req.logger.info('Reading categories');
-	modelsutil.getCategories(req,res,next,{includeunique:true},function(err,categories) {
+	modelsutil.getCategories(req.logger, req.db, {includeunique:true},function(err,categories) {
 		if(err) {
 			return mycallback(err);
 		}
@@ -71,7 +71,7 @@ module.exports = {
 					
 					
 					var filters = ld.merge({filter:{url:req.params.product}});
-					modelsutil.getProducts(req,res,next,filters,function(err,products) {
+					modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
 						if(err) {
 							return callback(err);
 						}
@@ -99,7 +99,7 @@ module.exports = {
 						}
 						var currentcategory = categories[0];
 						var filters = ld.merge({filter:{is_visible:true,category_id:currentcategory.id},formatslimit:3});
-						modelsutil.getProducts(req,res,next,filters,function(err,products) {
+						modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
 							if(err) {
 								return callback(err);
 							}
@@ -117,7 +117,7 @@ module.exports = {
 				if(pageinfo.page_to_render==='offers') {
 					req.logger.info('-------------------> Get Offers Info');
 					var filters = ld.merge({filter:{is_visible:true,is_offer:true},formatslimit:3});
-					modelsutil.getProducts(req,res,next,filters,function(err,offersproducts) {
+					modelsutil.getProducts(req.logger, req.models, filters,function(err,offersproducts) {
 						if(err) {
 							return callback(err);
 						}
@@ -127,7 +127,8 @@ module.exports = {
 							return callback();
 						}
 						else {
-							modelsutil.getPosters(req,res,next,function(err,posters) {
+							req.logger.info('Getting posters');
+							modelsutil.getPosters(req.logger, req.models, function(err,posters) {
 								if(err) {
 									return next(err);
 								}
@@ -147,7 +148,7 @@ module.exports = {
 					ld.merge(pageinfo,{searchinput:req.params.search});
 					req.logger.info('Search with criteria:'+req.params.search);
 					var filters = ld.merge({filter:{is_visible:true},search:req.params.search,formatslimit:3});
-					modelsutil.getProducts(req,res,next,filters,function(err,searchproducts) {
+					modelsutil.getProducts(req.logger, req.models, filters,function(err,searchproducts) {
 						if(err) {
 							return callback(err);
 						}
@@ -171,7 +172,7 @@ module.exports = {
 					
 					req.logger.info('Getting offers');
 					var filters = ld.merge({filter:{is_visible:true,is_offer:true},formatslimit:1,productslimit:2});
-					modelsutil.getProducts(req,res,next,filters,function(err,limitedoffersproducts) {
+					modelsutil.getProducts(req.logger, req.models, filters,function(err,limitedoffersproducts) {
 						if(err) {
 							return callback(err);
 						}

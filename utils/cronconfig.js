@@ -1,5 +1,8 @@
 'use strict';
 
+var reportutil	= require("../utils/reportutil"),
+	fs			= require('fs');
+
 (function (cronconfig) {
 
 	cronconfig.sendregistrationmails = function (logger, config, models,callback) {
@@ -96,7 +99,64 @@
 		});
 	};
 	
-	cronconfig.init = function (logger, config, models) {
+	cronconfig.sendpricereportsmail = function (logger, config, models, db, callback) {
+		
+		
+		reportutil.report(logger, db, 'phantom-pdf', function(err,out) {
+			if(err) {
+				return callback(err);
+			}
+			
+			logger.info("Writing file");
+			var token		= require('node-uuid').v1();
+			var filename	= '/tmp/output-'+token+'.pdf'
+			out.result.pipe(fs.createWriteStream(filename));
+			logger.info("Output file created !");
+			
+			var nodemailer = require("nodemailer");
+			
+			var smtpTransport = nodemailer.createTransport("SMTP",{
+				service: "Gmail",
+				auth: {
+					user: "info@ternopel.com",
+					pass: config.app_smtp_password
+				}
+			});		
+			
+			models.mailing.find({verified:true},function(err,mailings) {
+				if(err) {
+					return callback(err);
+				}
+				
+				var async	= require('async');
+				var url		= "https://"+config.app_proxy_host;
+				if(config.app_proxy_port!==443) {
+					url	+=":"+config.app_proxy_port;
+				}
+				async.each(mailings, function(mailing, mycallback) {
+					smtpTransport.sendMail({
+						from: "Información Papelera Ternopel <info@ternopel.com>",
+						to: "<"+mailing.email_address+">", 
+						subject: "Listado de Precios ✔", 
+						html: "Querido cliente ! Adjuntamos la lista de precios de nuestros productos actualizada !",
+						attachments: [
+							{
+								filename: 'listado-precios.pdf',
+								filePath: filename,
+								contentType: 'application/pdf'
+							}
+						]
+					}, function(error, response){
+						return mycallback(error);
+					});		
+				}, function(err) {
+					return callback(err);
+				});
+			});
+		});
+	};
+	
+	cronconfig.init = function (logger, config, models, db) {
 		if(config.app_cron === 'true') {
 			logger.debug("Cron is enabled");
 			var CronJob = require('cron').CronJob;
@@ -112,6 +172,15 @@
 			var MailingJob = new CronJob('30 * * * * *', function() {
 				logger.info('You will see this message every minute');
 				cronconfig.sendmailingmails(logger,config,models,function(err) {
+					if(err) {
+						logger.error(err);
+					}
+					logger.info("Cron runned successfully");
+				});
+			}, null, true, 'America/Buenos_Aires');
+			var PriceListJob = new CronJob('0 0 0 * * 4', function() {
+				logger.warn('You will see this message every tuesday');
+				cronconfig.sendpricereportsmail(logger,config,models,db,function(err) {
 					if(err) {
 						logger.error(err);
 					}

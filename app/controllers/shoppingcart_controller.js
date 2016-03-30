@@ -184,7 +184,7 @@ module.exports = {
 				var totalcart = 0;
 				async.each(shoppingcart, function(cartelement, asynccallback) {
 					var modelsutil	= require('../models/modelsutil');
-					modelsutil.getCategories(req,res,next,{useformatid:cartelement.product_format_id,includeunique:false},function(err,category) {
+					modelsutil.getCategories(req.logger, req.db, {useformatid:cartelement.product_format_id,includeunique:false},function(err,category) {
 						if(err) {
 							return asynccallback(err);
 						}

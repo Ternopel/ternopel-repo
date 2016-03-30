@@ -123,7 +123,7 @@ module.exports = {
 
 		req.logger.info("Getting product "+product_id);
 		var filters = ld.merge({filter:{id:product_id}});
-		modelsutil.getProducts(req,res,next,filters,function(err,products) {
+		modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}

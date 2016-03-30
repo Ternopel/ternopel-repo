@@ -41,7 +41,7 @@ describe('Test Suite', function() {
 		app.init(logger,config, function(app,pdb,models) {
 			db		= pdb;
 			
-			testsendemail.setModels(models);
+			testsendemail.setMailInfo(models,pdb);
 			
 			server	= app.listen(config.test_app_port, function() {
 				logger.info('Listening on port:'+server.address().port);
@@ -88,6 +88,7 @@ describe('Test Suite', function() {
 	if(runTests) {
 		it('Send registration email', testsendemail.sendRegistrationMail);
 		it('Send mailing email', testsendemail.sendMailingmails);
+		it('Send price reports email', testsendemail.sendPriceReportsMail);
 	}
 	
 	if(runTests) {

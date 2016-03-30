@@ -83,8 +83,9 @@ INSERT INTO registrations (email_address,token,verified,sent)
 VALUES ('demostenes1509@gmail.com','3041bd90-5397-11e5-9650-9bf126a5d21f',false,false);
 
 /* Mailing */
-INSERT INTO mailing (email_address,token,verified,sent) 
-VALUES ('demostenes1509@gmail.com','3041bd90-5397-11e5-9650-9bf126a5d21f',false,false);
+INSERT INTO mailing (email_address,token,verified,sent) VALUES 
+('demostenes1509@gmail.com','3041bd90-5397-11e5-9650-9bf126a5d21f',false,false),
+('mcarrizo@gmail.com','3041bd90-5397-11e5-9650-9bf126a5d21f',true,true);
 
 /* Bandas elasticas */
 INSERT INTO products (category_id,packaging_id,name,description,url,show_format,is_visible,is_offer) VALUES 

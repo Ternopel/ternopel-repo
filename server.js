@@ -31,7 +31,7 @@ app.init(logger,config, function(app,db,models) {
 	});
 	
 	logger.info("Configuring cron");
-	cronconfig.init(logger, config, models); 
+	cronconfig.init(logger, config, models, db); 
 });
 
 require('jsreport').bootstrapper({ httpPort: 4000 }).start();

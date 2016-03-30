@@ -42,11 +42,11 @@ function fillProductFormat(product,productformat,filters) {
 
 (function (modelsutil) {
 
-	modelsutil.getCategories = function (req,res,next,filters,getcallback) {
+	modelsutil.getCategories = function (logger,db,filters,getcallback) {
 	
 		var ld = require('lodash');
 		
-		req.logger.info("Getting all categories");
+		logger.info("Getting all categories");
 		var query = "select * from plain_info ";
 		if(filters.getformatswithnoprice) {
 			query += "where pf_retail <> 0 ";
@@ -55,8 +55,8 @@ function fillProductFormat(product,productformat,filters) {
 			query += "where pf_id = "+filters.useformatid;
 		}
 		query += "order by c_name, p_name, pf_retail";
-		req.db.driver.execQuery(query,function(err,records) {
-			req.logger.info("Records found:"+records.length);
+		db.driver.execQuery(query,function(err,records) {
+			logger.info("Records found:"+records.length);
 			if(err) {
 				return getcallback(err);
 			}
@@ -65,7 +65,7 @@ function fillProductFormat(product,productformat,filters) {
 			var categories	= [];
 			records.forEach(function(record) {
 				if(record.c_name !== c_name) {
-					req.logger.info('----------> New category:'+record.c_name);
+					logger.info('----------> New category:'+record.c_name);
 					var category		= ld.merge({id: record.c_id,name:record.c_name, url:record.c_url});
 					category.products	= [];
 					categories.push(category);
@@ -73,7 +73,7 @@ function fillProductFormat(product,productformat,filters) {
 				}
 				
 				if(record.p_name !== p_name) {
-					req.logger.info('----------> New product:'+record.p_name);
+					logger.info('----------> New product:'+record.p_name);
 					var lastcategory		= categories[categories.length - 1];
 					var packaging			= ld.merge({id: record.pk_id,name:record.pk_name});
 					var product				= ld.merge({id: record.p_id,name:record.p_name, url:record.p_url,is_visible: record.p_is_visible, is_offer: record.p_is_offer, packaging:packaging});
@@ -87,17 +87,18 @@ function fillProductFormat(product,productformat,filters) {
 				lastproduct.productsformats.push(productformat);
 			
 			});
+			logger.info("All categories obtained:"+categories.length);
 			return getcallback(null,categories);
 		});
 	};
 
-	modelsutil.getProducts = function (req,res,next,filters,getcallback) {
+	modelsutil.getProducts = function (logger, models, filters,getcallback) {
 		
 		var async		= require('async'),
 			ld			= require('lodash');
 		
-		req.logger.info('Entering to get_products');
-		var productsfind	= req.models.products.find(filters.filter,['name']);
+		logger.info('Entering to get_products');
+		var productsfind	= models.products.find(filters.filter,['name']);
 		if(filters.search) {
 			productsfind.where('lower(name) ilike ?',['%'+filters.search+'%']);
 		}
@@ -106,11 +107,11 @@ function fillProductFormat(product,productformat,filters) {
 		}
 		productsfind.run(function(err,products) {
 			if(err) {
-				return next(err);
+				return getcallback(err);
 			}
-			req.logger.info('Products readed:'+products.length);
+			logger.info('Products readed:'+products.length);
 			async.each(products, function(product, callback) {
-				req.models.packaging.get(product.packaging_id,function(err,packaging) {
+				models.packaging.get(product.packaging_id,function(err,packaging) {
 					if(err) {
 						return callback(err);
 					}
@@ -119,22 +120,22 @@ function fillProductFormat(product,productformat,filters) {
 					if(filters.formatslimit) {
 						productsformatsfind.limit(filters.formatslimit);
 					}
-					req.logger.info('Searching formats');
+					logger.info('Searching formats');
 					productsformatsfind.run(function(err,productformats) {
 						if(err) {
 							return callback(err);
 						}
-						req.logger.info('Formats readed:'+productformats.length);
+						logger.info('Formats readed:'+productformats.length);
 						productformats.forEach(function(productformat) {
 							fillProductFormat(product,productformat,{includeunique:true});
 						});
-						req.logger.info("Product:"+product.name+" Formats readed:"+productformats.length);
+						logger.info("Product:"+product.name+" Formats readed:"+productformats.length);
 						ld.merge(product, {productformats:productformats});
 						product.getCategory(function(err,category) {
 							if(err) {
 								return callback(err);
 							}
-							req.logger.info("Product:"+product.name+" Category:"+category.name);
+							logger.info("Product:"+product.name+" Category:"+category.name);
 							ld.merge(product, {category:category});
 							return callback();
 						});
@@ -148,26 +149,26 @@ function fillProductFormat(product,productformat,filters) {
 	};
 	
 	
-	modelsutil.getPosters = function (req,res,next,getcallback) {
+	modelsutil.getPosters = function (logger,models,getcallback) {
 		
 		var async		= require('async'),
 			ld			= require('lodash');
 
-		req.logger.info('Entering get posters');
-		req.models.posters.find({},['position'],function(err,posters) {
+		logger.info('Entering get posters');
+		models.posters.find({},['position'],function(err,posters) {
 			if(err) {
 				return getcallback(err);
 			}
-			req.logger.info('Posters found:'+posters.length);
+			logger.info('Posters found:'+posters.length);
 			
 			async.each(posters, function(poster, callback) {
-				req.models.categories.get(poster.category_id,function(err,category) {
+				models.categories.get(poster.category_id,function(err,category) {
 					if(err) {
 						return callback(err);
 					}
 					ld.merge(poster, {category:category});
 					if(poster.product_id) {
-						req.models.products.get(poster.product_id,function(err,product) {
+						models.products.get(poster.product_id,function(err,product) {
 							if(err) {
 								return callback(err);
 							}
