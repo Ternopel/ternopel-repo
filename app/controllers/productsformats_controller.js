@@ -25,25 +25,6 @@ module.exports = {
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				var filter = '';
-				if(colname==='format') {
-					filter={ format:colvalue };
-					req.logger.info("Searching using filter:"+JSON.stringify(filter));
-					req.models.productsformats.find(filter, function(err,productsformats) {
-						if(err) {
-							return callback(err);
-						}
-						if(productsformats.length===1 && productsformats[0].id !== id) {
-							return callback('El valor asignado a la columna existe en otro registro ('+productsformats[0].id+')');
-						}
-						return callback();
-					});
-				}
-				else {
-					return callback();
-				}
-			},
-			function(callback) {
 				req.logger.info("Getting id:"+id);
 				req.models.productsformats.get(id,function(err,productformat) {
 					return callback(err,productformat);

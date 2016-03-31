@@ -31,7 +31,7 @@ module.exports = {
 
 	get_posters: function(req, res, next) {
 		req.logger.info('En GET posters');
-		modelsutil.getPosters(req,function(err,posters) {
+		modelsutil.getPosters(req.logger, req.models, function(err,posters) {
 			if(err) {
 				return next(err);
 			}

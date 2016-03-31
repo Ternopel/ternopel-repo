@@ -330,23 +330,6 @@ var request		= require('supertest'),
 					});
 			}, 
 			function(res,callback) {
-				logger.info('Updating product');
-				request("http://localhost:"+config.test_app_port)
-					.post('/admin/productsformats')
-					.set('cookie', utils.getcookies(res))
-					.send({
-						'id' : '1',
-						'colname' : 'format',
-						'colvalue' : 'BOLSA PP 5 X 20 CMS.',
-						'_csrf' : utils.getcsrf(res)
-					})
-					.expect(500)
-					.end(function(err,newres) {
-						expect(newres.text).toInclude('El valor asignado a la columna existe en otro registro');
-						return callback(err,res);
-					});
-			}, 
-			function(res,callback) {
 				logger.info('Updating category');
 				request("http://localhost:"+config.test_app_port)
 					.post('/admin/productsformats')

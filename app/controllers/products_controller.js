@@ -200,8 +200,8 @@ module.exports = {
 			}
 		], 
 		function(err) {
-			req.logger.info("En function error de waterfall:"+err);
 			if(err) {
+				req.logger.info("En function error de waterfall:"+err);
 				return utils.send_ajax_error(req,res,err);
 			}
 			req.logger.debug('Returning success');
