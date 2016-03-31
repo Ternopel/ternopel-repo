@@ -1,11 +1,8 @@
-- Corregir Reporte ( VER PORQUE CARAJO QUEDA COLGADO EN PROD )
 
 - Mejorar la pagina de llamaremos al CUCO
 - Login Facebook
 - Refactor de forms
 - Agregar fecha de nacimiento, 
-	- Check Recibir novedades de ternopel
-	- Check Ofertas y promociones especiales
 - Marcar con ROJO los productos no visibles pero que el admin los vea !
 - Validar con checkParam los lugares donde recibo query params en lugar de preguntar por no nulo
 - Corregir las fotos de los posters

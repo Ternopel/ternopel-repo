@@ -3,6 +3,33 @@
 var reportutil	= require("../utils/reportutil"),
 	fs			= require('fs');
 
+function save_price_listing(config, smtpTransport, filename, records, callback) {
+	var async	= require('async');
+	var url		= "https://"+config.app_proxy_host;
+	if(config.app_proxy_port!==443) {
+		url	+=":"+config.app_proxy_port;
+	}
+	async.each(records, function(record, mycallback) {
+		smtpTransport.sendMail({
+			from: "Información Papelera Ternopel <info@ternopel.com>",
+			to: "<"+record.email_address+">", 
+			subject: "Listado de Precios ✔", 
+			html: "Querido cliente ! Adjuntamos la lista de precios de nuestros productos actualizada !",
+			attachments: [
+				{
+					filename: 'listado-precios.pdf',
+					filePath: filename,
+					contentType: 'application/pdf'
+				}
+			]
+		}, function(error, response){
+			return mycallback(error);
+		});		
+	}, function(err) {
+		return callback(err);
+	});	
+};
+
 (function (cronconfig) {
 
 	cronconfig.sendregistrationmails = function (logger, config, models,callback) {
@@ -127,30 +154,18 @@ var reportutil	= require("../utils/reportutil"),
 				if(err) {
 					return callback(err);
 				}
-				
-				var async	= require('async');
-				var url		= "https://"+config.app_proxy_host;
-				if(config.app_proxy_port!==443) {
-					url	+=":"+config.app_proxy_port;
-				}
-				async.each(mailings, function(mailing, mycallback) {
-					smtpTransport.sendMail({
-						from: "Información Papelera Ternopel <info@ternopel.com>",
-						to: "<"+mailing.email_address+">", 
-						subject: "Listado de Precios ✔", 
-						html: "Querido cliente ! Adjuntamos la lista de precios de nuestros productos actualizada !",
-						attachments: [
-							{
-								filename: 'listado-precios.pdf',
-								filePath: filename,
-								contentType: 'application/pdf'
-							}
-						]
-					}, function(error, response){
-						return mycallback(error);
-					});		
-				}, function(err) {
-					return callback(err);
+				save_price_listing(config, smtpTransport, filename, mailings,function(err) {
+					if(err) {
+						return callback(err);
+					}
+					models.users.find({},function(err,users) {
+						if(err) {
+							return callback(err);
+						}
+						save_price_listing(config, smtpTransport, filename, users,function(err) {
+							return callback(err);
+						});
+					});
 				});
 			});
 		});
