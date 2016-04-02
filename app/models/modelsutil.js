@@ -112,26 +112,40 @@ function fillProductFormat(product,productformat,filters) {
 			}
 			logger.info('Products readed:'+products.length);
 			async.each(products, function(product, callback) {
-				models.packaging.get(product.packaging_id,function(err,packaging) {
-					if(err) {
-						return callback(err);
-					}
-					ld.merge(product, {packaging:packaging});
-					var productsformatsfind = product.getProductsFormats().order('retail');
-					if(filters.formatslimit) {
-						productsformatsfind.limit(filters.formatslimit);
-					}
-					logger.info('Searching formats');
-					productsformatsfind.run(function(err,productformats) {
-						if(err) {
-							return callback(err);
-						}
-						logger.info('Formats readed:'+productformats.length);
-						productformats.forEach(function(productformat) {
-							fillProductFormat(product,productformat,{includeunique:true});
+				
+				var waterfall = require('async-waterfall');
+				waterfall([ 
+					function(callback) {
+						logger.info('Getting packaging');
+						models.packaging.get(product.packaging_id,function(err,packaging) {
+							if(err) {
+								return callback(err);
+							}
+							ld.merge(product, {packaging:packaging});
+							return callback();
 						});
-						logger.info("Product:"+product.name+" Formats readed:"+productformats.length);
-						ld.merge(product, {productformats:productformats});
+					},
+					function(callback) {
+						logger.info('Getting products formats');
+						var productsformatsfind = product.getProductsFormats().order('retail');
+						if(filters.formatslimit) {
+							productsformatsfind.limit(filters.formatslimit);
+						}
+						logger.info('Searching formats');
+						productsformatsfind.run(function(err,productformats) {
+							if(err) {
+								return callback(err);
+							}
+							logger.info('Formats readed:'+productformats.length);
+							productformats.forEach(function(productformat) {
+								fillProductFormat(product,productformat,{includeunique:true});
+							});
+							logger.info("Product:"+product.name+" Formats readed:"+productformats.length);
+							ld.merge(product, {productformats:productformats});					
+							return callback();
+						});
+					},
+					function(callback) {
 						product.getCategory(function(err,category) {
 							if(err) {
 								return callback(err);
@@ -140,8 +154,12 @@ function fillProductFormat(product,productformat,filters) {
 							ld.merge(product, {category:category});
 							return callback();
 						});
-					});
-				});
+					}
+				], 
+				function(err) {
+					logger.info("All product information gathered");
+					return callback(err);
+				});				
 			}, function(err) {
 				logger.info("Number of products returned:"+products.length);
 				return getcallback(err,products);
