@@ -146,6 +146,7 @@ function fillProductFormat(product,productformat,filters) {
 						});
 					},
 					function(callback) {
+						logger.info('Searching for category');
 						product.getCategory(function(err,category) {
 							if(err) {
 								return callback(err);
@@ -156,11 +157,12 @@ function fillProductFormat(product,productformat,filters) {
 						});
 					},
 					function(callback) {
+						logger.info('Searching for Pictures');
 						product.getProductsPictures().run(function(err, productspictures) {
 							if(err) {
 								return callback(err);
 							}
-							logger.info('Pictures readed:'+productformats.length);
+							logger.info('Pictures readed:'+productspictures.length);
 							ld.merge(product, {productspictures:productspictures});
 							return callback();
 						});
