@@ -154,7 +154,17 @@ function fillProductFormat(product,productformat,filters) {
 							ld.merge(product, {category:category});
 							return callback();
 						});
-					}
+					},
+					function(callback) {
+						product.getProductsPictures().run(function(err, productspictures) {
+							if(err) {
+								return callback(err);
+							}
+							logger.info('Pictures readed:'+productformats.length);
+							ld.merge(product, {productspictures:productspictures});
+							return callback();
+						});
+					}					
 				], 
 				function(err) {
 					logger.info("All product information gathered");

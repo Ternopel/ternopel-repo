@@ -14,7 +14,7 @@ function save_price_listing(config, smtpTransport, filename, records, callback) 
 			from: "Información Papelera Ternopel <info@ternopel.com>",
 			to: "<"+record.email_address+">", 
 			subject: "Listado de Precios ✔", 
-			html: "Querido cliente ! Adjuntamos la lista de precios de nuestros productos actualizada !",
+			html: "Querido cliente ! Adjuntamos la lista de precios de nuestros productos actualizada ! Y no se olvide de visitar nuestra página: www.papeleraternopel.com",
 			attachments: [
 				{
 					filename: 'listado-precios.pdf',
