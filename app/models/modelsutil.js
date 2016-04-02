@@ -112,57 +112,36 @@ function fillProductFormat(product,productformat,filters) {
 			}
 			logger.info('Products readed:'+products.length);
 			async.each(products, function(product, callback) {
-				async.parallel([ 
-					function(callback) {
-						logger.info('Getting packaging');
-						models.packaging.get(product.packaging_id,function(err,packaging) {
-							if(err) {
-								return callback(err);
-							}
-							ld.merge(product, {packaging:packaging});
-							logger.info('Getting packaging FINISHED');
-							return callback();
-						});
-					}, 
-					function(callback) {
-						logger.info('Getting formats');
-						var productsformatsfind = product.getProductsFormats().order('retail');
-						if(filters.formatslimit) {
-							productsformatsfind.limit(filters.formatslimit);
+				models.packaging.get(product.packaging_id,function(err,packaging) {
+					if(err) {
+						return callback(err);
+					}
+					ld.merge(product, {packaging:packaging});
+					var productsformatsfind = product.getProductsFormats().order('retail');
+					if(filters.formatslimit) {
+						productsformatsfind.limit(filters.formatslimit);
+					}
+					logger.info('Searching formats');
+					productsformatsfind.run(function(err,productformats) {
+						if(err) {
+							return callback(err);
 						}
-						productsformatsfind.run(function(err,productformats) {
-							if(err) {
-								return callback(err);
-							}
-							logger.info('Formats readed:'+productformats.length);
-							productformats.forEach(function(productformat) {
-								fillProductFormat(product,productformat,{includeunique:true});
-							});
-							logger.info("Product:"+product.name+" Formats readed:"+productformats.length);
-							ld.merge(product, {productformats:productformats});
-							logger.info('Getting formats FINISHED');
-							return callback();
-						});						
-					},
-					function(callback) {
-						logger.info('Getting categories');
+						logger.info('Formats readed:'+productformats.length);
+						productformats.forEach(function(productformat) {
+							fillProductFormat(product,productformat,{includeunique:true});
+						});
+						logger.info("Product:"+product.name+" Formats readed:"+productformats.length);
+						ld.merge(product, {productformats:productformats});
 						product.getCategory(function(err,category) {
 							if(err) {
 								return callback(err);
 							}
 							logger.info("Product:"+product.name+" Category:"+category.name);
 							ld.merge(product, {category:category});
-							logger.info('Getting categories FINISHED');
 							return callback();
 						});
-					},					
-					function(callback) {
-						return callback();
-					} 
-				],
-				function(err, results) {
-					return callback(err);
-				});				
+					});
+				});
 			}, function(err) {
 				logger.info("Number of products returned:"+products.length);
 				return getcallback(err,products);
