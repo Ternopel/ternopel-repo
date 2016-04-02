@@ -1,8 +1,10 @@
 'use strict';
 
+var logger = require("./logger")(module);
+
 (function (expressconfig) {
 
-	expressconfig.init = function (app, express, logger, config) {
+	expressconfig.init = function (app, express, config) {
 		
 		logger.debug("Forward to https if request comes from http ( Amazon only ! )");
 		app.use(function(req,res,next) {
@@ -17,7 +19,6 @@
 		logger.debug("Setting 'winston' logger");
 		app.use(logger.expressLogger);
 		app.use(function(req, res, next) {
-			req.logger	= logger;
 			req.config	= config;
 			next();
 		});

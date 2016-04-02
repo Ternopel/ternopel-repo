@@ -18,7 +18,7 @@ var modelsutil	= require('../app/models/modelsutil');
 			},
 			function(content,callback) {
 				logger.info('Reading categories');
-				modelsutil.getCategories(logger, db, { getformatswithnoprice:true,includeunique:true },function(err,categories) {
+				modelsutil.getCategories(db, { getformatswithnoprice:true,includeunique:true },function(err,categories) {
 					return callback(err,content,categories);
 				});
 			},

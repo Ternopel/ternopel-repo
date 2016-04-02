@@ -1,12 +1,13 @@
 'use strict';
 
 var ld			= require('lodash'),
-	modelsutil	= require('../models/modelsutil');
+	modelsutil	= require('../models/modelsutil'),
+	logger		= require("../../utils/logger")(module);
 
 // Getting information to render main menu
 var get_categories_info = function(req, res, next, mycallback) {
-	req.logger.info('Reading categories');
-	modelsutil.getCategories(req.logger, req.db, {includeunique:true},function(err,categories) {
+	logger.info('Reading categories');
+	modelsutil.getCategories(req.db, {includeunique:true},function(err,categories) {
 		if(err) {
 			return mycallback(err);
 		}
@@ -38,12 +39,12 @@ var get_categories_info = function(req, res, next, mycallback) {
 		
 module.exports = {
 	get_home: function(req, res, next) {
-		req.logger.info("Home GET");
+		logger.info("Home GET");
 		var pageinfo	= ld.merge(req.pageinfo,{is_home:true});
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				req.logger.info('Deciding which subpage we must render');
+				logger.info('Deciding which subpage we must render');
 				var page_to_render='';
 				if(req.params.product) {
 					page_to_render='product';
@@ -61,17 +62,17 @@ module.exports = {
 						}
 					}
 				}
-				req.logger.info("We will render:"+page_to_render);
+				logger.info("We will render:"+page_to_render);
 				ld.merge(pageinfo,{page_to_render:page_to_render});
 				return callback();
 			},
 			function(callback) {
 				if(pageinfo.page_to_render==='product') {
-					req.logger.info('-------------------> Get Product Info');
+					logger.info('-------------------> Get Product Info');
 					
 					
 					var filters = ld.merge({filter:{url:req.params.product}});
-					modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
+					modelsutil.getProducts(req.models, filters,function(err,products) {
 						if(err) {
 							return callback(err);
 						}
@@ -89,7 +90,7 @@ module.exports = {
 			},
 			function(callback) {
 				if(pageinfo.page_to_render==='category') {
-					req.logger.info('-------------------> Get Category Info');
+					logger.info('-------------------> Get Category Info');
 					req.models.categories.find({url: req.params.category},function(err,categories) {
 						if(err) {
 							return callback(err);
@@ -99,7 +100,7 @@ module.exports = {
 						}
 						var currentcategory = categories[0];
 						var filters = ld.merge({filter:{is_visible:true,category_id:currentcategory.id},formatslimit:3});
-						modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
+						modelsutil.getProducts(req.models, filters,function(err,products) {
 							if(err) {
 								return callback(err);
 							}
@@ -115,20 +116,20 @@ module.exports = {
 			},
 			function(callback) {
 				if(pageinfo.page_to_render==='offers') {
-					req.logger.info('-------------------> Get Offers Info');
+					logger.info('-------------------> Get Offers Info');
 					var filters = ld.merge({filter:{is_visible:true,is_offer:true},formatslimit:3});
-					modelsutil.getProducts(req.logger, req.models, filters,function(err,offersproducts) {
+					modelsutil.getProducts(req.models, filters,function(err,offersproducts) {
 						if(err) {
 							return callback(err);
 						}
-						req.logger.info('Offers found:'+offersproducts.lenght);
+						logger.info('Offers found:'+offersproducts.length);
 						if(req.query.posters) {
 							var pageinfo	= ld.merge(req.pageinfo, {offersproducts:offersproducts,csrfToken: req.csrfToken()});
 							return callback();
 						}
 						else {
-							req.logger.info('Getting posters');
-							modelsutil.getPosters(req.logger, req.models, function(err,posters) {
+							logger.info('Getting posters');
+							modelsutil.getPosters(req.models, function(err,posters) {
 								if(err) {
 									return next(err);
 								}
@@ -144,15 +145,15 @@ module.exports = {
 			},
 			function(callback) {
 				if(pageinfo.page_to_render==='search') {
-					req.logger.info('-------------------> Get Search Info');
+					logger.info('-------------------> Get Search Info');
 					ld.merge(pageinfo,{searchinput:req.params.search});
-					req.logger.info('Search with criteria:'+req.params.search);
+					logger.info('Search with criteria:'+req.params.search);
 					var filters = ld.merge({filter:{is_visible:true},search:req.params.search,formatslimit:3});
-					modelsutil.getProducts(req.logger, req.models, filters,function(err,searchproducts) {
+					modelsutil.getProducts(req.models, filters,function(err,searchproducts) {
 						if(err) {
 							return callback(err);
 						}
-						req.logger.info('Search found:'+searchproducts.length);
+						logger.info('Search found:'+searchproducts.length);
 						ld.merge(pageinfo,{searchproducts:searchproducts});
 						return callback();
 					});
@@ -162,17 +163,17 @@ module.exports = {
 				}
 			},
 			function(callback) {
-				req.logger.info('-------------------> Get Left toolbar information');
+				logger.info('-------------------> Get Left toolbar information');
 				get_categories_info(req,res,next,function(err,categories) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.info('Filling left toolback categories');
+					logger.info('Filling left toolback categories');
 					ld.merge(pageinfo,{menu_categories:categories});
 					
-					req.logger.info('Getting offers');
+					logger.info('Getting offers');
 					var filters = ld.merge({filter:{is_visible:true,is_offer:true},formatslimit:1,productslimit:2});
-					modelsutil.getProducts(req.logger, req.models, filters,function(err,limitedoffersproducts) {
+					modelsutil.getProducts(req.models, filters,function(err,limitedoffersproducts) {
 						if(err) {
 							return callback(err);
 						}
@@ -183,12 +184,12 @@ module.exports = {
 			}
 		], 
 		function(err) {
-			req.logger.info("Rendering page");
+			logger.info("Rendering page");
 			if(err) {
-				req.logger.info("Rendering page error:"+err);
+				logger.info("Rendering page error:"+err);
 				return next(err);
 			}
-			req.logger.info("Rendering page with NO ERROR");
+			logger.info("Rendering page with NO ERROR");
 			res.render('home.html',pageinfo);
 		});
 	}

@@ -1,6 +1,7 @@
 'use strict';
 
-var utils	= require('./utils');
+var utils	= require('./utils'),
+	logger	= require("../../utils/logger")(module);
 
 module.exports = {
 	get_products: function(req, res, next) {
@@ -12,20 +13,20 @@ module.exports = {
 		var waterfall	= require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				req.logger.info('Reading products');
+				logger.info('Reading products');
 				req.models.products.find({},['name']).where('lower(name) ilike ?',['%'+req.query.search+'%']).run(function(err,products) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.info('Products readed:'+products.length);
+					logger.info('Products readed:'+products.length);
 					var async = require('async');
 					async.each(products, function(product, asynccallback) {
-						req.logger.info('Product Info'+JSON.stringify(product));
+						logger.info('Product Info'+JSON.stringify(product));
 						product.getProductsFormats().order('format').run(function(err,productsformats) {
 							if(err) {
 								return asynccallback(err);
 							}
-							req.logger.debug('Product:'+product.name+' Products Formats readed:'+productsformats.length);
+							logger.debug('Product:'+product.name+' Products Formats readed:'+productsformats.length);
 							ld.merge(product, {productsformats:productsformats});
 							return asynccallback();
 						});
@@ -34,7 +35,7 @@ module.exports = {
 							return callback(err);
 						}
 						else {
-							req.logger.debug('Products'+JSON.stringify(products));
+							logger.debug('Products'+JSON.stringify(products));
 							ld.merge(pageinfo, {products:products});
 							return callback();
 						}
@@ -42,41 +43,41 @@ module.exports = {
 				});
 			},
 			function(callback) {
-				req.logger.info('Reading packaging');
+				logger.info('Reading packaging');
 				req.models.packaging.find({},['name'],function(err,packaging) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.debug('Packaging readed:'+packaging.length);
+					logger.debug('Packaging readed:'+packaging.length);
 					ld.merge(pageinfo, {packaging:packaging});
 					return callback();
 				});
 			},
 			function(callback) {
-				req.logger.info('Reading categories');
+				logger.info('Reading categories');
 				req.models.categories.find({},['name'],function(err,categories) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.debug('Categories readed:'+categories.length);
+					logger.debug('Categories readed:'+categories.length);
 					ld.merge(pageinfo, {categories:categories});
 					return callback();
 				});
 			}
 		], 
 		function(err) {
-			req.logger.info("Rendering page");
+			logger.info("Rendering page");
 			if(err) {
 				return next(err);
 			}
-			req.logger.info("Rendering page with NO ERROR");
+			logger.info("Rendering page with NO ERROR");
 			res.render('admin_products.html',pageinfo);
 		});
 	},
 
 	post_products: function(req, res, next) {
 
-		req.logger.info("En POST products");
+		logger.info("En POST products");
 		
 		var id			= req.body.id;
 		var colname		= req.body.colname;
@@ -99,7 +100,7 @@ module.exports = {
 					filter={ url:colvalue };
 				}
 				if(filter!=='') {
-					req.logger.info("Searching using filter:"+JSON.stringify(filter));
+					logger.info("Searching using filter:"+JSON.stringify(filter));
 					req.models.products.find(filter, function(err,products) {
 						if(err) {
 							return callback(err);
@@ -115,7 +116,7 @@ module.exports = {
 				}
 			},
 			function(callback) {
-				req.logger.info("Getting id:"+id);
+				logger.info("Getting id:"+id);
 				req.models.products.get(id,function(err,product) {
 					return callback(err,product);
 				});
@@ -143,7 +144,7 @@ module.exports = {
 					product.is_offer	= colvalue;
 				}
 				
-				req.logger.info("Updating product:"+JSON.stringify(product));
+				logger.info("Updating product:"+JSON.stringify(product));
 				product.save(function(err) {
 					return callback(err);
 				});
@@ -153,35 +154,35 @@ module.exports = {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
-			req.logger.debug('Returning success');
+			logger.debug('Returning success');
 			return res.status(200).send('success');
 		});
 	},
 
 	delete_products: function(req, res, next) {
-		req.logger.info('En DELETE products');
+		logger.info('En DELETE products');
 		
 		var id			= req.body.id;
-		req.logger.debug("Starting product deletion with id:"+id);
+		logger.debug("Starting product deletion with id:"+id);
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				req.logger.info("Getting product");
+				logger.info("Getting product");
 				req.models.products.get(id, function(err,product) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.debug("Product:"+JSON.stringify(product));
+					logger.debug("Product:"+JSON.stringify(product));
 					return callback(null,product);
 				});
 			},
 			function(product,callback) {
-				req.logger.info("Getting products formats");
+				logger.info("Getting products formats");
 				product.getProductsFormats(function(err,productsformats) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.info("Products formats quantity:"+productsformats.length);
+					logger.info("Products formats quantity:"+productsformats.length);
 					if(productsformats.length>0) {
 						return callback('Este producto tiene '+productsformats.length+' formatos asociados. Borre primero los formatos');
 					}
@@ -189,22 +190,22 @@ module.exports = {
 				});
 			},
 			function(product,callback) {
-				req.logger.info("Getting product to remove");
+				logger.info("Getting product to remove");
 				product.remove(function(err,productsformats) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.info("Category removed successfully");
+					logger.info("Category removed successfully");
 					return callback();
 				});
 			}
 		], 
 		function(err) {
 			if(err) {
-				req.logger.info("En function error de waterfall:"+err);
+				logger.info("En function error de waterfall:"+err);
 				return utils.send_ajax_error(req,res,err);
 			}
-			req.logger.debug('Returning success');
+			logger.debug('Returning success');
 			return res.status(200).send('success');
 		});
 	}

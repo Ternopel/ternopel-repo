@@ -2,21 +2,22 @@
 
 var cipher	= require('../../utils/cipher'),
 	utils	= require('./utils'),
-	ld		= require('lodash');
+	ld		= require('lodash'),
+	logger	= require("../../utils/logger")(module);
 
 
 function save_email(req, res, next, email_field, email_address, is_registration) {
 
 	var mailing_read_privacy	= req.body.mailing_read_privacy;
-	req.logger.debug('User trying to register:'+req.body.email_address);
+	logger.debug('User trying to register:'+email_address);
 	
-	req.logger.debug("Defining validators");
+	logger.debug("Defining validators");
 	req.assert(email_field, 'El email ingresado es incorrecto').isEmail();
 	if(is_registration===false) {
 		req.assert('mailing_read_privacy', 'Debe marcar que ha leído las Políticas de Privacidad').notEmpty();
 	}
 	
-	req.logger.info("Executing validation");
+	logger.info("Executing validation");
 	var valerrors = req.validationErrors();
 	if(valerrors) {
 		return utils.send_ajax_validation_errors(req,res,valerrors);
@@ -25,7 +26,7 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 	var waterfall = require('async-waterfall');
 	waterfall([ 
 		function(callback) {
-			req.logger.debug('Searching for existing user');
+			logger.debug('Searching for existing user');
 			req.models.users.find({email_address: email_address}, function(err,user) {
 				if(err) {
 					return callback(err);
@@ -41,15 +42,15 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 		function(user,callback) {
 			var token	= require('node-uuid').v1();
 			if(is_registration===true) {
-				req.logger.debug('Registracion de usuario !');
-				req.logger.info('Registrando user '+email_address);
+				logger.debug('Registracion de usuario !');
+				logger.info('Registrando user '+email_address);
 				req.models.registrations.create({	email_address:	email_address, token:token, verified:false, sent:false },function(err,registration) {
 					return callback(err,registration);
 				});
 			}
 			else {
-				req.logger.debug('Mailing de usuario !');
-				req.logger.info('Mailing user '+email_address);
+				logger.debug('Mailing de usuario !');
+				logger.info('Mailing user '+email_address);
 				req.models.mailing.create({	email_address:	email_address, token:token, verified:false, sent:false },function(err,mailing) {
 					return callback(err,mailing);
 				});
@@ -57,13 +58,13 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 		}
 	], 
 	function(err, user) {
-		req.logger.debug('Finalizacion de registration');
+		logger.debug('Finalizacion de registration');
 		if(err) {
-			req.logger.debug('Error por enviar al cliente:'+err);
+			logger.debug('Error por enviar al cliente:'+err);
 			return utils.send_ajax_error(req,res,err);
 		}
 		else {
-			req.logger.debug('Registracion exitosa !');
+			logger.debug('Registracion exitosa !');
 			return res.status(200).send(email_address);
 		}
 	});
@@ -72,13 +73,13 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 module.exports = {
 	
 	get_login: function(req, res, next) {
-		req.logger.info("Getting login page");
+		logger.info("Getting login page");
 		var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken() });
 		res.render('login.html',pageinfo);
 	},
 	
 	get_registration: function(req, res, next) {
-		req.logger.info("Getting registration page");
+		logger.info("Getting registration page");
 		req.models.registrations.find({token:req.params.token},function(err,registrations) {
 			if(err) {
 				return next(err);
@@ -99,7 +100,7 @@ module.exports = {
 	},
 	
 	get_mailing: function(req, res, next) {
-		req.logger.info("Getting mailing page");
+		logger.info("Getting mailing page");
 		req.models.mailing.find({token:req.params.token},function(err,mailings) {
 			if(err) {
 				return next(err);
@@ -120,7 +121,7 @@ module.exports = {
 	},
 	
 	get_mail_sent: function(req, res, next) {
-		req.logger.info("Getting mail sent page");
+		logger.info("Getting mail sent page");
 		var pageinfo = ld.merge(req.pageinfo, { message: 'Se ha enviado un correo de confirmación a <b>'+req.params.email+'</b>' });
 		res.render('mailsent.html',pageinfo);
 	},
@@ -131,15 +132,15 @@ module.exports = {
 		var first_name		= req.body.first_name;
 		var last_name		= req.body.last_name;
 		var password		= req.body.password;
-		req.logger.debug('User trying to register:'+req.body.email_address);
+		logger.debug('User trying to register:'+req.body.email_address);
 		
-		req.logger.debug("Defining validators");
+		logger.debug("Defining validators");
 		req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
 		req.assert('password', 'La clave es requerida').notEmpty();
 		req.assert('first_name', 'Nombre es requerido').notEmpty();
 		req.assert('last_name', 'Apellido es requerido').notEmpty();
 
-		req.logger.info("Executing validation");
+		logger.info("Executing validation");
 		var valerrors = req.validationErrors();
 		if(valerrors) {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
@@ -148,7 +149,7 @@ module.exports = {
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				req.logger.debug('Searching for existing user');
+				logger.debug('Searching for existing user');
 				req.models.users.find({email_address: email_address}, function(err,user) {
 					if(err) {
 						return callback(err);
@@ -162,7 +163,7 @@ module.exports = {
 				});
 			}, 
 			function(user,callback) {
-				req.logger.info('Creando user '+email_address);
+				logger.info('Creando user '+email_address);
 				req.models.users.create({	email_address:	email_address,
 											password:		cipher.encrypt(password), 
 											role_id:		req.constants.CUSTOMER_ID,
@@ -172,24 +173,24 @@ module.exports = {
 				});				
 			},
 			function(user,callback) {
-				req.logger.info('Assigning user to session');
+				logger.info('Assigning user to session');
 				req.usersession.setUser(user,function(err) {
 					if(err) {
 						callback(err);
 					}
-					req.logger.info('Complete session:'+JSON.stringify(req.usersession));
+					logger.info('Complete session:'+JSON.stringify(req.usersession));
 					return callback(err,user);
 				});
 			}
 		], 
 		function(err, user) {
-			req.logger.debug('Finalizacion de creacion de usuario');
+			logger.debug('Finalizacion de creacion de usuario');
 			if(err) {
-				req.logger.debug('Error por enviar al cliente:'+err);
+				logger.debug('Error por enviar al cliente:'+err);
 				return utils.send_ajax_error(req,res,err);
 			}
 			else {
-				req.logger.debug('Login exitoso !');
+				logger.debug('Login exitoso !');
 				return res.status(200).send('success_client');
 			}
 		});
@@ -199,13 +200,13 @@ module.exports = {
 
 		var email_address	= req.body.email_address;
 		var password		= req.body.password;
-		req.logger.debug('User trying to register:'+req.body.email_address);
+		logger.debug('User trying to register:'+req.body.email_address);
 		
-		req.logger.debug("Defining validators");
+		logger.debug("Defining validators");
 		req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
 		req.assert('password', 'La clave es requerida').notEmpty();
 
-		req.logger.info("Executing validation");
+		logger.info("Executing validation");
 		var valerrors = req.validationErrors();
 		if(valerrors) {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
@@ -214,7 +215,7 @@ module.exports = {
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				req.logger.debug('Searching for existing user');
+				logger.debug('Searching for existing user');
 				req.models.users.find({email_address: email_address}, function(err,user) {
 					if(err) {
 						return callback(err);
@@ -228,8 +229,8 @@ module.exports = {
 				});
 			}, 
 			function(user,callback) {
-				req.logger.debug('Login !');
-				req.logger.info('Evaluando claves');
+				logger.debug('Login !');
+				logger.info('Evaluando claves');
 				if(user.password !== cipher.encrypt(password)) {
 					return callback('Usuario/Clave inválido');
 				}
@@ -238,24 +239,24 @@ module.exports = {
 				}
 			},
 			function(user,callback) {
-				req.logger.info('Assigning user to session');
+				logger.info('Assigning user to session');
 				req.usersession.setUser(user,function(err) {
 					if(err) {
 						callback(err);
 					}
-					req.logger.info('Complete session:'+JSON.stringify(req.usersession));
+					logger.info('Complete session:'+JSON.stringify(req.usersession));
 					return callback(err,user);
 				});
 			}
 		], 
 		function(err, user) {
-			req.logger.debug('Finalizacion de login');
+			logger.debug('Finalizacion de login');
 			if(err) {
-				req.logger.debug('Error por enviar al cliente:'+err);
+				logger.debug('Error por enviar al cliente:'+err);
 				return utils.send_ajax_error(req,res,err);
 			}
 			else {
-				req.logger.debug('Login exitoso !');
+				logger.debug('Login exitoso !');
 				if(user.isAdmin()) {
 					return res.status(200).send('success_admin');
 				}

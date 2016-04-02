@@ -3,7 +3,7 @@
 var request		= require('supertest'),
 	expect		= require('expect'),
 	utils		= require('../utils/testutils.js'),
-	logger		= require(__dirname+'/../utils/logger'),
+	logger		= require(__dirname+'/../utils/logger')(module),
 	config		= require(__dirname+"/../utils/config")();
 
 (function (testhealth) {

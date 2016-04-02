@@ -1,6 +1,6 @@
 'use strict';
 
-var logger		= require("./utils/logger"),
+var logger		= require("./utils/logger")(module),
 	config		= require("./utils/config")(),
 	cronconfig	= require("./utils/cronconfig"),
 	app			= require("./app.js"),
@@ -17,7 +17,7 @@ var logger		= require("./utils/logger"),
 //};
 
 logger.info("Creating express app");
-app.init(logger,config, function(app,db,models) {
+app.init(config, function(app,db,models) {
 	
 	
 	logger.info("Creating server");

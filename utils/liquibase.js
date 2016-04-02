@@ -1,8 +1,10 @@
 'use strict';
 
+var logger = require("./logger")(module);
+
 (function (liquibase) {
 
-	liquibase.init = function (logger,config) {
+	liquibase.init = function (config) {
 
 		if(config.app_run_liquibase==='false') {
 			logger.warn("Not running liquibase");

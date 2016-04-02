@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports = function (orm, db, models,logger) {
+var logger		= require("../../utils/logger")(module);
+
+module.exports = function (orm, db, models) {
 
 	logger.debug("Configuring packaging");
 	models.packaging = db.define("packaging", { 

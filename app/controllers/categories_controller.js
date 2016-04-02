@@ -1,10 +1,11 @@
 'use strict';
 
-var utils	= require('./utils');
+var utils	= require('./utils'),
+	logger	= require("../../utils/logger")(module);
 
 module.exports = {
 	get_categories: function(req, res, next) {
-		req.logger.info('En GET categories');
+		logger.info('En GET categories');
 		var ld = require('lodash');
 		req.models.categories.find({},['name'],function(err,categories) {
 			if(err) {
@@ -16,7 +17,7 @@ module.exports = {
 	},
 
 	post_categories: function(req, res, next) {
-		req.logger.info("En POST categories");
+		logger.info("En POST categories");
 		
 		var id			= req.body.id;
 		var colname		= req.body.colname;
@@ -38,7 +39,7 @@ module.exports = {
 				if(colname==='url')	{
 					filter={ url:colvalue };
 				}
-				req.logger.info("Searching using filter:"+JSON.stringify(filter));
+				logger.info("Searching using filter:"+JSON.stringify(filter));
 				req.models.categories.find(filter, function(err,categories) {
 					if(err) {
 						return callback(err);
@@ -50,7 +51,7 @@ module.exports = {
 				});
 			},
 			function(callback) {
-				req.logger.info("Getting id:"+id);
+				logger.info("Getting id:"+id);
 				req.models.categories.get(id,function(err,category) {
 					return callback(err,category);
 				});
@@ -63,7 +64,7 @@ module.exports = {
 					category.url	= colvalue;
 				}
 				
-				req.logger.info("Updating category:"+JSON.stringify(category));
+				logger.info("Updating category:"+JSON.stringify(category));
 				category.save(function(err) {
 					return callback(err);
 				});
@@ -73,51 +74,51 @@ module.exports = {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
-			req.logger.debug('Returning success');
+			logger.debug('Returning success');
 			return res.status(200).send('success');
 		});
 	},
 
 	put_categories: function(req, res, next) {
-		req.logger.info('En PUT categories');
+		logger.info('En PUT categories');
 		
 		var milli=new Date().getTime();
-		req.logger.info('Creating category');
+		logger.info('Creating category');
 		req.models.categories.create({	name:			'A Insert Category Text here '+milli,
 										url:			'A Insert Category url here'+milli},function(err,category) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
-			req.logger.debug("Sending category to browser:"+JSON.stringify(category));
+			logger.debug("Sending category to browser:"+JSON.stringify(category));
 			return res.status(200).send(category);
 		});
 	},
 	
 	delete_categories: function(req, res, next) {
-		req.logger.info('En DELETE categories');
+		logger.info('En DELETE categories');
 		
 		var id			= req.body.id;
 		
-		req.logger.debug("Starting category deletion with id:"+id);
+		logger.debug("Starting category deletion with id:"+id);
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				req.logger.info("Getting category");
+				logger.info("Getting category");
 				req.models.categories.get(id, function(err,category) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.debug("Category:"+JSON.stringify(category));
+					logger.debug("Category:"+JSON.stringify(category));
 					return callback(null,category);
 				});
 			},
 			function(category,callback) {
-				req.logger.info("Getting products");
+				logger.info("Getting products");
 				category.getProducts(function(err,products) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.info("Products quantity:"+products.length);
+					logger.info("Products quantity:"+products.length);
 					if(products.length>0) {
 						return callback('Esta categoría tiene '+products.length+' productos asociados. Borre primero los productos');
 					}
@@ -125,22 +126,22 @@ module.exports = {
 				});
 			},
 			function(category,callback) {
-				req.logger.info("Getting category to remove");
+				logger.info("Getting category to remove");
 				category.remove(function(err,products) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.info("Category removed successfully");
+					logger.info("Category removed successfully");
 					return callback();
 				});
 			}
 		], 
 		function(err) {
 			if(err) {
-				req.logger.info("En function error de waterfall:"+err);
+				logger.info("En function error de waterfall:"+err);
 				return utils.send_ajax_error(req,res,err);
 			}
-			req.logger.debug('Returning success');
+			logger.debug('Returning success');
 			return res.status(200).send('success');
 		});
 	}

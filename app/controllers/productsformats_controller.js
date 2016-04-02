@@ -1,13 +1,14 @@
 'use strict';
 
-var utils	= require('./utils'),
+var utils		= require('./utils'),
 	ld			= require('lodash'),
-	modelsutil	= require('../models/modelsutil');
+	modelsutil	= require('../models/modelsutil'),
+	logger		= require("../../utils/logger")(module);
 
 module.exports = {
 	post_productsformats: function(req, res, next) {
 
-		req.logger.info("En POST products formats");
+		logger.info("En POST products formats");
 		
 		var id			= req.body.id;
 		var colname		= req.body.colname;
@@ -25,7 +26,7 @@ module.exports = {
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				req.logger.info("Getting id:"+id);
+				logger.info("Getting id:"+id);
 				req.models.productsformats.get(id,function(err,productformat) {
 					return callback(err,productformat);
 				});
@@ -47,7 +48,7 @@ module.exports = {
 					productformat.wholesale	= colvalue;
 				}
 				
-				req.logger.info("Updating product format:"+JSON.stringify(productformat));
+				logger.info("Updating product format:"+JSON.stringify(productformat));
 				productformat.save(function(err) {
 					return callback(err);
 				});
@@ -57,24 +58,24 @@ module.exports = {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
-			req.logger.debug('Returning success');
+			logger.debug('Returning success');
 			return res.status(200).send('success');
 		});
 	},
 	
 	put_productsformats: function(req, res, next) {
-		req.logger.info('En PUT products formats');
+		logger.info('En PUT products formats');
 		var milli		= new Date().getTime();
 		var product_id	= req.body.product_id;
 		
 		req.assert('product_id', 'El producto es requerido').notEmpty();
-		req.logger.info("Executing validation");
+		logger.info("Executing validation");
 		var valerrors = req.validationErrors();
 		if(valerrors) {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
 		
-		req.logger.info('Creating product format');
+		logger.info('Creating product format');
 		req.models.productsformats.create({	format:			''+milli,
 											product_id:		product_id,
 											quantity:		1,
@@ -84,27 +85,27 @@ module.exports = {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
-			req.logger.debug("Sending product format to browser:"+JSON.stringify(productformat));
+			logger.debug("Sending product format to browser:"+JSON.stringify(productformat));
 			return res.status(200).send(productformat);
 		});
 	},
 	
 	
 	get_productsformats: function(req, res, next) {
-		req.logger.info('En GET products formats');
+		logger.info('En GET products formats');
 		var milli		= new Date().getTime();
 		var product_id	= req.query.product_id;
 		
 		req.assert('product_id', 'El producto es requerido').notEmpty();
-		req.logger.info("Executing validation");
+		logger.info("Executing validation");
 		var valerrors = req.validationErrors();
 		if(valerrors) {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
 
-		req.logger.info("Getting product "+product_id);
+		logger.info("Getting product "+product_id);
 		var filters = ld.merge({filter:{id:product_id}});
-		modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
+		modelsutil.getProducts(req.models, filters,function(err,products) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
@@ -118,10 +119,10 @@ module.exports = {
 	
 	
 	delete_productsformats: function(req, res, next) {
-		req.logger.info('En DELETE products formats');
+		logger.info('En DELETE products formats');
 		
 		var id			= req.body.id;
-		req.logger.debug("Starting product format deletion with id:"+id);
+		logger.debug("Starting product format deletion with id:"+id);
 		
 		req.models.productsformats.get(id, function(err,productformat) {
 			if(err) {
@@ -132,7 +133,7 @@ module.exports = {
 				if(err) {
 					return utils.send_ajax_error(req,res,err);
 				}
-				req.logger.debug("Product:"+JSON.stringify(productformat));
+				logger.debug("Product:"+JSON.stringify(productformat));
 				return res.status(200).send('success');
 			});
 		});

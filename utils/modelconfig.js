@@ -1,8 +1,10 @@
 'use strict';
 
+var logger = require("./logger")(module);
+
 (function (modelconfig) {
 
-	modelconfig.init = function (app, express, logger, config, callback) {
+	modelconfig.init = function (app, express, config, callback) {
 		var orm = require('orm');
 		
 		logger.debug("Setting database connection info");
@@ -23,18 +25,18 @@
 		
 		app.use(orm.express(opts, {
 			define: function (db, models) {
-				require('../app/models/categories.js')(orm,db,models,logger);
-				require('../app/models/packaging.js')(orm,db,models,logger);
-				require('../app/models/products.js')(orm,db,models,logger);
-				require('../app/models/productsformats.js')(orm,db,models,logger);
-				require('../app/models/productspictures.js')(orm,db,models,logger);
-				require('../app/models/roles.js')(orm,db,models,logger);
-				require('../app/models/users.js')(orm,db,models,logger);
-				require('../app/models/userssessions.js')(orm,db,models,logger);
-				require('../app/models/posters.js')(orm,db,models,logger);
-				require('../app/models/registrations.js')(orm,db,models,logger);
-				require('../app/models/mailing.js')(orm,db,models,logger);
-				require('../app/models/shoppingcart.js')(orm,db,models,logger);
+				require('../app/models/categories.js')(orm,db,models);
+				require('../app/models/packaging.js')(orm,db,models);
+				require('../app/models/products.js')(orm,db,models);
+				require('../app/models/productsformats.js')(orm,db,models);
+				require('../app/models/productspictures.js')(orm,db,models);
+				require('../app/models/roles.js')(orm,db,models);
+				require('../app/models/users.js')(orm,db,models);
+				require('../app/models/userssessions.js')(orm,db,models);
+				require('../app/models/posters.js')(orm,db,models);
+				require('../app/models/registrations.js')(orm,db,models);
+				require('../app/models/mailing.js')(orm,db,models);
+				require('../app/models/shoppingcart.js')(orm,db,models);
 
 				return callback(app,db,models);
 			}

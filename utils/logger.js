@@ -7,45 +7,49 @@ var winston			= require('winston'),
 
 winston.emitErrs = true;
 
-var console = new winston.transports.Console({
-	level: config.app_log_level,
-	handleExceptions: false,
-	json: false,
-	colorize: true,
-	timestamp: function() {
-		 return dateformat(Date.now(),"yyyy/mm/dd HH:MM:ss:l");
-	} /*,
-	formatter: function(options) {
-		return options.timestamp() +' '+ options.level.toUpperCase() +' '+ (undefined !== options.message ? options.message : '') +
-		(options.meta && Object.keys(options.meta).length ? '\n\t'+ JSON.stringify(options.meta) : '' );
-	}
-	*/
-});
+module.exports = function(callingModule) {
+	
+	var getLabel = function() {
+		var parts = callingModule.filename.split('\\');
+		return parts[parts.length - 2] + '/' + parts.pop();
+	};
+	
+	var console2 = new winston.transports.Console({
+		level: config.app_log_level,
+		handleExceptions: false,
+		json: false,
+		colorize: true,
+		timestamp: function() {
+			 return dateformat(Date.now(),"yyyy/mm/dd HH:MM:ss:l") + " - " + getLabel();
+		}
+	});
+	
+	var logger = new winston.Logger({
+		transports : [ console2 ],
+		meta: false, 
+		msg: "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
+		colorStatus: true, 
+		exitOnError : false
+	});
+	
+	logger.expressLogger		= new expressWinston.logger({
+		transports : [ console2 ],
+		meta: false, 
+		msg: "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
+		colorStatus: true, 
+		exitOnError : false
+	});
+	
+	logger.expressErrorLogger	= new expressWinston.errorLogger({
+		transports : [ console2 ],
+		meta: false, 
+		msg: "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
+		colorStatus: true, 
+		exitOnError : false
+	});
 
-var logger = new winston.Logger({
-	transports : [ console ],
-	meta: false, // optional: control whether you want to log the meta data about the request (default to true)
-	msg: "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
-	colorStatus: true, 
-	exitOnError : false
-});
+	
+	return logger;
+};
 
-var expressLogger = new expressWinston.logger({
-	transports : [ console ],
-	meta: false, // optional: control whether you want to log the meta data about the request (default to true)
-	msg: "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
-	colorStatus: true, 
-	exitOnError : false
-});
 
-var expressErrorLogger = new expressWinston.errorLogger({
-	transports : [ console ],
-	meta: false, // optional: control whether you want to log the meta data about the request (default to true)
-	msg: "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
-	colorStatus: true, 
-	exitOnError : false
-});
-
-module.exports						= logger;
-module.exports.expressLogger		= expressLogger;
-module.exports.expressErrorLogger	= expressErrorLogger;

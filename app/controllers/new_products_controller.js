@@ -3,8 +3,8 @@
 var utils		= require('./utils'),
 	ld			= require('lodash'),
 	modelsutil	= require('../models/modelsutil'),
-	waterfall	= require('async-waterfall');
-
+	waterfall	= require('async-waterfall'),
+	logger		= require("../../utils/logger")(module);
 
 var get_product = function(req, res, next, is_new) {
 
@@ -25,7 +25,7 @@ var get_product = function(req, res, next, is_new) {
 			}
 			else {
 				var filters = ld.merge({filter:{id:req.query.productid}});
-				modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
+				modelsutil.getProducts(req.models, filters,function(err,products) {
 					if(err) {
 						return callback(err);
 					}
@@ -40,24 +40,24 @@ var get_product = function(req, res, next, is_new) {
 			}
 		},
 		function(callback) {
-			req.logger.info('Reading packaging');
+			logger.info('Reading packaging');
 			req.models.packaging.find({},['name'],function(err,packaging) {
 				if(err) {
 					return callback(err);
 				}
-				req.logger.debug('Packaging readed:'+packaging.length);
+				logger.debug('Packaging readed:'+packaging.length);
 				packaging.unshift(ld.merge({id:"", name:"Ingrese packaging"}));
 				ld.merge(pageinfo, {packaging:packaging});
 				return callback();
 			});
 		},
 		function(callback) {
-			req.logger.info('Reading categories');
+			logger.info('Reading categories');
 			req.models.categories.find({},['name'],function(err,categories) {
 				if(err) {
 					return callback(err);
 				}
-				req.logger.debug('Categories readed:'+categories.length);
+				logger.debug('Categories readed:'+categories.length);
 				categories.unshift(ld.merge({id:"", name:"Ingrese categoría"}));
 				ld.merge(pageinfo, {categories:categories});
 				return callback();
@@ -65,11 +65,11 @@ var get_product = function(req, res, next, is_new) {
 		}
 	], 
 	function(err) {
-		req.logger.info("Rendering page");
+		logger.info("Rendering page");
 		if(err) {
 			return next(err);
 		}
-		req.logger.info("Rendering page with NO ERROR");
+		logger.info("Rendering page with NO ERROR");
 		res.render('admin_new_product.html',pageinfo);
 	});
 	
@@ -95,7 +95,7 @@ var save_product = function(req, res, next, is_new) {
 	waterfall([ 
 		function(callback) {
 			var filter={or:[{name: req.body.name}, {url: req.body.url}]};
-			req.logger.info("Searching using filter:"+JSON.stringify(filter));
+			logger.info("Searching using filter:"+JSON.stringify(filter));
 			req.models.products.find(filter, function(err,products) {
 				if(err) {
 					return callback(err);
@@ -121,7 +121,7 @@ var save_product = function(req, res, next, is_new) {
 				return callback(null,product);
 			}
 			else {
-				req.logger.info("Getting id:"+req.body.id);
+				logger.info("Getting id:"+req.body.id);
 				req.models.products.get(req.body.id,function(err,product) {
 					return callback(err,product);
 				});
@@ -142,13 +142,13 @@ var save_product = function(req, res, next, is_new) {
 				ld.merge(product,{is_offer:false});
 			}
 			if(is_new) {
-				req.logger.info("Creating product:"+JSON.stringify(product));
+				logger.info("Creating product:"+JSON.stringify(product));
 				req.models.products.create(product,function(err,product) {
 					return callback(err,product);
 				});
 			}
 			else {
-				req.logger.info("Updating product:"+JSON.stringify(product));
+				logger.info("Updating product:"+JSON.stringify(product));
 				product.save(function(err) {
 					return callback(err,product);
 				});
@@ -156,7 +156,7 @@ var save_product = function(req, res, next, is_new) {
 		},
 		function(product,callback) {
 			var filters = ld.merge({filter:{id:product.id}});
-			modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
+			modelsutil.getProducts(req.models, filters,function(err,products) {
 				if(err) {
 					return callback(err);
 				}
@@ -169,7 +169,7 @@ var save_product = function(req, res, next, is_new) {
 		if(err) {
 			return utils.send_ajax_error(req,res,err);
 		}
-		req.logger.debug('Returning url');
+		logger.debug('Returning url');
 		return res.status(200).send(url);
 	});	
 };
@@ -195,14 +195,14 @@ module.exports = {
 	
 	post_edit_product: function(req, res, next) {
 		
-		req.logger.info("En POST products");
+		logger.info("En POST products");
 		save_product(req,res,next,false);
 		
 	},
 	
 	put_edit_product: function(req, res, next) {
 
-		req.logger.info("En PUT products");
+		logger.info("En PUT products");
 		save_product(req,res,next,true);
 		
 	},
@@ -226,14 +226,14 @@ module.exports = {
 	
 	get_edit_product_formats: function(req, res, next) {
 		
-		req.logger.info("En GET product formats");
+		logger.info("En GET product formats");
 		if(typeof req.query.productid === 'undefined') {
 			return next('No se encontró Id del Producto');
 		}
 		
-		req.logger.info("Obteniendo formatos de productos");
+		logger.info("Obteniendo formatos de productos");
 		var filters = ld.merge({filter:{id:req.query.productid}});
-		modelsutil.getProducts(req.logger, req.models, filters,function(err,products) {
+		modelsutil.getProducts(req.models, filters,function(err,products) {
 			if(err) {
 				return next(err);
 			}

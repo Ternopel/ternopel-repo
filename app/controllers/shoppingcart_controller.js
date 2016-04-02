@@ -2,7 +2,8 @@
 
 var cipher	= require('../../utils/cipher'),
 	utils	= require('./utils'),
-	ld		= require('lodash');
+	ld		= require('lodash'),
+	logger	= require("../../utils/logger")(module);
 
 
 var validate_shopping_cart_params = function(req, res, incartval) {
@@ -13,14 +14,14 @@ var validate_shopping_cart_params = function(req, res, incartval) {
 		req.check('incart', 'Indique si esta en carrito de compras').notEmpty().isBoolean();
 	}
 	
-	req.logger.info("Validating fields");
+	logger.info("Validating fields");
 	return req.validationErrors();
 };
 
 module.exports = {
 	get_price_calculation: function(req, res, next) {
 		
-		req.logger.info("En GET price calculation");
+		logger.info("En GET price calculation");
 		var valerrors = validate_shopping_cart_params(req, res, true);
 		if(valerrors) {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
@@ -29,48 +30,48 @@ module.exports = {
 		var quantity		= req.query.quantity;
 		var incart			= req.query.incart;
 		
-		req.logger.info("Calculating price");
+		logger.info("Calculating price");
 		req.models.productsformats.get(productformatid,function(err,productformat) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
 			var wholesale_price_units	= parseInt(quantity / productformat.quantity);
 			var retail_price_units		= quantity - ( wholesale_price_units * productformat.quantity);
-			req.logger.info("wholesale_price_units:"+wholesale_price_units);
-			req.logger.info("retail_price_units:"+retail_price_units);
+			logger.info("wholesale_price_units:"+wholesale_price_units);
+			logger.info("retail_price_units:"+retail_price_units);
 			
 			var wholesale_price			= wholesale_price_units * productformat.wholesale * productformat.quantity;
 			var retail_price			= retail_price_units * productformat.retail;
-			req.logger.info("wholesale_price:"+wholesale_price);
-			req.logger.info("retail_price:"+retail_price);
+			logger.info("wholesale_price:"+wholesale_price);
+			logger.info("retail_price:"+retail_price);
 			
 			var	price					= ( wholesale_price + retail_price ).toFixed(2);
-			req.logger.info("price:"+price);
-			req.logger.info("incart:"+incart);
+			logger.info("price:"+price);
+			logger.info("incart:"+incart);
 			
 			if(incart=='false') {
-				req.logger.info('Returning price to client');
+				logger.info('Returning price to client');
 				return res.status(200).send(price);
 			}
 			else {
 				var ter_token		= req.cookies.ter_token;
-				req.logger.info("Reading user session with token:"+ter_token);
+				logger.info("Reading user session with token:"+ter_token);
 				req.models.userssessions.find({token: ter_token},function(err,usersessions) {
 					if(err) {
 						return utils.send_ajax_error(req,res,err);
 					}
 					var usersession		= usersessions[0];
-					req.logger.info("Reading shopping cart");
+					logger.info("Reading shopping cart");
 					req.models.shoppingcart.find({user_session_id:usersession.id, product_format_id: productformatid},function(err,shoppingcart) {
 						if(err) {
 							return utils.send_ajax_error(req,res,err);
 						}
-						req.logger.info("Updating shopping cart:"+JSON.stringify(shoppingcart[0]));
+						logger.info("Updating shopping cart:"+JSON.stringify(shoppingcart[0]));
 						shoppingcart[0].save({quantity: quantity},function(err) {
 							if(err) {
 								return utils.send_ajax_error(req,res,err);
 							}
-							req.logger.info("Sending price to client");
+							logger.info("Sending price to client");
 							return res.status(200).send(price);
 						});
 					});
@@ -80,7 +81,7 @@ module.exports = {
 	},
 	
 	post_product_to_cart: function(req, res, next) {
-		req.logger.info("En POST product format to shopping cart");
+		logger.info("En POST product format to shopping cart");
 		
 		var valerrors = validate_shopping_cart_params(req, res, false);
 		if(valerrors) {
@@ -90,7 +91,7 @@ module.exports = {
 		var quantity		= req.body.quantity;
 		var ter_token		= req.cookies.ter_token;
 		
-		req.logger.info("Getting user session");
+		logger.info("Getting user session");
 		req.models.userssessions.find({token: ter_token},function(err,usersessions) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
@@ -98,7 +99,7 @@ module.exports = {
 			var usersession		= usersessions[0];
 			var shoppingcart	= ld.merge({user_session_id:usersession.id, product_format_id: productformatid,quantity:quantity });
 			
-			req.logger.info("Persisting product format on session");
+			logger.info("Persisting product format on session");
 			req.models.shoppingcart.create(shoppingcart,function(err,shoppingcart) {
 				if(err) {
 					return utils.send_ajax_error(req,res,err);
@@ -114,15 +115,15 @@ module.exports = {
 	},
 	
 	get_cart_products_count: function(req, res, next) {
-		req.logger.info("GET cart products count");
+		logger.info("GET cart products count");
 		var ter_token		= req.cookies.ter_token;
 		
-		req.logger.info("Getting user session");
+		logger.info("Getting user session");
 		req.models.userssessions.find({token: ter_token},function(err,usersessions) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
-			req.logger.info("Getting user session");
+			logger.info("Getting user session");
 			
 			var usersession		= usersessions[0];
 			req.models.shoppingcart.count({user_session_id:usersession.id},function(err,count) {
@@ -135,14 +136,14 @@ module.exports = {
 	},
 
 	get_shopping_cart: function(req, res, next) {
-		req.logger.info("GET shopping cart");
+		logger.info("GET shopping cart");
 		var pageinfo	= req.pageinfo;
 		var ter_token	= req.cookies.ter_token;
 		
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				req.logger.info('Getting User Session');
+				logger.info('Getting User Session');
 				req.models.userssessions.find({token: ter_token},function(err,usersessions) {
 					if(err) {
 						return callback(err);
@@ -153,28 +154,28 @@ module.exports = {
 			}, 
 			function(usersession,callback) {
 				if(pageinfo.is_logged_in===true) {
-					req.logger.info("User is logged in");
+					logger.info("User is logged in");
 					usersession.getUser(function (err, user) {
 						if(err) {
 							return callback(err);
 						}
-						req.logger.info('User logged in:'+user.fullName());
+						logger.info('User logged in:'+user.fullName());
 						pageinfo = ld.merge(pageinfo,{first_name: user.first_name, last_name: user.last_name, email_address: user.email_address});
 						return callback(err,usersession);
 					});
 				}
 				else {
-					req.logger.info("User is NOT logged in");
+					logger.info("User is NOT logged in");
 					return callback(null,usersession);
 				}
 			},
 			function(usersession,callback) {
-				req.logger.info("Reading shopping cart");
+				logger.info("Reading shopping cart");
 				req.models.shoppingcart.find({user_session_id: usersession.id},function(err,shoppingcart) {
 					if(err) {
 						return callback(err);
 					}
-					req.logger.info("Records readed:"+shoppingcart.length);
+					logger.info("Records readed:"+shoppingcart.length);
 					return callback(err,usersession,shoppingcart);
 				});
 			},
@@ -184,7 +185,7 @@ module.exports = {
 				var totalcart = 0;
 				async.each(shoppingcart, function(cartelement, asynccallback) {
 					var modelsutil	= require('../models/modelsutil');
-					modelsutil.getCategories(req.logger, req.db, {useformatid:cartelement.product_format_id,includeunique:false},function(err,category) {
+					modelsutil.getCategories(req.db, {useformatid:cartelement.product_format_id,includeunique:false},function(err,category) {
 						if(err) {
 							return asynccallback(err);
 						}
@@ -208,21 +209,21 @@ module.exports = {
 			},
 		], 
 		function(err) {
-			req.logger.info("Rendering page");
+			logger.info("Rendering page");
 			if(err) {
-				req.logger.info("Rendering page error:"+err);
+				logger.info("Rendering page error:"+err);
 				return next(err);
 			}
-			req.logger.info("Rendering page with NO ERROR");
+			logger.info("Rendering page with NO ERROR");
 
-			req.logger.info(JSON.stringify(pageinfo));
+			logger.info(JSON.stringify(pageinfo));
 			res.render('shopping_cart.html',pageinfo);	
 		});
 	},
 	
 	
 	delete_product_of_cart: function(req, res, next) {
-		req.logger.info("En DELETE shopping cart");
+		logger.info("En DELETE shopping cart");
 		
 		req.check('shopping_cart_id', 'Id de Shopping Cart es requerido').notEmpty();
 		if(req.validationErrors()) {
@@ -230,7 +231,7 @@ module.exports = {
 		}
 		var shopping_cart_id	= req.body.shopping_cart_id;
 		
-		req.logger.info("Getting shopping cart element:"+shopping_cart_id);
+		logger.info("Getting shopping cart element:"+shopping_cart_id);
 		req.models.shoppingcart.get(shopping_cart_id,function(err,shoppingcart) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
@@ -240,7 +241,7 @@ module.exports = {
 				if(err) {
 					return callback(err);
 				}
-				req.logger.info("Category removed successfully");
+				logger.info("Category removed successfully");
 				return res.status(200).send('OK');
 			});
 		});

@@ -1,7 +1,7 @@
 'use strict';
 
 var app			= require(__dirname+'/../app.js'),
-	logger		= require(__dirname+'/../utils/logger'),
+	logger		= require(__dirname+'/../utils/logger')(module),
 	config		= require(__dirname+'/../utils/config')(),
 	liquibase	= require(__dirname+'/../utils/liquibase');
 
@@ -38,7 +38,7 @@ describe('Test Suite', function() {
 		config.app_posters_imgs_dir			= config.test_app_posters_imgs_dir;
 		
 		logger.info("Initiating app");
-		app.init(logger,config, function(app,pdb,models) {
+		app.init(config, function(app,pdb,models) {
 			db		= pdb;
 			
 			testsendemail.setMailInfo(models,pdb);
@@ -67,7 +67,7 @@ describe('Test Suite', function() {
 					db.sync(function(err) {
 						config.app_run_liquibase	= 'true';
 						logger.info("Running liquibase");
-						liquibase.init(logger,config);
+						liquibase.init(config);
 						return done(err);
 					});
 				});
@@ -130,13 +130,13 @@ describe('Test Suite', function() {
 	
 	// home tests
 	if(runTests) {
+		it('Get Search', testshome.getSearch);
 		it('Get Offers', testshome.getOffers);
 		it('Get No Posters', testshome.getNoPosters);
-		it('Get Search', testshome.getSearch);
 		it('Get category', testshome.getCategory);
-		it('Get product', testshome.getProduct);
 		it('Get no existing category', testshome.getNoExistingCategory);
 		it('Get no existing product', testshome.getNoExistingProduct);
+		it('Get product', testshome.getProduct);
 	}
 	
 	// Registration tests
