@@ -58,6 +58,7 @@
     "app_posters_imgs_dir": "./posters/images",
     "app_cron": "true",
     "app_smtp_password": "Pilarcita1",
+    "app_path_separator": "\\",
     "db_database": "ternopel",
     "db_protocol": "postgres",
     "db_driver": "org.postgresql.Driver",

@@ -10,7 +10,7 @@ winston.emitErrs = true;
 module.exports = function(callingModule) {
 	
 	var getLabel = function() {
-		var parts = callingModule.filename.split('\\');
+		var parts = callingModule.filename.split(config.app_path_separator);
 		return parts[parts.length - 2] + '/' + parts.pop();
 	};
 	
