@@ -70,7 +70,7 @@ var logger = require("./logger")(module);
 				logger.info(req.method+" to:"+req.path);
 			}
 			else {
-				logger.warn(req.method+" to:"+req.path);
+				logger.warn(req.method+" to:"+req.path+" - "+req.headers['user-agent']);
 			}
 			logger.info("==================================");
 			
