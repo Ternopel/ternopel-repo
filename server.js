@@ -13,7 +13,6 @@ app.init(config, function(app,db,models) {
 	
 	
 	logger.info("Creating server");
-//	var server = https.createServer(options);
 	var server = http.createServer();
 	server.on('request',app);
 
@@ -26,4 +25,4 @@ app.init(config, function(app,db,models) {
 	cronconfig.init(logger, config, models, db); 
 });
 
-//require('jsreport').bootstrapper({ httpPort: 4000 }).start();
+require('jsreport').bootstrapper({ httpPort: 4000 }).start();

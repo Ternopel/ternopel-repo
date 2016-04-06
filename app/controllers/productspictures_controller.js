@@ -92,49 +92,6 @@ module.exports = {
 					});
 					
 				});
-				
-				
-				/*
-				var picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id;
-				logger.info('Writing picture:'+picture_name);
-				
-				
-				logger.info("==============================================================================================================");
-				logger.info("==============================================================================================================");
-				logger.info("==============================================================================================================");
-				logger.info("==============================================================================================================");
-				logger.info("==============================================================================================================");
-
-				fs.writeFile('/tmp/maxito.png', data,'base64',function (err) {
-
-					
-					
-					require('lwip').open('/tmp/maxito.png', function(err, image){
-					
-					  // check err...
-					  // define a batch of manipulations and save to disk as JPEG:
-					  image.batch()
-					    .writeFile('/tmp/maxito.jpg', function(err){
-
-							logger.info(err);
-
-					    	
-					    	fs.writeFile(picture_name, data,'base64',function (err) {
-					    		return callback(err,productpicture);
-					    	});
-					    });
-					
-					});					
-					
-					
-					
-					
-				});
-				*/
-				
-				
-				
-				
 			},
 			function(productpicture,callback) {
 				var filters = ld.merge({filter:{id:productpicture.product_id}});
