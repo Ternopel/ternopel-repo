@@ -158,7 +158,7 @@ function fillProductFormat(product,productformat,filters) {
 					},
 					function(callback) {
 						logger.info('Searching for Pictures');
-						product.getProductsPictures().run(function(err, productspictures) {
+						product.getProductsPictures().order('id').run(function(err, productspictures) {
 							if(err) {
 								return callback(err);
 							}

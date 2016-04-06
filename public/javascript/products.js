@@ -147,3 +147,18 @@ $(function () {
 });
 
 
+// Calculate price
+$(function () {
+	$("a[name^='change_image_']").click(function(event) {
+		var productpictureid = $(this).attr('alt');
+		console.log(productpictureid);
+		
+		$("img[name='min_image']").attr('src','/images/productspictures/'+productpictureid);
+		$("img[name='max_image']").attr('src','/images/productspictures/'+productpictureid);
+		
+		return false;
+	});
+});
+
+
+

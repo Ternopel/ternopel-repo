@@ -1,0 +1,1 @@
+alter table products_pictures drop constraint if exists products_pictures_product_id_key;

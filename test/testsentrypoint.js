@@ -112,13 +112,13 @@ describe('Test Suite', function() {
 	if(runTests) {
 		it('Get products', testsproducts.getProducts);
 		it('Get products formats', testsproducts.getProductFormats);
-		it('Get products picture', testsproducts.getProductPicture);
 		it('Delete product', testsproducts.deleteProduct);
 		it('Create product', testsproducts.createProduct);
 		it('Update product', testsproducts.updateProduct);
-		it('Get Admin products', testsproducts.getAdminProducts);
 		it('Update Admin products', testsproducts.updateAdminProduct);
+		it('Get Admin products', testsproducts.getAdminProducts);
 	}	
+	it('Get products picture', testsproducts.getProductPicture);
 	
 	// admin categories tests
 	if(runTests) {
@@ -137,6 +137,7 @@ describe('Test Suite', function() {
 		it('Get no existing category', testshome.getNoExistingCategory);
 		it('Get no existing product', testshome.getNoExistingProduct);
 		it('Get product', testshome.getProduct);
+		it('Get product admin user', testshome.getProductAdminUser);
 	}
 	
 	// Registration tests

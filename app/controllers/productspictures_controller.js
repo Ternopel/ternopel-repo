@@ -9,27 +9,37 @@ var utils		= require('./utils'),
 module.exports = {
 	post_productspictures: function(req, res, next) {
 		logger.info("En POST products pictures");
+
+		req.assert('product_id', 'El producto es requerido').notEmpty();
+		req.assert('picture_id', 'La imagen es requerido').notEmpty();
+		req.assert('type', 'El Tipo es requerido').notEmpty();
+		req.assert('data', 'El Dato es requerido').notEmpty();
+		
+		logger.info("Executing validation");
+		var valerrors = req.validationErrors();
+		if(valerrors) {
+			return utils.send_ajax_validation_errors(req,res,valerrors);
+		}		
+		
 		var product_id	= req.body.product_id;
-		var type		= req.body.type;
+		var picture_id	= req.body.picture_id;
+//		var type		= req.body.type;
+		var type		= 'image/jpeg';
 		var data		= req.body.data;
 		
-		logger.info("Id:"+product_id);
+		logger.info("Product Id:"+product_id);
+		logger.info("Picture Id:"+picture_id);
 		logger.info("type:"+type);
 		
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				req.models.productspictures.find({product_id:product_id},function(err,productspictures) {
+				req.models.productspictures.get(picture_id,function(err,productpicture) {
 					// Not found !
 					if(err) {
-						return callback(err);
-					}
-					if(productspictures.length===1) {
-						return callback(null,productspictures[0]);
-					}
-					else {
 						return callback(null,null);
 					}
+					return callback(null,productpicture);
 				});
 			},
 			function(productpicture,callback) {
@@ -50,11 +60,81 @@ module.exports = {
 				}
 			},
 			function(productpicture, callback) {
+				
+				
+				var token		= require('node-uuid').v1();
+				var tempfile	= '/tmp/temp-image-'+token+'.png'
+				var picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id;
+				
+				logger.info('Writing temporary file:'+tempfile);
+				fs.writeFile(tempfile, data,'base64',function (err) {
+					if(err) {
+						return callback(err);
+					}
+
+					logger.info('Converting file :'+tempfile);
+					require('lwip').open(tempfile, function(err, image){
+						if(err) {
+							return callback(err);
+						}
+						
+						logger.info('Generating jpg');
+						image.toBuffer('jpg', function(err, data){
+							if(err) {
+								return callback(err);
+							}
+							
+							logger.info('Saving file '+picture_name);
+							fs.writeFile(picture_name, data,'base64',function (err) {
+								return callback(err,productpicture);
+							});
+						});
+					});
+					
+				});
+				
+				
+				/*
 				var picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id;
 				logger.info('Writing picture:'+picture_name);
-				fs.writeFile(picture_name, data,'base64',function (err) {
-					return callback(err,productpicture);
+				
+				
+				logger.info("==============================================================================================================");
+				logger.info("==============================================================================================================");
+				logger.info("==============================================================================================================");
+				logger.info("==============================================================================================================");
+				logger.info("==============================================================================================================");
+
+				fs.writeFile('/tmp/maxito.png', data,'base64',function (err) {
+
+					
+					
+					require('lwip').open('/tmp/maxito.png', function(err, image){
+					
+					  // check err...
+					  // define a batch of manipulations and save to disk as JPEG:
+					  image.batch()
+					    .writeFile('/tmp/maxito.jpg', function(err){
+
+							logger.info(err);
+
+					    	
+					    	fs.writeFile(picture_name, data,'base64',function (err) {
+					    		return callback(err,productpicture);
+					    	});
+					    });
+					
+					});					
+					
+					
+					
+					
 				});
+				*/
+				
+				
+				
+				
 			},
 			function(productpicture,callback) {
 				var filters = ld.merge({filter:{id:productpicture.product_id}});
@@ -75,25 +155,21 @@ module.exports = {
 			return res.status(200).send(url);
 		});	
 	},
+	
 	get_productspictures: function(req, res, next) {
 		logger.info("En GET products pictures");
-		var product_id			= req.params.id;
+		var picture_id			= req.params.id;
 		
 		logger.info("Getting product info");
-		req.models.productspictures.find({product_id:product_id},function(err,productspictures) {
-			
-			if(err) {
-				return utils.send_ajax_error(req,res,err);
-			}			
+		req.models.productspictures.get(picture_id,function(err,productpicture) {
 
 			var picture_name;
 			var content_type;
-			if(productspictures.length===0) {
+			if(err) {
 				picture_name='./public/images/default-img.jpg';
 				content_type='image/jpeg';
 			}	
 			else {
-				var productpicture = productspictures[0];
 				picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id;
 				content_type=productpicture.content_type;
 			}
@@ -106,11 +182,12 @@ module.exports = {
 				logger.info("Preparing picture metadata");
 				res.setHeader('Content-Type', content_type);
 				res.setHeader('Content-Length', data.length);
-				res.setHeader('Content-Disposition', 'inline; filename='+product_id);
+				res.setHeader('Content-Disposition', 'inline; filename='+picture_id);
 				
 				logger.info("Sending picture to browser");
 				return res.send(data);
 			});
 		});
-	}
+	}	
+	
 };

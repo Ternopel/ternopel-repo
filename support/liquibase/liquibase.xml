@@ -23,4 +23,8 @@
 		<sqlFile path="support/liquibase/sql/add_sent_column.sql" />
 	</changeSet>
 
+	<changeSet author="maximiliano.ezequiel.carrizo.barrera" id="drop_products_pictures_index">
+		<sqlFile path="support/liquibase/sql/drop_products_pictures_index.sql" />
+	</changeSet>
+
 </databaseChangeLog>

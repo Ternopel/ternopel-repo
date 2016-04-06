@@ -176,20 +176,20 @@ var save_product = function(req, res, next, is_new) {
 
 module.exports = {
 	get_add_product: function(req, res, next) {
-
-		if(typeof req.query.categoryid === 'undefined') {
+		req.assert('categoryid','Categoria es requerida').notEmpty();
+		var valerrors = req.validationErrors();
+		if(valerrors) {
 			return next('No se encontró categoría del Producto');
-		}
-
+		}		
 		get_product(req,res,next,true);
 	},
 
 	get_edit_product: function(req, res, next) {
-		
-		if(typeof req.query.productid === 'undefined') {
+		req.assert('productid',			'Producto es requerido').notEmpty();
+		var valerrors = req.validationErrors();
+		if(valerrors) {
 			return next('No se encontró Id del Producto');
-		}
-		
+		}		
 		get_product(req,res,next,false);
 	},
 	
@@ -207,18 +207,41 @@ module.exports = {
 		
 	},
 	
-	get_edit_product_picture: function(req, res, next) {
+	get_add_product_picture: function(req, res, next) {
 		
-		if(typeof req.query.productid === 'undefined') {
+		req.assert('productid',			'Producto es requerido').notEmpty();
+		var valerrors = req.validationErrors();
+		if(valerrors) {
 			return next('No se encontró Id del Producto');
-		}
+		}				
 		
 		req.models.products.get(req.query.productid, function(err,product) {
 			if(err) {
 				return next('No se encontró Producto con id:'+req.query.productid);
 			}
-			var currentproduct	= ld.merge({id:req.query.productid});
-			var pageinfo		= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(), currentproduct: currentproduct});
+			var currentproduct	= {id:req.query.productid};
+			var currentpicture	= {id:0};
+			var pageinfo		= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(), currentproduct: currentproduct, currentpicture:currentpicture});
+			res.render('admin_new_product_picture.html',pageinfo);
+		});
+		
+	},
+	
+	get_edit_product_picture: function(req, res, next) {
+		
+		req.assert('pictureid',			'Imagen es requerida').notEmpty();
+		var valerrors = req.validationErrors();
+		if(valerrors) {
+			return next('No se encontró Id de Imagen');
+		}				
+		
+		req.models.productspictures.get(req.query.pictureid, function(err,productpicture) {
+			if(err) {
+				return next('No se encontró Imagen con id:'+req.query.pictureid);
+			}
+			var currentpicture	= {id:req.query.pictureid};
+			var currentproduct	= {id:productpicture.product_id};
+			var pageinfo		= ld.merge(req.pageinfo, {csrfToken: req.csrfToken(), currentproduct: currentproduct, currentpicture:currentpicture});
 			res.render('admin_new_product_picture.html',pageinfo);
 		});
 		

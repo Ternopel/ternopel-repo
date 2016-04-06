@@ -33,11 +33,14 @@
 		app.get		( '/admin/products',					controllers.products.get_products);
 		app.post	( '/admin/products',					controllers.products.post_products);
 		app.delete	( '/admin/products',					controllers.products.delete_products);
+		app.get		( '/images/products/:id',				controllers.products.get_productspictures);
+		app.get		( '/images/productspictures/:id',		controllers.productspictures.get_productspictures);
 		
 		app.get		( '/admin/products/add',				controllers.newproducts.get_add_product);
 		app.get		( '/admin/products/edit',				controllers.newproducts.get_edit_product);
 		app.post	( '/admin/products/save',				controllers.newproducts.post_edit_product);
 		app.put		( '/admin/products/save',				controllers.newproducts.put_edit_product);
+		app.get		( '/admin/products/picture/add',		controllers.newproducts.get_add_product_picture);
 		app.get		( '/admin/products/picture/edit',		controllers.newproducts.get_edit_product_picture);
 		app.get		( '/admin/products/formats/edit',		controllers.newproducts.get_edit_product_formats);
 		
@@ -55,7 +58,7 @@
 		var multipart			= require('connect-multiparty');
 		var multipartMiddleware = multipart();
 		
-		app.get		( '/images/productspictures/:id',		controllers.productspictures.get_productspictures);
+		
 		app.post	( '/admin/productspictures',			multipartMiddleware,controllers.productspictures.post_productspictures);
 		
 		app.get		( '/shoppingcart/pricecalculation',		controllers.shoppingcart.get_price_calculation);

@@ -246,3 +246,8 @@ INSERT INTO products (category_id,packaging_id,name,description,url,show_format,
 INSERT INTO shopping_cart (quantity,user_session_id,product_format_id) VALUES 
 (9.0,1,1),
 (9.0,1,2);
+
+/* Products pictures */
+INSERT INTO products_pictures (product_id,content_type,last_update) VALUES 
+(1,'image/png',{ts '2016-03-23 12:48:26.500'});
+

@@ -11,7 +11,8 @@
 				<h3 class="form-header">Complete sus datos</h3>
 				<form id='save_product_picture' method="POST" action="/admin/products/picture/save">
 					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
-					<input type='hidden' name='id' value='{{=it.currentproduct.id}}'>
+					<input type='hidden' name='product_id' value='{{=it.currentproduct.id}}'>
+					<input type='hidden' name='picture_id' value='{{=it.currentpicture.id}}'>
 				
 					<div name="upload-photo-container" class="upload-photo-container"> 
 						<div name="imageBox" class="imageBox">

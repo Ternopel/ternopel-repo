@@ -39,12 +39,13 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Creating product picture');
-				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
+				fs.readFile(__dirname + '/logo1.png', function (err, data) {
 					request("http://localhost:"+config.test_app_port)
 						.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 						.set('cookie', utils.getcookies(res))
 						.field('product_id', '1')
-						.field('type', 'image/jpeg')
+						.field('picture_id', '0')
+						.field('type', 'image/png')
 						.field('data', data)
 						.expect(200)
 						.end(function(err,newres) {
@@ -55,18 +56,28 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Updating product picture');
-				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
+				fs.readFile(__dirname + '/logo1.png', function (err, data) {
 					request("http://localhost:"+config.test_app_port)
 						.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 						.set('cookie', utils.getcookies(res))
 						.field('product_id', '1')
-						.field('type', 'image/jpeg')
+						.field('picture_id', '1')
+						.field('type', 'image/png')
 						.field('data', data)
 						.expect(200)
 						.end(function(err,newres) {
 							expect(newres.text).toBe('/bandas-elasticas/bolsa-bandas-elasticas');
 							return callback(err,res);
 						});
+				});
+			},
+			function(res,callback) {
+				logger.info('Getting product picture');
+				request("http://localhost:"+config.test_app_port)
+				.get('/images/products/1')
+				.expect(200)
+				.end(function(err,newres) {
+					return callback(err,res);
 				});
 			},
 			function(res,callback) {
@@ -79,9 +90,18 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
+				logger.info('Getting product picture');
+				request("http://localhost:"+config.test_app_port)
+				.get('/images/productspictures/10')
+				.expect(200)
+				.end(function(err,newres) {
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
 				logger.info('Getting non existing product picture with default picture');
 				request("http://localhost:"+config.test_app_port)
-				.get('/images/productspictures/2')
+				.get('/images/products/2')
 				.expect(200)
 				.end(function(err,newres) {
 					return callback(err,res);

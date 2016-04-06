@@ -1026,7 +1026,7 @@ a.enlarge-product-btn {
 }
 
 .product-thumbnail-container a:last-child img {
-	float: right;
+	float: left;
 }
 
 .product-details-col h2 {

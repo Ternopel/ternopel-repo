@@ -1,6 +1,7 @@
 'use strict';
 
 var utils	= require('./utils'),
+	fs		= require('fs'),
 	logger	= require("../../utils/logger")(module);
 
 module.exports = {
@@ -208,7 +209,48 @@ module.exports = {
 			logger.debug('Returning success');
 			return res.status(200).send('success');
 		});
+	},
+	
+	get_productspictures: function(req, res, next) {
+		logger.info("En GET products pictures");
+		var product_id			= req.params.id;
+		
+		logger.info("Getting product info");
+		req.models.productspictures.find({product_id:product_id},['id'],function(err,productspictures) {
+			
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}			
+
+			var picture_name;
+			var content_type;
+			if(productspictures.length===0) {
+				picture_name='./public/images/default-img.jpg';
+				content_type='image/jpeg';
+			}	
+			else {
+				var productpicture = productspictures[0];
+				picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id;
+				content_type=productpicture.content_type;
+			}
+			
+			logger.info("Reading image "+picture_name);
+			fs.readFile(picture_name, function (err, data) {
+				if(err) {
+					return utils.send_ajax_error(req,res,err);
+				}
+				logger.info("Preparing picture metadata");
+				res.setHeader('Content-Type', content_type);
+				res.setHeader('Content-Length', data.length);
+				res.setHeader('Content-Disposition', 'inline; filename='+product_id);
+				
+				logger.info("Sending picture to browser");
+				return res.send(data);
+			});
+		});
 	}
+	
+	
 };
 
 

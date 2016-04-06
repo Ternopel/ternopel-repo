@@ -3,9 +3,10 @@
 // Show picture upload
 $(function () {
 	
-	var productid = $("input[name='id']").val();
+	var productid = $("input[name='product_id']").val();
+	var pictureid = $("input[name='picture_id']").val();
 	var milliseconds=new Date().getTime();
-	$("div[name='upload-photo-container']").attr('style', 'background: url(/images/productspictures/'+productid+'?a='+milliseconds+'); ');
+	$("div[name='upload-photo-container']").attr('style', 'background: url(/images/productspictures/'+pictureid+'?a='+milliseconds+'); ');
 
 	var options = {
 		imageBox: "div[name='imageBox']",
@@ -78,7 +79,7 @@ $(function () {
 				var type			= img_data.replace(picture_regex, '$1');
 				var data			= img_data.replace(picture_regex, '$2');
 				
-				var formdata	={_csrf:csrf, product_id:productid, type:type, data:data};
+				var formdata	={_csrf:csrf, product_id:productid, picture_id:pictureid, type:type, data:data};
 				$.ajax({
 					url : '/admin/productspictures',
 					type : 'POST',

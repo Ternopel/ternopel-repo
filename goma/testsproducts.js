@@ -13,7 +13,7 @@ var request		= require('supertest'),
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get to server suite 1');
 				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
@@ -37,7 +37,7 @@ var request		= require('supertest'),
 					});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get add 1 to server ');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/add')
 					.set('cookie', utils.getcookies(res))
@@ -48,7 +48,7 @@ var request		= require('supertest'),
 					});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get add 2 to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/add?categoryid=1')
 					.set('cookie', utils.getcookies(res))
@@ -61,7 +61,7 @@ var request		= require('supertest'),
 					});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get edit 1 to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/edit')
 					.set('cookie', utils.getcookies(res))
@@ -72,7 +72,7 @@ var request		= require('supertest'),
 					});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get edit 2 to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/edit?productid=1')
 					.set('cookie', utils.getcookies(res))
@@ -85,7 +85,7 @@ var request		= require('supertest'),
 					});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get edit 3 to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/edit?productid=4545')
 					.set('cookie', utils.getcookies(res))
@@ -106,7 +106,7 @@ var request		= require('supertest'),
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get to server suite 2');
 				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
@@ -130,20 +130,20 @@ var request		= require('supertest'),
 					});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get edit 1.1 to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/picture/edit')
 					.set('cookie', utils.getcookies(res))
 					.expect(200)
 					.end(function(err, newres){
-						expect(newres.text).toInclude('No se encontró Id del Producto');
+						expect(newres.text).toInclude('No se encontró Id de Imagen');
 						return callback(err,res);
 					});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get edit 2.2 to server');
 				request("http://localhost:"+config.test_app_port)
-				.get('/admin/products/picture/edit?productid=1')
+				.get('/admin/products/picture/edit?pictureid=1')
 				.set('cookie', utils.getcookies(res))
 				.expect(200)
 				.end(function(err, newres){
@@ -154,11 +154,11 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)
-					.get('/admin/products/picture/edit?productid=4545')
+					.get('/admin/products/picture/edit?pictureid=4545')
 					.set('cookie', utils.getcookies(res))
 					.expect(200)
 					.end(function(err, newres){
-						expect(newres.text).toInclude('No se encontró Producto con id:4545');
+						expect(newres.text).toInclude('No se encontró Imagen con id:4545');
 						return callback(err,res);
 					});
 			}
@@ -173,7 +173,7 @@ var request		= require('supertest'),
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get to server suite 3');
 				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
@@ -197,7 +197,7 @@ var request		= require('supertest'),
 					});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get edit format to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/formats/edit')
 					.set('cookie', utils.getcookies(res))
@@ -208,7 +208,7 @@ var request		= require('supertest'),
 					});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get edit format to server');
 				request("http://localhost:"+config.test_app_port)
 				.get('/admin/products/formats/edit?productid=1')
 				.set('cookie', utils.getcookies(res))
@@ -219,7 +219,7 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get edit format to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/formats/edit?productid=4545')
 					.set('cookie', utils.getcookies(res))
@@ -240,7 +240,7 @@ var request		= require('supertest'),
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get to server suite 4');
 				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
@@ -305,7 +305,7 @@ var request		= require('supertest'),
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get to server suite 5');
 				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
@@ -410,7 +410,7 @@ var request		= require('supertest'),
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get to server suite 6');
 				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
@@ -516,7 +516,7 @@ var request		= require('supertest'),
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get to server suite 7');
 				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){
@@ -588,7 +588,7 @@ var request		= require('supertest'),
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get to server suite 8');
 				request("http://localhost:"+config.test_app_port)
 					.get('/login')
 					.end(function(err, res){

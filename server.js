@@ -6,15 +6,7 @@ var logger		= require("./utils/logger")(module),
 	app			= require("./app.js"),
 	fs			= require('fs'),
 	http		= require('http');
-//	https		= require('https');
 	
-//var options = {
-//	key: fs.readFileSync('support/key/server.key'),
-//	cert: fs.readFileSync('support/key/server.crt'),
-//	ca: fs.readFileSync('support/key/ca.crt'),
-//	requestCert: true,
-//	rejectUnauthorized: false
-//};
 
 logger.info("Creating express app");
 app.init(config, function(app,db,models) {
@@ -34,4 +26,4 @@ app.init(config, function(app,db,models) {
 	cronconfig.init(logger, config, models, db); 
 });
 
-require('jsreport').bootstrapper({ httpPort: 4000 }).start();
+//require('jsreport').bootstrapper({ httpPort: 4000 }).start();

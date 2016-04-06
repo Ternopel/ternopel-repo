@@ -36,6 +36,7 @@
     "jsreport": "^0.13.2",
     "jsreport-phantom-image": "^0.2.0",
     "lodash": "^3.9.3",
+    "lwip": "0.0.8",
     "mocha": "^2.2.5",
     "node-uuid": "^1.4.3",
     "nodemailer": "^0.7.1",
@@ -48,7 +49,7 @@
     "winston": "^1.0.0"
   },
   "config": {
-    "app_log_level": "debug",
+    "app_log_level": "info",
     "app_run_liquibase": "true",
     "app_proxy_host": "localhost",
     "app_proxy_port": "3000",
