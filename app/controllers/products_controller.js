@@ -214,9 +214,10 @@ module.exports = {
 	get_productspictures: function(req, res, next) {
 		logger.info("En GET products pictures");
 		var product_id			= req.params.id;
+		var id					= product_id.replace('.jpg','');
 		
 		logger.info("Getting product info");
-		req.models.productspictures.find({product_id:product_id},['id'],function(err,productspictures) {
+		req.models.productspictures.find({product_id:id},['id'],function(err,productspictures) {
 			
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
@@ -230,7 +231,7 @@ module.exports = {
 			}	
 			else {
 				var productpicture = productspictures[0];
-				picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id;
+				picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id+".jpg";
 				content_type=productpicture.content_type;
 			}
 			
@@ -242,6 +243,7 @@ module.exports = {
 				logger.info("Preparing picture metadata");
 				res.setHeader('Content-Type', content_type);
 				res.setHeader('Content-Length', data.length);
+				res.setHeader('Type', 'image');
 				res.setHeader('Content-Disposition', 'inline; filename='+product_id);
 				
 				logger.info("Sending picture to browser");

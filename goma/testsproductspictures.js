@@ -40,13 +40,14 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating product picture');
 				fs.readFile(__dirname + '/logo1.png', function (err, data) {
+					var base64data = new Buffer(data).toString('base64');
 					request("http://localhost:"+config.test_app_port)
 						.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 						.set('cookie', utils.getcookies(res))
 						.field('product_id', '1')
 						.field('picture_id', '0')
 						.field('type', 'image/png')
-						.field('data', data)
+						.field('data', base64data)
 						.expect(200)
 						.end(function(err,newres) {
 							expect(newres.text).toBe('/bandas-elasticas/bolsa-bandas-elasticas');
@@ -57,13 +58,14 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Updating product picture');
 				fs.readFile(__dirname + '/logo1.png', function (err, data) {
+					var base64data = new Buffer(data).toString('base64');
 					request("http://localhost:"+config.test_app_port)
 						.post('/admin/productspictures?_csrf='+utils.getcsrf(res))
 						.set('cookie', utils.getcookies(res))
 						.field('product_id', '1')
 						.field('picture_id', '1')
 						.field('type', 'image/png')
-						.field('data', data)
+						.field('data', base64data)
 						.expect(200)
 						.end(function(err,newres) {
 							expect(newres.text).toBe('/bandas-elasticas/bolsa-bandas-elasticas');

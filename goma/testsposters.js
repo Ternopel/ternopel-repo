@@ -38,8 +38,8 @@ var request		= require('supertest'),
 					});
 			}, 
 			function(res,callback) {
-				logger.info('Creating poster');
-				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
+				logger.info('Creating poster 1');
+				fs.readFile(__dirname + '/logo1.png', function (err, data) {
 					request("http://localhost:"+config.test_app_port)
 						.put('/admin/posters')
 						.set('cookie', utils.getcookies(res))
@@ -58,8 +58,8 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
-				logger.info('Creating poster');
-				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
+				logger.info('Creating poster 2');
+				fs.readFile(__dirname + '/logo1.png', function (err, data) {
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -79,8 +79,8 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
-				logger.info('Creating poster');
-				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
+				logger.info('Creating poster 3');
+				fs.readFile(__dirname + '/logo1.png', function (err, data) {
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -100,8 +100,8 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
-				logger.info('Creating poster');
-				fs.readFile(__dirname + '/logo1.jpg', function (err, data) {
+				logger.info('Creating poster 4');
+				fs.readFile(__dirname + '/logo1.png', function (err, data) {
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -121,8 +121,8 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
-				logger.info('Creating poster');
-				fs.readFile(__dirname + '/logo2.jpg', function (err, data) {
+				logger.info('Creating poster 5');
+				fs.readFile(__dirname + '/logo2.png', function (err, data) {
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))

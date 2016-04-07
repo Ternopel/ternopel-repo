@@ -85,7 +85,7 @@ module.exports = {
 							}
 							
 							logger.info('Saving file '+picture_name);
-							fs.writeFile(picture_name, data,'base64',function (err) {
+							fs.writeFile(picture_name+'.jpg', data,'base64',function (err) {
 								return callback(err,productpicture);
 							});
 						});
@@ -116,9 +116,10 @@ module.exports = {
 	get_productspictures: function(req, res, next) {
 		logger.info("En GET products pictures");
 		var picture_id			= req.params.id;
+		var id					= picture_id.replace('.jpg','');
 		
 		logger.info("Getting product info");
-		req.models.productspictures.get(picture_id,function(err,productpicture) {
+		req.models.productspictures.get(id,function(err,productpicture) {
 
 			var picture_name;
 			var content_type;
@@ -127,7 +128,7 @@ module.exports = {
 				content_type='image/jpeg';
 			}	
 			else {
-				picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id;
+				picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id+".jpg";
 				content_type=productpicture.content_type;
 			}
 			

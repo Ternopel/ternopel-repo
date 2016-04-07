@@ -17,10 +17,10 @@
 
 		<div class="product-image-container">
 			<a href="" name="productimage">
-				<img src="/images/products/{{=it.detailedproduct.id}}" style="width: 300px; height: 200px;" alt="{{=it.detailedproduct.name}}" name="min_image">
+				<img src="/images/products/{{=it.detailedproduct.id}}.jpg" style="width: 300px; height: 200px;" alt="{{=it.detailedproduct.name}}" name="min_image">
 			</a>
 			<a href="" name="productimagehidden" style="display:none;">
-				<img src="/images/products/{{=it.detailedproduct.id}}" style="width: 600px; height: 450px; " alt="{{=it.detailedproduct.name}}" name="max_image">
+				<img src="/images/products/{{=it.detailedproduct.id}}.jpg" style="width: 600px; height: 450px; " alt="{{=it.detailedproduct.name}}" name="max_image">
 			</a>
 			<a href="" name="productimage" class="enlarge-product-btn">Ver más grande</a>
 		</div>
@@ -28,11 +28,11 @@
 		<div class="product-thumbnail-container">
 			{{?it.is_admin}}
 				{{~ it.detailedproduct.productspictures:productpicture}}
-					<a href="/admin/products/picture/edit?pictureid={{=productpicture.id}}"><img src="/images/productspictures/{{=productpicture.id}}" width="106" height="76" alt="{{=it.detailedproduct.name}}"></a>
+					<a href="/admin/products/picture/edit?pictureid={{=productpicture.id}}"><img src="/images/productspictures/{{=productpicture.id}}.jpg" width="106" height="76" alt="{{=it.detailedproduct.name}}"></a>
 				{{~}}
 			{{??}}
 				{{~ it.detailedproduct.productspictures:productpicture}}
-					<a href="" name="change_image_{{=productpicture.id}}" alt="{{=productpicture.id}}"><img src="/images/productspictures/{{=productpicture.id}}" width="106" height="76" alt="{{=it.detailedproduct.name}}"></a>
+					<a href="" name="change_image_{{=productpicture.id}}" alt="{{=productpicture.id}}"><img src="/images/productspictures/{{=productpicture.id}}.jpg" width="106" height="76" alt="{{=it.detailedproduct.name}}"></a>
 				{{~}}
 			{{?}}
 		</div>

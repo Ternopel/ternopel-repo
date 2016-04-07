@@ -75,7 +75,7 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=true;
+	var runTests=false;
 	
 	if(runTests) {
 		it('Get Shopping Cart Logged in', testshoppingcart.getShoppingCartLoggedIn);
