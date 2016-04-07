@@ -1,6 +1,7 @@
 'use strict';
 
 var ld			= require('lodash'),
+	utils		= require('./utils'),
 	modelsutil	= require('../models/modelsutil'),
 	logger		= require("../../utils/logger")(module);
 
@@ -83,7 +84,7 @@ module.exports = {
 						ld.merge(pageinfo,{detailedproduct:detailedproduct,csrfToken: req.csrfToken(),page_title:'Papelera Ternopel - '+detailedproduct.name});
 						
 						logger.info(JSON.stringify(detailedproduct));
-
+						utils.populate_og_info(pageinfo,detailedproduct.category.url+'/'+detailedproduct.url,detailedproduct.name,detailedproduct.productspictures);
 						
 						return callback();
 					});

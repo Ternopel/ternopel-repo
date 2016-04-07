@@ -66,7 +66,7 @@ function fillProductFormat(product,productformat,filters) {
 			var categories	= [];
 			records.forEach(function(record) {
 				if(record.c_name !== c_name) {
-					logger.info('----------> New category:'+record.c_name);
+					logger.debug('----------> New category:'+record.c_name);
 					var category		= ld.merge({id: record.c_id,name:record.c_name, url:record.c_url});
 					category.products	= [];
 					categories.push(category);
@@ -74,7 +74,7 @@ function fillProductFormat(product,productformat,filters) {
 				}
 				
 				if(record.p_name !== p_name) {
-					logger.info('----------> New product:'+record.p_name);
+					logger.debug('----------> New product:'+record.p_name);
 					var lastcategory		= categories[categories.length - 1];
 					var packaging			= ld.merge({id: record.pk_id,name:record.pk_name});
 					var product				= ld.merge({id: record.p_id,name:record.p_name, url:record.p_url,is_visible: record.p_is_visible, is_offer: record.p_is_offer, packaging:packaging});

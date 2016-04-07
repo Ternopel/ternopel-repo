@@ -104,7 +104,7 @@ var logger = require("./logger")(module);
 				return next();
 			}
 			var ld = require('lodash');
-			req.pageinfo = ld.merge(req.pageinfo,{app_resources: req.config.app_resources, page_title: 'Papelera Ternopel',is_home:false});
+			req.pageinfo = ld.merge(req.pageinfo,{app_resources: req.config.app_resources, page_title: 'Papelera Ternopel',is_home:false, og_images: []});
 			req.models.categories.find({},['name'],function(err,categories) {
 				if(err) {
 					return next(err);
