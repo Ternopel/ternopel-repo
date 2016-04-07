@@ -13,10 +13,10 @@ module.exports = {
 		return res.status(500).send(err);
 	},
 	populate_og_info: function(pageinfo,url,description,images) {
-		logger.warn('Adding og_properties to pageinfo');
+		logger.info('Adding og_properties to pageinfo');
 		var ld	= require('lodash');
-		logger.warn(JSON.stringify(images));
+		logger.info(JSON.stringify(images));
 		ld.merge(pageinfo,{og_url: url, og_description: description, og_images: images});
-		logger.warn(JSON.stringify(pageinfo));
+		logger.info(JSON.stringify(pageinfo));
 	}
 };
