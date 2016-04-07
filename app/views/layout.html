@@ -11,11 +11,11 @@
 
 		<!-- OG PROPERTIES -->
 		{{?it.og_images.length>0}}
-			<meta property="og:title" content="{{=it.og_description}} 1" />
-			<meta property="og:site_name" content="Papelera Ternopel 2" />
+			<meta property="og:title" content="{{=it.og_description}}" />
+			<meta property="og:site_name" content="Papelera Ternopel" />
 			<meta property="og:type" content="website" />
 			<meta property="og:url" content="https://www.papeleraternopel.com/{{=it.og_url}}" />
-			<meta property="og:description" content="{{=it.og_description}} 3" />
+			<meta property="og:description" content="{{=it.og_description}}" />
 			{{~ it.og_images:og_image}}
 				<meta property="og:image" content="http://www.papeleraternopel.com/images/productspictures/{{=og_image.id}}" />
 				<meta property="og:image:url" content="http://www.papeleraternopel.com/images/productspictures/{{=og_image.id}}" />
