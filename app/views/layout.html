@@ -17,6 +17,7 @@
 			<meta property="og:url" content="https://www.papeleraternopel.com/{{=it.og_url}}" />
 			<meta property="og:description" content="{{=it.og_description}} 3" />
 			{{~ it.og_images:og_image}}
+				<meta property="og:image" content="http://www.papeleraternopel.com/images/productspictures/{{=og_image.id}}" />
 				<meta property="og:image:url" content="http://www.papeleraternopel.com/images/productspictures/{{=og_image.id}}" />
 			{{~}}
 		{{?}}
