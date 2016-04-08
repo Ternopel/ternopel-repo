@@ -240,7 +240,23 @@ var request		= require('supertest'),
 					expect(newres.text).toInclude('OK');
 					return callback(err,res);
 				});
+			},
+			function(res,callback) {
+				logger.info('Delete shopping cart element');
+				request("http://localhost:"+config.test_app_port)
+				.delete('/shoppingcart/deleteshoppingcart')
+				.send({
+						'shopping_cart_id' : '10',
+						'_csrf' : utils.getcsrf(res)
+				})
+				.set('cookie', utils.getcookies(res))
+				.expect(500)
+				.end(function(err,newres) {
+					expect(newres.text).toInclude('Not found');
+					return callback(err,res);
+				});
 			}
+
 		], 
 		function(err) {
 			return done(err);

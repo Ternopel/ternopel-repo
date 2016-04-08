@@ -6,7 +6,7 @@ $(function () {
 	var productid = $("input[name='product_id']").val();
 	var pictureid = $("input[name='picture_id']").val();
 	var milliseconds=new Date().getTime();
-	$("div[name='upload-photo-container']").attr('style', 'background: url(/images/productspictures/'+pictureid+'?a='+milliseconds+'); ');
+	$("div[name='upload-photo-container']").attr('style', 'background: url(/images/productspictures/'+pictureid+'.jpg?a='+milliseconds+'); ');
 
 	var options = {
 		imageBox: "div[name='imageBox']",

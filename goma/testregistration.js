@@ -44,6 +44,16 @@ var request		= require('supertest'),
 				});
 			}, 
 			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+				.get('/mailing/3041bd90-5397-11e5-9650-9bf126a5d299')
+				.expect(200)
+				.end(function(err, newres){
+					expect(newres.text).toInclude('Su token es inválido !');
+					return callback(err,res);
+				});
+			}, 
+			function(res,callback) {
 				logger.info('Posting info to server');
 				request("http://localhost:"+config.test_app_port)
 					.post('/confirm')

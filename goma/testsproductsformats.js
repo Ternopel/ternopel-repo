@@ -96,6 +96,21 @@ var request		= require('supertest'),
 						expect(newres.text).toBe('success');
 						return callback(err,res);
 					});
+			},
+			function(res,callback) {
+				logger.info('Deleting product format');
+				request("http://localhost:"+config.test_app_port)
+					.delete('/admin/productsformats')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'id' : '900',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Not found');
+						return callback(err,res);
+					});
 			} 
 		], 
 		function(err) {

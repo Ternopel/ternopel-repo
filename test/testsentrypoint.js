@@ -103,16 +103,16 @@ describe('Test Suite', function() {
 	// admin products formats tests
 	if(runTests) {
 		it('Get product format', testsproductsformats.getProductFormat);
-		it('Delete product format', testsproductsformats.deleteProductFormat);
 		it('Create product format', testsproductsformats.createProductFormat);
 		it('Update product format', testsproductsformats.updateProductFormat);
+		it('Delete product format', testsproductsformats.deleteProductFormat);
 	}	
 	
 	// admin products tests
 	if(runTests) {
+		it('Delete product', testsproducts.deleteProduct);
 		it('Get products', testsproducts.getProducts);
 		it('Get products formats', testsproducts.getProductFormats);
-		it('Delete product', testsproducts.deleteProduct);
 		it('Create product', testsproducts.createProduct);
 		it('Update product', testsproducts.updateProduct);
 		it('Update Admin products', testsproducts.updateAdminProduct);
@@ -123,9 +123,9 @@ describe('Test Suite', function() {
 	// admin categories tests
 	if(runTests) {
 		it('Get categories', testscategories.getCategories);
-		it('Delete category', testscategories.deleteCategory);
 		it('Create category', testscategories.createCategory);
 		it('Update category', testscategories.updateCategory);
+		it('Delete category', testscategories.deleteCategory);
 	}	
 	
 	// home tests

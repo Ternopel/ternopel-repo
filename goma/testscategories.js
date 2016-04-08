@@ -111,6 +111,21 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Deleting category');
 				request("http://localhost:"+config.test_app_port)
+				.delete('/admin/categories')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'id' : '60',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(500)
+				.end(function(err,newres) {
+					expect(newres.text).toInclude('Not found');
+					return callback(err,res);
+				});
+			}, 
+			function(res,callback) {
+				logger.info('Deleting category');
+				request("http://localhost:"+config.test_app_port)
 					.delete('/admin/categories')
 					.set('cookie', utils.getcookies(res))
 					.send({

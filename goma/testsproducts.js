@@ -284,6 +284,21 @@ var request		= require('supertest'),
 					.delete('/admin/products')
 					.set('cookie', utils.getcookies(res))
 					.send({
+						'id' : '900',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Not found');
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Deleting product');
+				request("http://localhost:"+config.test_app_port)
+					.delete('/admin/products')
+					.set('cookie', utils.getcookies(res))
+					.send({
 						'id' : '7',
 						'_csrf' : utils.getcsrf(res)
 					})
