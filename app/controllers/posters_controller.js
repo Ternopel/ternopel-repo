@@ -144,7 +144,9 @@ module.exports = {
 				logger.info("Preparing picture metadata");
 				res.setHeader('Content-Type', content_type);
 				res.setHeader('Content-Length', data.length);
+				res.setHeader('Type', 'image');
 				res.setHeader('Content-Disposition', 'inline; filename='+id);
+				res.setHeader('Cache-Control', 'max-age=16070400,public');
 				
 				logger.info("Sending picture to browser");
 				return res.send(data);
