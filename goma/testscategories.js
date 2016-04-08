@@ -262,6 +262,23 @@ var request		= require('supertest'),
 					.post('/admin/categories')
 					.set('cookie', utils.getcookies(res))
 					.send({
+						'id' : '999',
+						'colname' : 'url',
+						'colvalue' : 'nuevas-bolsitas 999',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Not found');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Updating category');
+				request("http://localhost:"+config.test_app_port)
+					.post('/admin/categories')
+					.set('cookie', utils.getcookies(res))
+					.send({
 						'id' : '1',
 						'colname' : 'name',
 						'_csrf' : utils.getcsrf(res)

@@ -447,7 +447,7 @@ var request		= require('supertest'),
 						expect(newres.text).toBe('success_admin');
 						return callback(err,res);
 					});
-			}, 
+			},
 			function(res,callback) {
 				logger.info('Updating product');
 				request("http://localhost:"+config.test_app_port)
@@ -477,6 +477,26 @@ var request		= require('supertest'),
 						expect(newres.text).toInclude('Descripción es requerida');
 						expect(newres.text).toInclude('Url es requerido');
 						expect(newres.text).toInclude('Seleccione packaging');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Creating product');
+				request("http://localhost:"+config.test_app_port)
+					.post('/admin/products/save')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'id' : 999,
+						'category_id' : 1,
+						'packaging_id' : 1,
+						'name' : 'Nuevo Prod 999',
+						'description' : 'Nuevo SUPER Prod',
+						'url' : 'prod 999',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Not found');
 						return callback(err,res);
 					});
 			},
