@@ -133,7 +133,7 @@ $(function() {
 			image.src = e.target.result;
 			image.onload = function(evt) {
 				console.log('Firing image on load');
-				if (this.width > 450 && this.height > 300) {
+				if (this.width >= 678 && this.height >= 300) {
 					options.imgSrc = e.target.result;
 					cropper = new cropbox(options);
 					$("span[name='upload-btn']").attr('class', 'change-btn');
@@ -144,7 +144,7 @@ $(function() {
 					$("span[name='save-span']").show();
 				} 
 				else {
-					show_error_messages({responseText:"[{\"param\":\"general\",\"msg\":\"Imagen debe ser mayor a 452x x 300px.\"}]"});
+					show_error_messages({responseText:"[{\"param\":\"general\",\"msg\":\"Imagen debe ser mayor a 678x x 300px.\"}]"});
 				}
 			}
 		};

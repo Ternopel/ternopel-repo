@@ -1731,6 +1731,14 @@ th {
 	height: 300px;
 }
 
+.upload-photo-container-poster {
+	margin: 34px 10% 0;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	width: 678px;
+	height: 300px;
+}
+
 .upload-photo-container .action {
 	background: #fff;
 	cursor: pointer;
