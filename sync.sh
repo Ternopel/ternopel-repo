@@ -29,7 +29,7 @@ function nocompress() {
 	echo "Copying files $extension to /tmp/public ..."
 	cp --parents `find public -name "$extension"` /tmp
 	echo "Sending files $extension to s3 ..."
-	s3cmd -m $mime --add-header=content-type:$mime sync /tmp/public/* -P --verbose --add-header=cache-control:max-age=16070400,public s3://ternopel
+	s3cmd -m $mime --add-header=content-type:$mime sync /tmp/public/* -P --verbose --add-header=cache-control:max-age=16070400,public --add-header=content-encoding:gzip --add-header=expires:'Mon, 03 Nov 2050 23:16:20 GMT' s3://ternopel
 	echo "Done !!"
 
 }
