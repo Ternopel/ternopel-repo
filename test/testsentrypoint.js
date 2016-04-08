@@ -75,7 +75,7 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 	
 	if(runTests) {
 		it('Get Shopping Cart Logged in', testshoppingcart.getShoppingCartLoggedIn);
@@ -117,8 +117,8 @@ describe('Test Suite', function() {
 		it('Update product', testsproducts.updateProduct);
 		it('Update Admin products', testsproducts.updateAdminProduct);
 		it('Get Admin products', testsproducts.getAdminProducts);
+		it('Get products picture', testsproducts.getProductPicture);
 	}	
-	it('Get products picture', testsproducts.getProductPicture);
 	
 	// admin categories tests
 	if(runTests) {

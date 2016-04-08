@@ -87,14 +87,36 @@ module.exports = {
 				if(err) {
 					return utils.send_ajax_error(req,res,err);
 				}
-				var picture_name=req.config.app_posters_imgs_dir+"/"+poster.id;
-				logger.info('Writing picture:'+picture_name);
-				fs.writeFile(picture_name, req.body.data,'base64',function (err) {
+				var token		= require('node-uuid').v1();
+				var picture_name= req.config.app_posters_imgs_dir+"/"+poster.id;
+				var tempfile	= '/tmp/temp-image-'+token+'.png'
+				
+				logger.info('Writing temporary file:'+tempfile);
+				fs.writeFile(tempfile, req.body.data,'base64',function (err) {
 					if(err) {
 						return utils.send_ajax_error(req,res,err);
 					}
-					logger.debug("Sending response to browser");
-					return res.status(200).send('created');
+					
+					
+					logger.info('Converting file :'+tempfile);
+					require('lwip').open(tempfile, function(err, image){
+						if(err) {
+							return callback(err);
+						}
+						
+						logger.info('Generating jpg');
+						image.toBuffer('jpg', function(err, data){
+							if(err) {
+								return callback(err);
+							}
+							
+							logger.info('Saving file '+picture_name);
+							fs.writeFile(picture_name+'.jpg', data,'base64',function (err) {
+								logger.debug("Sending response to browser");
+								return res.status(200).send('created');
+							});
+						});
+					});					
 				});
 			});
 		});	
@@ -105,7 +127,7 @@ module.exports = {
 		var id			= req.params.id;
 		
 		logger.info("Getting poster info");
-		req.models.posters.get(id,function(err,poster) {
+		req.models.posters.get(id.replace('.jpg',''),function(err,poster) {
 			
 			if(err) {
 				return utils.send_ajax_error(req,res,err);

@@ -40,6 +40,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating poster 1');
 				fs.readFile(__dirname + '/logo1.png', function (err, data) {
+					var base64data = new Buffer(data).toString('base64');
 					request("http://localhost:"+config.test_app_port)
 						.put('/admin/posters')
 						.set('cookie', utils.getcookies(res))
@@ -47,7 +48,7 @@ var request		= require('supertest'),
 							'is_product' : 'true',
 							'product_id' : '1',
 							'position' : '1',
-							'data' : data,
+							'data' : base64data,
 							'_csrf' : utils.getcsrf(res)
 						})
 						.expect(500)
@@ -60,6 +61,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating poster 2');
 				fs.readFile(__dirname + '/logo1.png', function (err, data) {
+					var base64data = new Buffer(data).toString('base64');
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -68,7 +70,7 @@ var request		= require('supertest'),
 						'product_id' : '1_1',
 						'position' : '1',
 						'type' : 'image/jpeg',
-						'data' : data,
+						'data' : base64data,
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(200)
@@ -81,6 +83,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating poster 3');
 				fs.readFile(__dirname + '/logo1.png', function (err, data) {
+					var base64data = new Buffer(data).toString('base64');
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -89,7 +92,7 @@ var request		= require('supertest'),
 						'category_id' : '1',
 						'position' : '1',
 						'type' : 'image/jpeg',
-						'data' : data,
+						'data' : base64data,
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(500)
@@ -102,6 +105,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating poster 4');
 				fs.readFile(__dirname + '/logo1.png', function (err, data) {
+					var base64data = new Buffer(data).toString('base64');
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -110,7 +114,7 @@ var request		= require('supertest'),
 						'category_id' : '1',
 						'position' : '2',
 						'type' : 'image/jpeg',
-						'data' : data,
+						'data' : base64data,
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(200)
@@ -123,6 +127,7 @@ var request		= require('supertest'),
 			function(res,callback) {
 				logger.info('Creating poster 5');
 				fs.readFile(__dirname + '/logo2.png', function (err, data) {
+					var base64data = new Buffer(data).toString('base64');
 					request("http://localhost:"+config.test_app_port)
 					.put('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -131,7 +136,7 @@ var request		= require('supertest'),
 						'product_id' : '2_1',
 						'position' : '3',
 						'type' : 'image/jpeg',
-						'data' : data,
+						'data' : base64data,
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(200)
@@ -142,7 +147,7 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get 1 to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/posters')
 					.set('cookie', utils.getcookies(res))
@@ -152,9 +157,9 @@ var request		= require('supertest'),
 					});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get 2 to server');
 				request("http://localhost:"+config.test_app_port)
-				.get('/images/posters/picture/2')
+				.get('/images/posters/picture/3.jpg')
 				.set('cookie', utils.getcookies(res))
 				.expect(200)
 				.end(function(err, newres){
@@ -162,7 +167,7 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing get 3 to server');
 				request("http://localhost:"+config.test_app_port)
 				.get('/admin/posters/add')
 				.set('cookie', utils.getcookies(res))
@@ -172,12 +177,12 @@ var request		= require('supertest'),
 				});
 			}, 
 			function(res,callback) {
-				logger.info('Executing get to server');
+				logger.info('Executing delete to server');
 				request("http://localhost:"+config.test_app_port)
 				.delete('/admin/posters')
 				.set('cookie', utils.getcookies(res))
 				.send({
-						'id' : '1',
+						'id' : '3',
 						'_csrf' : utils.getcsrf(res)
 				})
 				.expect(200)
