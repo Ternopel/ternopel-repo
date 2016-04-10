@@ -123,13 +123,16 @@ module.exports = {
 
 			var picture_name;
 			var content_type;
+			var last_update;
 			if(err) {
 				picture_name='./public/images/default-img.jpg';
 				content_type='image/jpeg';
+				last_update	=new Date();
 			}	
 			else {
 				picture_name=req.config.app_products_imgs_dir+"/"+productpicture.id+".jpg";
 				content_type=productpicture.content_type;
+				last_update	=productpicture.last_update;
 			}
 			
 			logger.info("Reading image "+picture_name);
@@ -144,7 +147,7 @@ module.exports = {
 				res.setHeader('Content-Disposition', 'inline; filename='+picture_id);
 				res.setHeader('Cache-Control', 'must-revalidate,private');
 				res.setHeader('Expires', '-1');
-				res.setHeader('Last-Modified', productpicture.last_update.toUTCString());
+				res.setHeader('Last-Modified', last_update.toUTCString());
 				
 				logger.info("Sending picture to browser");
 				return res.send(data);
