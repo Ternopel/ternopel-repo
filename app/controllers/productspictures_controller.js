@@ -142,8 +142,9 @@ module.exports = {
 				res.setHeader('Type', 'image');
 				res.setHeader('Content-Length', data.length);
 				res.setHeader('Content-Disposition', 'inline; filename='+picture_id);
-				res.setHeader('Cache-Control', 'max-age=16070400,public');
-				res.setHeader('Expires', 'Mon, 03 Nov 2050 23:16:20 GMT');
+//				res.setHeader('Cache-Control', 'max-age=16070400,public');
+//				res.setHeader('Expires', 'Mon, 03 Nov 2050 23:16:20 GMT');
+				res.setHeader('Last-Modified', productpicture.last_update.toUTCString());
 				
 				logger.info("Sending picture to browser");
 				return res.send(data);

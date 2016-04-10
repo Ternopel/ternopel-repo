@@ -11,7 +11,6 @@ var logger		= require("./utils/logger")(module),
 logger.info("Creating express app");
 app.init(config, function(app,db,models) {
 	
-	
 	logger.info("Creating server");
 	var server = http.createServer();
 	server.on('request',app);
