@@ -494,7 +494,7 @@ a:hover, a:active {
 	width: 435px;
 	height: 83px;
 	display: inline-block;
-	background: url(../images/logo.png) no-repeat center center;
+	background: url(../images/all.png) no-repeat 0 0;
 	text-indent: -9999px;
 	margin: 40px;
 }
@@ -566,7 +566,7 @@ a.user-logout {
 /* Main Nav */
 
 .nav-bar {
-	background: url(../images/main-nav-bg.png) no-repeat center center;
+	background: url(../images/all.png) no-repeat 0px -134px;
 	height: 61px;
 	overflow: visible;
 	width: 1014px;
@@ -649,7 +649,7 @@ li.main-search input[type=text] {
 
 button.search-btn {
 	border: none;
-	background: url(../images/search-icon.png) no-repeat center center;
+	background: url(../images/all.png) no-repeat -242px -84px;
 	text-indent: -9999px;
 	width: 20px;
 	height: 20px;
@@ -668,8 +668,8 @@ h2.aside-title {
 	color: #fff;
 	font-size: 22px;
 	font-weight: 200;
-	background: url(../images/aside-title-banner.png) no-repeat left center;
-	width: 241px;
+	background: url(../images/all.png) no-repeat 0px -84px;
+	width: 211px;
 	height: 49px;
 	margin: 10px 0 0 -27px;
 	line-height: 42px;
@@ -800,11 +800,11 @@ span.compress {
 	display: inline-block;
 	height: 15px;
 	width: 15px;
-	background: url(../images/slide-btn.png) no-repeat center center;
+	background: url(../images/all.png) no-repeat -279px -84px;
 }
 
 .slider-btns li a.active-slide, .slider-btns li a:hover {
-	background: url(../images/slide-btn-active.png) no-repeat center center;
+	background: url(../images/all.png) no-repeat -263px -84px;
 }
 
 h2.main-title {
