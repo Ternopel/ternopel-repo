@@ -139,12 +139,12 @@ module.exports = {
 				}
 				logger.info("Preparing picture metadata");
 				res.setHeader('Content-Type', content_type);
-				res.setHeader('Type', 'image');
 				res.setHeader('Content-Length', data.length);
+				res.setHeader('Type', 'image');
 				res.setHeader('Content-Disposition', 'inline; filename='+picture_id);
-//				res.setHeader('Cache-Control', 'max-age=16070400,public');
-//				res.setHeader('Expires', 'Mon, 03 Nov 2050 23:16:20 GMT');
-//				res.setHeader('Last-Modified', productpicture.last_update.toUTCString());
+				res.setHeader('Cache-Control', 'must-revalidate,private');
+				res.setHeader('Expires', '-1');
+				res.setHeader('Last-Modified', productpicture.last_update.toUTCString());
 				
 				logger.info("Sending picture to browser");
 				return res.send(data);
