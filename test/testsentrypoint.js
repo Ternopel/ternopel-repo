@@ -45,6 +45,9 @@ describe('Test Suite', function() {
 			
 			server	= app.listen(config.test_app_port, function() {
 				logger.info('Listening on port:'+server.address().port);
+				
+				require('jsreport').bootstrapper({ httpPort: 4000 }).start();
+
 				return done();
 			});
 		});
@@ -117,6 +120,7 @@ describe('Test Suite', function() {
 		it('Update Admin products', testsproducts.updateAdminProduct);
 		it('Get Admin products', testsproducts.getAdminProducts);
 		it('Get products picture', testsproducts.getProductPicture);
+		it('Add products picture', testsproducts.addProductPicture);
 		it('Update product', testsproducts.updateProduct);
 	}	
 	

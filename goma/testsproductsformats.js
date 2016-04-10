@@ -46,6 +46,28 @@ var request		= require('supertest'),
 						expect(newres.text).toBe('/cajas/caja-madera');
 						return callback(err,res);
 					});
+			}, 
+			function(res,callback) {
+				logger.info('Get product format');
+				request("http://localhost:"+config.test_app_port)
+				.get('/admin/productsformats')
+				.set('cookie', utils.getcookies(res))
+				.expect(500)
+				.end(function(err,newres) {
+					expect(newres.text).toInclude('El producto es requerido');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Get product format');
+				request("http://localhost:"+config.test_app_port)
+				.get('/admin/productsformats?product_id=9000')
+				.set('cookie', utils.getcookies(res))
+				.expect(500)
+				.end(function(err,newres) {
+					expect(newres.text).toInclude('Este producto no está más disponible');
+					return callback(err,res);
+				});
 			} 
 		], 
 		function(err) {

@@ -821,6 +821,72 @@ var request		= require('supertest'),
 		});
 	};
 	
+	testsproducts.addProductPicture = function (done) {
+
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server suite 2');
+				request("http://localhost:"+config.test_app_port)
+					.get('/login')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/login')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'mcarrizo@ternopel.com',
+						'password' : 'maxi',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success_admin');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Executing get edit 1.1 to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/admin/products/picture/add')
+					.set('cookie', utils.getcookies(res))
+					.expect(200)
+					.end(function(err, newres){
+						expect(newres.text).toInclude('No se encontró Id del Producto');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Executing get edit 2.2 to server');
+				request("http://localhost:"+config.test_app_port)
+				.get('/admin/products/picture/add?productid=1')
+				.set('cookie', utils.getcookies(res))
+				.expect(200)
+				.end(function(err, newres){
+					expect(newres.text).toInclude('Gestión de Foto de Producto');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/admin/products/picture/add?productid=4545')
+					.set('cookie', utils.getcookies(res))
+					.expect(200)
+					.end(function(err, newres){
+						expect(newres.text).toInclude('No se encontró Producto con id:4545');
+						return callback(err,res);
+					});
+			}
+		], 
+		function(err) {
+			return done(err);
+		});
+	};
 	
 	
 	

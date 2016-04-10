@@ -167,6 +167,17 @@ var request		= require('supertest'),
 				});
 			},
 			function(res,callback) {
+				logger.info('Executing get 2 to server');
+				request("http://localhost:"+config.test_app_port)
+				.get('/images/posters/picture/30.jpg')
+				.set('cookie', utils.getcookies(res))
+				.expect(500)
+				.end(function(err, newres){
+					expect(newres.text).toInclude('Not found');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
 				logger.info('Executing get 3 to server');
 				request("http://localhost:"+config.test_app_port)
 				.get('/admin/posters/add')
@@ -186,7 +197,23 @@ var request		= require('supertest'),
 						'_csrf' : utils.getcsrf(res)
 				})
 				.expect(200)
-				.end(function(err, res){
+				.end(function(err, newres){
+					expect(newres.text).toBe('removed');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Executing delete to server');
+				request("http://localhost:"+config.test_app_port)
+				.delete('/admin/posters')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'id' : '30',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(500)
+				.end(function(err, newres){
+					expect(newres.text).toInclude('Not found');
 					return callback(err,res);
 				});
 			}

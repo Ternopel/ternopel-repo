@@ -10,12 +10,12 @@ module.exports = function (orm, db, models) {
 			quantity: 		{ type: 'number', size:8, required: true },
 		},
 		{
-			cache:	false,
+			cache:	false,/*
 			methods: {
 				isLogged: function() {
 					return (this.user_id !== null);
 				}
-			},
+			},*/
 			validations: {
 				
 			}

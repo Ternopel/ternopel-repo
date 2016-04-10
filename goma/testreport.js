@@ -55,7 +55,7 @@ var request		= require('supertest'),
 				.end(function(err, res){
 					return callback(err,res);
 				});
-			}
+			} 
 		], 
 		function(err) {
 			return done(err);
