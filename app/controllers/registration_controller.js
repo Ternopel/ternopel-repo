@@ -8,6 +8,7 @@ var cipher	= require('../../utils/cipher'),
 
 function save_email(req, res, next, email_field, email_address, is_registration) {
 
+	logger.info("Saving email");
 	var mailing_read_privacy	= req.body.mailing_read_privacy;
 	logger.debug('User trying to register:'+email_address);
 	
@@ -64,7 +65,7 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 			return utils.send_ajax_error(req,res,err);
 		}
 		else {
-			logger.debug('Registracion exitosa !');
+			logger.debug('Registracion exitosa '+email_address);
 			return res.status(200).send(email_address);
 		}
 	});
@@ -122,7 +123,7 @@ module.exports = {
 	
 	get_mail_sent: function(req, res, next) {
 		logger.info("Getting mail sent page");
-		var pageinfo = ld.merge(req.pageinfo, { message: 'Se ha enviado un correo de confirmación a <b>'+req.params.email+'</b>' });
+		var pageinfo = ld.merge(req.pageinfo, { message: 'Se ha enviado un correo de confirmación a <b>'+req.params.email+'</b>' , csrfToken: req.csrfToken() });
 		res.render('mailsent.html',pageinfo);
 	},
 	
@@ -272,6 +273,7 @@ module.exports = {
 	},
 	
 	post_mailing: function(req, res, next) {
+		logger.info("Receiving post");
 		return save_email(req, res, next, 'email_address', req.body.email_address, false);
 	}
 };
