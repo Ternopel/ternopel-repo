@@ -45,9 +45,6 @@ describe('Test Suite', function() {
 			
 			server	= app.listen(config.test_app_port, function() {
 				logger.info('Listening on port:'+server.address().port);
-				
-				require('jsreport').bootstrapper({ httpPort: 4000 }).start();
-
 				return done();
 			});
 		});
@@ -134,15 +131,15 @@ describe('Test Suite', function() {
 	
 	// home tests
 	if(runTests) {
-		it('Get Search', testshome.getSearch);
 		it('Get Offers', testshome.getOffers);
 		it('Get No Posters', testshome.getNoPosters);
 		it('Get category', testshome.getCategory);
 		it('Get no existing category', testshome.getNoExistingCategory);
 		it('Get no existing product', testshome.getNoExistingProduct);
-		it('Get product', testshome.getProduct);
 		it('Get product admin user', testshome.getProductAdminUser);
+		it('Get product', testshome.getProduct);
 	}
+	it('Get Search', testshome.getSearch);
 	
 	// Registration tests
 	if(runTests) {
@@ -167,6 +164,7 @@ describe('Test Suite', function() {
  	
  	// Report test
 	if(runTests) {
+		require('jsreport').bootstrapper({ httpPort: 4000 }).start();
 		it('Report', testreport.getReport);
 	}
 

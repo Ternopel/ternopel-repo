@@ -41,6 +41,75 @@ function fillProductFormat(product,productformat,filters) {
 	}
 }
 
+function fillProductsInfo(models,filters,product,getcallback) {
+	
+	var async		= require('async'),
+		ld			= require('lodash');	
+	
+	var waterfall = require('async-waterfall');
+	waterfall([ 
+		function(callback) {
+			logger.info('Getting packaging');
+			models.packaging.get(product.packaging_id,function(err,packaging) {
+				if(err) {
+					return callback(err);
+				}
+				ld.merge(product, {packaging:packaging});
+				return callback();
+			});
+		},
+		function(callback) {
+			logger.info('Getting products formats');
+			var productsformatsfind = product.getProductsFormats().order('retail');
+			if(filters.formatslimit) {
+				productsformatsfind.limit(filters.formatslimit);
+			}
+			logger.info('Searching formats');
+			productsformatsfind.run(function(err,productformats) {
+				if(err) {
+					return callback(err);
+				}
+				logger.info('Formats readed:'+productformats.length);
+				productformats.forEach(function(productformat) {
+					fillProductFormat(product,productformat,{includeunique:true});
+				});
+				logger.info("Product:"+product.name+" Formats readed:"+productformats.length);
+				ld.merge(product, {productformats:productformats});					
+				return callback();
+			});
+		},
+		function(callback) {
+			logger.info('Searching for category');
+			product.getCategory(function(err,category) {
+				if(err) {
+					return callback(err);
+				}
+				logger.info("Product:"+product.name+" Category:"+category.name);
+				ld.merge(product, {category:category});
+				return callback();
+			});
+		},
+		function(callback) {
+			logger.info('Searching for Pictures');
+			product.getProductsPictures().order('id').run(function(err, productspictures) {
+				if(err) {
+					return callback(err);
+				}
+				logger.info('Pictures readed:'+productspictures.length);
+				ld.merge(product, {productspictures:productspictures});
+				return callback();
+			});
+		}					
+	], 
+	function(err) {
+		logger.info("All product information gathered");
+		return getcallback(err);
+	});				
+}
+
+
+
+
 (function (modelsutil) {
 
 	modelsutil.getCategories = function (db,filters,getcallback) {
@@ -112,6 +181,16 @@ function fillProductFormat(product,productformat,filters) {
 			}
 			logger.info('Products readed:'+products.length);
 			async.each(products, function(product, callback) {
+				fillProductsInfo(models,filters,product,function(err) {
+					return callback(err);
+				}); 
+			},function(err) {
+				logger.info("Number of products returned:"+products.length);
+				return getcallback(err,products);
+			});
+			
+			/*
+			async.each(products, function(product, callback) {
 				
 				var waterfall = require('async-waterfall');
 				waterfall([ 
@@ -176,6 +255,10 @@ function fillProductFormat(product,productformat,filters) {
 				logger.info("Number of products returned:"+products.length);
 				return getcallback(err,products);
 			});
+			*/
+			
+			
+			
 		});
 	};
 	
@@ -220,5 +303,60 @@ function fillProductFormat(product,productformat,filters) {
 		});
 	};
 	
+	
+	modelsutil.getProductsSearch = function (models, db,filters,getcallback) {
+		
+		var async		= require('async'),
+			ld			= require('lodash');
+		
+		var searchwithsinglespace = filters.search.replace(/  +/g,'|').replace(/ /g,'|');
+		
+		logger.info('************************');
+		logger.info(searchwithsinglespace);
+		logger.info('************************');
+		
+		logger.info("Getting all categories");
+		
+		var ts_vector	= 'to_tsvector(c.name||\' \'||p.name)';
+		var ts_query	= 'to_tsquery(\''+searchwithsinglespace+'\')';
+
+		logger.info('ts_vector:'+ts_vector);
+		logger.info('ts_queryr:'+ts_query);
+
+		var query = "select p.id from categories c, products p where c.id = p.category_id and ";
+		query+= ts_vector+" @@ "+ts_query+" ";
+		query+= "order by ts_rank_cd("+ts_vector+","+ts_query+") desc";
+
+		logger.info(query);
+		db.driver.execQuery(query,function(err,records) {
+			if(err) {
+				return getcallback(err);
+			}
+			var products	= [];
+			logger.info('Ids readed:'+JSON.stringify(records));
+			async.each(records, function(record, callback) {
+				
+				logger.info('Processing id:'+record.id);
+				models.products.get(record.id,function(err,product) {
+					if(err) {
+						return callback(err);
+					}
+					products.push(product);
+					fillProductsInfo(models,filters,product,function(err) {
+						return callback(err);
+					}); 
+				});
+			},function(err) {
+				logger.info("Number of products returned:"+products.length);
+				products.sort(function(a,b) {
+					var aindex = ld.findIndex(records, function(rec) { return rec.id == a.id; });
+					var bindex = ld.findIndex(records, function(rec) { return rec.id == b.id; });
+					logger.debug('------------->'+a.id+'='+aindex+' '+b.id+'='+bindex);
+					return aindex - bindex;		
+				});
+				return getcallback(err,products);
+			});			
+		});
+	};
 	
 })(module.exports);

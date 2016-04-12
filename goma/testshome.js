@@ -56,7 +56,7 @@ var request		= require('supertest'),
 		           function(res,callback) {
 		        	   logger.info('Executing get to server');
 		        	   request("http://localhost:"+config.test_app_port)
-		        	   .get('/search/bolsa')
+		        	   .get('/search/bolsa%20camiseta%20%20%20reforzada')
 		        	   .set('cookie', 'ter_token=notoken')
 		        	   .expect(200)
 		        	   .end(function(err, res){
