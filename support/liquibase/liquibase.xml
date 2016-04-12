@@ -26,5 +26,9 @@
 	<changeSet author="maximiliano.ezequiel.carrizo.barrera" id="drop_products_pictures_index">
 		<sqlFile path="support/liquibase/sql/drop_products_pictures_index.sql" />
 	</changeSet>
+	
+	<changeSet author="maximiliano.ezequiel.carrizo.barrera" id="create_unique_mailing_email">
+		<sqlFile path="support/liquibase/sql/create_unique_mailing_email.sql" />
+	</changeSet>
 
 </databaseChangeLog>

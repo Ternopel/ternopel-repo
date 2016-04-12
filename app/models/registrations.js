@@ -9,7 +9,7 @@ module.exports = function (orm, db, models) {
 	models.registrations = db.define("registrations", { 
 			id:				{ type: 'serial', key: true}, 
 			token:		 	{ type: 'text', required: true },
-			email_address: 	{ type: 'text', required: true },
+			email_address: 	{ type: 'text', required: true, unique:true },
 			sent:			{ type: 'boolean', required: true },
 			verified:		{ type: 'boolean', required: true }
 		},
