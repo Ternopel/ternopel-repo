@@ -32,6 +32,7 @@ var modelsutil	= require('../app/models/modelsutil');
 						engine: "jsrender",
 						phantom: {
 							header: "<h2 style='background-color: lightGray; font-size: 15px;'>Productos por Categor&iacute;a &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ternopel - email: info@ternopel.com - WhatsApp: 15-5888-3335</h2>",
+							footer: "<div style='text-align:center'>Página {#pageNum} de {#numPages}</div>",
 							orientation: "portrait",
 							width: "600px"
 						},
