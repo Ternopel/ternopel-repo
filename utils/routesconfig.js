@@ -64,8 +64,12 @@
 		app.get		( '/shoppingcart/pricecalculation',		controllers.shoppingcart.get_price_calculation);
 		app.get		( '/shoppingcart/get_cart_count',		controllers.shoppingcart.get_cart_products_count);
 		app.post	( '/shoppingcart/addproducttocart',		controllers.shoppingcart.post_product_to_cart);
+		app.post	( '/shoppingcart/executepurchase',		controllers.shoppingcart.post_execute_purchase);
 		app.delete	( '/shoppingcart/deleteshoppingcart',	controllers.shoppingcart.delete_product_of_cart);
 		app.get		( '/shoppingcart',						controllers.shoppingcart.get_shopping_cart);
+		
+		
+		
 		
 		app.get		( '/report.pdf',						controllers.report.get_report_pdf);
 		app.get		( '/report.jpg',						controllers.report.get_report_jpg);

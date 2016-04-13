@@ -7,7 +7,6 @@
 	<h2 class="main-title">Compra Rápida</h2>
 	<p>Completa los siguientes campos para realizar tu pedido</p>
 	<section class="cart-container clear-fix">
-		<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 		<div class="cart-header">
 			<ul class="cart-header-list">
 				<li class="data-title">
@@ -28,7 +27,7 @@
 					<input type="email" class="cart-email" name='email_address'>
 					
 					<label>Contraseña<span class="form-error" id='password_error'></span></label>
-					<input type="password" class="customer-password" name="password">
+					<input type="password" class="customer-password" name="password" >
 
 					<label>Nombre<span class="form-error" id='first_name_error'></span></label>
 					<input type="text" class="first-name" name="first_name">
@@ -52,24 +51,25 @@
 					<input type="email" class="cart-email" readonly="readonly" value="{{=it.email_address}}">
 					
 					<label>Nombre</label>
-					<input type="text" class="first-name" readonly="readonly" value="{{=it.first_name}}">
+					<input type="text" class="first-name" value="{{=it.first_name}}">
 
 					<label>Apellido</label>
-					<input type="text" class="last-name" readonly="readonly" value="{{=it.last_name}}">
+					<input type="text" class="last-name" value="{{=it.last_name}}">
 			{{?}}
 			<div class="address-content">
 				<a href="#"class="shipping-tab active-tab">Dirección de envío</a>
-				<form class="clear-fix">
+				<form class="clear-fix" id="address_info">
+					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 					<label>Dirección<span class="form-error"></span></label>
-					<input type="text" class="" name="">
-					<label>Ciudad*<span class="form-error"></span></label>
-					<input type="text" class="" name="">
-					<label>Teléfono*<span class="form-error"></span></label>
-					<input type="tel" class="" name="">
+					<input type="text" class="" name="address">
+					<label>Ciudad<span class="form-error"></span></label>
+					<input type="text" class="" name="city">
+					<label>Teléfono<span class="form-error"></span></label>
+					<input type="tel" class="" name="telephone">
 					<label>Código Postal<span class="form-error"></span></label>
-					<input type="text" class="" name="">
+					<input type="text" class="" name="zipcode">
 					<label class="address-select address-select-right">Provincia
-						<select>
+						<select name="state">
 							<option value="1">Ciudad Autónoma de Buenos Aires</option>
 							<option value="2">Buenos Aires</option>
 							<option value="3">Catamarca</option>
@@ -100,47 +100,49 @@
 			</div>
 		</div>
 		<div class="delivery-payment-content clear-fix">
-			<div class="delivery-section">
-				<ul class="delivery-options">
-					<li class="clear-fix">
-						<input type="radio" name="delivery_type" checked="checked" value="1">
-						<p><strong>RETIRO CLIENTE</strong><span>Entrega en 72h máximo</span></p>
-						<p><strong>GRATIS!</strong></p>
-					</li>
-				</ul>
-				<ul class="delivery-options">
-					<li class="clear-fix">
-						<input type="radio" name="delivery_type" value="2">
-						<p><strong>ENTREGA EN CABA</strong><span>Entrega en 72h máximo</span></p>
-						<p><strong>GRATIS!</strong></p>
-					</li>
-				</ul>
-				<ul class="delivery-options">
-					<li class="clear-fix">
-						<input type="radio" name="delivery_type" value="3">
-						<p><strong>ENCOMIENDA</strong><span>Entrega en 72h máximo</span></p>
-						<p><strong></strong></p>
-					</li>
-				</ul>
-			</div>
-			<div class="payment-section">
-				<ul class="payment-options">
-					<li class="clear-fix">
-						<input type="radio" name="payment_type" checked="checked" value="1">
-						<p><strong>Pago contrareembolso</strong></p>
-						<p>Usted paga la mercancía en el momento de la entrega, coste adicional: 7.11€</p>
-					</li>
-					<li class="clear-fix">
-						<input type="radio" name="payment_type" value="2">
-						<p><strong>Pago por transferencia bancaria</strong></p>
-						<p>Recibirá el número de cuenta tras finalizar el pedido</p>
-					</li>
-					<li class="clear-fix">
-						<input type="radio" name="payment_type" value="3">
-						<p><strong>Pago seguro con tarjeta</strong></p>
-					</li>
-				</ul>
-			</div>
+			<form id="delivery_info">
+				<div class="delivery-section">
+					<ul class="delivery-options">
+						<li class="clear-fix">
+							<input type="radio" name="delivery_type" checked="checked" value="1">
+							<p><strong>RETIRO CLIENTE</strong><span>Entrega en 72h máximo</span></p>
+							<p><strong>GRATIS!</strong></p>
+						</li>
+					</ul>
+					<ul class="delivery-options">
+						<li class="clear-fix">
+							<input type="radio" name="delivery_type" value="2">
+							<p><strong>ENTREGA EN CABA</strong><span>Entrega en 72h máximo</span></p>
+							<p><strong>GRATIS!</strong></p>
+						</li>
+					</ul>
+					<ul class="delivery-options">
+						<li class="clear-fix">
+							<input type="radio" name="delivery_type" value="3">
+							<p><strong>ENCOMIENDA</strong><span>Entrega en 72h máximo</span></p>
+							<p><strong></strong></p>
+						</li>
+					</ul>
+				</div>
+				<div class="payment-section">
+					<ul class="payment-options">
+						<li class="clear-fix">
+							<input type="radio" name="payment_type" checked="checked" value="1">
+							<p><strong>Pago contrareembolso</strong></p>
+							<p>Usted paga la mercancía en el momento de la entrega, coste adicional: 7.11€</p>
+						</li>
+						<li class="clear-fix">
+							<input type="radio" name="payment_type" value="2">
+							<p><strong>Pago por transferencia bancaria</strong></p>
+							<p>Recibirá el número de cuenta tras finalizar el pedido</p>
+						</li>
+						<li class="clear-fix">
+							<input type="radio" name="payment_type" value="3">
+							<p><strong>Pago seguro con tarjeta</strong></p>
+						</li>
+					</ul>
+				</div>
+			</form>
 			<div class="summary-section">
 				<h3>Resumen de Pedido</h3>
 				<table class="summary-table">
@@ -168,25 +170,6 @@
 								<td>$ <span name="price_{{=element.productformat.id}}" alt="price_{{=element.id}}">{{=element.totalitem}}</span></td>
 							</tr>						
 						{{~}}
-						
-						<!-- 
-						<tr class="summary-totals">
-							<td colspan="4">Total productos (IVA incl.) :</td>
-							<td>116,60 €</td>
-						</tr>
-						<tr class="summary-totals">
-							<td colspan="4">Total envio :</td>
-							<td>Envio Gratis</td>
-						</tr>
-						<tr class="summary-totals">
-							<td colspan="4">Total (IVA excl.) :</td>
-							<td>116,60 €</td>
-						</tr>
-						<tr class="summary-totals">
-							<td colspan="4">Total IVA :</td>
-							<td>23,20 €</td>
-						</tr>
-						 -->
 						<tr class="summary-totals">
 							<td colspan="4">Importe Total De Su Compra :</td>
 							<td><b>$ <span name="total">{{=it.totalcart}}</span></b></td>
@@ -200,7 +183,7 @@
 				</div>
 				<div class="summary-btn-container clear-fix">
 					<button class="cart-continue-btn">Continuar Comprando</button>
-					<button class="cart-confirm-btn">Confirmar Pedido</button>
+					<button class="cart-confirm-btn" name="execute_purchase">Confirmar Pedido</button>
 				</div>
 			</div>
 		</div>

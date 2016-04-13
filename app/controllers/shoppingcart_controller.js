@@ -245,7 +245,32 @@ module.exports = {
 				return res.status(200).send('OK');
 			});
 		});
-	}
+	},
 	
+	post_execute_purchase: function(req, res, next) {
+		logger.info("En POST execute purchase");
+		var pageinfo	= req.pageinfo;
+		
+		req.check('address', 'Dirección es requerida').notEmpty();
+		req.check('city', 'Ciudad es requerida').notEmpty();
+		req.check('telephone', 'Teléfono es requerido').notEmpty();
+		req.check('zipcode', 'Código postal es requerido y numérica').notEmpty().isInt();
+		if(pageinfo.is_logged_in===false) {
+			req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
+			req.assert('password', 'La clave es requerida').notEmpty();
+			var already_registered = req.body.already_registered;
+			if(already_registered===false) {
+				req.assert('first_name', 'Nombre es requerido').notEmpty();
+				req.assert('last_name', 'Apellido es requerido').notEmpty();
+			}
+		}
+		
+		logger.info("Validating fields");
+		var valerrors = req.validationErrors();
+		if(valerrors) {
+			return utils.send_ajax_validation_errors(req,res,valerrors);
+		}
+		return res.status(200).send('OK');
+	}
 };
 

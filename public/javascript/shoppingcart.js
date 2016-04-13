@@ -101,3 +101,48 @@ $(function () {
 		});
 	});
 });
+
+$(function() {
+	$("button[name='execute_purchase']").click(function() {
+		console.log('Execute purchase pressed');
+		
+		var already_registered	=$('#a_already_registered').is(':visible');
+		var register			=$('#a_register').is(':visible');
+		
+		var formstosend;
+		if(already_registered===true) {
+			console.log('already_registered');
+			formstosend=$('#form_not_registered, #address_info, #delivery_info').serialize();
+		}
+		else {
+			if(register===true) {
+				console.log('register');
+				formstosend=$('#form_registered, #address_info, #delivery_info').serialize();
+			}
+			else {
+				console.log('Already logged in');
+				formstosend=$('#address_info, #delivery_info').serialize();
+			}
+		}
+		
+		console.log(formstosend);
+		clear_error_fields($('#form_not_registered'));
+		clear_error_fields($('#form_registered'));
+		clear_error_fields($('#address_info'));
+		clear_error_fields($('#delivery_info'));
+		
+		$.ajax({
+			url : '/shoppingcart/executepurchase',
+			type : 'POST',
+			data : formstosend,
+			success : function (successresponse) {
+				window.location.href	= '/';
+			},
+			error: function (errorresponse) {
+				show_error_messages(errorresponse);
+			}		
+		});
+		
+		return false;
+	});
+});
