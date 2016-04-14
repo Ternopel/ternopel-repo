@@ -254,15 +254,31 @@ module.exports = {
 		req.check('address', 'Dirección es requerida').notEmpty();
 		req.check('city', 'Ciudad es requerida').notEmpty();
 		req.check('telephone', 'Teléfono es requerido').notEmpty();
-		req.check('zipcode', 'Código postal es requerido y numérica').notEmpty().isInt();
+		req.check('zipcode', 'Código postal es requerido y numérico').notEmpty().isInt();
+		req.check('delivery_type', 'Tipo de delivery es requerido y numérica').notEmpty().isInt();
+		req.check('payment_type', 'Forma de Pago es requerida y numérica').notEmpty().isInt();
+		req.assert('purchase_conditions', 'Debe marcar que ha leído las Políticas de Privacidad').notEmpty();
+		
 		if(pageinfo.is_logged_in===false) {
-			req.assert('email_address', 'El email ingresado es incorrecto').isEmail();
-			req.assert('password', 'La clave es requerida').notEmpty();
+			logger.info("User is NOT logged in");
 			var already_registered = req.body.already_registered;
-			if(already_registered===false) {
+			logger.info("Already registered:"+already_registered);
+			if(already_registered==='false') {
+				logger.info('Already registered is false');
+				req.assert('email_address', 'Email es incorrecto').isEmail();
+				req.assert('password', 'Clave es requerida').notEmpty();
 				req.assert('first_name', 'Nombre es requerido').notEmpty();
 				req.assert('last_name', 'Apellido es requerido').notEmpty();
 			}
+			else {
+				req.assert('email_address_reg', 'Email es incorrecto').isEmail();
+				req.assert('password_reg', 'Clave es requerida').notEmpty();
+			}
+		}
+		else {
+			logger.info("User is logged in");
+			req.assert('first_name_log', 'Nombre es requerido').notEmpty();
+			req.assert('last_name_log', 'Apellido es requerido').notEmpty();
 		}
 		
 		logger.info("Validating fields");

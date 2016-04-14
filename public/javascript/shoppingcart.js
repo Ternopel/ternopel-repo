@@ -112,24 +112,26 @@ $(function() {
 		var formstosend;
 		if(already_registered===true) {
 			console.log('already_registered');
-			formstosend=$('#form_not_registered, #address_info, #delivery_info').serialize();
+			formstosend=$('#form_not_registered, #address_info, #delivery_info, #purchase_extras').serialize();
 		}
 		else {
 			if(register===true) {
 				console.log('register');
-				formstosend=$('#form_registered, #address_info, #delivery_info').serialize();
+				formstosend=$('#form_registered, #address_info, #delivery_info, #purchase_extras').serialize();
 			}
 			else {
 				console.log('Already logged in');
-				formstosend=$('#address_info, #delivery_info').serialize();
+				formstosend=$('#form_logged_in, #address_info, #delivery_info, #purchase_extras').serialize();
 			}
 		}
 		
 		console.log(formstosend);
+		clear_error_fields($('#form_logged_in'));
 		clear_error_fields($('#form_not_registered'));
 		clear_error_fields($('#form_registered'));
 		clear_error_fields($('#address_info'));
 		clear_error_fields($('#delivery_info'));
+		clear_error_fields($('#purchase_extras'));
 		
 		$.ajax({
 			url : '/shoppingcart/executepurchase',

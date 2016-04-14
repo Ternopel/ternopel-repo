@@ -38,35 +38,37 @@
 					<input type='hidden' name='already_registered' value='false'>
 				</form>
 				<form id="form_registered" hidden="true">
-					<label>Correo Electrónico<span class='form-error' id='email_address_error'></span></label>
-					<input type="email" class="cart-email" name='email_address'>
+					<label>Correo Electrónico<span class='form-error' id='email_address_reg_error'></span></label>
+					<input type="email" class="cart-email" name='email_address_reg'>
 					
-					<label>Contraseña<span class="form-error" id='password_error'></span></label>
-					<input type="password" class="customer-password" name="password">
+					<label>Contraseña<span class="form-error" id='password_reg_error'></span></label>
+					<input type="password" class="customer-password" name="password_reg">
 					
 					<input type='hidden' name='already_registered' value='true'>
 				</form>
 			{{??}}
+				<form id="form_logged_in">
 					<label>Correo Electrónico</label>
 					<input type="email" class="cart-email" readonly="readonly" value="{{=it.email_address}}">
 					
-					<label>Nombre</label>
-					<input type="text" class="first-name" value="{{=it.first_name}}">
+					<label>Nombre<span class="form-error" id='first_name_log_error'></span></label>
+					<input type="text" class="first-name" value="{{=it.first_name}}" name="first_name_log">
 
-					<label>Apellido</label>
-					<input type="text" class="last-name" value="{{=it.last_name}}">
+					<label>Apellido<span class="form-error" id='last_name_log_error'></span></label>
+					<input type="text" class="last-name" value="{{=it.last_name}}" name="last_name_log">
+				</form>
 			{{?}}
 			<div class="address-content">
 				<a href="#"class="shipping-tab active-tab">Dirección de envío</a>
 				<form class="clear-fix" id="address_info">
 					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
-					<label>Dirección<span class="form-error"></span></label>
+					<label>Dirección<span class="form-error" id='address_error'></span></label>
 					<input type="text" class="" name="address">
-					<label>Ciudad<span class="form-error"></span></label>
+					<label>Ciudad<span class="form-error" id='city_error'></span></label>
 					<input type="text" class="" name="city">
-					<label>Teléfono<span class="form-error"></span></label>
+					<label>Teléfono<span class="form-error" id='telephone_error'></span></label>
 					<input type="tel" class="" name="telephone">
-					<label>Código Postal<span class="form-error"></span></label>
+					<label>Código Postal<span class="form-error" id='zipcode_error'></span></label>
 					<input type="text" class="" name="zipcode">
 					<label class="address-select address-select-right">Provincia
 						<select name="state">
@@ -178,8 +180,11 @@
 				</table>
 				<div>
 					<p>Si desea dejarnos un comentario a cerca de su pedido, por favor indiquelo a continuación:</p>
-					<textarea class="cart-textarea"></textarea>
-					<label class="form-check"><input type="checkbox">Acepto las condiciones generales de venta y política de privacidad.</label>
+					<form id="purchase_extras">
+						<textarea class="cart-textarea"></textarea>
+						<span class="form-error" id="purchase_conditions_error"></span>
+						<label class="form-check"><input type="checkbox" name="purchase_conditions">Acepto las condiciones generales de venta y política de privacidad.</label>
+					</form>
 				</div>
 				<div class="summary-btn-container clear-fix">
 					<button class="cart-continue-btn">Continuar Comprando</button>
