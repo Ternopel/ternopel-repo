@@ -249,7 +249,8 @@ module.exports = {
 	
 	post_execute_purchase: function(req, res, next) {
 		logger.info("En POST execute purchase");
-		var pageinfo	= req.pageinfo;
+		var pageinfo			= req.pageinfo;
+		var already_registered	= req.body.already_registered;
 		
 		req.check('address', 'Dirección es requerida').notEmpty();
 		req.check('city', 'Ciudad es requerida').notEmpty();
@@ -259,9 +260,12 @@ module.exports = {
 		req.check('payment_type', 'Forma de Pago es requerida y numérica').notEmpty().isInt();
 		req.assert('purchase_conditions', 'Debe marcar que ha leído las Políticas de Privacidad').notEmpty();
 		
+		var email_address;
+		var password;
+		var first_name;
+		var last_name;
 		if(pageinfo.is_logged_in===false) {
 			logger.info("User is NOT logged in");
-			var already_registered = req.body.already_registered;
 			logger.info("Already registered:"+already_registered);
 			if(already_registered==='false') {
 				logger.info('Already registered is false');
@@ -269,16 +273,25 @@ module.exports = {
 				req.assert('password', 'Clave es requerida').notEmpty();
 				req.assert('first_name', 'Nombre es requerido').notEmpty();
 				req.assert('last_name', 'Apellido es requerido').notEmpty();
+				
+				email_address	= req.body.email_address;
+				password		= req.body.password;
+				first_name		= req.body.first_name;
+				last_name		= req.body.last_name;
 			}
 			else {
 				req.assert('email_address_reg', 'Email es incorrecto').isEmail();
 				req.assert('password_reg', 'Clave es requerida').notEmpty();
+				email_address	= req.body.email_address_reg;
+				password		= req.body.password_reg;
 			}
 		}
 		else {
 			logger.info("User is logged in");
 			req.assert('first_name_log', 'Nombre es requerido').notEmpty();
 			req.assert('last_name_log', 'Apellido es requerido').notEmpty();
+			first_name		= req.body.first_name_log;
+			last_name		= req.body.last_name_log;
 		}
 		
 		logger.info("Validating fields");
@@ -286,7 +299,43 @@ module.exports = {
 		if(valerrors) {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
-		return res.status(200).send('OK');
+		
+		if(pageinfo.is_logged_in===false) {
+			if(already_registered==='false') {
+				logger.info('Register new user and purchase');
+				var controllers = require('./controller');
+				controllers.registration.save_user(req.models, req.usersession, req.constants.CUSTOMER_ID, email_address, password, first_name, last_name, function(err,user) {
+					logger.debug('Finalizacion de creacion de usuario');
+					if(err) {
+						logger.debug('Error por enviar al cliente:'+err);
+						return utils.send_ajax_error(req,res,err);
+					}
+					else {
+						logger.debug('Creation usuario exitosa !');
+						return res.status(200).send('OK');
+					}
+				});
+			}
+			else {
+				logger.info('Login and purchase');
+				var controllers = require('./controller');
+				controllers.registration.save_login(req.models, req.usersession, email_address, password, function(err,user) {
+					logger.debug('Finalizacion de login');
+					if(err) {
+						logger.debug('Error por enviar al cliente:'+err);
+						return utils.send_ajax_error(req,res,err);
+					}
+					else {
+						logger.debug('Login exitoso !');
+						return res.status(200).send('OK');
+					}
+				});
+				
+			}
+		}
+		else {
+			return res.status(200).send('ERR');
+		}
 	}
 };
 

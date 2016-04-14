@@ -264,4 +264,235 @@ var request		= require('supertest'),
 	};	
 	
 	
+	testshoppingcart.purchaseWithRegistration = function (done) {
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Post purchase with empty fields');
+				request("http://localhost:"+config.test_app_port)
+					.post('/shoppingcart/executepurchase')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'register@gmail.com',
+						'password' : 'maxito',
+						'first_name' : 'Max',
+						'last_name' : 'Register',
+						'address' : 'Malabia',
+						'city' : 'CABA',
+						'telephone' : '11-232-232',
+						'zipcode' : '3',
+						'state' : '3',
+						'delivery_type' : '3',
+						'payment_type' : '3',
+						'already_registered' : 'false',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('Debe marcar que ha leído las Políticas de Privacidad');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Register an existing user');
+				request("http://localhost:"+config.test_app_port)
+				.post('/shoppingcart/executepurchase')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'email_address' : 'mcarrizo@gmail.com',
+					'password' : 'nicasio',
+					'first_name' : 'Max',
+					'last_name' : 'Register',
+					'address' : 'Malabia',
+					'city' : 'CABA',
+					'telephone' : '11-232-232',
+					'zipcode' : '3',
+					'state' : '3',
+					'delivery_type' : '3',
+					'payment_type' : '3',
+					'already_registered' : 'false',
+					'purchase_conditions':'true',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(500)
+				.end(function(err,newres) {
+					expect(newres.text).toInclude('Usuario/Clave existente');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Post purchase with empty fields');
+				request("http://localhost:"+config.test_app_port)
+				.post('/shoppingcart/executepurchase')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'email_address' : 'register@gmail.com',
+					'password' : 'maxito',
+					'first_name' : 'Max',
+					'last_name' : 'Register',
+					'address' : 'Malabia',
+					'city' : 'CABA',
+					'telephone' : '11-232-232',
+					'zipcode' : '3',
+					'state' : '3',
+					'delivery_type' : '3',
+					'payment_type' : '3',
+					'already_registered' : 'false',
+					'purchase_conditions':'true',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toInclude('OK');
+					return callback(err,res);
+				});
+			}
+		], 
+		function(err) {
+			return done(err);
+		});
+	};	
+	
+	
+	testshoppingcart.purchaseWithLogin = function (done) {
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Register an existing user');
+				request("http://localhost:"+config.test_app_port)
+				.post('/shoppingcart/executepurchase')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'email_address_reg' : 'mcarrizo@gmail.com',
+					'password_reg' : 'nicasio',
+					'address' : 'Malabia',
+					'city' : 'CABA',
+					'telephone' : '11-232-232',
+					'zipcode' : '3',
+					'state' : '3',
+					'delivery_type' : '3',
+					'payment_type' : '3',
+					'already_registered' : 'true',
+					'purchase_conditions':'true',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(500)
+				.end(function(err,newres) {
+					expect(newres.text).toInclude('Usuario/Clave inválido');
+					return callback(err,res);
+				});
+			},
+			function(res,callback) {
+				logger.info('Register an existing user');
+				request("http://localhost:"+config.test_app_port)
+				.post('/shoppingcart/executepurchase')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'email_address_reg' : 'mcarrizo@gmail.com',
+					'password_reg' : 'maxi',
+					'address' : 'Malabia',
+					'city' : 'CABA',
+					'telephone' : '11-232-232',
+					'zipcode' : '3',
+					'state' : '3',
+					'delivery_type' : '3',
+					'payment_type' : '3',
+					'already_registered' : 'true',
+					'purchase_conditions':'true',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toBe('OK');
+					return callback(err,res);
+				});
+			}
+
+		], 
+		function(err) {
+			return done(err);
+		});
+	};	
+	
+
+	testshoppingcart.purchaseLoggedIn = function (done) {
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/login')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/login')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'email_address' : 'mcarrizo@gmail.com',
+						'password' : 'maxi',
+						'_csrf' : utils.getcsrf(res)
+					})
+					.expect(200)
+					.end(function(err,newres) {
+						expect(newres.text).toBe('success_client');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Register an existing user');
+				request("http://localhost:"+config.test_app_port)
+				.post('/shoppingcart/executepurchase')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'first_name_log' : 'Max',
+					'last_name_log' : 'Register',
+					'address' : 'Malabia',
+					'city' : 'CABA',
+					'telephone' : '11-232-232',
+					'zipcode' : '3',
+					'state' : '3',
+					'delivery_type' : '3',
+					'payment_type' : '3',
+					'already_registered' : 'true',
+					'purchase_conditions':'true',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toBe('ERR');
+					return callback(err,res);
+				});
+			}			
+		], 
+		function(err) {
+			return done(err);
+		});
+	};		
+	
+	
+	
+	
+	
+	
 })(module.exports);

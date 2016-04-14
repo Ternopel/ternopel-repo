@@ -71,7 +71,96 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 	});
 }
 
+
+
 module.exports = {
+
+	save_login: function(models, usersession, email_address, password, callback) {
+
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.debug('Searching for existing user');
+				models.users.find({email_address: email_address}, function(err,user) {
+					if(err) {
+						return callback(err);
+					}
+					if(user.length===0) {
+						return callback('Usuario/Clave inválido');
+					}
+					else {
+						return callback(null,user[0]);
+					}
+				});
+			}, 
+			function(user,callback) {
+				logger.debug('Login !');
+				logger.info('Evaluando claves');
+				if(user.password !== cipher.encrypt(password)) {
+					return callback('Usuario/Clave inválido');
+				}
+				else {
+					return callback(null,user);
+				}
+			},
+			function(user,callback) {
+				logger.info('Assigning user to session');
+				usersession.setUser(user,function(err) {
+					if(err) {
+						callback(err);
+					}
+					logger.info('Complete session:'+JSON.stringify(usersession));
+					return callback(err,user);
+				});
+			}
+		], 
+		function(err, user) {
+			return callback(err,user);
+		});
+	},
+		
+	save_user: function(models, usersession, customerid, email_address, password, first_name, last_name, callback) {
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.debug('Searching for existing user');
+				models.users.find({email_address: email_address}, function(err,user) {
+					if(err) {
+						return callback(err);
+					}
+					if(user.length===1) {
+						return callback('Usuario/Clave existente');
+					}
+					else {
+						return callback(null,user[0]);
+					}
+				});
+			}, 
+			function(user,callback) {
+				logger.info('Creando user '+email_address);
+				models.users.create({	email_address:	email_address,
+										password:		cipher.encrypt(password), 
+										role_id:		customerid,
+										last_name:		last_name,
+										first_name:		first_name},function(err,user) {
+					return callback(err,user);
+				});				
+			},
+			function(user,callback) {
+				logger.info('Assigning user to session');
+				usersession.setUser(user,function(err) {
+					if(err) {
+						callback(err);
+					}
+					logger.info('Complete session:'+JSON.stringify(usersession));
+					return callback(err,user);
+				});
+			}
+		], 
+		function(err, user) {
+			return callback(err,user);
+		});
+	},		
 	
 	get_login: function(req, res, next) {
 		logger.info("Getting login page");
@@ -147,44 +236,8 @@ module.exports = {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
 		
-		var waterfall = require('async-waterfall');
-		waterfall([ 
-			function(callback) {
-				logger.debug('Searching for existing user');
-				req.models.users.find({email_address: email_address}, function(err,user) {
-					if(err) {
-						return callback(err);
-					}
-					if(user.length===1) {
-						return callback('Usuario/Clave existente');
-					}
-					else {
-						return callback(null,user[0]);
-					}
-				});
-			}, 
-			function(user,callback) {
-				logger.info('Creando user '+email_address);
-				req.models.users.create({	email_address:	email_address,
-											password:		cipher.encrypt(password), 
-											role_id:		req.constants.CUSTOMER_ID,
-											last_name:		last_name,
-											first_name:		first_name},function(err,user) {
-					return callback(err,user);
-				});				
-			},
-			function(user,callback) {
-				logger.info('Assigning user to session');
-				req.usersession.setUser(user,function(err) {
-					if(err) {
-						callback(err);
-					}
-					logger.info('Complete session:'+JSON.stringify(req.usersession));
-					return callback(err,user);
-				});
-			}
-		], 
-		function(err, user) {
+		var controllers = require('./controller');
+		controllers.registration.save_user(req.models, req.usersession, req.constants.CUSTOMER_ID, email_address, password, first_name, last_name, function(err,user) {
 			logger.debug('Finalizacion de creacion de usuario');
 			if(err) {
 				logger.debug('Error por enviar al cliente:'+err);
@@ -213,44 +266,8 @@ module.exports = {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
 		
-		var waterfall = require('async-waterfall');
-		waterfall([ 
-			function(callback) {
-				logger.debug('Searching for existing user');
-				req.models.users.find({email_address: email_address}, function(err,user) {
-					if(err) {
-						return callback(err);
-					}
-					if(user.length===0) {
-						return callback('Usuario/Clave inválido');
-					}
-					else {
-						return callback(null,user[0]);
-					}
-				});
-			}, 
-			function(user,callback) {
-				logger.debug('Login !');
-				logger.info('Evaluando claves');
-				if(user.password !== cipher.encrypt(password)) {
-					return callback('Usuario/Clave inválido');
-				}
-				else {
-					return callback(null,user);
-				}
-			},
-			function(user,callback) {
-				logger.info('Assigning user to session');
-				req.usersession.setUser(user,function(err) {
-					if(err) {
-						callback(err);
-					}
-					logger.info('Complete session:'+JSON.stringify(req.usersession));
-					return callback(err,user);
-				});
-			}
-		], 
-		function(err, user) {
+		var controllers = require('./controller');
+		controllers.registration.save_login(req.models, req.usersession, email_address, password, function(err,user) {
 			logger.debug('Finalizacion de login');
 			if(err) {
 				logger.debug('Error por enviar al cliente:'+err);

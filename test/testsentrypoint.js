@@ -75,7 +75,7 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=true;
+	var runTests=false;
 	
 	if(runTests) {
 		it('Get Shopping Cart Logged in', testshoppingcart.getShoppingCartLoggedIn);
@@ -84,6 +84,9 @@ describe('Test Suite', function() {
 		it('Add product to cart', testshoppingcart.addProductToCart);
 		it('Delete Product of cart', testshoppingcart.deleteShoppingCart);
 	}
+//	it('Purchase With Registration', testshoppingcart.purchaseWithRegistration);
+//	it('Purchase With Login', testshoppingcart.purchaseWithLogin);
+	it('Purchase Logged In', testshoppingcart.purchaseLoggedIn);
 	
 	if(runTests) {
 		it('Send registration email', testsendemail.sendRegistrationMail);
@@ -138,19 +141,19 @@ describe('Test Suite', function() {
 		it('Get no existing product', testshome.getNoExistingProduct);
 		it('Get product admin user', testshome.getProductAdminUser);
 		it('Get product', testshome.getProduct);
+		it('Get Search', testshome.getSearch);
 	}
-	it('Get Search', testshome.getSearch);
 	
 	// Registration tests
 	if(runTests) {
 		it('Admin with no permissions', testsregistration.adminWithNoPermissions);
-		it('Admin login', testsregistration.adminLogin);
-		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
 		it('Register new mailing user', testsregistration.registerNewMailingUser);
 		it('Client login', testsregistration.clientLogin);
 		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
 		it('Users registration ', testsregistration.registerNewUser);
 		it('Confirm User', testsregistration.confirmUser);
+		it('Admin login', testsregistration.adminLogin);
+		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
 	}
 	 	
  	// Health check
