@@ -480,7 +480,7 @@ var request		= require('supertest'),
 				})
 				.expect(200)
 				.end(function(err,newres) {
-					expect(newres.text).toBe('ERR');
+					expect(newres.text).toBe('OK');
 					return callback(err,res);
 				});
 			}			

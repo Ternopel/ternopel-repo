@@ -300,42 +300,71 @@ module.exports = {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
 		
-		if(pageinfo.is_logged_in===false) {
-			if(already_registered==='false') {
-				logger.info('Register new user and purchase');
-				var controllers = require('./controller');
-				controllers.registration.save_user(req.models, req.usersession, req.constants.CUSTOMER_ID, email_address, password, first_name, last_name, function(err,user) {
-					logger.debug('Finalizacion de creacion de usuario');
-					if(err) {
-						logger.debug('Error por enviar al cliente:'+err);
-						return utils.send_ajax_error(req,res,err);
+		
+		
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				if(pageinfo.is_logged_in===false) {
+					if(already_registered==='false') {
+						logger.info('Register new user and purchase');
+						var controllers = require('./controller');
+						controllers.registration.save_user(req.models, req.usersession, req.constants.CUSTOMER_ID, email_address, password, first_name, last_name, function(err,user) {
+							logger.info("Registration error:"+err);
+							logger.info("Registration user:"+JSON.stringify(user));
+							return callback(err,user);
+						});
 					}
 					else {
-						logger.debug('Creation usuario exitosa !');
-						return res.status(200).send('OK');
+						logger.info('Login and purchase');
+						var controllers = require('./controller');
+						controllers.registration.save_login(req.models, req.usersession, email_address, password, function(err,user) {
+							return callback(err,user);
+						});
 					}
-				});
-			}
-			else {
-				logger.info('Login and purchase');
-				var controllers = require('./controller');
-				controllers.registration.save_login(req.models, req.usersession, email_address, password, function(err,user) {
-					logger.debug('Finalizacion de login');
-					if(err) {
-						logger.debug('Error por enviar al cliente:'+err);
-						return utils.send_ajax_error(req,res,err);
-					}
-					else {
-						logger.debug('Login exitoso !');
-						return res.status(200).send('OK');
-					}
-				});
+				}
+				else {
+					logger.info("User is logged in");
+					req.usersession.getUser(function (err, user) {
+						return callback(err,user);
+					});
+				}
 				
+			}, 
+			function(user,callback) {
+				logger.info("Reading shopping cart");
+				req.models.shoppingcart.find({user_session_id: req.usersession.id},function(err,shoppingcart) {
+					if(err) {
+						return callback(err);
+					}
+					logger.info("Records readed:"+shoppingcart.length);
+					return callback(err,user,shoppingcart);
+				});
+			},
+			function(user,shoppingcart,callback) {
+				logger.info("Saving user info");
+				user.address = req.body.address;
+				user.city = req.body.city;
+				user.zipcode = req.body.zipcode;
+				user.state = req.body.state;
+				user.telephone = req.body.telephone;
+				user.save(function(err) {
+					return callback(err,user,shoppingcart);
+				});
 			}
-		}
-		else {
-			return res.status(200).send('ERR');
-		}
+		], 
+		function(err) {
+			logger.debug('Finalizacion de compra');
+			if(err) {
+				logger.debug('Error por enviar al cliente:'+err);
+				return utils.send_ajax_error(req,res,err);
+			}
+			logger.debug('Compra exitoso !');
+			return res.status(200).send('OK');
+		});
+		
+		
+		
 	}
 };
 
