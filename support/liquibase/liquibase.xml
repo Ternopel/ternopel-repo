@@ -30,5 +30,9 @@
 	<changeSet author="maximiliano.ezequiel.carrizo.barrera" id="create_unique_mailing_email">
 		<sqlFile path="support/liquibase/sql/create_unique_mailing_email.sql" />
 	</changeSet>
+	
+	<changeSet author="maximiliano.ezequiel.carrizo.barrera" id="transactions">
+		<sqlFile path="support/liquibase/sql/transactions.sql" />
+	</changeSet>
 
 </databaseChangeLog>

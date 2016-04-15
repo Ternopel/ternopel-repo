@@ -75,7 +75,7 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 	
 	if(runTests) {
 		it('Get Shopping Cart Logged in', testshoppingcart.getShoppingCartLoggedIn);
@@ -83,10 +83,10 @@ describe('Test Suite', function() {
 		it('Get Price Calculation', testshoppingcart.getPriceCalculation);
 		it('Add product to cart', testshoppingcart.addProductToCart);
 		it('Delete Product of cart', testshoppingcart.deleteShoppingCart);
+		it('Purchase With Registration', testshoppingcart.purchaseWithRegistration);
+		it('Purchase With Login', testshoppingcart.purchaseWithLogin);
+		it('Purchase Logged In', testshoppingcart.purchaseLoggedIn);
 	}
-//	it('Purchase With Registration', testshoppingcart.purchaseWithRegistration);
-//	it('Purchase With Login', testshoppingcart.purchaseWithLogin);
-	it('Purchase Logged In', testshoppingcart.purchaseLoggedIn);
 	
 	if(runTests) {
 		it('Send registration email', testsendemail.sendRegistrationMail);

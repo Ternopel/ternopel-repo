@@ -3,7 +3,8 @@
 var cipher	= require('../../utils/cipher'),
 	utils	= require('./utils'),
 	ld		= require('lodash'),
-	logger	= require("../../utils/logger")(module);
+	logger	= require("../../utils/logger")(module),
+	math	= require('mathjs');
 
 
 var validate_shopping_cart_params = function(req, res, incartval) {
@@ -19,6 +20,31 @@ var validate_shopping_cart_params = function(req, res, incartval) {
 };
 
 module.exports = {
+		
+	get_price: function(models, productformatid, quantity, callback) {
+		
+		logger.info("Calculating price");
+		models.productsformats.get(productformatid,function(err,productformat) {
+			if(err) {
+				return callback(err);
+			}
+			var wholesale_price_units	= parseInt(quantity / productformat.quantity);
+			var retail_price_units		= quantity - ( wholesale_price_units * productformat.quantity);
+			logger.info("wholesale_price_units:"+wholesale_price_units);
+			logger.info("retail_price_units:"+retail_price_units);
+			
+			var wholesale_price			= wholesale_price_units * productformat.wholesale * productformat.quantity;
+			var retail_price			= retail_price_units * productformat.retail;
+			logger.info("wholesale_price:"+wholesale_price);
+			logger.info("retail_price:"+retail_price);
+			
+			var	price					= ( wholesale_price + retail_price ).toFixed(2);
+			logger.info("price:"+price);
+			
+			return callback(null,price);
+		});
+	},
+		
 	get_price_calculation: function(req, res, next) {
 		
 		logger.info("En GET price calculation");
@@ -29,6 +55,48 @@ module.exports = {
 		var productformatid	= req.query.productformatid;
 		var quantity		= req.query.quantity;
 		var incart			= req.query.incart;
+		
+		var controllers = require('./controller');
+		controllers.shoppingcart.get_price(req.models, productformatid, quantity, function(err,price) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			
+			logger.info("price:"+price);
+			logger.info("incart:"+incart);
+			
+			if(incart=='false') {
+				logger.info('Returning price to client');
+				return res.status(200).send(price);
+			}
+			else {
+				var ter_token		= req.cookies.ter_token;
+				logger.info("Reading user session with token:"+ter_token);
+				req.models.userssessions.find({token: ter_token},function(err,usersessions) {
+					if(err) {
+						return utils.send_ajax_error(req,res,err);
+					}
+					var usersession		= usersessions[0];
+					logger.info("Reading shopping cart");
+					req.models.shoppingcart.find({user_session_id:usersession.id, product_format_id: productformatid},function(err,shoppingcart) {
+						if(err) {
+							return utils.send_ajax_error(req,res,err);
+						}
+						logger.info("Updating shopping cart:"+JSON.stringify(shoppingcart[0]));
+						shoppingcart[0].save({quantity: quantity},function(err) {
+							if(err) {
+								return utils.send_ajax_error(req,res,err);
+							}
+							logger.info("Sending price to client");
+							return res.status(200).send(price);
+						});
+					});
+				});				
+			}
+		});
+		
+		
+		/*
 		
 		logger.info("Calculating price");
 		req.models.productsformats.get(productformatid,function(err,productformat) {
@@ -78,6 +146,7 @@ module.exports = {
 				});				
 			}
 		});
+		*/
 	},
 	
 	post_product_to_cart: function(req, res, next) {
@@ -160,7 +229,15 @@ module.exports = {
 							return callback(err);
 						}
 						logger.info('User logged in:'+user.fullName());
-						pageinfo = ld.merge(pageinfo,{first_name: user.first_name, last_name: user.last_name, email_address: user.email_address});
+						pageinfo = ld.merge(pageinfo,{
+							first_name: user.first_name, 
+							last_name: user.last_name, 
+							email_address: user.email_address,
+							address: user.address || '',
+							city: user.city || '',
+							telephone: user.telephone || '',
+							zipcode: user.zipcode || '',
+							state: user.state});
 						return callback(err,usersession);
 					});
 				}
@@ -343,13 +420,81 @@ module.exports = {
 			},
 			function(user,shoppingcart,callback) {
 				logger.info("Saving user info");
-				user.address = req.body.address;
-				user.city = req.body.city;
-				user.zipcode = req.body.zipcode;
-				user.state = req.body.state;
-				user.telephone = req.body.telephone;
+				user.address		= req.body.address;
+				user.city			= req.body.city;
+				user.zipcode		= req.body.zipcode;
+				user.state			= req.body.state;
+				user.telephone		= req.body.telephone;
 				user.save(function(err) {
 					return callback(err,user,shoppingcart);
+				});
+			},
+			function(user,shoppingcart,callback) {
+				logger.info("Saving transaction header info");
+				var transactionheader = {};
+				transactionheader.user_id			= user.id;
+				transactionheader.purchase_date		= new Date();
+				transactionheader.delivery_type		= req.body.delivery_type;
+				transactionheader.payment_type		= req.body.payment_type;
+				transactionheader.total_purchase	= 0;
+				transactionheader.mail_sent			= false;
+				
+				req.models.transactionsheader.create(transactionheader,function(err,transactionheader) {
+					return callback(err,user,shoppingcart,transactionheader);
+				});
+			},
+			function(user,shoppingcart,transactionheader,callback) {
+				logger.info("Saving transaction detail info");
+				
+				var async = require('async');
+				async.each(shoppingcart, function(cartelement, asynccallback) {
+					
+					var transactiondetail = {};
+					transactiondetail.transaction_header_id = transactionheader.id;
+					transactiondetail.product_format_id		= cartelement.product_format_id;
+					transactiondetail.quantity				= cartelement.quantity;
+					var controllers = require('./controller');
+					controllers.shoppingcart.get_price(req.models, cartelement.product_format_id, cartelement.quantity, function(err,price) {
+						if(err) {
+							return asynccallback(err);
+						}
+						transactiondetail.price				= price;
+						cartelement.price					= price;
+						req.models.transactionsdetail.create(transactiondetail,function(err,transactiondetail) {
+							return asynccallback(err);
+						});
+					});
+				}, 
+				function(err) {
+					logger.info("Calculating total");
+					var totalcart = 0;
+					logger.info("totalcart:"+totalcart);
+					shoppingcart.forEach(function(cartelement) {
+						logger.info("Price:"+cartelement.price);
+						totalcart = math.add(totalcart,cartelement.price);
+					});
+					logger.info("Total purchase:"+totalcart);
+					transactionheader.total_purchase = totalcart.toFixed(2);
+					return callback(err,transactionheader,shoppingcart);
+				});
+			},
+			function(transactionheader,shoppingcart,callback) {
+				logger.info("Updating transaction header info ( updating total purchase )");
+				transactionheader.save(function(err) {
+					return callback(err,shoppingcart);
+				});
+			},
+			function(shoppingcart,callback) {
+				logger.info("Deleting element from shopping cart");
+				var async = require('async');
+				async.each(shoppingcart, function(cartelement, asynccallback) {
+					logger.info("Getting shopping cart element to remove");
+					cartelement.remove(function(err,element) {
+						return asynccallback(err);
+					});
+				}, 
+				function(err) {
+					return callback(err);
 				});
 			}
 		], 

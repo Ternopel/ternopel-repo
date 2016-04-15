@@ -63,13 +63,13 @@
 				<form class="clear-fix" id="address_info">
 					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
 					<label>Dirección<span class="form-error" id='address_error'></span></label>
-					<input type="text" class="" name="address">
+					<input type="text" class="" name="address" value="{{=it.address}}">
 					<label>Ciudad<span class="form-error" id='city_error'></span></label>
-					<input type="text" class="" name="city">
+					<input type="text" class="" name="city" value="{{=it.city}}">
 					<label>Teléfono<span class="form-error" id='telephone_error'></span></label>
-					<input type="tel" class="" name="telephone">
+					<input type="tel" class="" name="telephone" value="{{=it.telephone}}">
 					<label>Código Postal<span class="form-error" id='zipcode_error'></span></label>
-					<input type="text" class="" name="zipcode">
+					<input type="text" class="" name="zipcode" value="{{=it.zipcode}}">
 					<label class="address-select address-select-right">Provincia
 						<select name="state">
 							<option value="1">Ciudad Autónoma de Buenos Aires</option>
