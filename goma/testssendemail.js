@@ -4,16 +4,17 @@ var request		= require('supertest'),
 	expect		= require('expect'),
 	utils		= require('../utils/testutils.js'),
 	logger		= require(__dirname+'/../utils/logger')(module),
-	config		= require(__dirname+"/../utils/config")(),
 	cronconfig	= require('../utils/cronconfig.js'),
 	models,
-	db;
+	db,
+	config;
 
 (function (testsendmail) {
 
-	testsendmail.setMailInfo = function (pmodels,pdb) {
+	testsendmail.setMailInfo = function (pmodels,pdb,pconfig) {
 		models	= pmodels;
 		db		= pdb;
+		config	= pconfig;
 	};
 	
 	testsendmail.sendRegistrationMail = function (done) {
@@ -30,6 +31,12 @@ var request		= require('supertest'),
 	
 	testsendmail.sendPriceReportsMail = function (done) {
 		cronconfig.sendpricereportsmail(logger,config,models,db,function(err) {
+			return done(err);
+		});
+	};
+	
+	testsendmail.sendPurchaseMail = function (done) {
+		cronconfig.sendpurchasemail(logger,config,models,function(err) {
 			return done(err);
 		});
 	};

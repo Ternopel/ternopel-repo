@@ -94,59 +94,6 @@ module.exports = {
 				});				
 			}
 		});
-		
-		
-		/*
-		
-		logger.info("Calculating price");
-		req.models.productsformats.get(productformatid,function(err,productformat) {
-			if(err) {
-				return utils.send_ajax_error(req,res,err);
-			}
-			var wholesale_price_units	= parseInt(quantity / productformat.quantity);
-			var retail_price_units		= quantity - ( wholesale_price_units * productformat.quantity);
-			logger.info("wholesale_price_units:"+wholesale_price_units);
-			logger.info("retail_price_units:"+retail_price_units);
-			
-			var wholesale_price			= wholesale_price_units * productformat.wholesale * productformat.quantity;
-			var retail_price			= retail_price_units * productformat.retail;
-			logger.info("wholesale_price:"+wholesale_price);
-			logger.info("retail_price:"+retail_price);
-			
-			var	price					= ( wholesale_price + retail_price ).toFixed(2);
-			logger.info("price:"+price);
-			logger.info("incart:"+incart);
-			
-			if(incart=='false') {
-				logger.info('Returning price to client');
-				return res.status(200).send(price);
-			}
-			else {
-				var ter_token		= req.cookies.ter_token;
-				logger.info("Reading user session with token:"+ter_token);
-				req.models.userssessions.find({token: ter_token},function(err,usersessions) {
-					if(err) {
-						return utils.send_ajax_error(req,res,err);
-					}
-					var usersession		= usersessions[0];
-					logger.info("Reading shopping cart");
-					req.models.shoppingcart.find({user_session_id:usersession.id, product_format_id: productformatid},function(err,shoppingcart) {
-						if(err) {
-							return utils.send_ajax_error(req,res,err);
-						}
-						logger.info("Updating shopping cart:"+JSON.stringify(shoppingcart[0]));
-						shoppingcart[0].save({quantity: quantity},function(err) {
-							if(err) {
-								return utils.send_ajax_error(req,res,err);
-							}
-							logger.info("Sending price to client");
-							return res.status(200).send(price);
-						});
-					});
-				});				
-			}
-		});
-		*/
 	},
 	
 	post_product_to_cart: function(req, res, next) {
@@ -376,9 +323,6 @@ module.exports = {
 		if(valerrors) {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
-		
-		
-		
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
@@ -406,7 +350,6 @@ module.exports = {
 						return callback(err,user);
 					});
 				}
-				
 			}, 
 			function(user,callback) {
 				logger.info("Reading shopping cart");

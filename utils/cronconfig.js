@@ -171,6 +171,60 @@ function save_price_listing(config, smtpTransport, filename, records, callback) 
 		});
 	};
 	
+	cronconfig.sendpurchasemail = function (logger, config, models,callback) {
+		var nodemailer = require("nodemailer");
+		
+		var smtpTransport = nodemailer.createTransport("SMTP",{
+			service: "Gmail",
+			auth: {
+				user: "info@ternopel.com",
+				pass: config.app_smtp_password
+			}
+		});		
+		
+		models.transactionsheader.find({mail_sent:false},function(err,transactions) {
+			if(err) {
+				return callback(err);
+			}
+			
+			var async	= require('async');
+			var url		= "https://"+config.app_proxy_host;
+			if(config.app_proxy_port!==443) {
+				url	+=":"+config.app_proxy_port;
+			}
+			logger.info('Iterating transactions:'+config.app_target_mail);
+			async.each(transactions, function(transaction, mycallback) {
+				
+				transaction.getUser(function(err,user) {
+					if(err) {
+						return callback(err);
+					}
+					logger.info('Sending mail to:'+user.email_address);
+					smtpTransport.sendMail({
+						from: "Información Papelera Ternopel <info@ternopel.com>",
+						to: "<"+config.app_target_mail+">", 
+						subject: "Nuevo incauto ✔", 
+						html: "Amor, acaban de hacer un pedido en el carrito de compras ! La compra fue:"+transaction.total_purchase+" y el comprador fue:"+user.email_address
+					}, function(error, response){
+						if(error){
+							return mycallback(error);
+						}
+						else{
+							logger.info("Message sent: " + response.message);
+							transaction.mail_sent		= true;
+							transaction.save(function(err) {
+								return mycallback(err);
+							});
+						}
+					});
+				});
+				
+			}, function(err) {
+				return callback(err);
+			});
+		});
+	};
+	
 	cronconfig.init = function (logger, config, models, db) {
 		if(config.app_cron === 'true') {
 			logger.debug("Cron is enabled");
@@ -178,6 +232,15 @@ function save_price_listing(config, smtpTransport, filename, records, callback) 
 			var RegistrationJob = new CronJob('0 * * * * *', function() {
 				logger.info('You will see this message every minute');
 				cronconfig.sendregistrationmails(logger,config,models,function(err) {
+					if(err) {
+						logger.error(err);
+					}
+					logger.info("Cron runned successfully");
+				});
+			}, null, true, 'America/Buenos_Aires');
+			var PurchaseJob = new CronJob('20 * * * * *', function() {
+				logger.info('You will see this message every minute');
+				cronconfig.sendpurchasemail(logger,config,models,function(err) {
 					if(err) {
 						logger.error(err);
 					}
@@ -206,5 +269,8 @@ function save_price_listing(config, smtpTransport, filename, records, callback) 
 			
 		}
 	};
+	
+	
+	
 	
 })(module.exports);

@@ -36,12 +36,13 @@ describe('Test Suite', function() {
 		config.db_liquibase_xml				= config.test_db_liquibase_xml;
 		config.app_products_imgs_dir		= config.test_app_products_imgs_dir;
 		config.app_posters_imgs_dir			= config.test_app_posters_imgs_dir;
+		config.app_target_mail				= config.test_app_target_mail;
 		
 		logger.info("Initiating app");
 		app.init(config, function(app,pdb,models) {
 			db		= pdb;
 			
-			testsendemail.setMailInfo(models,pdb);
+			testsendemail.setMailInfo(models,pdb,config);
 			
 			server	= app.listen(config.test_app_port, function() {
 				logger.info('Listening on port:'+server.address().port);
@@ -92,6 +93,7 @@ describe('Test Suite', function() {
 		it('Send registration email', testsendemail.sendRegistrationMail);
 		it('Send mailing email', testsendemail.sendMailingmails);
 		it('Send price reports email', testsendemail.sendPriceReportsMail);
+		it('Send purchase email', testsendemail.sendPurchaseMail);
 	}
 	
 	if(runTests) {

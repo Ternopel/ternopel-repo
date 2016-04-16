@@ -251,3 +251,11 @@ INSERT INTO shopping_cart (quantity,user_session_id,product_format_id) VALUES
 INSERT INTO products_pictures (product_id,content_type,last_update) VALUES 
 (1,'image/png',{ts '2016-03-23 12:48:26.500'});
 
+/* Transactions Header */
+INSERT INTO transactions_header (purchase_date,delivery_type,payment_type,total_purchase,mail_sent,user_id) VALUES 
+({ts '2016-04-16 13:43:43.715'},3.0,3.0,3546.0,false,2);
+
+/* Transactions Detail */
+INSERT INTO transactions_detail (quantity,price,product_format_id,transaction_header_id) VALUES 
+(9.0,2250.0,1,1),
+(9.0,1296.0,2,1);
