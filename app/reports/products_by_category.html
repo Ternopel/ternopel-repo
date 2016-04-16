@@ -8,31 +8,28 @@
 		<table style="font-family: Helvetica, Arial;">
 			{{for categories}}
 				<tr>
-					<td><h4 style="height:6px; font-size: 12px;">Categor&iacute;a:{{:name}}</h4></td>
+					<td><h4 style="height:6px; font-size: 10px;">Categor&iacute;a:{{:name}}</h4></td>
 				</tr>
 				<tr>
 					<td>
 						<table style='border-style:solid'>
 							<tr >
-								<th style='text-align: left;font-size: 10px;'>Producto</th>
-								<th style='text-align: left;font-size: 10px;'>Minorista</th>
+								<th style='text-align: left;font-size: 8px;'>Producto</th>
+								<th style='text-align: left;font-size: 8px;'>Minorista</th>
 								{{if has_wholesale}}
-									<th style='text-align: left;font-size: 10px;'>Mayorista</th>
+									<th style='text-align: left;font-size: 8px;'>Mayorista</th>
 								{{/if}}
 							</tr>
 							{{for productsformats}}
 								<tr>
-									<td style="font-size: 8px;">{{:productname}}</td>
-									<td style="font-size: 8px;">{{:retaildescription}}</td>
-									<td style="font-size: 8px;">{{:wholesaledescription}}</td>
+									<td style="font-size: 6px;">{{:productname}}</td>
+									<td style="font-size: 6px;">{{:retaildescription}}</td>
+									<td style="font-size: 6px;">{{:wholesaledescription}}</td>
 									</td>
 								</tr>
 							{{/for}}
 						</table>
 					</td>
-				</tr>
-				<tr>
-					<td></td>
 				</tr>
 			{{/for}}
 		</table>

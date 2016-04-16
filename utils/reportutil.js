@@ -59,8 +59,8 @@ var modelsutil	= require('../app/models/modelsutil');
 						recipe: recipe,
 						engine: "jsrender",
 						phantom: {
-							header: "<h2 style='background-color: lightGray;'><span style='font-size: 14px;'>Productos por Categor&iacute;a</span><span style='margin-left:8%;font-size: 14px;'>Ternopel - email: info@ternopel.com - WhatsApp: 15-5888-3335</span></h2>",
-							footer: "<div style='text-align:center;font-size: 12px;'>Página {#pageNum} de {#numPages}</div>",
+							header: "<h2 style='background-color: lightGray;'><span style='font-size: 12px;'>Productos por Categor&iacute;a</span><span style='margin-left:8%;font-size: 12px;'>Ternopel - email: info@ternopel.com - WhatsApp: 15-5888-3335</span></h2>",
+							footer: "<div style='text-align:center;font-size: 10px;'>Página {#pageNum} de {#numPages}</div>",
 							orientation: "portrait",
 							width: "600px"
 						},
