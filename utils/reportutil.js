@@ -48,7 +48,7 @@ var modelsutil	= require('../app/models/modelsutil');
 					});
 					newcategories.push(newcategory);
 				});
-				logger.info(JSON.stringify(newcategories,null,'\t'));
+//				logger.info(JSON.stringify(newcategories,null,'\t'));
 				
 				
 				logger.info('Generating report gif');
@@ -59,7 +59,7 @@ var modelsutil	= require('../app/models/modelsutil');
 						recipe: recipe,
 						engine: "jsrender",
 						phantom: {
-							header: "<h2 style='background-color: lightGray; font-size: 12px;'><span>Productos por Categor&iacute;a</span><span style='margin-left:40%;'>Ternopel - email: info@ternopel.com - WhatsApp: 15-5888-3335</span></h2>",
+							header: "<h2 style='background-color: lightGray;'><span style='font-size: 14px;'>Productos por Categor&iacute;a</span><span style='margin-left:20%;font-size: 14px;'>Ternopel - email: info@ternopel.com - WhatsApp: 15-5888-3335</span></h2>",
 							footer: "<div style='text-align:center;font-size: 12px;'>Página {#pageNum} de {#numPages}</div>",
 							orientation: "portrait",
 							width: "600px"
