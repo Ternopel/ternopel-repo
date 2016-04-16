@@ -18,11 +18,39 @@ var modelsutil	= require('../app/models/modelsutil');
 			},
 			function(content,callback) {
 				logger.info('Reading categories');
-				modelsutil.getCategories(db, { getformatswithnoprice:true,includeunique:true },function(err,categories) {
+				modelsutil.getCategories(db, { getformatswithnoprice:true,includeunique:true, highlight: 'report' },function(err,categories) {
 					return callback(err,content,categories);
 				});
 			},
 			function(content,categories, callback) {
+				
+				var newcategories = [];
+				categories.forEach(function(category) {
+					var newcategory = { name: category.name };
+					newcategory.productsformats	= [];
+					newcategory.has_wholesale	= false;
+					category.products.forEach(function(product) {
+						var first		= true;
+						product.productsformats.forEach(function(productformat) {
+							var newproductformat = {};
+							if(first) {
+								newproductformat.productname = product.name;
+								first = false;
+							}
+							if(productformat.wholesaledescription) {
+								newcategory.has_wholesale	= true;
+							}
+							newproductformat.retaildescription		= productformat.retaildescription;
+							newproductformat.wholesaledescription	= productformat.wholesaledescription;
+							
+							newcategory.productsformats.push(newproductformat);
+						});
+					});
+					newcategories.push(newcategory);
+				});
+				logger.info(JSON.stringify(newcategories,null,'\t'));
+				
+				
 				logger.info('Generating report gif');
 				var jsreport = require('jsreport');
 				jsreport.render({
@@ -31,7 +59,7 @@ var modelsutil	= require('../app/models/modelsutil');
 						recipe: recipe,
 						engine: "jsrender",
 						phantom: {
-							header: "<h2 style='background-color: lightGray; font-size: 12px;'>Productos por Categor&iacute;a &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ternopel - email: info@ternopel.com - WhatsApp: 15-5888-3335</h2>",
+							header: "<h2 style='background-color: lightGray; font-size: 12px;'><span>Productos por Categor&iacute;a</span><span style='margin-left:40%;'>Ternopel - email: info@ternopel.com - WhatsApp: 15-5888-3335</span></h2>",
 							footer: "<div style='text-align:center;font-size: 12px;'>Página {#pageNum} de {#numPages}</div>",
 							orientation: "portrait",
 							width: "600px"
@@ -42,7 +70,7 @@ var modelsutil	= require('../app/models/modelsutil');
 						}
 					},
 					data: { 
-						categories: categories 
+						categories: newcategories 
 					}
 				}).then(function(out) {
 					return callback(null,out);
