@@ -8,10 +8,10 @@ function fillProductFormat(product,productformat,filters) {
 		var wholesaledescription	= '';
 		var begin					= '<span class="price-con">$';
 		var end						= '</span>';
-		if(filters.highlight==='report') {
-			begin					= '<b>';
-			end						= '</b>';
-		}
+//		if(filters.highlight==='report') {
+//			begin					= '<b>';
+//			end						= '</b>';
+//		}
 		if( ( productformat.units%1 ) !==0) {
 			// Ejemplo de esta condicion: Bobinas de papel diario
 			retaildescription += productformat.units.toFixed(2)+' '+product.packaging.name + 's de ' + productformat.format;

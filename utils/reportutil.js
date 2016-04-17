@@ -34,14 +34,14 @@ var modelsutil	= require('../app/models/modelsutil');
 						product.productsformats.forEach(function(productformat) {
 							var newproductformat = {};
 							if(first) {
-								newproductformat.productname = product.name;
+								newproductformat.productname = product.name.toUpperCase();
 								first = false;
 							}
 							if(productformat.wholesaledescription) {
 								newcategory.has_wholesale	= true;
 							}
-							newproductformat.retaildescription		= productformat.retaildescription;
-							newproductformat.wholesaledescription	= productformat.wholesaledescription;
+							newproductformat.retaildescription		= productformat.retaildescription.toUpperCase();
+							newproductformat.wholesaledescription	= productformat.wholesaledescription.toUpperCase();
 							
 							newcategory.productsformats.push(newproductformat);
 						});
