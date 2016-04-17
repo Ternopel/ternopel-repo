@@ -249,7 +249,7 @@ function fillProductsInfo(models,filters,product,getcallback) {
 		
 		logger.info("Getting all categories");
 		
-		var ts_vector	= 'to_tsvector(c.name||\' \'||p.name)';
+		var ts_vector	= 'to_tsvector(\'english\',c.name||\' \'||p.name)';
 		var ts_query	= 'to_tsquery(\''+searchwithsinglespace+'\')';
 
 		logger.info('ts_vector:'+ts_vector);
