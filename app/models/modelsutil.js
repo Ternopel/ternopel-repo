@@ -63,7 +63,7 @@ function fillProductsInfo(models,filters,product,getcallback) {
 		},
 		function(callback) {
 			logger.info('Getting products formats');
-			var productsformatsfind = product.getProductsFormats().order('retail');
+			var productsformatsfind = product.getProductsFormats();
 			if(filters.formatslimit) {
 				productsformatsfind.limit(filters.formatslimit);
 			}
@@ -72,6 +72,24 @@ function fillProductsInfo(models,filters,product,getcallback) {
 				if(err) {
 					return callback(err);
 				}
+				
+				productformats.sort(function(a,b) {
+					var avalue = (a.retail===0?100000:a.retail);
+					var bvalue = (b.retail===0?100000:b.retail);
+					if(avalue !== bvalue) {
+						logger.info("Order by retail");
+						return avalue - bvalue;
+					}
+					else {
+						logger.info("Order by format");
+						avalue = a.format.toLowerCase();
+						avalue = b.format.toLowerCase();
+						if (avalue < bvalue) return 1;
+						if (avalue > bvalue) return -1;
+						return 0;
+					}
+				});
+				
 				logger.info('Formats readed:'+productformats.length);
 				productformats.forEach(function(productformat) {
 					fillProductFormat(product,productformat,{includeunique:true});
