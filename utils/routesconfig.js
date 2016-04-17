@@ -67,6 +67,7 @@
 		app.post	( '/shoppingcart/executepurchase',		controllers.shoppingcart.post_execute_purchase);
 		app.delete	( '/shoppingcart/deleteshoppingcart',	controllers.shoppingcart.delete_product_of_cart);
 		app.get		( '/shoppingcart',						controllers.shoppingcart.get_shopping_cart);
+		app.get		( '/shoppingcart/purchasedone',			controllers.shoppingcart.get_purchase_done);
 		
 		
 		

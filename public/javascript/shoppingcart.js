@@ -103,6 +103,10 @@ $(function () {
 });
 
 $(function() {
+	$("button[name='continue_purchase']").click(function() {
+		window.location.href	= '/';
+	});
+	
 	$("button[name='execute_purchase']").click(function() {
 		console.log('Execute purchase pressed');
 		
@@ -138,7 +142,7 @@ $(function() {
 			type : 'POST',
 			data : formstosend,
 			success : function (successresponse) {
-				window.location.href	= '/';
+				window.location.href	= '/shoppingcart/purchasedone';
 			},
 			error: function (errorresponse) {
 				show_error_messages(errorresponse);

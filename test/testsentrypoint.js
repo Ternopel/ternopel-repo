@@ -76,7 +76,7 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 	
 	if(runTests) {
 		it('Get Shopping Cart Logged in', testshoppingcart.getShoppingCartLoggedIn);
@@ -168,11 +168,11 @@ describe('Test Suite', function() {
 	}
  	
  	// Report test
-//	if(runTests) {
+	if(runTests) {
 		require('jsreport').bootstrapper({ httpPort: 4000 }).start();
-//		it('Report JPG', testreport.getReportJPG);
+		it('Report JPG', testreport.getReportJPG);
 		it('Report PDF', testreport.getReportPDF);
-//	}
+	}
 
  	after(function (){
 		logger.info('Stopping server');

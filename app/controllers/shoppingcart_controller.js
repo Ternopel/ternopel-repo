@@ -21,6 +21,12 @@ var validate_shopping_cart_params = function(req, res, incartval) {
 
 module.exports = {
 		
+	get_purchase_done: function(req, res, next) {
+		logger.info("Getting mail sent page");
+		var pageinfo = ld.merge(req.pageinfo, { message: 'Su pedido ha sido procesado y usted será contactado a la brevedad. Gracias !!' , csrfToken: req.csrfToken() });
+		res.render('mailsent.html',pageinfo);
+	},
+		
 	get_price: function(models, productformatid, quantity, callback) {
 		
 		logger.info("Calculating price");
@@ -380,6 +386,7 @@ module.exports = {
 				transactionheader.delivery_type		= req.body.delivery_type;
 				transactionheader.payment_type		= req.body.payment_type;
 				transactionheader.total_purchase	= 0;
+				transactionheader.comments			= req.body.comments;
 				transactionheader.mail_sent			= false;
 				
 				req.models.transactionsheader.create(transactionheader,function(err,transactionheader) {

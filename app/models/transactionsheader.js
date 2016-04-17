@@ -11,7 +11,8 @@ module.exports = function (orm, db, models) {
 			delivery_type: 	{ type: 'number', size:4, required: true },
 			payment_type: 	{ type: 'number', size:4, required: true },
 			total_purchase:	{ type: 'number', size:8, required: true },
-			mail_sent:		{ type: 'boolean', required: true }
+			mail_sent:		{ type: 'boolean', required: true },
+			comments:		{ type: 'text', required: false },
 		},
 		{
 			cache:	false,

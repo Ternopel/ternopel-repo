@@ -848,6 +848,12 @@ p.main-product-description {
 	font-size: 13px;
 }
 
+.product-content-details ul li span.price-con {
+	font-weight: 600;
+	font-size: 18px;
+}
+
+
 /* Authentication Page */
 
 ul.breadcrumb-list li {

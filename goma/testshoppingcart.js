@@ -483,16 +483,21 @@ var request		= require('supertest'),
 					expect(newres.text).toBe('OK');
 					return callback(err,res);
 				});
+			},
+			function(res,callback) {
+				logger.info('Register an existing user');
+				request("http://localhost:"+config.test_app_port)
+				.get('/shoppingcart/purchasedone')
+				.set('cookie', utils.getcookies(res))
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toInclude('Su pedido ha sido procesado y usted será contactado a la brevedad');
+					return callback(err,res);
+				});
 			}			
 		], 
 		function(err) {
 			return done(err);
 		});
 	};		
-	
-	
-	
-	
-	
-	
 })(module.exports);

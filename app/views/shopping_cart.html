@@ -4,8 +4,8 @@
 <section class="page-container clear-fix">
 
 
-	<h2 class="main-title">Compra Rápida</h2>
-	<p>Completa los siguientes campos para realizar tu pedido</p>
+	<h2 class="main-title">Pedido Rápido</h2>
+	<p>Completa los siguientes campos para realizar tu pedido ( sin compromiso de <b>COMPRA</b> )</p>
 	<section class="cart-container clear-fix">
 		<div class="cart-header">
 			<ul class="cart-header-list">
@@ -17,7 +17,7 @@
 					{{?}}
 				</li>
 				<li class="shipping-title">Método de Envío</li>
-				<li class="payment-title">Método de Pago</li>
+				<li class="payment-title">Método de Pedido</li>
 			</ul>
 		</div>
 		<div class="data-content clear-fix">
@@ -130,18 +130,25 @@
 					<ul class="payment-options">
 						<li class="clear-fix">
 							<input type="radio" name="payment_type" checked="checked" value="1">
-							<p><strong>Pago contrareembolso</strong></p>
-							<p>Usted paga la mercancía en el momento de la entrega, coste adicional: 7.11€</p>
+							<p><strong>Sólo pedido</strong></p>
+							<p>Usted solicita la mercadería sin compromiso de compra</p>
 						</li>
 						<li class="clear-fix">
 							<input type="radio" name="payment_type" value="2">
+							<p><strong>Pago contrareembolso</strong></p>
+							<p>Usted paga la mercancía en el momento de la entrega</p>
+						</li>
+						<li class="clear-fix">
+							<input type="radio" name="payment_type" value="3">
 							<p><strong>Pago por transferencia bancaria</strong></p>
 							<p>Recibirá el número de cuenta tras finalizar el pedido</p>
 						</li>
+						<!-- 
 						<li class="clear-fix">
 							<input type="radio" name="payment_type" value="3">
 							<p><strong>Pago seguro con tarjeta</strong></p>
 						</li>
+						 -->
 					</ul>
 				</div>
 			</form>
@@ -173,7 +180,7 @@
 							</tr>						
 						{{~}}
 						<tr class="summary-totals">
-							<td colspan="4">Importe Total De Su Compra :</td>
+							<td colspan="4">Importe Total De Su Pedido :</td>
 							<td><b>$ <span name="total">{{=it.totalcart}}</span></b></td>
 						</tr>
 					</tbody>
@@ -181,13 +188,13 @@
 				<div>
 					<p>Si desea dejarnos un comentario a cerca de su pedido, por favor indiquelo a continuación:</p>
 					<form id="purchase_extras">
-						<textarea class="cart-textarea"></textarea>
+						<textarea class="cart-textarea" name="comments"></textarea>
 						<span class="form-error" id="purchase_conditions_error"></span>
 						<label class="form-check"><input type="checkbox" name="purchase_conditions">Acepto las condiciones generales de venta y política de privacidad.</label>
 					</form>
 				</div>
 				<div class="summary-btn-container clear-fix">
-					<button class="cart-continue-btn">Continuar Comprando</button>
+					<button class="cart-continue-btn" name="continue_purchase">Continuar el Pedido</button>
 					<button class="cart-confirm-btn" name="execute_purchase">Confirmar Pedido</button>
 				</div>
 			</div>
