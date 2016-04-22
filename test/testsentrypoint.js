@@ -142,8 +142,8 @@ describe('Test Suite', function() {
 		it('Get no existing category', testshome.getNoExistingCategory);
 		it('Get no existing product', testshome.getNoExistingProduct);
 		it('Get product admin user', testshome.getProductAdminUser);
-		it('Get Search', testshome.getSearch);
 		it('Get product', testshome.getProduct);
+		it('Get Search', testshome.getSearch);
 	}
 	
 	// Registration tests
