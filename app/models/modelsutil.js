@@ -14,15 +14,15 @@ function fillProductFormat(product,productformat,filters) {
 //		}
 		if( ( productformat.units%1 ) !==0) {
 			// Ejemplo de esta condicion: Bobinas de papel diario
-			retaildescription += productformat.units.toFixed(2)+' '+product.packaging.name + 's de ' + productformat.format;
+			retaildescription += productformat.units.toFixed(2)+' '+product.packaging.name + 's ' + productformat.format;
 		}
 		else if ( productformat.units === 1 ) {
 			// Ejemplo de esta condicion: Bandas elasticas
-			retaildescription += productformat.units +' '+product.packaging.name + ' de ' + productformat.format;
+			retaildescription += productformat.units +' '+product.packaging.name + ' ' + productformat.format;
 		}
 		else {
 			// Ejemplo de esta condicion: Blondas de papel caladas
-			retaildescription += product.packaging.name +' '+ productformat.units + ' unid. de ' + productformat.format;
+			retaildescription += product.packaging.name +' '+ productformat.units + ' unid. ' + productformat.format;
 		}
 		if(productformat.retail !==0 && filters.includeunique) {
 			retaildescription += ' a '+begin+productformat.retail.toFixed(2)+end;
@@ -32,7 +32,7 @@ function fillProductFormat(product,productformat,filters) {
 		}
 		
 		if(productformat.retail !==0 && productformat.wholesale !== 0) {
-			wholesaledescription	+= productformat.quantity+' '+product.packaging.name+'s de '+begin+productformat.wholesale.toFixed(2)+end+' c/u a '+begin+(productformat.wholesale*productformat.quantity).toFixed(2)+end;
+			wholesaledescription	+= productformat.quantity+' '+product.packaging.name+'s '+begin+productformat.wholesale.toFixed(2)+end+' c/u a '+begin+(productformat.wholesale*productformat.quantity).toFixed(2)+end;
 		}
 		
 		productformat.retaildescription		= retaildescription;
