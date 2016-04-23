@@ -21,6 +21,7 @@ var testsposters			= require(__dirname+'/../goma/testsposters');
 var testsendemail			= require(__dirname+'/../goma/testssendemail');
 var testprivacy				= require(__dirname+'/../goma/testprivacy');
 var testshoppingcart		= require(__dirname+'/../goma/testshoppingcart');
+var testscontact			= require(__dirname+'/../goma/testcontact');
 
 describe('Test Suite', function() {
 	
@@ -77,6 +78,11 @@ describe('Test Suite', function() {
 	});	
 
 	var runTests=true;
+	
+	if(runTests) {
+		it('Get Contact Unlogged in', testscontact.getContactUnloggedIn);
+		it('Get Contact Logged in', testscontact.getContactLoggedIn);
+	}
 	
 	if(runTests) {
 		it('Get Shopping Cart Logged in', testshoppingcart.getShoppingCartLoggedIn);
