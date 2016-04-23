@@ -635,7 +635,7 @@ ul.main-nav li.main-search {
 	border-radius: 6px;
 	line-height: 0;
 	margin: 9px;
-	width: 366px;
+	width: 338px;
 }
 
 li.main-search input[type=text] {
@@ -643,7 +643,7 @@ li.main-search input[type=text] {
 	margin: 0;
 	padding: 7px;
 	height: 20px;
-	width: 314px;
+	width: 290px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 }
