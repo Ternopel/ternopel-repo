@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /privacy/datapolicy
 Disallow: /login
+Disallow: /admin
 Disallow: /report.pdf
 Disallow: /report.jpg
