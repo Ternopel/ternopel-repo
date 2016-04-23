@@ -83,6 +83,7 @@
 		
 		app.get		( '/contact',							controllers.contact.get_contact);
 		app.post	( '/contact',							controllers.contact.post_contact);
+		app.get		( '/contact/messagesent',				controllers.contact.get_contact_sent);
 		
 		app.get		( '/privacy/datapolicy',				controllers.privacy.get_data_policy);
 		

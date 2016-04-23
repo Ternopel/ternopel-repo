@@ -11,7 +11,8 @@ module.exports = function (orm, db, models) {
 			email_address: 	{ type: 'text', required: true, unique:true },
 			first_name:		{ type: 'text', required: true },
 			last_name:		{ type: 'text', required: true },
-			comments:		{ type: 'text', required: true }
+			comments:		{ type: 'text', required: true },
+			sent:			{ type: 'boolean', required: true }
 		},
 		{
 			cache:	false,

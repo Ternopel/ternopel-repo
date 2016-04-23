@@ -225,6 +225,60 @@ function save_price_listing(config, smtpTransport, filename, records, callback) 
 		});
 	};
 	
+	cronconfig.contactmessage = function (logger, config, models,callback) {
+		var nodemailer = require("nodemailer");
+		
+		var smtpTransport = nodemailer.createTransport("SMTP",{
+			service: "Gmail",
+			auth: {
+				user: "info@ternopel.com",
+				pass: config.app_smtp_password
+			}
+		});		
+		
+		models.contact.find({sent:false},function(err,messages) {
+			if(err) {
+				return callback(err);
+			}
+			
+			var async	= require('async');
+			var url		= "https://"+config.app_proxy_host;
+			if(config.app_proxy_port!==443) {
+				url	+=":"+config.app_proxy_port;
+			}
+			logger.info('Iterating contacts sent:'+config.app_target_mail);
+			async.each(messages, function(message, mycallback) {
+				
+				var html="Amor, acaban de mandar un mensaje pidiendo información ...<br>";
+				html+="Email:"+message.email_address+"<br>";
+				html+="Apellido:"+message.last_name+"<br>";
+				html+="Nombre:"+message.first_name+"<br>";
+				html+="Consulta:"+message.comments+"<br>";
+				
+				smtpTransport.sendMail({
+					from: "Información Papelera Ternopel <info@ternopel.com>",
+					to: "<"+config.app_target_mail+">", 
+					subject: "Nueva consulta ✔", 
+					html: html
+				}, function(error, response){
+					if(error){
+						return mycallback(error);
+					}
+					else{
+						logger.info("Message sent: " + response.message);
+						message.sent		= true;
+						message.save(function(err) {
+							return mycallback(err);
+						});
+					}
+				});
+				
+			}, function(err) {
+				return callback(err);
+			});
+		});
+	};
+	
 	cronconfig.init = function (logger, config, models, db) {
 		if(config.app_cron === 'true') {
 			logger.debug("Cron is enabled");
@@ -250,6 +304,15 @@ function save_price_listing(config, smtpTransport, filename, records, callback) 
 			var MailingJob = new CronJob('30 * * * * *', function() {
 				logger.info('You will see this message every minute');
 				cronconfig.sendmailingmails(logger,config,models,function(err) {
+					if(err) {
+						logger.error(err);
+					}
+					logger.info("Cron runned successfully");
+				});
+			}, null, true, 'America/Buenos_Aires');
+			var ContactJob = new CronJob('40 * * * * *', function() {
+				logger.info('You will see this message every minute');
+				cronconfig.contactmessage(logger,config,models,function(err) {
 					if(err) {
 						logger.error(err);
 					}

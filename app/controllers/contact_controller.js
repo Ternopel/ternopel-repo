@@ -43,13 +43,19 @@ module.exports = {
 			return utils.send_ajax_validation_errors(req,res,valerrors);
 		}
 
-		var contact = {email_address: email_address, first_name:first_name, last_name: last_name, comments: comments};
+		var contact = {email_address: email_address, first_name:first_name, last_name: last_name, comments: comments, sent:false};
 		req.models.contact.create(contact,function(err,contact) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
 			return res.status(200).send('success');
 		});
+	},
+	
+	get_contact_sent:function(req, res, next) {
+		logger.info("Getting mail sent page");
+		var pageinfo = ld.merge(req.pageinfo, { message: 'Su pedido ha sido procesado y usted será contactado a la brevedad. Gracias !!' , csrfToken: req.csrfToken() });
+		res.render('mailsent.html',pageinfo);
 	}
 	
 };
