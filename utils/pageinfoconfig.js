@@ -50,7 +50,12 @@ var logger = require("./logger")(module);
 					next(err);
 				}
 				logger.info('User logged in:'+user.fullName());
-				req.pageinfo = {is_logged_in:true, full_name: user.fullName(), is_admin: user.isAdmin()};
+				req.pageinfo = {is_logged_in:true, 
+								full_name: user.fullName(), 
+								is_admin: user.isAdmin(), 
+								email_address: user.email_address, 
+								first_name: user.first_name, 
+								last_name: user.last_name};
 				savesession(req,next,usersession);
 			});
 		}

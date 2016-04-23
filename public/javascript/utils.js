@@ -26,7 +26,11 @@ function show_error_messages(errors) {
 			var input = $("input[name='" + error.param+"']");
 			if(!input.length) {
 				input = $("select[name='" + error.param+"']");
+				if(!input.length) {
+					input = $("textarea[name='" + error.param+"']");
+				}
 			}
+			console.log(input.attr('name'));
 			input.attr("class", "form-error-input");
 			$("#" + error.param+"_error").html(error.msg);
 		}

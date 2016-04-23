@@ -69,9 +69,6 @@
 		app.get		( '/shoppingcart',						controllers.shoppingcart.get_shopping_cart);
 		app.get		( '/shoppingcart/purchasedone',			controllers.shoppingcart.get_purchase_done);
 		
-		
-		
-		
 		app.get		( '/report.pdf',						controllers.report.get_report_pdf);
 		app.get		( '/report.jpg',						controllers.report.get_report_jpg);
 
@@ -83,6 +80,9 @@
 		app.post	( '/registration',						controllers.registration.post_registration);
 		app.post	( '/confirm',							controllers.registration.post_confirm);
 		app.post	( '/mailing',							controllers.registration.post_mailing);
+		
+		app.get		( '/contact',							controllers.contact.get_contact);
+		app.post	( '/contact',							controllers.contact.post_contact);
 		
 		app.get		( '/privacy/datapolicy',				controllers.privacy.get_data_policy);
 		

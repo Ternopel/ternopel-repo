@@ -65,7 +65,7 @@
 				</div>
 				<div class="header-details">
 					<ul>
-						<li><a href="#">Contacto</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Mapa sitio</a></li>
+						<li><a href="/contact">Contáctenos</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Mapa sitio</a></li>
 						{{?it.cart_count===0}}
 							<li class="cart-box"><a href="#" class="header-cart" name="cart_a">Carrito: <span name="cart_count">Vacío</span></a></li>
 						{{??}}
@@ -93,22 +93,12 @@
 						{{??}}
 							<li><a href="/">Inicio</a>
 							<li><a href="#">Mi Cuenta</a></li>
-							<li><a href="#">Contacto</a></li>
+							<li><a href="/contact">Contáctenos</a></li>
 						{{?}}
 					{{??}}	
 						<li><a href="/">Inicio</a>
-						<li><a href="#">Contacto</a></li>
+						<li><a href="/contact">Contáctenos</a></li>
 					{{?}}					
-					{{?it.is_home}}
-						<li class="main-search">
-							{{?it.searchinput}}
-								<input type="text" class="search-input" name="homesearchinput" value="{{=it.searchinput}}" />
-							{{??}}
-								<input type="text" class="search-input" name="homesearchinput" placeholder="Que estás buscando ?"/>
-							{{?}}
-							<button name="homesearchbutton" class="search-btn">Search</button>
-						</li>
-					{{?}}	
 					<li><a href="/?posters=false">Ofertas</a></li>
 					{{?it.cart_count===0}}
 						<li><a href="#" name="cart_a">Carrito</a></li>
@@ -121,6 +111,16 @@
 							<li><a href="/report.jpg" target="_blank">Reporte JPG</a></li>
 						</ul>
 					</li>
+					{{?it.is_home}}
+						<li class="main-search">
+							{{?it.searchinput}}
+								<input type="text" class="search-input" name="homesearchinput" value="{{=it.searchinput}}" />
+							{{??}}
+								<input type="text" class="search-input" name="homesearchinput" placeholder="Que estás buscando ?"/>
+							{{?}}
+							<button name="homesearchbutton" class="search-btn">Search</button>
+						</li>
+					{{?}}	
 				</ul>
 			</nav>
 			{{=it.body}}
@@ -157,7 +157,7 @@
 					<div class="footer-links">
 						<h4>Informacion</h4>
 						<ul>
-							<li><a href="#">Contacte con nostros</a></li>
+							<li><a href="/contact">Contáctenos</a></li>
 							<li><a href="#">Envíos y Devoluciones</a></li>
 							<li><a href="#">Quienes somos</a></li>
 							<li><a href="#">Aviso legal</a></li>
@@ -182,11 +182,12 @@
 						</div>
 					{{?}}
 					<div class="footer-links">
-						<h4>Contacte Con Nosotros</h4>
+						<h4>Contáctenos</h4>
 						<ul>
 							<li><a href="/">www.papeleraternopel.com</a></li>
 							<li><a href="/">Tel: + 54 9 11 5888 3335</a></li>
 							<li><a href="mailto:info@ternopel.com">Email: info@ternopel.com</a></li>
+							<li><a href="/contact">Contacto</a></li>
 						</ul>
 					</div>
 					<div class="footer-links">

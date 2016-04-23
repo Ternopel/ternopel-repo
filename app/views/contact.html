@@ -1,0 +1,34 @@
+<script src='{{=it.app_resources}}/javascript/contact.js' ></script>
+
+<section class="page-container clear-fix">
+	<section class="authentication-section">
+		<div class="authentication-forms clear-fix">
+			<h2 class="main-title">Contáctenos</h2>
+			<div class="new-customer">
+				<h3 class="form-header">Complete información de Contacto</h3>
+				<p>Llene el formulario para que podamos ponernos en contacto con Usted</p>
+				<form id="contact_form" method="post" action="/contact">
+					<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+					
+					{{?!it.is_logged_in}}
+						<label>Correo Electrónico<span class="form-error" id="email_address_error"></span></label>
+						<input type="text" class="customer-email" name="email_address">
+						
+						<label>Apellido<span class="form-error" id='last_name_error'></span></label>
+						<input type="text" class="customer-email" name="last_name">
+	
+						<label>Nombre<span class="form-error" id='first_name_error'></span></label>
+						<input type="text" class="customer-email" name="first_name">
+					{{?}}
+					
+					<label>Su consulta<span class="form-error" id='comments_error'></span></label>
+					<textarea class="cart-textarea" name="comments"></textarea>
+					
+					<button type="button" class="form-btn" name="send">Enviar</button>
+				</form>
+			</div>
+		</div>
+	</section>
+</section>
+
+

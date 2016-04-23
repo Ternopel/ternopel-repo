@@ -585,7 +585,7 @@ ul.sub-menu-list {
 	width: 180px;
 	position: absolute;
 	top: 36px;
-	left: 180px;
+	left: 328px;
 	z-index: 1;
 }
 
@@ -609,7 +609,7 @@ ul.main-nav > li {
 	display: inline;
 	font-size: 18px;
 	line-height: 53px;
-	margin: 0 38px 0 0;
+	margin: 0 18px 0 0;
 }
 
 ul.main-nav li a:link, ul.main-nav li a:visited {
@@ -635,7 +635,7 @@ ul.main-nav li.main-search {
 	border-radius: 6px;
 	line-height: 0;
 	margin: 9px;
-	width: 400px;
+	width: 366px;
 }
 
 li.main-search input[type=text] {
@@ -643,7 +643,7 @@ li.main-search input[type=text] {
 	margin: 0;
 	padding: 7px;
 	height: 20px;
-	width: 350px;
+	width: 314px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 }

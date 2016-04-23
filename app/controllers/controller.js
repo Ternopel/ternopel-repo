@@ -14,5 +14,6 @@ module.exports = {
 	home:				require('./home_controller'),
 	logout:				require('./logout_controller'),
 	privacy:			require('./privacy_controller'),
+	contact:			require('./contact_controller'),
 	posters:			require('./posters_controller')
 };

@@ -39,6 +39,7 @@ var logger = require("./logger")(module);
 				require('../app/models/shoppingcart.js')(orm,db,models);
 				require('../app/models/transactionsheader.js')(orm,db,models);
 				require('../app/models/transactionsdetail.js')(orm,db,models);
+				require('../app/models/contact.js')(orm,db,models);
 
 				return callback(app,db,models);
 			}

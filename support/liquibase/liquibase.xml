@@ -39,4 +39,8 @@
 		<sqlFile path="support/liquibase/sql/add_transaction_fields.sql" />
 	</changeSet>
 
+	<changeSet author="maximiliano.ezequiel.carrizo.barrera" id="contact">
+		<sqlFile path="support/liquibase/sql/contact.sql" />
+	</changeSet>
+
 </databaseChangeLog>
