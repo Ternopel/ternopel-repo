@@ -3,13 +3,14 @@
 var reportutil	= require("../utils/reportutil"),
 	fs			= require('fs');
 
-function save_price_listing(config, smtpTransport, filename, records, callback) {
+function save_price_listing(logger, config, smtpTransport, filename, records, callback) {
 	var async	= require('async');
 	var url		= "https://"+config.app_proxy_host;
 	if(config.app_proxy_port!==443) {
 		url	+=":"+config.app_proxy_port;
 	}
 	async.each(records, function(record, mycallback) {
+		logger.info("Sending mail to:"+record.email_address);
 		smtpTransport.sendMail({
 			from: "Información Papelera Ternopel <info@ternopel.com>",
 			to: "<"+record.email_address+">", 
@@ -79,7 +80,7 @@ function save_price_listing(config, smtpTransport, filename, records, callback) 
 		});
 	};
 
-	cronconfig.sendmailingmails = function (logger, config, models,callback) {
+	cronconfig.sendmailingmails = function (logger, config, models, callback) {
 		
 		var nodemailer = require("nodemailer");
 		
@@ -126,7 +127,7 @@ function save_price_listing(config, smtpTransport, filename, records, callback) 
 		});
 	};
 	
-	cronconfig.sendpricereportsmail = function (logger, config, models, db, callback) {
+	cronconfig.sendpricereportsmail = function (logger, config, models, db, filter, callback) {
 		
 		
 		reportutil.report(logger, db, 'phantom-pdf', function(err,out) {
@@ -150,22 +151,37 @@ function save_price_listing(config, smtpTransport, filename, records, callback) 
 				}
 			});		
 			
-			models.mailing.find({verified:true},function(err,mailings) {
+			models.mailing.find(filter,function(err,mailings) {
 				if(err) {
 					return callback(err);
 				}
-				save_price_listing(config, smtpTransport, filename, mailings,function(err) {
+				save_price_listing(logger, config, smtpTransport, filename, mailings,function(err) {
 					if(err) {
 						return callback(err);
 					}
-					models.users.find({},function(err,users) {
-						if(err) {
-							return callback(err);
-						}
-						save_price_listing(config, smtpTransport, filename, users,function(err) {
-							return callback(err);
+					
+					if(filter.verified===true) {
+						models.users.find({},function(err,users) {
+							if(err) {
+								return callback(err);
+							}
+							save_price_listing(logger, config, smtpTransport, filename, users,function(err) {
+								return callback(err);
+							});
 						});
-					});
+					}
+					else {
+						var async	= require('async');
+						async.each(mailings, function(mailing, mycallback) {
+							logger.info("Updating mailing:" + mailing.email_address);
+							mailing.immediate	= false;
+							mailing.save(function(err) {
+								return mycallback(err);
+							});
+						}, function(err) {
+							return callback(err);
+						});						
+					}
 				});
 			});
 		});
@@ -321,7 +337,7 @@ function save_price_listing(config, smtpTransport, filename, records, callback) 
 			}, null, true, 'America/Buenos_Aires');
 			var PriceListJob = new CronJob('0 0 0 * * 4', function() {
 				logger.warn('You will see this message every tuesday');
-				cronconfig.sendpricereportsmail(logger,config,models,db,function(err) {
+				cronconfig.sendpricereportsmail(logger,config,models,db,{verified:true},function(err) {
 					if(err) {
 						logger.error(err);
 					}

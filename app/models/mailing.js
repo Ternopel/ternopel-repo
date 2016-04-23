@@ -11,7 +11,8 @@ module.exports = function (orm, db, models) {
 			token:		 	{ type: 'text', required: true },
 			email_address: 	{ type: 'text', required: true, unique:true },
 			sent:			{ type: 'boolean', required: true },
-			verified:		{ type: 'boolean', required: true }
+			verified:		{ type: 'boolean', required: true },
+			immediate:		{ type: 'boolean', required: true }
 		},
 		{
 			cache:	false,

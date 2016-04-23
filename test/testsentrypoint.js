@@ -98,8 +98,10 @@ describe('Test Suite', function() {
 	if(runTests) {
 		it('Send registration email', testsendemail.sendRegistrationMail);
 		it('Send mailing email', testsendemail.sendMailingmails);
-		it('Send price reports email', testsendemail.sendPriceReportsMail);
 		it('Send purchase email', testsendemail.sendPurchaseMail);
+		it('Send contact email', testsendemail.sendContactMessage);
+		it('Send price reports email', testsendemail.sendPriceReportsMail);
+		it('Send price immediate email', testsendemail.sendPriceImmediateMail);
 	}
 	
 	if(runTests) {
@@ -162,6 +164,7 @@ describe('Test Suite', function() {
 		it('Confirm User', testsregistration.confirmUser);
 		it('Admin login', testsregistration.adminLogin);
 		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
+		it('List delivery', testsregistration.listDelivery);
 	}
 	 	
  	// Health check

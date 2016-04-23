@@ -55,6 +55,9 @@
 		app.get		( '/images/posters/picture/:id',		controllers.posters.get_picture);
 		app.delete	( '/admin/posters',						controllers.posters.delete_posters);
 
+		app.get		( '/admin/listdelivery',				controllers.registration.get_list_delivery);
+		app.post	( '/admin/listdelivery',				controllers.registration.post_list_delivery);
+
 		var multipart			= require('connect-multiparty');
 		var multipartMiddleware = multipart();
 		

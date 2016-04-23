@@ -43,4 +43,7 @@
 		<sqlFile path="support/liquibase/sql/contact.sql" />
 	</changeSet>
 
+	<changeSet author="maximiliano.ezequiel.carrizo.barrera" id="add_immediate_column">
+		<sqlFile path="support/liquibase/sql/add_immediate_column.sql" />
+	</changeSet>
 </databaseChangeLog>

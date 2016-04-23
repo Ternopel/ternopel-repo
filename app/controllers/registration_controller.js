@@ -1,12 +1,13 @@
 'use strict';
 
-var cipher	= require('../../utils/cipher'),
-	utils	= require('./utils'),
-	ld		= require('lodash'),
-	logger	= require("../../utils/logger")(module);
+var cipher		= require('../../utils/cipher'),
+	utils		= require('./utils'),
+	ld			= require('lodash'),
+	cronconfig	= require('../../utils/cronconfig.js'),
+	logger		= require("../../utils/logger")(module);
 
 
-function save_email(req, res, next, email_field, email_address, is_registration) {
+function save_email(req, res, next, email_field, email_address, is_registration, immediate) {
 
 	logger.info("Saving email");
 	var mailing_read_privacy	= req.body.mailing_read_privacy;
@@ -14,7 +15,7 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 	
 	logger.debug("Defining validators");
 	req.assert(email_field, 'El email ingresado es incorrecto').isEmail();
-	if(is_registration===false) {
+	if(is_registration===false && immediate ===false) {
 		req.assert('mailing_read_privacy', 'Debe marcar que ha leído las Políticas de Privacidad').notEmpty();
 	}
 	
@@ -52,8 +53,14 @@ function save_email(req, res, next, email_field, email_address, is_registration)
 			else {
 				logger.debug('Mailing de usuario !');
 				logger.info('Mailing user '+email_address);
-				req.models.mailing.create({	email_address:	email_address, token:token, verified:false, sent:false },function(err,mailing) {
-					return callback(err,mailing);
+				req.models.mailing.create({	email_address:	email_address, token:token, verified:false, sent:false, immediate:immediate },function(err,mailing) {
+					if(err) {
+						return callback(err);
+					}
+					cronconfig.sendpricereportsmail(logger,req.config,req.models,req.db,{immediate:true},function(err) {
+						logger.info("Cron runned successfully");
+						return callback(err,mailing);
+					});
 				});
 			}
 		}
@@ -286,11 +293,22 @@ module.exports = {
 	},
 	
 	post_registration: function(req, res, next) {
-		return save_email(req, res, next, 'regis_email_address', req.body.regis_email_address, true);
+		return save_email(req, res, next, 'regis_email_address', req.body.regis_email_address, true, false);
 	},
 	
 	post_mailing: function(req, res, next) {
 		logger.info("Receiving post");
-		return save_email(req, res, next, 'email_address', req.body.email_address, false);
+		return save_email(req, res, next, 'email_address', req.body.email_address, false, false);
+	},
+	
+	get_list_delivery: function(req, res, next) {
+		logger.info("Getting list delivery");
+		var pageinfo = ld.merge(req.pageinfo, { csrfToken: req.csrfToken() });
+		res.render('admin_list_delivery.html',pageinfo);
+	},
+	
+	post_list_delivery: function(req, res, next) {
+		logger.info("Receiving post");
+		return save_email(req, res, next, 'email_address', req.body.email_address, false, true);
 	}
 };

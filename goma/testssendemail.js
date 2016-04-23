@@ -30,13 +30,25 @@ var request		= require('supertest'),
 	};
 	
 	testsendmail.sendPriceReportsMail = function (done) {
-		cronconfig.sendpricereportsmail(logger,config,models,db,function(err) {
+		cronconfig.sendpricereportsmail(logger,config,models,db,{verified:true},function(err) {
+			return done(err);
+		});
+	};
+	
+	testsendmail.sendPriceImmediateMail = function (done) {
+		cronconfig.sendpricereportsmail(logger,config,models,db,{immediate:true},function(err) {
 			return done(err);
 		});
 	};
 	
 	testsendmail.sendPurchaseMail = function (done) {
 		cronconfig.sendpurchasemail(logger,config,models,function(err) {
+			return done(err);
+		});
+	};
+	
+	testsendmail.sendContactMessage = function (done) {
+		cronconfig.contactmessage(logger,config,models,function(err) {
 			return done(err);
 		});
 	};

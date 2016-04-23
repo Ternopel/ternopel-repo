@@ -1,0 +1,17 @@
+<script src='{{=it.app_resources}}/javascript/listdelivery.js' ></script>
+<section class="page-container clear-fix">
+	{{#def.load('admin_menu.html')}}
+	<section class="main-content">
+
+		<h1>Envío de Lista de Precios a Cliente</h1>
+
+		<form id='listdelivery_form' method="post" action="/admin/listdelivery">
+			<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+		
+			<label>Correo Electrónico<span class="form-error" id="email_address_error"></span></label>
+			<input type="text" class="customer-email" name="email_address">
+
+			<button type="submit" class="form-btn" name="send">Enviar</button>
+		</form>
+	</section>
+</section>
