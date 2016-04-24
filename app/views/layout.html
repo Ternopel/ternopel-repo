@@ -37,11 +37,12 @@
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 			
-			ga('create', 'UA-75278112-1', 'auto');
-			ga('send', 'pageview');
 			{{?it.is_logged_in}}
-				ga('set', 'userId','{{=it.user_id}}');
+				ga('create', 'UA-75278112-1', { 'userId': '{{=it.user_id}}' });
+			{{??}}
+				ga('create', 'UA-75278112-1');
 			{{?}}	
+			ga('send', 'pageview');
 		</script>
 
 		<!--[if lt IE 9]>
