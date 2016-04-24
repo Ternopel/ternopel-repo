@@ -16,13 +16,28 @@ function make_form(formid, successcallback,errorcallback) {
 function show_error_messages(errors) {
 	console.log("Showing error messages:"+errors.responseText);
 	$.each(JSON.parse(errors.responseText), function(index, error) {
-		console.log("Error message:"+error.msg);
 		if (error.param === 'general') {
+			console.log("General Error");
+
 			$("section[id='notifications']").show();
 			$("#" + error.param + "_error").show();
-			$("#" + error.param + "_error").html(error.msg);
+
+			if( typeof error.msg === 'string' ) {
+				console.log("Error message string:"+error.msg);
+				$("#" + error.param + "_error").html(error.msg);
+			}
+			else {
+				console.log("Error message object:"+JSON.stringify(error.msg));
+				if(error.msg.detail) {
+					$("#" + error.param + "_error").html(error.msg.detail);
+				}
+				else {
+					$("#" + error.param + "_error").html('Undefined error');
+				}
+			}
 		}
 		else {
+			console.log("Specific Error");
 			var input = $("input[name='" + error.param+"']");
 			if(!input.length) {
 				input = $("select[name='" + error.param+"']");
