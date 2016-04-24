@@ -23,7 +23,7 @@
 		<div class="data-content clear-fix">
 			{{?!it.is_logged_in}}
 				<form id="form_not_registered" >
-					<label>Correo Electrónico<span class='form-error' id='email_address_error'></span></label>
+					<label>Correo<span class='form-error' id='email_address_error'></span></label>
 					<input type="email" class="cart-email" name='email_address'>
 					
 					<label>Contraseña<span class="form-error" id='password_error'></span></label>
@@ -38,7 +38,7 @@
 					<input type='hidden' name='already_registered' value='false'>
 				</form>
 				<form id="form_registered" hidden="true">
-					<label>Correo Electrónico<span class='form-error' id='email_address_reg_error'></span></label>
+					<label>Correo<span class='form-error' id='email_address_reg_error'></span></label>
 					<input type="email" class="cart-email" name='email_address_reg'>
 					
 					<label>Contraseña<span class="form-error" id='password_reg_error'></span></label>
@@ -48,7 +48,7 @@
 				</form>
 			{{??}}
 				<form id="form_logged_in">
-					<label>Correo Electrónico</label>
+					<label>Correo</label>
 					<input type="email" class="cart-email" readonly="readonly" value="{{=it.email_address}}">
 					
 					<label>Nombre<span class="form-error" id='first_name_log_error'></span></label>
