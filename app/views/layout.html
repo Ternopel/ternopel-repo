@@ -39,10 +39,13 @@
 			
 			{{?it.is_logged_in}}
 				ga('create', 'UA-75278112-1', { 'userId': '{{=it.user_id}}' });
+				console.log('Sending user to analytics:{{=it.user_id}}');
 			{{??}}
 				ga('create', 'UA-75278112-1');
+				console.log('Sending NO user to analytics');
 			{{?}}	
 			ga('send', 'pageview');
+			console.log('Sending page view');
 		</script>
 
 		<!--[if lt IE 9]>
