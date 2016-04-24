@@ -51,6 +51,7 @@ var logger = require("./logger")(module);
 				}
 				logger.info('User logged in:'+user.fullName());
 				req.pageinfo = {is_logged_in:true, 
+								user_id: "{{"+user.id+"}}",
 								full_name: user.fullName(), 
 								is_admin: user.isAdmin(), 
 								email_address: user.email_address, 

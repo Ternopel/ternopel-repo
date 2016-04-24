@@ -42,6 +42,9 @@
 			
 			ga('create', 'UA-75278112-1', 'auto');
 			ga('send', 'pageview');
+			{{?it.is_logged_in}}
+				ga('set', 'userId','{{=it.user_id}}');
+			{{?}}	
 		</script>
 
 		<!--[if lt IE 9]>
