@@ -38,10 +38,10 @@
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 			
 			{{?it.is_logged_in}}
-				ga('create', 'UA-75278112-1', { 'userId': '{{=it.user_id}}' });
+				ga('create', 'UA-75278112-1', 'auto', { 'userId': '{{=it.user_id}}' });
 				console.log('Sending user to analytics:{{=it.user_id}}');
 			{{??}}
-				ga('create', 'UA-75278112-1');
+				ga('create', 'UA-75278112-1', 'auto');
 				console.log('Sending NO user to analytics');
 			{{?}}	
 			ga('send', 'pageview');
