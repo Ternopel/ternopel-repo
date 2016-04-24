@@ -517,7 +517,7 @@ a:hover, a:active {
 
 .header-details ul li {
 	text-align: right;
-	margin: 0 0 10px 0
+	margin: 0 0 16px 0
 }
 
 .header-details ul li a:link, .header-details ul li a:visited {
@@ -545,6 +545,7 @@ a:hover, a:active {
 a.user-login {
 	background: url(../images/user-icon.png) no-repeat left center;
 	padding: 0 0 0 20px;
+	font-size: 20px;
 }
 
 a.user-logout {
