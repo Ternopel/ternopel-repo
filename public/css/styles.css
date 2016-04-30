@@ -453,7 +453,7 @@ a:hover, a:active {
 }
 
 .main-sidebar {
-	width: 210px;
+	width: 230px;
 	float: left;
 	margin: 0 10px 0 0;
 }
@@ -671,8 +671,8 @@ h2.aside-title {
 	color: #fff;
 	font-size: 22px;
 	font-weight: 200;
-	background: url(../images/all.png) no-repeat 0px -84px;
-	width: 211px;
+	background: url(../images/all.png) no-repeat -436px 0px;
+	width: 230px;
 	height: 49px;
 	margin: 10px 0 0 -27px;
 	line-height: 42px;
