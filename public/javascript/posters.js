@@ -3,6 +3,7 @@
 function send_form(form) {
 	var csrf			= $("input[name='_csrf']").val();
 	var position		= $("input[name='position']").val();
+	var caption			= $("input[name='caption']").val();
 	var poster_id		= $("input[name='poster_id']").val();
 	var is_product		= $('input[name=is_product]:checked', '#posters_form').val()
 	var product_id		= $("select[name='product_id']").val();
@@ -14,7 +15,7 @@ function send_form(form) {
 		var picture_regex	= /data:(.*);base64,(.*)/;
 		var type			= img_data.replace(picture_regex, '$1');
 		var data			= img_data.replace(picture_regex, '$2');
-		formdata			= {id:poster_id, _csrf:csrf, product_id:product_id, category_id:category_id, type:type, data:data, is_product:is_product, position:position};
+		formdata			= {id:poster_id, _csrf:csrf, product_id:product_id, category_id:category_id, type:type, data:data, is_product:is_product, position:position, caption:caption};
 	}
 	else {
 		console.log('Picture didnt changed');

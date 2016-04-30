@@ -10,7 +10,7 @@ module.exports = {
 		
 	get_add_page: function(req, res, next) {
 		logger.info('En GET ADD PAGE');
-		var poster		= ld.merge({position:''});
+		var poster		= ld.merge({position:'',caption:''});
 		var pageinfo	= ld.merge(req.pageinfo, {method:'PUT',csrfToken: req.csrfToken(),poster:poster});
 
 		modelsutil.getCategories(req.db, {includeunique:true},function(err,categories) {
@@ -47,6 +47,7 @@ module.exports = {
 		logger.debug("Defining validators");
 		req.assert('is_product', 'El flag indicando tipo de poster es requerido').notEmpty();
 		req.assert('position', 'El orden del cartel es requerido').notEmpty();
+		req.assert('caption', 'El subtítulo es requerido').notEmpty();
 		req.assert('type', 'Por favor, cargue el archivo').notEmpty();
 		req.assert('data', 'El stream del archivo es requerido').notEmpty();
 		var category_id;
@@ -82,6 +83,7 @@ module.exports = {
 			req.models.posters.create({	category_id:category_id,
 										product_id:product_id,
 										content_type:req.body.type,
+										caption:req.body.caption,
 										last_update:new Date(),
 										position:req.body.position},function(err,poster) {
 				if(err) {

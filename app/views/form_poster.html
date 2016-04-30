@@ -1,4 +1,3 @@
-<!-- <script src='{{=it.app_resources}}/javascript/imagecrop.min.js'></script> -->
 <script src='{{=it.app_resources}}/javascript/posters.js'></script>
 
 {{?it.method==='PUT'}}
@@ -36,6 +35,11 @@
 				<label>Posición</label> 
 				<input type='text' name='position' value="{{=it.poster.position}}"></input>
 				<div class='errorMsg' id='position_error'></div>
+			</span> 
+			<span class='formItem'> 
+				<label>Subtítulo</label> 
+				<input type='text' name='caption' value="{{=it.poster.caption}}"></input>
+				<div class='errorMsg' id='caption_error'></div>
 			</span> 
 			<span class='formItem'> 
 				<label>Tipo Cartel</label> 

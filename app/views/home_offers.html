@@ -7,7 +7,7 @@
 			<div class="slider-container">
 				<ul class="slider-images">
 					{{~ it.posters:poster}}
-						<li>
+						<li data-caption="{{=poster.caption}}">
 							<a href="{{=poster.url}}" name="slider-{{=poster.id}}">
 								<img src="/images/posters/picture/{{=poster.id}}.jpg" class="slider-img">
 							</a>

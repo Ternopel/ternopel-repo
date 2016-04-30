@@ -9,6 +9,7 @@ module.exports = function (orm, db, models) {
 			id:				{ type: 'serial', key: true}, 
 			content_type: 	{ type: 'text', required: true },
 			last_update: 	{ type: 'date', size:4, required: true },
+			caption:		{ type: 'text', required: true },
 			position:	 	{ type: 'integer', size:4, required: true, unique: true }
 		},
 		{
