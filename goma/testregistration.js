@@ -17,7 +17,7 @@ var request		= require('supertest'),
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/registration/3041bd90-5397-11e5-9650-9bf126a5d211')
-					.expect(200)
+					.expect(404)
 					.end(function(err, res){
 						expect(res.text).toInclude('Su token es inválido !');
 						return callback(err,res);
@@ -47,7 +47,7 @@ var request		= require('supertest'),
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)
 				.get('/mailing/3041bd90-5397-11e5-9650-9bf126a5d299')
-				.expect(200)
+				.expect(404)
 				.end(function(err, newres){
 					expect(newres.text).toInclude('Su token es inválido !');
 					return callback(err,res);
@@ -531,7 +531,7 @@ var request		= require('supertest'),
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin')
-					.expect(200)
+					.expect(404)
 					.end(function(err, res){
 						expect(res.text).toInclude('Usted no tiene permisos para ver esta página');
 						return callback(err,res);

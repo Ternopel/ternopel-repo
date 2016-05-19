@@ -124,14 +124,14 @@ describe('Test Suite', function() {
 	// admin products tests
 	if(runTests) {
 		it('Delete product', testsproducts.deleteProduct);
-		it('Get products', testsproducts.getProducts);
-		it('Get products formats', testsproducts.getProductFormats);
 		it('Create product', testsproducts.createProduct);
 		it('Update Admin products', testsproducts.updateAdminProduct);
+		it('Update product', testsproducts.updateProduct);
+		it('Get products', testsproducts.getProducts);
+		it('Get products formats', testsproducts.getProductFormats);
 		it('Get Admin products', testsproducts.getAdminProducts);
 		it('Get products picture', testsproducts.getProductPicture);
 		it('Add products picture', testsproducts.addProductPicture);
-		it('Update product', testsproducts.updateProduct);
 	}	
 	
 	// admin categories tests
@@ -147,24 +147,24 @@ describe('Test Suite', function() {
 		it('Get Offers', testshome.getOffers);
 		it('Get No Posters', testshome.getNoPosters);
 		it('Get category', testshome.getCategory);
-		it('Get no existing category', testshome.getNoExistingCategory);
-		it('Get no existing product', testshome.getNoExistingProduct);
 		it('Get product admin user', testshome.getProductAdminUser);
 		it('Get product', testshome.getProduct);
 		it('Get Search', testshome.getSearch);
+		it('Get no existing category', testshome.getNoExistingCategory);
+		it('Get no existing product', testshome.getNoExistingProduct);
 	}
 	
 	// Registration tests
 	if(runTests) {
-		it('Admin with no permissions', testsregistration.adminWithNoPermissions);
 		it('Register new mailing user', testsregistration.registerNewMailingUser);
 		it('Client login', testsregistration.clientLogin);
 		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
 		it('Users registration ', testsregistration.registerNewUser);
-		it('Confirm User', testsregistration.confirmUser);
 		it('Admin login', testsregistration.adminLogin);
 		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
 		it('List delivery', testsregistration.listDelivery);
+		it('Admin with no permissions', testsregistration.adminWithNoPermissions);
+		it('Confirm User', testsregistration.confirmUser);
 	}
 	 	
  	// Health check

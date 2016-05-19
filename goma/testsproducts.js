@@ -41,7 +41,7 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/add')
 					.set('cookie', utils.getcookies(res))
-					.expect(200)
+					.expect(404)
 					.end(function(err, newres){
 						expect(newres.text).toInclude('No se encontró categoría del Producto');
 						return callback(err,res);
@@ -65,7 +65,7 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/edit')
 					.set('cookie', utils.getcookies(res))
-					.expect(200)
+					.expect(404)
 					.end(function(err, newres){
 						expect(newres.text).toInclude('No se encontró Id del Producto');
 						return callback(err,res);
@@ -89,7 +89,7 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/edit?productid=4545')
 					.set('cookie', utils.getcookies(res))
-					.expect(200)
+					.expect(404)
 					.end(function(err, newres){
 						expect(newres.text).toInclude('Producto con id:4545 no existente');
 						return callback(err,res);
@@ -134,7 +134,7 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/picture/edit')
 					.set('cookie', utils.getcookies(res))
-					.expect(200)
+					.expect(404)
 					.end(function(err, newres){
 						expect(newres.text).toInclude('No se encontró Id de Imagen');
 						return callback(err,res);
@@ -156,7 +156,7 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/picture/edit?pictureid=4545')
 					.set('cookie', utils.getcookies(res))
-					.expect(200)
+					.expect(404)
 					.end(function(err, newres){
 						expect(newres.text).toInclude('No se encontró Imagen con id:4545');
 						return callback(err,res);
@@ -201,7 +201,7 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/formats/edit')
 					.set('cookie', utils.getcookies(res))
-					.expect(200)
+					.expect(404)
 					.end(function(err, newres){
 						expect(newres.text).toInclude('No se encontró Id del Producto');
 						return callback(err,res);
@@ -223,7 +223,7 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/formats/edit?productid=4545')
 					.set('cookie', utils.getcookies(res))
-					.expect(200)
+					.expect(404)
 					.end(function(err, newres){
 						expect(newres.text).toInclude('No se encontró Producto con id:4545');
 						return callback(err,res);
@@ -579,7 +579,7 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products')
 					.set('cookie', utils.getcookies(res))
-					.expect(200)
+					.expect(404)
 					.end(function(err, newres){
 						expect(newres.text).toInclude('No se encontró parámetro de búsqueda');
 						return callback(err,res);
@@ -854,7 +854,7 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/picture/add')
 					.set('cookie', utils.getcookies(res))
-					.expect(200)
+					.expect(404)
 					.end(function(err, newres){
 						expect(newres.text).toInclude('No se encontró Id del Producto');
 						return callback(err,res);
@@ -876,7 +876,7 @@ var request		= require('supertest'),
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/products/picture/add?productid=4545')
 					.set('cookie', utils.getcookies(res))
-					.expect(200)
+					.expect(404)
 					.end(function(err, newres){
 						expect(newres.text).toInclude('No se encontró Producto con id:4545');
 						return callback(err,res);

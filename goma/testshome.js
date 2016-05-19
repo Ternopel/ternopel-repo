@@ -97,7 +97,7 @@ var request		= require('supertest'),
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/no-existing-category')
-					.expect(200)
+					.expect(404)
 					.end(function(err, res){
 						expect(res.text).toInclude('Esta categoria no está más disponible');
 						return callback(err,res);
@@ -186,7 +186,7 @@ var request		= require('supertest'),
 				logger.info('Executing get to server');
 				request("http://localhost:"+config.test_app_port)
 					.get('/no-existing-category/no-existing-product')
-					.expect(200)
+					.expect(404)
 					.end(function(err, res){
 						expect(res.text).toInclude('Este producto no está más disponible');
 						return callback(err,res);
