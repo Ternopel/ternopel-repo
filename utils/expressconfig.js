@@ -84,7 +84,7 @@ var logger = require("./logger")(module);
 				logger.error(err);
 				var ld = require('lodash');
 				var pageinfo = ld.merge(req.pageinfo, {error:err});
-				res.render('error.html',pageinfo);
+				res.status(404).render('error.html',pageinfo);
 			});
 		}
 
@@ -94,7 +94,7 @@ var logger = require("./logger")(module);
 			logger.error(err);
 			var ld = require('lodash');
 			var pageinfo = ld.merge(req.pageinfo, {error:err});
-			res.render('error.html',pageinfo);
+			res.status(404).render('error.html',pageinfo);
 		});
 		
 		logger.debug("Setting 'winston' error logger");
