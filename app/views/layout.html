@@ -66,8 +66,8 @@
 					<h1 class="logo"><a href="/">{{=it.page_title}}</a></h1>
 				</div>
 				<div class="header-labels">
-					<img src="{{=it.app_resources}}/images/tel-tab.png" alt="">
-					<img src="{{=it.app_resources}}/images/header-image.png" alt="">
+					<img src="{{=it.app_resources}}/images/tel-tab.png" alt="" />
+					<img src="{{=it.app_resources}}/images/header-image.png" alt=""/>
 				</div>
 				<div class="header-details">
 					<ul>
@@ -137,15 +137,16 @@
 						<div class="subscribe-form">
 						
 							<form id="mailing_form" method="post" action="/mailing">
-								<input type='hidden' name='_csrf' value='{{=it.csrfToken}}'>
+								<input type='hidden' name='_csrf' value='{{=it.csrfToken}}' />
 								<div class="subscribe-input clear-fix">
 									<span class="form-error" id="email_address_error"></span>
-									<input type="text" name="email_address">
+									<input type="text" name="email_address" />
 									<button class="subscribe-btn" name="mailingbutton">Enviar</button>
 								</div>
 								<div class="subscribe-checkbox">
 									<span class="form-error" id="mailing_read_privacy_error"></span>
-									<input type="checkbox" name="mailing_read_privacy"><span>He leido y estoy conforme con la <a href="/privacy/datapolicy">Política de protección de Datos</a></span>
+									<input type="checkbox" name="mailing_read_privacy"/>
+									<span>He leido y estoy conforme con la <a href="/privacy/datapolicy">Política de protección de Datos</a></span>
 								</div>
 							</form>
 						</div>
