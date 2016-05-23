@@ -579,6 +579,16 @@ ul.main-nav {
 	position: relative;
 }
 
+ul.main-nav li:first-child {
+	margin: 0;
+}
+
+a.menu-link {
+	display: none;
+	background: url(../images/nav-arrow.png) no-repeat right center;
+	padding: 0 24px 0 0;
+}
+
 ul.sub-menu-list {
 	display: none;
 	background: rgba(0, 0, 0, 0.7);
@@ -709,6 +719,10 @@ ul.aside-sub-menu li a {
 	display: inline-block;
 }
 
+img.delivery-img2 {
+	display: none;
+}
+
 span.expand {
 	background: url(../images/plus-icon.png) no-repeat center center;
 	display: inline-block;
@@ -732,8 +746,12 @@ span.compress {
 }
 
 .discount-image {
-	width: 60px;
+	width: 30%;
 	float: left;
+}
+
+.discount-image img {
+	width: 100%;
 }
 
 .discount-small {
@@ -742,12 +760,12 @@ span.compress {
 }
 
 .discount-image a {
-	padding: 20px 10px;
+	margin: 20px 0 0;
 	display: inline-block;
 }
 
 .discount-details {
-	width: 140px;
+	width: 65%;
 	float: right;
 }
 .discount-details ul li {
@@ -1546,26 +1564,31 @@ footer.main-footer {
 }
 
 .footer-subscribe p, .subscribe-form {
-	width: 50%;
+	width: 52%;
 	float: left;
 }
 
 .footer-subscribe p {
 	font-size: 22px;
 	color: #fff;
-	margin: 0;
+	margin: 0 2% 0 0;
+}
+
+section.footer-subscribe>p {
+    width: 46%;
+    line-height: 22px;
 }
 
 .subscribe-input input[type=text] {
 	border: none;
 	margin: 0;
-	padding: 7px;
+	padding: 7px 2%;
 	height: 20px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 	background: #fff;
 	border: 2px solid #004db2;
-	width: 76%;
+	width: 74%;
 	float: left;
 	color: #2b2b2b;
 }
@@ -1576,9 +1599,8 @@ footer.main-footer {
 	background: #000;
 	color: #fff;
 	border: none;
-	padding: 9px;
-	width: 18%;
-	margin: 0 0 0 10px;
+	padding: 9px 2%;
+	margin: 0 0 0 2%;
 }
 
 .subscribe-checkbox {
@@ -1587,7 +1609,6 @@ footer.main-footer {
 
 .subscribe-checkbox span {
 	font-size: 14px;
-	display: inline-block;
 	margin: 0 0 0 3px;
 }
 
@@ -1673,3 +1694,303 @@ ul.social-links li {
 .hideShowPassword-toggle-hide {
 	background-position: -44px center;
 }
+
+/* ==========================================================================
+MEDIA QUERIES
+========================================================================== */
+
+@media only screen and (max-width: 1024px) {
+
+	section.main-wrapper {
+		width: 96%;
+	}
+	
+	.main-content {
+    	width: 70%;
+		margin: 0;
+		float: left;
+	}
+	
+	.main-sidebar {
+    	width: 25%;
+		margin: 0 5% 0 0;
+	}
+
+	.logo-section {
+		width: 45%;
+	}
+
+	.logo-section h1.logo a {
+		width: 90%;
+		margin: 40px 4%;
+		background-size: contain;
+	}
+
+	.header-labels {
+		width: 25%;
+	}
+
+	.header-labels img {
+		width: 100%;
+	}
+
+	.header-details {
+		padding: 20px 2% 0;
+		width: 25%;
+	}
+
+	.nav-bar {
+		width: 100%;
+		margin: 5px 0 0 0px;
+		background-size: 108%;
+		position: relative;
+		background: #0c6be8;
+		height: auto;
+	}
+
+	ul.main-nav li.main-search {
+		width: 246px;
+	}
+	
+	.slider-container img {
+		width: 100%;
+	}
+	
+	h2.aside-title {
+	    font-size: 18px;
+	    background: #0c6be8;
+	    width: 95%;
+	    height: auto;
+	    margin: 10px 0 10px -10px;
+	    padding: 0 0 0 20px;
+	    -webkit-border-radius: 0 10px 10px 0;
+		border-radius: 0 10px 10px 0;
+	}
+	
+	.advertising-aside {
+	    background: #0c6be8;
+	    -webkit-border-radius: 0 10px 10px 0;
+		border-radius: 0 10px 10px 0;
+		margin: 0 0 20px;
+	}
+	
+	img.delivery-img1 {
+		display: none;
+	}
+
+	img.delivery-img2 {
+		display: block;
+		margin: 0 0 0 -10px;
+		width: 100%;
+	}
+	
+	ul.main-products-list li img {
+		width: 100%;
+	}
+	
+	.authentication-forms > div {
+    	width: 45%;
+	}
+	
+	.product-image-container img {
+    	width: 100%;
+	}
+	
+	.product-thumbnail-container img {
+    	width: 30%;
+	}
+	
+	.product-info ul.info-list li {
+    	font-size: 13px;
+		width: 30%;
+		font-weight: 400;
+	}
+	
+	.product-content-details ul li {
+    	line-height: 18px;
+		margin: 0 0 10px 18px;
+	}
+	
+	a.add-to-basket {
+	    font-size: 11px;
+	    padding: 6px 0;
+	    width: 24%;
+	    text-align: center;
+	}
+	
+	.quantity .product-price {
+    	font-size: 18px;
+	}
+	
+	li.quantity input {
+	    width: 30px;
+	    margin: 10px 6px 10px 0;
+	}
+
+}
+
+@media only screen and (max-width: 950px) {
+
+	ul.main-nav li.main-search {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	ul.main-nav li {
+		font-size: 15px;
+		margin: 0 32px 0 0;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+
+	ul.main-nav li {
+	    display: block;
+	}
+	
+	a.menu-link {
+		display: inline-block;
+		padding: 0 30px;
+		color: #fff;
+		margin: 14px 0;
+	}
+	
+	ul.main-nav li a:link, ul.main-nav li.main-search {
+		display: none;
+	}
+	
+	.authentication-section {
+    	padding: 0 20px 80px;
+	}
+	
+	.authentication-forms > div {
+    	width: 100%;
+		float: none;
+	}
+	
+	.product-details-col, .product-image-col {
+    	width: 98%;
+		float: none;
+		margin: 0 0 40px;
+	}
+	
+}
+
+
+@media only screen and (max-width: 650px) {
+	
+	header.main-header {
+    	position: relative;
+	}
+
+	.logo-section {
+		width: 100%;
+		float: none;
+	}
+
+	.header-labels, .header-details {
+		width: 41%;
+		margin: 0 2%;
+	}
+	
+	.header-labels img:first-child {
+    	position: absolute;
+		top: -14px;
+		right: 15px;
+		width: 220px;
+	}
+	
+	ul.aside-menu li {
+    	font-size: 12px;
+		line-height: 16px;
+	}
+	
+	.contact-details ul li {
+    	font-size: 15px;
+		line-height: 20px;
+		padding: 0 0 0 28px;
+		margin: 0 0 10px;
+	}
+	
+	.contact-details ul li.aside-tel, .contact-details ul li.aside-email {
+		background-size: 20px;
+	}
+	
+	.payment-logos img {
+		width: 100%;
+	}
+	
+	.subscribe-input input[type=text] {
+    	width: 68%;
+	}
+	
+	.subscribe-btn {
+		padding: 7px 2%;
+	}
+	
+	section.footer-subscribe p, div.subscribe-form {
+    	width: 100%;
+		float: none;
+		margin: 0 0 10px;
+		font-size: 18px;
+	}
+	
+	.footer-links {
+		width: 98%;
+		float: none;
+	}
+	
+	.footer-links h4 {
+		margin: 30px 0 10px;
+	}
+
+}
+
+
+@media only screen and (max-width: 480px) {
+	
+	.header-labels img:last-child {
+    	display: none;
+	}
+	
+	.main-sidebar {
+    	width: 35%;
+		margin: 0 5% 0 0;
+	}
+	
+	.main-content {
+    	width: 60%;
+	}
+	
+	.logo-section {
+		text-align: center;
+	}
+
+	.logo-section h1.logo a {
+		margin: 40px 0 20px;
+	}
+
+	.logo-section, .header-labels, .header-details {
+		width: 96%;
+		float: none;
+		padding: 0;
+		margin: 0 2%;
+	}
+	
+	h2.aside-title {
+    	font-size: 16px;
+		width: 100%;
+		padding: 0 0 0 14px;
+	}
+	
+	.main-products-list li {
+    	width: 96%;
+		float: none;
+		margin: 0 2% 40px;
+	}
+
+}
+
+
+
