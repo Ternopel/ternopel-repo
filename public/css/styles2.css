@@ -703,7 +703,7 @@ ul.aside-menu li:last-child {
 }
 
 ul.aside-menu > li > a {
-	background: url(../images/list-point.png) no-repeat 10px 8px;
+	background: url(../images/list-point.png) no-repeat 10px 12px;
 	padding: 8px 12px 8px 25px;
 	display: inline-block
 }
@@ -2157,7 +2157,7 @@ input[type=button].zoom-in-btn, input[type=button].zoom-out-btn {
 }
 
 .categoryul {
-	line-height: 10px;
+	line-height: 16px;
 }
 
 

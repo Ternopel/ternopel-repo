@@ -713,7 +713,6 @@ ul.aside-menu > li > a.aside-active, ul.aside-sub-menu li a.aside-active {
 }
 
 ul.aside-sub-menu {
-	display: none;
 	margin: 0 0 0 30px;
 }
 
