@@ -993,6 +993,7 @@ a.forgot-password {
 	color: #e05a65;
 	text-transform: none;
 	font-size: 13px;
+	font-weight: bolder;
 }
 
 .form-error-input {
