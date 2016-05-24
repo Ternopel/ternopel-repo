@@ -81,7 +81,7 @@ module.exports = {
 							return callback('Este producto no está más disponible');
 						}
 						var detailedproduct = products[0];
-						ld.merge(pageinfo,{detailedproduct:detailedproduct,csrfToken: req.csrfToken(),page_title:'Papelera Ternopel - '+detailedproduct.name});
+						ld.merge(pageinfo,{detailedproduct:detailedproduct,csrfToken: req.csrfToken(),page_title:'Papelera Ternopel - '+detailedproduct.category.name+' - '+detailedproduct.name});
 						
 						logger.info(JSON.stringify(detailedproduct));
 						utils.populate_og_info(pageinfo,detailedproduct.category.url+'/'+detailedproduct.url,detailedproduct.name,detailedproduct.productspictures);
