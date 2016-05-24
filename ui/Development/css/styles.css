@@ -545,6 +545,7 @@ a:hover, a:active {
 a.user-login {
 	background: url(../images/user-icon.png) no-repeat left center;
 	padding: 0 0 0 20px;
+	font-size: 18px;
 }
 
 a.user-logout {
@@ -561,6 +562,7 @@ a.user-logout {
 	text-align: center;
 	margin: 0;
 	padding: 7px 0 4px;
+	font-size: 18px;
 }
 
 /* Main Nav */
@@ -580,7 +582,7 @@ ul.main-nav {
 }
 
 ul.main-nav li:first-child {
-	margin: 0;
+	margin-right: 10;
 }
 
 a.menu-link {
@@ -595,7 +597,7 @@ ul.sub-menu-list {
 	width: 180px;
 	position: absolute;
 	top: 36px;
-	left: 17px;
+	left: 328px;
 	z-index: 1;
 }
 
@@ -619,7 +621,7 @@ ul.main-nav > li {
 	display: inline;
 	font-size: 18px;
 	line-height: 53px;
-	margin: 0 38px 0 0;
+	margin: 0 16px 0 0;
 }
 
 ul.main-nav li a:link, ul.main-nav li a:visited {
@@ -634,6 +636,7 @@ ul.main-nav li a:hover, ul.main-nav li a:active {
 ul.main-nav li a.sub-menu-item {
 	background: url(../images/nav-arrow.png) no-repeat right center;
 	padding: 0 24px 0 0;
+	color: #FFFFFF;
 }
 
 ul.main-nav li.main-search {
@@ -644,7 +647,7 @@ ul.main-nav li.main-search {
 	border-radius: 6px;
 	line-height: 0;
 	margin: 9px;
-	width: 280px;
+	width: 338px;
 }
 
 li.main-search input[type=text] {
@@ -691,7 +694,7 @@ ul.aside-menu {
 
 ul.aside-menu > li {
 	border-bottom: 1px solid #ddd;
-	font-size: 14px;
+	font-size: 17px;
 	position: relative;
 }
 
@@ -1043,7 +1046,7 @@ a.enlarge-product-btn {
 }
 
 .product-thumbnail-container a:last-child img {
-	float: right;
+	float: left;
 }
 
 .product-details-col h2 {
