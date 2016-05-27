@@ -837,10 +837,11 @@ h2.main-title {
 	width: 31%;
 	float: left;
 	margin: 0 2% 40px 0;
+	min-height: 330px;
 }
 
 .main-products-list li:nth-of-type(3) {
-	margin: 0;
+	margin-right: 0;
 }
 
 h3.main-product-title {
@@ -1698,6 +1699,11 @@ ul.social-links li {
 	background-position: -44px center;
 }
 
+.prodimg {
+	width: 100% !important;
+	height: auto !important;
+}
+
 /* ==========================================================================
 MEDIA QUERIES
 ========================================================================== */
@@ -1707,13 +1713,13 @@ MEDIA QUERIES
 	section.main-wrapper {
 		width: 96%;
 	}
-	
+
 	.main-content {
     	width: 70%;
 		margin: 0;
 		float: left;
 	}
-	
+
 	.main-sidebar {
     	width: 25%;
 		margin: 0 5% 0 0;
@@ -1754,11 +1760,11 @@ MEDIA QUERIES
 	ul.main-nav li.main-search {
 		width: 246px;
 	}
-	
+
 	.slider-container img {
 		width: 100%;
 	}
-	
+
 	h2.aside-title {
 	    font-size: 18px;
 	    background: #0c6be8;
@@ -1769,14 +1775,14 @@ MEDIA QUERIES
 	    -webkit-border-radius: 0 10px 10px 0;
 		border-radius: 0 10px 10px 0;
 	}
-	
+
 	.advertising-aside {
 	    background: #0c6be8;
 	    -webkit-border-radius: 0 10px 10px 0;
 		border-radius: 0 10px 10px 0;
 		margin: 0 0 20px;
 	}
-	
+
 	img.delivery-img1 {
 		display: none;
 	}
@@ -1786,45 +1792,45 @@ MEDIA QUERIES
 		margin: 0 0 0 -10px;
 		width: 100%;
 	}
-	
+
 	ul.main-products-list li img {
 		width: 100%;
 	}
-	
+
 	.authentication-forms > div {
     	width: 45%;
 	}
-	
+
 	.product-image-container img {
     	width: 100%;
 	}
-	
+
 	.product-thumbnail-container img {
     	width: 30%;
 	}
-	
+
 	.product-info ul.info-list li {
     	font-size: 13px;
 		width: 30%;
 		font-weight: 400;
 	}
-	
+
 	.product-content-details ul li {
     	line-height: 18px;
 		margin: 0 0 10px 18px;
 	}
-	
+
 	a.add-to-basket {
 	    font-size: 11px;
 	    padding: 6px 0;
 	    width: 24%;
 	    text-align: center;
 	}
-	
+
 	.quantity .product-price {
     	font-size: 18px;
 	}
-	
+
 	li.quantity input {
 	    width: 30px;
 	    margin: 10px 6px 10px 0;
@@ -1851,38 +1857,42 @@ MEDIA QUERIES
 	ul.main-nav li {
 	    display: block;
 	}
-	
+
 	a.menu-link {
 		display: inline-block;
 		padding: 0 30px;
 		color: #fff;
 		margin: 14px 0;
 	}
-	
+
 	ul.main-nav li a:link, ul.main-nav li.main-search {
 		display: none;
 	}
-	
+
 	.authentication-section {
     	padding: 0 20px 80px;
 	}
-	
+
 	.authentication-forms > div {
     	width: 100%;
 		float: none;
 	}
-	
+
 	.product-details-col, .product-image-col {
     	width: 98%;
 		float: none;
 		margin: 0 0 40px;
 	}
-	
+
+	.product-thumbnail-container {
+		min-height: 112px;
+	}
+
 }
 
 
 @media only screen and (max-width: 650px) {
-	
+
 	header.main-header {
     	position: relative;
 	}
@@ -1896,54 +1906,54 @@ MEDIA QUERIES
 		width: 41%;
 		margin: 0 2%;
 	}
-	
+
 	.header-labels img:first-child {
     	position: absolute;
 		top: -14px;
 		right: 15px;
 		width: 220px;
 	}
-	
+
 	ul.aside-menu li {
     	font-size: 12px;
 		line-height: 16px;
 	}
-	
+
 	.contact-details ul li {
     	font-size: 15px;
 		line-height: 20px;
 		padding: 0 0 0 28px;
 		margin: 0 0 10px;
 	}
-	
+
 	.contact-details ul li.aside-tel, .contact-details ul li.aside-email {
 		background-size: 20px;
 	}
-	
+
 	.payment-logos img {
 		width: 100%;
 	}
-	
+
 	.subscribe-input input[type=text] {
     	width: 68%;
 	}
-	
+
 	.subscribe-btn {
 		padding: 7px 2%;
 	}
-	
+
 	section.footer-subscribe p, div.subscribe-form {
     	width: 100%;
 		float: none;
 		margin: 0 0 10px;
 		font-size: 18px;
 	}
-	
+
 	.footer-links {
 		width: 98%;
 		float: none;
 	}
-	
+
 	.footer-links h4 {
 		margin: 30px 0 10px;
 	}
@@ -1952,20 +1962,20 @@ MEDIA QUERIES
 
 
 @media only screen and (max-width: 480px) {
-	
+
 	.header-labels img:last-child {
     	display: none;
 	}
-	
+
 	.main-sidebar {
     	width: 35%;
 		margin: 0 5% 0 0;
 	}
-	
+
 	.main-content {
     	width: 60%;
 	}
-	
+
 	.logo-section {
 		text-align: center;
 	}
@@ -1980,13 +1990,13 @@ MEDIA QUERIES
 		padding: 0;
 		margin: 0 2%;
 	}
-	
+
 	h2.aside-title {
     	font-size: 16px;
 		width: 100%;
 		padding: 0 0 0 14px;
 	}
-	
+
 	.main-products-list li {
     	width: 96%;
 		float: none;
