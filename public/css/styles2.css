@@ -837,10 +837,11 @@ h2.main-title {
 	width: 31%;
 	float: left;
 	margin: 0 2% 40px 0;
+	min-height: 330px;
 }
 
 .main-products-list li:nth-of-type(3) {
-	margin: 0;
+	margin-right: 0;
 }
 
 h3.main-product-title {
@@ -1698,6 +1699,11 @@ ul.social-links li {
 	background-position: -44px center;
 }
 
+.prodimg {
+	width: 100% !important;
+	height: auto !important;
+}
+
 /* ==========================================================================
 MEDIA QUERIES
 ========================================================================== */
@@ -1707,13 +1713,13 @@ MEDIA QUERIES
 	section.main-wrapper {
 		width: 96%;
 	}
-	
+
 	.main-content {
     	width: 70%;
 		margin: 0;
 		float: left;
 	}
-	
+
 	.main-sidebar {
     	width: 25%;
 		margin: 0 5% 0 0;
@@ -1754,11 +1760,11 @@ MEDIA QUERIES
 	ul.main-nav li.main-search {
 		width: 246px;
 	}
-	
+
 	.slider-container img {
 		width: 100%;
 	}
-	
+
 	h2.aside-title {
 	    font-size: 18px;
 	    background: #0c6be8;
@@ -1878,6 +1884,10 @@ MEDIA QUERIES
 		margin: 0 0 40px;
 	}
 	
+	.product-thumbnail-container {
+		min-height: 112px;
+	}
+
 }
 
 
