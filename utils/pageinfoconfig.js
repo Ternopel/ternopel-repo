@@ -36,7 +36,7 @@ var logger = require("./logger")(module);
 			req.usersession		= usersession;
 			req.pageinfo		= {is_logged_in:false, cart_count:0};
 			logger.info('Created session:'+JSON.stringify(req.usersession));
-			res.cookie("ter_token", token, { httpOnly: true, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
+			res.cookie("ter_token", token, { httpOnly: true, secure:req.secure, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
 			next();
 		});
 	};
