@@ -36,12 +36,7 @@ var logger = require("./logger")(module);
 			req.usersession		= usersession;
 			req.pageinfo		= {is_logged_in:false, cart_count:0};
 			logger.info('Created session:'+JSON.stringify(req.usersession));
-
-			var secure=false;
-			if(req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto']==='http') {
-				secure=true;
-			}
-			logger.warn('Page is secured:'+secure);
+			logger.warn('WHAT IS :'+req.protocol);
 			res.cookie("ter_token", token, { httpOnly: true, secure:req.secure, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
 			next();
 		});
