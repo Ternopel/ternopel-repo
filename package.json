@@ -62,6 +62,7 @@
     "app_smtp_password": "Pilarcita1",
     "app_path_separator": "\\",
     "app_target_mail": "natalia.gorodilovska@gmail.com",
+    "app_secured_cookies": "false",
     "db_database": "ternopel",
     "db_protocol": "postgres",
     "db_driver": "org.postgresql.Driver",
@@ -77,7 +78,8 @@
     "test_db_liquibase_xml": "liquibase_test.xml",
     "test_app_products_imgs_dir": "./products/testimages",
     "test_app_posters_imgs_dir": "./posters/testimages",
-    "test_app_target_mail": "mcarrizo@gmail.com"
+    "test_app_target_mail": "mcarrizo@gmail.com",
+    "test_app_secured_cookies": "false"
   },
   "author": "Maximiliano Carrizo"
 }

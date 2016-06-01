@@ -38,6 +38,7 @@ describe('Test Suite', function() {
 		config.app_products_imgs_dir		= config.test_app_products_imgs_dir;
 		config.app_posters_imgs_dir			= config.test_app_posters_imgs_dir;
 		config.app_target_mail				= config.test_app_target_mail;
+		config.app_secured_cookies			= config.test_app_secured_cookies;
 		
 		logger.info("Initiating app");
 		app.init(config, function(app,pdb,models) {
