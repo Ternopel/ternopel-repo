@@ -83,8 +83,15 @@ var logger = require("./logger")(module);
 			app.use(function(err, req, res, next) {
 				logger.error(err);
 				var ld = require('lodash');
-				var pageinfo = ld.merge(req.pageinfo, {error:err});
-				res.status(404).render('error.html',pageinfo);
+				logger.info('Error on method '+req.method);
+				if(req.method=='GET') {
+					var pageinfo = ld.merge(req.pageinfo, {error:err});
+					res.status(404).render('error.html',pageinfo);
+				}
+				else {
+					var utils		= require('../app/controllers/utils');
+					utils.send_ajax_error(req,res,err.toString());
+				}
 			});
 		}
 
@@ -93,7 +100,7 @@ var logger = require("./logger")(module);
 		app.use(function(err, req, res, next) {
 			logger.error(err);
 			var ld = require('lodash');
-			var pageinfo = ld.merge(req.pageinfo, {error:err});
+			var pageinfo = ld.merge(req.pageinfo, {error:err, og_images: []});
 			res.status(404).render('error.html',pageinfo);
 		});
 		

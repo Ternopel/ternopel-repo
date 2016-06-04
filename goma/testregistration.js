@@ -79,6 +79,23 @@ var request		= require('supertest'),
 					.send({
 						'first_name' : 'Nicasio',
 						'last_name' : 'Oronio',
+						'email_address' : 'mcarrizo@gmail.com',
+						'password' : 'nicasio'
+					})
+					.expect(500)
+					.end(function(err,newres) {
+						expect(newres.text).toInclude('invalid csrf token');
+						return callback(err,res);
+					});
+			},
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+					.post('/confirm')
+					.set('cookie', utils.getcookies(res))
+					.send({
+						'first_name' : 'Nicasio',
+						'last_name' : 'Oronio',
 						'_csrf' : utils.getcsrf(res)
 					})
 					.expect(500)
