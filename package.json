@@ -31,6 +31,7 @@
     "express-session": "^1.11.2",
     "express-validator": "^2.10.0",
     "express-winston": "^0.3.1",
+    "helmet": "^2.1.0",
     "html": "0.0.10",
     "istanbul": "^0.3.14",
     "jsreport": "^0.13.2",
