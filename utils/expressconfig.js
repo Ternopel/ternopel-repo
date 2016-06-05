@@ -87,6 +87,22 @@ var logger = require("./logger")(module);
 				logger.info('Error on method '+req.method);
 				if(req.method=='GET') {
 					var pageinfo = ld.merge(req.pageinfo, {error:err});
+					if(!pageinfo.app_resources) {
+						logger.info("Adding resources to error");
+						pageinfo = ld.merge(pageinfo, {app_resources: req.config.app_resources});
+					}
+					if(!pageinfo.page_title) {
+						logger.info("Adding title to error");
+						pageinfo = ld.merge(pageinfo, {page_title: 'Papelera Ternopel'});
+					}
+					if(!pageinfo.is_home) {
+						logger.info("Adding is_home to error");
+						pageinfo = ld.merge(pageinfo, {is_home: false});
+					}
+					if(!pageinfo.og_images) {
+						logger.info("Adding og_images to error");
+						pageinfo = ld.merge(pageinfo, {og_images: []});
+					}
 					res.status(404).render('error.html',pageinfo);
 				}
 				else {
