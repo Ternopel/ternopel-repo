@@ -74,9 +74,6 @@ var logger = require("./logger")(module);
 		var csrf = require('csurf');
 		app.use(csrf({ cookie: true }));
 		
-		logger.debug("Secure express app adding secured http headers");
-		var helmet = require('helmet');
-		app.use(helmet());
 	};
 	
 	expressconfig.addErrorRoutes = function(app,logger) {
