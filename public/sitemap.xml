@@ -2,907 +2,889 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
     <loc>https://www.papeleraternopel.com/</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/estallidos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://www.papeleraternopel.com/potes</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/hilos</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/envases</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/hilos</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/potes/potes-termicos-para-alimento</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/?posters=false</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/fundas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bolsas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bandejas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/laminas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/potes/potes-bisagra-rotlen</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bandejas/bandeja-carton-fiesta</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/vasos-de-cristal</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/papeles</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/hilos/hilo-cinta</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/cuchillos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/tapas-para-vasos-termicos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bandejas/bandejas-de-expandido</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/potes/potes-termicos-para-helado</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/servilletas-rollos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/ensaladeras-plasticas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/porta-cintas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/servilletas-rollos/papel-higienico</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-residuos-reforzada</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/torteras</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/fondos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bandejas/bandejas-plasticas-comunes</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bandejas/bandejas-plasticas-para-microondas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/cintas-adhesivas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/cintas-de-papel-rapifix</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/fondos/fondo-pizzero</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/pirotines-de-colores</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/torteras/budineras-de-aluminio</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/resmas-de-papel-para-fotocopias-autor</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bolsas/bolsas-camisetas-economicas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/bandas-elasticas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bandejas/bandejas-doradas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bolsas/hojas-de-celofan</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/sorbetes-de-colores</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/ceniceros-de-aluminio</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/escarbadientes-a-granel</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/envases/frascos-galletitas</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-consorcio</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/platos-descartables</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/sobres-de-papel-fantasia</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/servilletas-rollos/limpia-manos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/racionador-de-cinta-embalar</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bandejas/bandejas-de-aluminio</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/dispensers</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/?posters=false</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/moldes</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/bandejas</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/moldes/moldes-de-papel-para-biscochuelo</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/potes/potes-bisagra-rotlen</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/dispensers/dispenser-limpia-manos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/bolsas</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/varios/guantes-descartables-latex</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/bandejas/bandeja-carton-fiesta</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/bolsas/bolsas-camisetas-reforzadas</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/laminas</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobina-panedaria</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/cajas-de-carton-corrugado</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/servilletas-rollos/rollos-para-turno</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobinas-linea-dorada</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/pinches</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/porta-bobinas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/moldes/moldes-de-papel-para-pan-dulce</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/envases/envases-tubulares</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/servilletas-rollos/rollos-de-cocina</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-residuos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/porta-rollo</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/servilletas-rollos/rollos-de-p-v-c</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/estallidos-de-colores</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/bolsas/bolsas-para-horno</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bandejas/bandejas-de-expandido</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-escombro</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/moldes/moldes-de-papel-para-budin</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/tacos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/hilos/hilo-algodon</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/cajas-de-empanadas-lisas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/papeles/papeles-de-diario</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/hilos/hilo-choricero</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/platos-de-aluminio</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/cinta-de-embalar</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/servilletas-rollos/rollos-registradora-termico</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobinas-fantasia</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bolsas/bolsas-a-lunares</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/cajas-de-pizzas-estandar-1-color</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobinas-de-arranque-ventajosa</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/platos-dorados</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/laminas/laminas-para-fiambres</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/tapas-empanadas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bandejas/bandejas-de-carton-blanca</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/dispensers/dispenser-jabonera</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/servilletas-rollos/toallas-intercaladas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bandejas/bandejas-de-carton-gris</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/cajas-para-ravioles</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/tripodes-para-pizza</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobinas-de-arranque-rendidora</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/carton-corrugado</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/moldes/moldes-de-papel-para-rosca</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/cucurucho</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/contact</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/rejillas-plasticas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/platos-termicos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/cucharas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-fantasia-con-ri-on</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/servilletas-rollos/rollos-registradora-obra</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/lancheras</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/cajas-de-empanadas-estandar-1-color</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/talonarios-duplicados</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/fajas-aut-varios-motivos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/torteras/flanera-aluminio</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/porta-pancho</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/vasos-termicos-dart</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/adhesivas</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/agitadores</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/torteras/torteras-plasticas-con-tapa</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/etiquetas-motex</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-papel-kraft-para-camperas</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/fondos/fondo-raviolero</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/papeles</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/hilos/hilo-cinta</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/varios/servilletero-plastico</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/hilos/hilo-algodon</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/cuchillos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/tapas-para-vasos-termicos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/fondos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/vasos-de-cristal</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/cintas-adhesivas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/ensaladeras-plasticas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/cintas-de-papel-rapifix</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/pirotines-de-colores</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/fondos/fondo-pizzero</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/porta-cintas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/servilletas-rollos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-residuos-reforzada</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/potes/potes-termicos-para-helado</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/resmas-de-papel-para-fotocopias-autor</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/bandas-elasticas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/torteras</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/servilletas-rollos/papel-higienico</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bandejas/bandejas-plasticas-comunes</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bandejas/bandejas-plasticas-para-microondas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/torteras/budineras-de-aluminio</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bolsas/bolsas-camisetas-economicas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bolsas/hojas-de-celofan</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/sorbetes-de-colores</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/ceniceros-de-aluminio</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/escarbadientes-a-granel</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bandejas/bandejas-doradas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/sobres-de-papel-fantasia</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-consorcio</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/platos-descartables</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/racionador-de-cinta-embalar</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bandejas/bandejas-de-aluminio</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/dispensers</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/servilletas-rollos/limpia-manos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/moldes</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/dispensers/dispenser-limpia-manos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/moldes/moldes-de-papel-para-biscochuelo</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/cajas-de-carton-corrugado</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/cajas-para-ravioles</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/guantes-descartables-latex</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bolsas/bolsas-camisetas-reforzadas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobinas-de-arranque-rendidora</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/carton-corrugado</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobina-panedaria</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobinas-linea-dorada</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/servilletas-rollos/rollos-para-turno</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/moldes/moldes-de-papel-para-rosca</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/cucurucho</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/pinches</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/contact</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/platos-termicos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/moldes/moldes-de-papel-para-pan-dulce</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/porta-bobinas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/rejillas-plasticas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/cucharas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-fantasia-con-ri-on</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/servilletas-rollos/rollos-registradora-obra</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/lancheras</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/cajas-de-empanadas-estandar-1-color</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/envases/envases-tubulares</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/porta-rollo</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/talonarios-duplicados</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/servilletas-rollos/rollos-de-cocina</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/fajas-aut-varios-motivos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-residuos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/torteras/flanera-aluminio</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/porta-pancho</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/vasos-termicos-dart</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/servilletas-rollos/rollos-de-p-v-c</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/tacos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/adhesivas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/estallidos-de-colores</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/torteras/torteras-plasticas-con-tapa</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/etiquetas-motex</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/agitadores</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/articulos-libreria/mo-os-magicos-para-armar</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/moldes/moldes-de-papel-para-budin</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/servilletas-rollos/servilletas-a-granel</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-papel-sulfito-kraft</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/fundas/fundas-de-polipropileno-para-ropa</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/platos-de-aluminio</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/fondos/fondo-raviolero</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/servilletero-plastico</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/cajas-de-empanadas-lisas</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/articulos-libreria/blondas-de-papel-caladas</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/papeles/papeles-de-diario</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/cinta-de-embalar</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/hilos/hilo-choricero</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/tapas</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/tapas/tapas-para-potes</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/varios/precintos-plasticos</loc>
-    <lastmod>2016-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.papeleraternopel.com/tapas/tapas-para-ensaladeras</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/servilletas-rollos/rollos-registradora-termico</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/tapas/tapas-para-flaneras-aluminio</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/tapas/tapas-de-aluminio</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/articulos-libreria/mo-os-estrella-autoadhesivos</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/tapas/tapas-para-potes</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/tapas/tapas-para-ensaladeras</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/varios/precintos-plasticos</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/tenedores</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/articulos-libreria/mo-os-estrella-autoadhesivos</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobinas-fantasia</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/servilletas-rollos/film-strech</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/kraft-en-bobina</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/tripodes-para-pizza</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/cajas-de-pizzas-lisas</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/tapas-empanadas</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobina-de-papel-diario</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/bolsas/bolsas-a-lunares</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-papel-kraft-con-manija</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/cajas-de-pizzas-estandar-1-color</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/kraft-en-bobina</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/cajas-de-pizzas-lisas</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/vasos-plasticos-blancos</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobina-de-papel-diario</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/faina-lind</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/bandejas/bandejas-de-carton-redondas</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/cajas-cartones-bobinas/bobinas-de-arranque-ventajosa</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/varios/guantes-descartables-plastico</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/platos-cubiertos-vasos/platos-dorados</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bandejas/bandejas-de-carton-redondas</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/laminas/laminas-para-fiambres</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/harina-0000</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-polipropileno</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/servilletas-rollos/toallas-intercaladas</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/hilos/hilo-de-formio</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/paleta</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-polipropileno</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bandejas/bandejas-de-carton-blanca</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-papel-estampadas-con-manija</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-papel-kraft-para-vino</loc>
-    <lastmod>2016-06-06</lastmod>
+    <loc>https://www.papeleraternopel.com/insumos-de-pizzerias/paleta</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/dispensers/dispenser-jabonera</loc>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bandejas/bandejas-de-carton-gris</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/potes/pote-natural</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.papeleraternopel.com/bolsas/bolsas-de-papel-kraft-para-vino</loc>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.papeleraternopel.com/hilos/hilo-recuperado</loc>
-    <lastmod>2016-06-06</lastmod>
+    <lastmod>2016-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
