@@ -274,7 +274,7 @@ function fillProductsInfo(models,filters,product,getcallback) {
 		logger.warn('ts_vector:'+ts_vector);
 		logger.warn('ts_queryr:'+ts_query);
 
-		var query = "select "+ts_rank+", p.id from categories c, products p, products_formats pf where c.id = p.category_id and p.id = pf.product_id and ";
+		var query = "select distinct "+ts_rank+", p.id from categories c, products p, products_formats pf where c.id = p.category_id and p.id = pf.product_id and ";
 		query+= ts_vector+" @@ "+ts_query+" ";
 		query+= "order by "+ts_rank+" desc";
 
