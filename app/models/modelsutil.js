@@ -261,48 +261,48 @@ function fillProductsInfo(models,filters,product,getcallback) {
 		
 		var searchwithsinglespace = filters.search.replace(/  +/g,'|').replace(/ /g,'|');
 		
-		logger.warn('************************');
-		logger.warn(searchwithsinglespace);
-		logger.warn('************************');
+		logger.info('************************');
+		logger.info(searchwithsinglespace);
+		logger.info('************************');
 		
-		logger.warn("Getting all categories");
+		logger.info("Getting all categories");
 		
 		var ts_vector	= 'to_tsvector(c.name||\' \'||p.name||\' \'||replace(pf.format,\'x\',\' x \'))';
 		var ts_query	= 'to_tsquery(\''+searchwithsinglespace+'\')';
 		var ts_rank		= 'ts_rank_cd('+ts_vector+","+ts_query+')';
 
-		logger.warn('ts_vector:'+ts_vector);
-		logger.warn('ts_queryr:'+ts_query);
+		logger.info('ts_vector:'+ts_vector);
+		logger.info('ts_queryr:'+ts_query);
 
 		var query = "select distinct "+ts_rank+", p.id from categories c, products p, products_formats pf where c.id = p.category_id and p.id = pf.product_id and ";
 		query+= ts_vector+" @@ "+ts_query+" and ";
 		query+= ts_rank + " > 0.19 "
 		query+= "order by "+ts_rank+" desc";
 
-		logger.warn(query);
+		logger.info(query);
 		db.driver.execQuery(query,function(err,records) {
 			if(err) {
 				return getcallback(err);
 			}
-			logger.warn('Ids readed:'+JSON.stringify(records));
+			logger.info('Ids readed:'+JSON.stringify(records));
 			
 			var uniqueids = [];
 			records.forEach(function(rec) {
-				logger.warn("Evaluating:"+rec.id);
+				logger.info("Evaluating:"+rec.id);
 				if(uniqueids.indexOf(rec.id)>=0) {
-					logger.warn("Existing!!");
+					logger.info("Existing!!");
 				}
 				else {
-					logger.warn("Adding!!");
+					logger.info("Adding!!");
 					uniqueids.push(rec.id);
 				}
 			});
 			
-			logger.warn('Ids UNIQUE:'+JSON.stringify(uniqueids));
+			logger.info('Ids UNIQUE:'+JSON.stringify(uniqueids));
 			var products	= [];
 			async.each(uniqueids, function(id, callback) {
 				
-				logger.warn('Processing id:'+id);
+				logger.info('Processing id:'+id);
 				models.products.get(id,function(err,product) {
 					if(err) {
 						return callback(err);
@@ -313,11 +313,11 @@ function fillProductsInfo(models,filters,product,getcallback) {
 					}); 
 				});
 			},function(err) {
-				logger.warn("Number of products returned:"+products.length);
+				logger.info("Number of products returned:"+products.length);
 				products.sort(function(a,b) {
 					var aindex = ld.findIndex(uniqueids, function(id) { return id == a.id; });
 					var bindex = ld.findIndex(uniqueids, function(id) { return id == b.id; });
-					logger.warn('------------->'+a.id+'='+aindex+' '+b.id+'='+bindex);
+					logger.info('------------->'+a.id+'='+aindex+' '+b.id+'='+bindex);
 					return aindex - bindex;		
 				});
 				return getcallback(err,products);
