@@ -267,7 +267,7 @@ function fillProductsInfo(models,filters,product,getcallback) {
 		
 		logger.warn("Getting all categories");
 		
-		var ts_vector	= 'to_tsvector(\'english\',c.name||\' \'||p.name||\' \'||replace(pf.format,\'x\',\' x \'))';
+		var ts_vector	= 'to_tsvector(c.name||\' \'||p.name||\' \'||replace(pf.format,\'x\',\' x \'))';
 		var ts_query	= 'to_tsquery(\''+searchwithsinglespace+'\')';
 		var ts_rank		= 'ts_rank_cd('+ts_vector+","+ts_query+')';
 
