@@ -163,9 +163,9 @@ describe('Test Suite', function() {
 		it('Users registration ', testsregistration.registerNewUser);
 		it('Admin login', testsregistration.adminLogin);
 		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
-		it('List delivery', testsregistration.listDelivery);
 		it('Admin with no permissions', testsregistration.adminWithNoPermissions);
 		it('Confirm User', testsregistration.confirmUser);
+		it('List delivery', testsregistration.listDelivery);
 	}
 	 	
  	// Health check

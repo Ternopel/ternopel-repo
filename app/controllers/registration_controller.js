@@ -28,26 +28,46 @@ function save_email(req, res, next, email_field, email_address, is_registration,
 	var waterfall = require('async-waterfall');
 	waterfall([ 
 		function(callback) {
-			logger.debug('Searching for existing user');
-			req.models.users.find({email_address: email_address}, function(err,user) {
-				if(err) {
-					return callback(err);
-				}
-				if(user.length===1) {
-					return callback('Usuario ya existente');
-				}
-				else {
-					return callback(null,null);
-				}
-			});
+			if(is_registration==true) {
+				logger.debug('Searching for existing user');
+				req.models.users.find({email_address: email_address}, function(err,user) {
+					if(err) {
+						return callback(err);
+					}
+					if(user.length===1) {
+						return callback('Usuario ya existente');
+					}
+					else {
+						return callback();
+					}
+				});
+			}
+			else {
+				logger.info('Searching for existing mailing');
+				req.models.mailing.find({email_address: email_address}, function(err,mailing) {
+					if(err) {
+						return callback(err);
+					}
+					if(mailing.length===1) {
+						logger.info('Removing existing mailing');
+						mailing[0].remove(function (err) {
+							return callback(err);
+						});
+					}
+					else {
+						logger.info('No existing mailing found');
+						return callback();
+					}
+				});
+			}
 		}, 
-		function(user,callback) {
+		function(callback) {
 			var token	= require('node-uuid').v1();
 			if(is_registration===true) {
 				logger.debug('Registracion de usuario !');
 				logger.info('Registrando user '+email_address);
 				req.models.registrations.create({	email_address:	email_address, token:token, verified:false, sent:false },function(err,registration) {
-					return callback(err,registration);
+					return callback(err);
 				});
 			}
 			else {
@@ -59,13 +79,13 @@ function save_email(req, res, next, email_field, email_address, is_registration,
 					}
 					cronconfig.sendpricereportsmail(logger,req.config,req.models,req.db,{immediate:true},function(err) {
 						logger.info("Cron runned successfully");
-						return callback(err,mailing);
+						return callback(err);
 					});
 				});
 			}
 		}
 	], 
-	function(err, user) {
+	function(err) {
 		logger.debug('Finalizacion de registration');
 		if(err) {
 			logger.debug('Error por enviar al cliente:'+err);

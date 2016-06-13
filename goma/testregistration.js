@@ -626,7 +626,22 @@ var request		= require('supertest'),
 					expect(newres.text).toBe('new_guy@gmail.com');
 					return callback(err,res);
 				});
-			}, 
+			},
+			function(res,callback) {
+				logger.info('Posting info to server');
+				request("http://localhost:"+config.test_app_port)
+				.post('/admin/listdelivery')
+				.set('cookie', utils.getcookies(res))
+				.send({
+					'email_address' : 'new_guy@gmail.com',
+					'_csrf' : utils.getcsrf(res)
+				})
+				.expect(200)
+				.end(function(err,newres) {
+					expect(newres.text).toBe('new_guy@gmail.com');
+					return callback(err,res);
+				});
+			}
 		], 
 		function(err) {
 			return done(err);
