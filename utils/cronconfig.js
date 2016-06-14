@@ -266,15 +266,15 @@ function save_price_listing(logger, config, smtpTransport, filename, records, ca
 			async.each(messages, function(message, mycallback) {
 				
 				var html="Amor, acaban de mandar un mensaje pidiendo información ...<br>";
-				html+="Email:"+message.email_address+"<br>";
-				html+="Apellido:"+message.last_name+"<br>";
-				html+="Nombre:"+message.first_name+"<br>";
-				html+="Consulta:"+message.comments+"<br>";
+				html+="Email: "+message.email_address+"<br>";
+				html+="Apellido: "+message.last_name+"<br>";
+				html+="Nombre: "+message.first_name+"<br>";
+				html+="Consulta: "+message.comments+"<br>";
 				
 				smtpTransport.sendMail({
 					from: "Información Papelera Ternopel <info@ternopel.com>",
 					to: "<"+config.app_target_mail+">", 
-					subject: "Nueva consulta ✔", 
+					subject: "Nueva consulta de "+message.email_address+" ✔", 
 					html: html
 				}, function(error, response){
 					if(error){
