@@ -62,8 +62,17 @@ var request		= require('supertest'),
 		        	   .end(function(err, res){
 		        		   return callback(err,res);
 		        	   });
+		           },
+		           function(res,callback) {
+		        	   logger.info('Executing get to server');
+		        	   request("http://localhost:"+config.test_app_port)
+		        	   .get('/search/poxipol')
+		        	   .set('cookie', 'ter_token=notoken')
+		        	   .expect(200)
+		        	   .end(function(err, res){
+		        		   return callback(err,res);
+		        	   });
 		           }
-		           
 		           ], 
 		           function(err) {
 			return done(err);
