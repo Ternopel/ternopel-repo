@@ -1000,6 +1000,10 @@ a.forgot-password {
 	border: 1px solid #e05a65 !important;
 }
 
+.summary-btn-container {
+	margin: 20px 0 0;
+}
+
 /* Product Page */
 
 .product-image-col {
@@ -1019,6 +1023,11 @@ a.forgot-password {
 	text-align: center;
 }
 
+.product-image-container a:link img {
+	width: 100% !important;
+	height: auto !important;
+}
+
 a.enlarge-product-btn {
 	color: #2b2b2b;
 	display: inline-block;
@@ -1036,6 +1045,7 @@ a.enlarge-product-btn {
 
 .product-thumbnail-container a img {
 	border: 1px solid #ddd;
+	height: auto !important;
 }
 
 .product-thumbnail-container a.active-thumbnail img, .product-thumbnail-container a img:hover {
@@ -1298,12 +1308,12 @@ li.payment-title {
 }
 
 .data-content {
-	width: 300px;
+	width: 32%;
 	float: left;
 }
 
 .delivery-payment-content {
-	width: 600px;
+	width: 65%;
 	float: right;
 }
 
@@ -1335,15 +1345,6 @@ li.payment-title {
 	box-shadow:inset 0 0 5px 0 rgba(0,0,0,0.5);
 	width: 94%;
 	margin: 0 0 14px;
-}
-
-.data-content .address-select {
-	width: 46%;
-	float: left;
-}
-
-.data-content label.address-select-right {
-	float: right;
 }
 
 .data-content select {
@@ -1525,7 +1526,7 @@ div textarea.cart-textarea {
 }
 
 .summary-section label.form-check input {
-	margin: 0 10px 20px 0;
+	margin: 0 10px 0 0;
 }
 
 .summary-btn-container button.cart-continue-btn {
@@ -1886,6 +1887,19 @@ MEDIA QUERIES
 
 	.product-thumbnail-container {
 		min-height: 112px;
+	}
+
+	.data-content, .delivery-payment-content {
+		width: 100%;
+		float: none;
+	}
+
+	div textarea.cart-textarea {
+		max-width: none;
+	}
+
+	.data-content label {
+		clear: right;
 	}
 
 }
