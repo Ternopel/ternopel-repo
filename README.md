@@ -1,0 +1,3 @@
+# Ternopel 
+
+Ayudamemorias de temas 
