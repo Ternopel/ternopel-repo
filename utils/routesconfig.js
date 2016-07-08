@@ -57,6 +57,9 @@
 
 		app.get		( '/admin/listdelivery',				controllers.registration.get_list_delivery);
 		app.post	( '/admin/listdelivery',				controllers.registration.post_list_delivery);
+		
+		app.get		( '/admin/elastic/reindex',				controllers.elastic.get_reindex);
+		app.get		( '/admin/elastic/search/:search',		controllers.elastic.get_search);
 
 		var multipart			= require('connect-multiparty');
 		var multipartMiddleware = multipart();

@@ -15,5 +15,6 @@ module.exports = {
 	logout:				require('./logout_controller'),
 	privacy:			require('./privacy_controller'),
 	contact:			require('./contact_controller'),
-	posters:			require('./posters_controller')
+	posters:			require('./posters_controller'),
+	elastic:			require('./elastic_controller')
 };

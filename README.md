@@ -1,12 +1,13 @@
 # Ternopel 
 
-## Como instalar y configurar solr
+## Como instalar y configurar ElasticSearch
 
-- Descargar solr 6
+- Descargar Elastic Search 2.3.3
 - Instalarlo en algun lado
-- Correr los scripts de startup y shutdown del directorio support\solr
-- Correr la creacion de los cores para ternopel y ternopel_test ( donde se alojaran los indices )
-  - solr.cmd create -c ternopel -d basic_configs
-  - solr.cmd create -c ternopel_test -d basic_configs
+- Instalar el Windows Service corriendo el comando
+``
+<ElasticSearchDir>\bin\service.bat install <ServiceName>
+``
+- Asegurarse que %JAVA_HOME% esta en la configuracion de la computadora y no en la del usuario
 
 

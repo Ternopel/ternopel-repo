@@ -24,6 +24,7 @@
     "dateformat": "^1.0.11",
     "debug": "~2.2.0",
     "dot": "^1.0.3",
+    "elasticsearch": "^11.0.1",
     "expect": "^1.6.0",
     "expert": "^0.3.2",
     "express": "~4.12.4",
@@ -44,6 +45,7 @@
     "orm": "^2.1.26",
     "pg": "^4.3.0",
     "serve-favicon": "~2.2.1",
+    "sleep": "^3.0.1",
     "soda": "^0.2.5",
     "supertest": "^1.0.1",
     "supervisor": "^0.7.1",
@@ -63,6 +65,8 @@
     "app_path_separator": "\\",
     "app_target_mail": "natalia.gorodilovska@gmail.com",
     "app_secured_cookies": "false",
+    "app_elastic_host": "localhost:9200",
+    "app_elastic_index": "ternopel",
     "db_database": "ternopel",
     "db_protocol": "postgres",
     "db_driver": "org.postgresql.Driver",
@@ -79,7 +83,9 @@
     "test_app_products_imgs_dir": "./products/testimages",
     "test_app_posters_imgs_dir": "./posters/testimages",
     "test_app_target_mail": "mcarrizo@gmail.com",
-    "test_app_secured_cookies": "false"
+    "test_app_secured_cookies": "false",
+    "test_app_elastic_host": "localhost:9200",
+    "test_app_elastic_index": "ternopel_test"
   },
   "author": "Maximiliano Carrizo"
 }

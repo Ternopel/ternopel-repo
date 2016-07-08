@@ -22,6 +22,7 @@ var testsendemail			= require(__dirname+'/../goma/testssendemail');
 var testprivacy				= require(__dirname+'/../goma/testprivacy');
 var testshoppingcart		= require(__dirname+'/../goma/testshoppingcart');
 var testscontact			= require(__dirname+'/../goma/testcontact');
+var testelastic				= require(__dirname+'/../goma/testelastic');
 
 describe('Test Suite', function() {
 	
@@ -39,6 +40,8 @@ describe('Test Suite', function() {
 		config.app_posters_imgs_dir			= config.test_app_posters_imgs_dir;
 		config.app_target_mail				= config.test_app_target_mail;
 		config.app_secured_cookies			= config.test_app_secured_cookies;
+		config.app_elastic_host				= config.test_app_elastic_host;
+		config.app_elastic_index			= config.test_app_elastic_index;
 		
 		logger.info("Initiating app");
 		app.init(config, function(app,pdb,models) {
@@ -78,7 +81,7 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=true;
+	var runTests=false;
 	
 	if(runTests) {
 		it('Get Contact Unlogged in', testscontact.getContactUnloggedIn);
@@ -172,7 +175,10 @@ describe('Test Suite', function() {
 	if(runTests) {
 		it('Health check', testhealth.getHealth);
 	}
-
+//	if(runTests) {
+		it('Elastic search reindex', testelastic.getReindex);
+//	}
+	
 	if(runTests) {
 		it('Privacy', testprivacy.getPrivacy);
 	}
