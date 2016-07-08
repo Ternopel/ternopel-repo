@@ -9,7 +9,7 @@ function get_client(req, res, callback) {
 
 	var client = new elasticsearch.Client({
 		host: req.config.app_elastic_host,
-		log: req.config.app_log_level
+		log: info
 	});
 	
 	client.ping({
