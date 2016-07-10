@@ -27,8 +27,8 @@ var logger = require("./logger")(module);
 			define: function (db, models) {
 				require('../app/models/categories.js')(orm,db,models);
 				require('../app/models/packaging.js')(orm,db,models);
-				require('../app/models/products.js')(orm,db,models);
-				require('../app/models/productsformats.js')(orm,db,models);
+				require('../app/models/products.js')(orm,db,models,config);
+				require('../app/models/productsformats.js')(orm,db,models,config);
 				require('../app/models/productspictures.js')(orm,db,models);
 				require('../app/models/roles.js')(orm,db,models);
 				require('../app/models/users.js')(orm,db,models);

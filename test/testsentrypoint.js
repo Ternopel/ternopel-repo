@@ -81,7 +81,7 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 	
 	if(runTests) {
 		it('Get Contact Unlogged in', testscontact.getContactUnloggedIn);
@@ -120,15 +120,13 @@ describe('Test Suite', function() {
 	// admin products formats tests
 	if(runTests) {
 		it('Get product format', testsproductsformats.getProductFormat);
-		it('Create product format', testsproductsformats.createProductFormat);
 		it('Delete product format', testsproductsformats.deleteProductFormat);
 		it('Update product format', testsproductsformats.updateProductFormat);
+		it('Create product format', testsproductsformats.createProductFormat);
 	}	
 	
 	// admin products tests
 	if(runTests) {
-		it('Delete product', testsproducts.deleteProduct);
-		it('Create product', testsproducts.createProduct);
 		it('Update Admin products', testsproducts.updateAdminProduct);
 		it('Update product', testsproducts.updateProduct);
 		it('Get products', testsproducts.getProducts);
@@ -136,6 +134,8 @@ describe('Test Suite', function() {
 		it('Get Admin products', testsproducts.getAdminProducts);
 		it('Get products picture', testsproducts.getProductPicture);
 		it('Add products picture', testsproducts.addProductPicture);
+		it('Delete product', testsproducts.deleteProduct);
+		it('Create product', testsproducts.createProduct);
 	}	
 	
 	// admin categories tests
@@ -175,9 +175,9 @@ describe('Test Suite', function() {
 	if(runTests) {
 		it('Health check', testhealth.getHealth);
 	}
-//	if(runTests) {
+	if(runTests) {
 		it('Elastic search reindex', testelastic.getReindex);
-//	}
+	}
 	
 	if(runTests) {
 		it('Privacy', testprivacy.getPrivacy);

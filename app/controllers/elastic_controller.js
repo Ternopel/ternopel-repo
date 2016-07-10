@@ -5,32 +5,107 @@ var elasticsearch	= require('elasticsearch'),
 	async			= require('async'),
 	logger			= require("../../utils/logger")(module);
 
-function get_client(req, res, callback) {
-
-	var client = new elasticsearch.Client({
-		host: req.config.app_elastic_host,
-		log: 'info'
-	});
+(function (elastic_controller) {
 	
-	client.ping({
-			// undocumented params are appended to the query string
-			hello: "elasticsearch!"
-		}, 
-		function (err) {
-			return callback(err,client);
-		}
-	);	
-};
-
-module.exports = {
-	get_reindex: function(req, res, next) {
-
-		var indexName = req.config.app_elastic_index;
+	elastic_controller.remove_product = function (hostName,indexName,id,callback) {
+		elastic_controller.get_client(hostName,function(err,client) {
+			if(err) {
+				return callback(err);	
+			}
+			client.delete({
+				index: indexName,
+				type: 'document',
+				id: id
+			}, 
+			function (err, response) {
+				return callback(err);
+			});
+		});
+	},
+		
+	elastic_controller.index_product = function (hostName,indexName,db,id,callback) {
+		elastic_controller.get_client(hostName,function(err,client) {
+			if(err) {
+				return callback(err);	
+			}		
+		
+			logger.info('Populating Elastic index ');
+			var query = "select p_id, p_name, c_name, array_to_string(array_agg(pf_format),' ','') as pf_format FROM plain_info ";
+			if(id) {
+				query += "where p_id = "+id+" ";
+			}
+			query += "group by p_id, p_name, c_name";
+			
+			db.driver.execQuery(query,function(err,records) {
+				if(err) {
+					return callback(err);
+				}
+				logger.info('Records to index:'+records.length);
+				logger.info(JSON.stringify(records));
+				async.each(records, function(record, mycallback) {
+					
+					logger.info('Indexing record id:'+record.p_id);
+					
+					client.index({
+						index: indexName,
+						type: 'document',
+						id: record.p_id,
+						body: {
+							p_name: record.p_name,
+							c_name: record.c_name,
+							pf_format: record.pf_format,
+							published: true,
+						}
+					}, function (err, response) {
+						return mycallback(err);
+					});
+				},function(err) {
+					return callback(err,records);
+				});
+			});
+		});
+	},
+	
+	elastic_controller.search = function(hostName,indexName,searchCriteria,callback) {
+		elastic_controller.get_client(hostName,function(err,client) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			client.search({
+				index:	indexName,
+				type:	'document',
+				q: 		'p_name:'+searchCriteria
+			}, 
+			function (err, response) {
+				return callback(err,response);
+			});
+		});
+	};
+	
+	elastic_controller.get_client = function (hostName, callback) {
+		var client = new elasticsearch.Client({
+			host: hostName,
+			log: 'trace'
+		});
+		
+		client.ping({
+				// undocumented params are appended to the query string
+				hello: "elasticsearch!"
+			}, 
+			function (err) {
+				return callback(err,client);
+			}
+		);	
+	},
+		
+	
+	elastic_controller.reindex = function(hostName,indexName,db,gencallback) {
+		
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
 				logger.info('Getting Elastic client');
-				get_client(req,res,function(err,client) {
+				elastic_controller.get_client(hostName, function(err,client) {
 					return callback(err,client);
 				});
 			}, 
@@ -91,72 +166,36 @@ module.exports = {
 				});
 			}, 
 			function(client,callback) {
-				logger.info('Populating Elastic index ');
-				var query = "select p_id, p_name, c_name, array_to_string(array_agg(pf_format),' ','') as pf_format FROM plain_info ";
-				query += "group by p_id, p_name, c_name";
-				
-				req.db.driver.execQuery(query,function(err,records) {
-					if(err) {
-						return callback(err);
-					}
-					logger.info('Records to index:'+records.length);
-					async.each(records, function(record, mycallback) {
-						
-						client.index({
-							index: indexName,
-							type: 'document',
-							id: record.p_id,
-							body: {
-								p_name: record.p_name,
-								c_name: record.c_name,
-								pf_format: record.pf_format,
-								published: true,
-							}
-						}, function (err, response) {
-							return mycallback(err);
-						});
-					},function(err) {
-						return callback(err);
-					});
-				});
+				elastic_controller.index_product(hostName,indexName,db,null,callback);
 			} 
 		], 
-		function(err) {
+		function(err,records) {
+			return gencallback(err,records);
+		});
+	};
+	
+	
+	elastic_controller.get_reindex = function(req, res, next) {
+		elastic_controller.reindex(req.config.app_elastic_host, req.config.app_elastic_index,req.db,function(err, records) {
 			if(err) {
 				logger.error(err);
 				return utils.send_ajax_error(req,res,err);
 			}
-			return res.status(200).send('OK');
+			return res.status(200).send('OK '+records.length);
 		});
-	},
-	get_search: function(req, res, next) {
-		var indexName = req.config.app_elastic_index;
-
-		get_client(req,res,function(err,client) {
+	};
+	
+	elastic_controller.get_search = function(req, res, next) {
+		elastic_controller.search(req.config.app_elastic_host, req.config.app_elastic_index,req.params.search,function(err,response) {
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
-			var search = req.params.search;
-
-			client.search({
-				index:	indexName,
-				type:	'document',
-				q: 		'p_name:'+search
-			}, 
-			function (err, response) {
-				if(err) {
-					return utils.send_ajax_error(req,res,err);
-				}
-				logger.info(JSON.stringify(response));
-				response.hits.hits.forEach(function (hit) {
-					logger.info('Score:'+hit._score+" Id:"+hit._id+" p_name:"+hit._source.p_name);
-				});	
-				return res.status(200).send('OK '+response.hits.hits.length);
-			});
+			logger.info(JSON.stringify(response));
+			response.hits.hits.forEach(function (hit) {
+				logger.info('Score:'+hit._score+" Id:"+hit._id+" p_name:"+hit._source.p_name);
+			});	
+			return res.status(200).send('OK '+response.hits.hits.length);
 		});
-	}
-};
-
-
+	};
 	
-
+})(module.exports);

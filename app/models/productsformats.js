@@ -1,9 +1,31 @@
 'use strict';
 
-var logger		= require("../../utils/logger")(module);
+var logger		= require("../../utils/logger")(module),
+	elastic		= require('../controllers/elastic_controller');
 
-module.exports = function (orm, db, models) {
+module.exports = function (orm, db, models, config) {
 
+	
+
+	models.updateProduct = function(_this,config) {
+		elastic.get_client(config.app_elastic_host,function(err,client) {
+			if(err) {
+				logger.error(err);
+			}
+			else {
+				elastic.index_product(config.app_elastic_host,config.app_elastic_index,db,_this.product_id,function(err) {
+					if(!err) {
+						logger.info("Record "+_this.id+" has been indexed");
+					}
+					else {
+						logger.error(err);
+					}
+				});
+			}
+		});
+	}
+	
+	
 	logger.debug("Configuring products formats");
 	models.productsformats = db.define("products_formats", { 
 			id:				{ type: 'serial', key: true}, 
@@ -15,9 +37,17 @@ module.exports = function (orm, db, models) {
 		},
 		{
 			cache:	false,
-			methods: {
-			},
-			validations: {
+			hooks: {
+				afterSave: function (success) {
+					if(success) {
+						models.updateProduct(this,config);
+					}
+				},
+				afterRemove :function(success){
+					if(success) {
+						models.updateProduct(this,config);
+					}
+				} 
 			}
 		}
 	);	

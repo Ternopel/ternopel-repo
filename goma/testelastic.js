@@ -43,13 +43,13 @@ var request		= require('supertest'),
 					.set('cookie', utils.getcookies(res))
 					.expect(200)
 					.end(function(err, newres){
-						expect(newres.text).toBe('OK');
+						expect(newres.text).toBe('OK 9');
 						return callback(err,res);
 					});
 			},
 			function(res,callback) {
 				var sleep = require('sleep');
-				sleep.sleep(1);
+				sleep.sleep(2);
 				logger.info('Executing elastic search reindex');
 				request("http://localhost:"+config.test_app_port)
 					.get('/admin/elastic/search/bolsas')
