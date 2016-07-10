@@ -56,7 +56,10 @@ var request		= require('supertest'),
 					.set('cookie', utils.getcookies(res))
 					.expect(200)
 					.end(function(err, newres){
-						expect(newres.text).toBe('OK 6');
+						if(!err) {
+							var response = JSON.parse(newres.text);
+							expect(response.hits.total).toBe(6);
+						}
 						return callback(err,res);
 					});
 			}

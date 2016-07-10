@@ -149,9 +149,9 @@ var elasticsearch	= require('elasticsearch'),
 					body: {
 						properties: {
 							id:			{ type: "long" },
-							p_name:		{ type: "string" },
-							c_name:		{ type: "string" },
-							pf_format:	{ type: "string" },
+							p_name:		{ type: "string", boost: "3.0" },
+							c_name:		{ type: "string", boost: "1.0" },
+							pf_format:	{ type: "string", boost: "0.5" },
 							suggest: {
 								type: "completion",
 								analyzer: "simple",
@@ -194,7 +194,8 @@ var elasticsearch	= require('elasticsearch'),
 			response.hits.hits.forEach(function (hit) {
 				logger.info('Score:'+hit._score+" Id:"+hit._id+" p_name:"+hit._source.p_name);
 			});	
-			return res.status(200).send('OK '+response.hits.hits.length);
+			res.json(response);
+			return res.end();
 		});
 	};
 	
