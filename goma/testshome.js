@@ -43,38 +43,38 @@ var request		= require('supertest'),
 		
 		var waterfall = require('async-waterfall');
 		waterfall([ 
-		           function(callback) {
-		        	   logger.info('Executing get to server');
-		        	   request("http://localhost:"+config.test_app_port)
-		        	   .get('/')
-		        	   .expect(200)
-		        	   .end(function(err, res){
-		        		   expect(res.text).toInclude('Bolsa de banditas elásticas');
-		        		   return callback(err,res);
-		        	   });
-		           },
-		           function(res,callback) {
-		        	   logger.info('Executing get to server');
-		        	   request("http://localhost:"+config.test_app_port)
-		        	   .get('/search/bolsa%20camiseta%20%20%20reforzada')
-		        	   .set('cookie', 'ter_token=notoken')
-		        	   .expect(200)
-		        	   .end(function(err, res){
-		        		   return callback(err,res);
-		        	   });
-		           },
-		           function(res,callback) {
-		        	   logger.info('Executing get to server');
-		        	   request("http://localhost:"+config.test_app_port)
-		        	   .get('/search/poxipol')
-		        	   .set('cookie', 'ter_token=notoken')
-		        	   .expect(200)
-		        	   .end(function(err, res){
-		        		   return callback(err,res);
-		        	   });
-		           }
-		           ], 
-		           function(err) {
+				function(callback) {
+					   logger.info('Executing get to server');
+					   request("http://localhost:"+config.test_app_port)
+					   .get('/')
+					   .expect(200)
+					   .end(function(err, res){
+						   expect(res.text).toInclude('Bolsa de banditas elásticas');
+						   return callback(err,res);
+					   });
+				},
+				function(res,callback) {
+					   logger.info('Executing get to server');
+					   request("http://localhost:"+config.test_app_port)
+					   .get('/search/bolsas%20camisetas%20%20%20reforzadas')
+					   .set('cookie', 'ter_token=notoken')
+					   .expect(200)
+					   .end(function(err, res){
+						   return callback(err,res);
+					   });
+				},
+				function(res,callback) {
+					logger.info('Executing get to server');
+					request("http://localhost:"+config.test_app_port)
+					.get('/search/bolsas%20camisetas%20%20%20reforzadas')
+					.set('cookie', 'ter_token=notoken')
+					.expect(200)
+					.end(function(err, res){
+						return callback(err,res);
+					});
+				}
+		], 
+		function(err) {
 			return done(err);
 		});
 	};

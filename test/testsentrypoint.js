@@ -81,7 +81,7 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 	
 	if(runTests) {
 		it('Get Contact Unlogged in', testscontact.getContactUnloggedIn);
@@ -153,9 +153,9 @@ describe('Test Suite', function() {
 		it('Get category', testshome.getCategory);
 		it('Get product admin user', testshome.getProductAdminUser);
 		it('Get product', testshome.getProduct);
-		it('Get Search', testshome.getSearch);
 		it('Get no existing category', testshome.getNoExistingCategory);
 		it('Get no existing product', testshome.getNoExistingProduct);
+		it('Get Search', testshome.getSearch);
 	}
 	
 	// Registration tests
@@ -175,9 +175,9 @@ describe('Test Suite', function() {
 	if(runTests) {
 		it('Health check', testhealth.getHealth);
 	}
-//	if(runTests) {
+	if(runTests) {
 		it('Elastic search reindex', testelastic.getReindex);
-//	}
+	}
 	
 	if(runTests) {
 		it('Privacy', testprivacy.getPrivacy);

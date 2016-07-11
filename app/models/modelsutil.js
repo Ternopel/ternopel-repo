@@ -254,10 +254,49 @@ function fillProductsInfo(models,filters,product,getcallback) {
 	};
 	
 	
-	modelsutil.getProductsSearch = function (models, db,filters,getcallback) {
+	modelsutil.getProductsSearch = function (models,config,filters,getcallback) {
 		
 		var async		= require('async'),
-			ld			= require('lodash');
+			ld			= require('lodash'),
+			elastic		= require("../controllers/elastic_controller");
+
+		elastic.search(config.app_elastic_host,config.app_elastic_index,filters.search,function(err,response) {
+			if(err) {
+				return getcallback(err);
+			}
+			var uniqueids = [];
+			response.hits.hits.forEach(function (hit) {
+				logger.info('Score:'+hit._score+" Id:"+hit._id+" p_name:"+hit._source.p_name);
+				uniqueids.push(hit._id);
+			});	
+
+			var products	= [];
+			async.each(uniqueids, function(id, callback) {
+				logger.info('Processing id:'+id);
+				models.products.get(id,function(err,product) {
+					if(err) {
+						logger.info('Id:'+id+' with errors');
+						return callback(err);
+					}
+					logger.info('Pushing id:'+id);
+					products.push(product);
+					fillProductsInfo(models,filters,product,function(err) {
+						return callback(err);
+					}); 
+				});
+			},function(err) {
+				logger.info("Number of products returned:"+products.length);
+				products.sort(function(a,b) {
+					var aindex = ld.findIndex(uniqueids, function(id) { return id == a.id; });
+					var bindex = ld.findIndex(uniqueids, function(id) { return id == b.id; });
+					logger.info('------------->'+a.id+'='+aindex+' '+b.id+'='+bindex);
+					return aindex - bindex;		
+				});
+				return getcallback(err,products);
+			});			
+		});
+		
+		/*
 		
 		var searchwithsinglespace = filters.search.replace(/  +/g,'|').replace(/ /g,'|');
 		
@@ -323,6 +362,7 @@ function fillProductsInfo(models,filters,product,getcallback) {
 				return getcallback(err,products);
 			});			
 		});
+		*/
 	};
 	
 })(module.exports);

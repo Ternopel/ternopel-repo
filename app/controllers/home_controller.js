@@ -154,7 +154,7 @@ module.exports = {
 					ld.merge(pageinfo,{searchinput:req.params.search});
 					logger.info('Search with criteria:'+req.params.search);
 					var filters = ld.merge({search:req.params.search,formatslimit:3});
-					modelsutil.getProductsSearch(req.models, req.db, filters,function(err,searchproducts) {
+					modelsutil.getProductsSearch(req.models, req.config, filters,function(err,searchproducts) {
 						if(err) {
 							return callback(err);
 						}
