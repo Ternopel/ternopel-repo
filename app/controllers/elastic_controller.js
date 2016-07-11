@@ -87,6 +87,9 @@ var elasticsearch	= require('elasticsearch'),
 			var options = {
 				url:		url,
 				method:		'POST',
+				headers: {
+					'content-type':'application/json'
+				},
 				form: JSON.stringify(content)
 			}
 			
