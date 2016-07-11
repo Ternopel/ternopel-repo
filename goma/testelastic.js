@@ -62,6 +62,22 @@ var request		= require('supertest'),
 						}
 						return callback(err,res);
 					});
+			},
+			function(res,callback) {
+				var sleep = require('sleep');
+				sleep.sleep(2);
+				logger.info('Executing elastic search reindex');
+				request("http://localhost:"+config.test_app_port)
+				.get('/admin/elastic/search/xxxxx')
+				.set('cookie', utils.getcookies(res))
+				.expect(200)
+				.end(function(err, newres){
+					if(!err) {
+						var response = JSON.parse(newres.text);
+						expect(response.hits.total).toBe(0);
+					}
+					return callback(err,res);
+				});
 			}
 		], 
 		function(err) {

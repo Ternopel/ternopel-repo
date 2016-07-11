@@ -81,6 +81,7 @@ var elasticsearch	= require('elasticsearch'),
 			var url		= 'http://'+hostName+'/'+indexName+'/document/_search?pretty';
 			logger.warn('-------------------------------------------------------');
 			logger.warn(url);
+			logger.warn(JSON.stringify(content));
 			logger.warn('-------------------------------------------------------');
 			// Configure the request
 			var options = {
