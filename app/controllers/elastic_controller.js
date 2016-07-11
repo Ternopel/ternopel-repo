@@ -71,6 +71,30 @@ var elasticsearch	= require('elasticsearch'),
 			if(err) {
 				return utils.send_ajax_error(req,res,err);
 			}
+			var should	= [];
+			should.push({match: {p_name: {query:searchCriteria, fuzziness:2}}});
+			should.push({match: {c_name: {query:searchCriteria, fuzziness:2}}});
+			should.push({match: {pf_format: {query:searchCriteria, fuzziness:2}}});
+			var content	= {query: {bool: { should: should }}};
+			
+			var request = require('request');
+			// Configure the request
+			var options = {
+				url:		'http://'+hostName+'/'+indexName+'/document/_search?pretty',
+				method:		'POST',
+				form: JSON.stringify(content)
+			}
+			
+			// Start the request
+			request(options, function (error, response, body) {
+				if (!error && response.statusCode == 200) {
+					return callback(error,JSON.parse(body));
+				}
+				else {
+					return callback(error);
+				}
+			});
+			/*
 			client.search({
 				index:	indexName,
 				type:	'document',
@@ -79,6 +103,7 @@ var elasticsearch	= require('elasticsearch'),
 			function (err, response) {
 				return callback(err,response);
 			});
+			*/
 		});
 	};
 	

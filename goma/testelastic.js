@@ -58,7 +58,7 @@ var request		= require('supertest'),
 					.end(function(err, newres){
 						if(!err) {
 							var response = JSON.parse(newres.text);
-							expect(response.hits.total).toBe(6);
+							expect(response.hits.total).toBe(7);
 						}
 						return callback(err,res);
 					});

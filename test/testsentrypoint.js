@@ -81,7 +81,7 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=true;
+	var runTests=false;
 	
 	if(runTests) {
 		it('Get Contact Unlogged in', testscontact.getContactUnloggedIn);
@@ -175,9 +175,9 @@ describe('Test Suite', function() {
 	if(runTests) {
 		it('Health check', testhealth.getHealth);
 	}
-	if(runTests) {
+//	if(runTests) {
 		it('Elastic search reindex', testelastic.getReindex);
-	}
+//	}
 	
 	if(runTests) {
 		it('Privacy', testprivacy.getPrivacy);
