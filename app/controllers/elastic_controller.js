@@ -78,9 +78,13 @@ var elasticsearch	= require('elasticsearch'),
 			var content	= {query: {bool: { should: should }}};
 			
 			var request = require('request');
+			var url		= 'http://'+hostName+'/'+indexName+'/document/_search?pretty';
+			logger.warn('-------------------------------------------------------');
+			logger.warn(url);
+			logger.warn('-------------------------------------------------------');
 			// Configure the request
 			var options = {
-				url:		'http://'+hostName+'/'+indexName+'/document/_search?pretty',
+				url:		url,
 				method:		'POST',
 				form: JSON.stringify(content)
 			}
