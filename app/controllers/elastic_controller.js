@@ -88,6 +88,9 @@ var elasticsearch	= require('elasticsearch'),
 			// Start the request
 			request(options, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
+					logger.info('-------------------------------------------------------');
+					logger.info(body);
+					logger.info('-------------------------------------------------------');
 					return callback(error,JSON.parse(body));
 				}
 				else {
