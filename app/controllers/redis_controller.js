@@ -6,9 +6,9 @@ var utils			= require('./utils'),
 
 (function (redis_controller) {
 	
-	redis_controller.get_client = function (hostName, port, nameSpace,callback) {
+	redis_controller.get_client = function (config,callback) {
 		var redis = require('redis');
-		var client = redis.createClient({port:port, host:hostName, prefix:nameSpace,connect_timeout: 3600000});
+		var client = redis.createClient({port:config.app_redis_port, host:config.app_redis_host, prefix:config.app_redis_namespace});
 		
 		client.on("connect", function () {
 			logger.info('Connected to redis');
@@ -26,7 +26,7 @@ var utils			= require('./utils'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Getting Redis client');
-				redis_controller.get_client(req.config.app_redis_host, req.config.app_redis_port, req.config.app_redis_namespace, function(err,client) {
+				redis_controller.get_client(req.config, function(err,client) {
 					return callback(err,client);
 				});
 			},
@@ -61,5 +61,5 @@ var utils			= require('./utils'),
 			return res.status(200).send('OK');
 		});		
 	};
-	
+
 })(module.exports);

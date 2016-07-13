@@ -91,7 +91,7 @@
     "test_app_secured_cookies": "false",
     "test_app_elastic_host": "localhost:9200",
     "test_app_elastic_index": "ternopel_test",
-    "test_app_redis_host": "ternopel-001.3j6gql.0001.usw2.cache.amazonaws.com",
+    "test_app_redis_host": "localhost",
     "test_app_redis_port": "6379",
     "test_app_redis_namespace": "ternopel_test"
   },
