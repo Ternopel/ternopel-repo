@@ -16,5 +16,6 @@ module.exports = {
 	privacy:			require('./privacy_controller'),
 	contact:			require('./contact_controller'),
 	posters:			require('./posters_controller'),
-	elastic:			require('./elastic_controller')
+	elastic:			require('./elastic_controller'),
+	redis:				require('./redis_controller')
 };
