@@ -1,11 +1,37 @@
 'use strict';
 
-var logger = require("./logger")(module);
+var logger	= require("./logger")(module),
+	redis	= require("../app/controllers/redis_controller");
 
 (function (pageinfoconfig) {
 	
 	var savesession	= function(req,next,usersession) {
 		logger.debug('Changing last access');
+		
+		redis.get_client(req.config, function(err,client) {
+			if(err) {
+				return next(err);
+			}
+			client.set(usersession.token, JSON.stringify(usersession), function (err, reply) {
+				if(err) {
+					return next(err);
+				};
+				
+				logger.info("Assigning current session to request");
+				req.usersession = usersession;
+				
+				req.models.shoppingcart.count({user_session_id:usersession.id},function(err,count) {
+					if(err) {
+						return next(err);
+					}
+					var ld = require('lodash');
+					req.pageinfo = ld.merge(req.pageinfo,{cart_count:count});
+					return next();
+				});
+			});
+		});
+		
+		/*
 		usersession.save({last_access: new Date()},function(err) {
 			if(err) {
 				next(err);
@@ -22,12 +48,36 @@ var logger = require("./logger")(module);
 				return next();
 			});
 		});
+		*/
 	};
 	
 	var createsession = function(req,res,next) {
 		logger.debug("Session has no token. Creating it");
 		var token	= require('node-uuid').v1();
 		logger.debug("Creating user session");
+		
+		
+		redis.get_client(req.config, function(err,client) {
+			if(err) {
+				return next(err);
+			}
+			var usersession = {token: token,last_access: new Date()};
+			client.set(usersession.token, JSON.stringify(usersession), function (err, reply) {
+				if(err) {
+					return next(err);
+				};
+				logger.info('User is NOT logged IN !!');
+				req.usersession		= usersession;
+				req.pageinfo		= {is_logged_in:false, cart_count:0};
+				logger.info('Created session:'+JSON.stringify(req.usersession));
+				var secure = JSON.parse(req.config.app_secured_cookies);
+				logger.info("Secured cookie:"+secure);
+				res.cookie("ter_token", token, { httpOnly: true, secure: secure, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
+				next();
+			});
+		});
+		
+		/*
 		req.models.userssessions.create({token: token,last_access: new Date()},function(err,usersession) {
 			if(err) {
 				return next(err);
@@ -41,13 +91,14 @@ var logger = require("./logger")(module);
 			res.cookie("ter_token", token, { httpOnly: true, secure: secure, path: '/', maxAge: 365 * 24 * 60 * 60 * 1000 });
 			next();
 		});
+		*/
 	};
 	
 	var updatesession = function(req,res,next,usersession) {
-		logger.debug("Session:"+JSON.stringify(usersession));
-		logger.info('User is logged in:'+usersession.isLogged());
-		if(usersession.isLogged()===true) {
-			usersession.getUser(function (err, user) {
+		logger.info("Session:"+JSON.stringify(usersession));
+		if(usersession.user_id) {
+			logger.info('User is logged in');
+			req.models.users.get(usersession.user_id,function (err, user) {
 				if(err) {
 					next(err);
 				}
@@ -63,6 +114,7 @@ var logger = require("./logger")(module);
 			});
 		}
 		else {
+			logger.info('User is NOT logged in');
 			req.pageinfo	= {is_logged_in:false};
 			savesession(req,next,usersession);
 		}
@@ -82,12 +134,37 @@ var logger = require("./logger")(module);
 			}
 			logger.info("==================================");
 			
+			logger.info("Checking cookie ter_token value");
 			var ter_token = req.cookies.ter_token;
+			logger.info("ter_token:"+ter_token);
 			if(!ter_token) {
 				logger.info("Creating session");
 				createsession(req,res,next);
 			}
 			else {
+				logger.info("Getting session");
+				redis.get_client(req.config, function(err,client) {
+					if(err) {
+						return next(err);
+					}
+					logger.info("Looking for token in redis");
+					client.get(ter_token, function (err, value) {
+						if(err) {
+							return next(err);
+						};
+						if(!value) {
+							logger.info("Session missing. Recreating it");
+							createsession(req,res,next);
+						}
+						else {
+							logger.info("Updating session timestamp");
+							logger.info(value);
+							updatesession(req,res,next,JSON.parse(value));
+						}
+					});
+				});				
+				
+				/*
 				logger.info('Searching for session');
 				req.models.userssessions.find({token: ter_token},function(err,usersession) {
 					if(err) {
@@ -102,6 +179,7 @@ var logger = require("./logger")(module);
 						updatesession(req,res,next,usersession[0]);
 					}
 				});
+				*/
 			}
 		});
 	};

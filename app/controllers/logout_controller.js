@@ -5,6 +5,11 @@ var logger		= require("../../utils/logger")(module);
 module.exports = {
 	get_logout: function(req, res, next) {
 		logger.info('Executing logout');
+		req.usersession.user_id = null;
+		logger.info('User removed from session');
+		return res.redirect('/');
+		
+		/*
 		req.usersession.removeUser(function(err) {
 			if(err) {
 				next(err);
@@ -12,5 +17,6 @@ module.exports = {
 			logger.info('User removed from session');
 			return res.redirect('/');
 		});
+		*/
 	}
 };

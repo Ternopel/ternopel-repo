@@ -4,7 +4,8 @@ var cipher	= require('../../utils/cipher'),
 	utils	= require('./utils'),
 	ld		= require('lodash'),
 	logger	= require("../../utils/logger")(module),
-	math	= require('mathjs');
+	math	= require('mathjs'),
+	redis	= require('./redis_controller');
 
 
 var validate_shopping_cart_params = function(req, res, incartval) {
@@ -166,18 +167,23 @@ module.exports = {
 		waterfall([ 
 			function(callback) {
 				logger.info('Getting User Session');
-				req.models.userssessions.find({token: ter_token},function(err,usersessions) {
+				
+				redis.get_client(req.config, function(err,client) {
 					if(err) {
 						return callback(err);
 					}
-					var usersession		= usersessions[0];
-					return callback(err,usersession);
+					logger.info('Connected to Redis');
+					client.get(ter_token, function (err, value) {
+						var usersession = JSON.parse(value);
+						logger.info('Usersession:'+JSON.stringify(usersession));
+						return callback(err,usersession);
+					});
 				});
 			}, 
 			function(usersession,callback) {
 				if(pageinfo.is_logged_in===true) {
 					logger.info("User is logged in");
-					usersession.getUser(function (err, user) {
+					req.models.users.get(usersession.user_id,function(err,user) {
 						if(err) {
 							return callback(err);
 						}
@@ -352,7 +358,7 @@ module.exports = {
 				}
 				else {
 					logger.info("User is logged in");
-					req.usersession.getUser(function (err, user) {
+					req.models.users.get(req.usersession.user_id,function (err, user) {
 						return callback(err,user);
 					});
 				}

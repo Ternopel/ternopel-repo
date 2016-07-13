@@ -71,7 +71,7 @@
     "app_elastic_index": "ternopel",
     "app_redis_host": "localhost",
     "app_redis_port": "6379",
-    "app_redis_namespace": "ternopel",
+    "app_redis_namespace": "ternopel_",
     "db_database": "ternopel",
     "db_protocol": "postgres",
     "db_driver": "org.postgresql.Driver",
@@ -93,7 +93,7 @@
     "test_app_elastic_index": "ternopel_test",
     "test_app_redis_host": "localhost",
     "test_app_redis_port": "6379",
-    "test_app_redis_namespace": "ternopel_test"
+    "test_app_redis_namespace": "ternopel_test_"
   },
   "author": "Maximiliano Carrizo"
 }

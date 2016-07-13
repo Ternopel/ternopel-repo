@@ -4,6 +4,7 @@ var cipher		= require('../../utils/cipher'),
 	utils		= require('./utils'),
 	ld			= require('lodash'),
 	cronconfig	= require('../../utils/cronconfig.js'),
+	redis		= require('./redis_controller'),
 	logger		= require("../../utils/logger")(module);
 
 
@@ -102,7 +103,7 @@ function save_email(req, res, next, email_field, email_address, is_registration,
 
 module.exports = {
 
-	save_login: function(models, usersession, email_address, password, callback) {
+	save_login: function(config, models, usersession, email_address, password, callback) {
 
 		var waterfall = require('async-waterfall');
 		waterfall([ 
@@ -132,6 +133,21 @@ module.exports = {
 			},
 			function(user,callback) {
 				logger.info('Assigning user to session');
+				usersession.user_id = user.id;
+				redis.get_client(config, function(err,client) {
+					if(err) {
+						return callback(err);
+					}
+					client.set(usersession.token, JSON.stringify(usersession), function (err, reply) {
+						if(err) {
+							return callback(err);
+						};
+						logger.info('Complete session:'+JSON.stringify(usersession));
+						return callback(err,user);
+					});				
+				});
+				
+				/*
 				usersession.setUser(user,function(err) {
 					if(err) {
 						callback(err);
@@ -139,6 +155,7 @@ module.exports = {
 					logger.info('Complete session:'+JSON.stringify(usersession));
 					return callback(err,user);
 				});
+				*/
 			}
 		], 
 		function(err, user) {
@@ -146,7 +163,7 @@ module.exports = {
 		});
 	},
 		
-	save_user: function(models, usersession, customerid, email_address, password, first_name, last_name, callback) {
+	save_user: function(config, models, usersession, customerid, email_address, password, first_name, last_name, callback) {
 		var waterfall = require('async-waterfall');
 		waterfall([ 
 			function(callback) {
@@ -175,6 +192,23 @@ module.exports = {
 			},
 			function(user,callback) {
 				logger.info('Assigning user to session');
+				usersession.user_id = user.id;
+				redis.get_client(config, function(err,client) {
+					if(err) {
+						return callback(err);
+					}
+					client.set(usersession.token, JSON.stringify(usersession), function (err, reply) {
+						if(err) {
+							return callback(err);
+						};
+						logger.info('Complete session:'+JSON.stringify(usersession));
+						return callback(err,user);
+					});				
+				});				
+				
+				
+				/*
+				logger.info('Assigning user to session');
 				usersession.setUser(user,function(err) {
 					if(err) {
 						callback(err);
@@ -182,6 +216,7 @@ module.exports = {
 					logger.info('Complete session:'+JSON.stringify(usersession));
 					return callback(err,user);
 				});
+				*/
 			}
 		], 
 		function(err, user) {
@@ -264,7 +299,7 @@ module.exports = {
 		}
 		
 		var controllers = require('./controller');
-		controllers.registration.save_user(req.models, req.usersession, req.constants.CUSTOMER_ID, email_address, password, first_name, last_name, function(err,user) {
+		controllers.registration.save_user(req.config, req.models, req.usersession, req.constants.CUSTOMER_ID, email_address, password, first_name, last_name, function(err,user) {
 			logger.debug('Finalizacion de creacion de usuario');
 			if(err) {
 				logger.debug('Error por enviar al cliente:'+err);
@@ -294,7 +329,7 @@ module.exports = {
 		}
 		
 		var controllers = require('./controller');
-		controllers.registration.save_login(req.models, req.usersession, email_address, password, function(err,user) {
+		controllers.registration.save_login(req.config, req.models, req.usersession, email_address, password, function(err,user) {
 			logger.debug('Finalizacion de login');
 			if(err) {
 				logger.debug('Error por enviar al cliente:'+err);

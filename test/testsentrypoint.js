@@ -95,13 +95,13 @@ describe('Test Suite', function() {
 	if(runTests) {
 		it('Get Shopping Cart Logged in', testshoppingcart.getShoppingCartLoggedIn);
 		it('Get Shopping Cart Unlogged in', testshoppingcart.getShoppingCartUnloggedIn);
-		it('Get Price Calculation', testshoppingcart.getPriceCalculation);
 		it('Add product to cart', testshoppingcart.addProductToCart);
 		it('Delete Product of cart', testshoppingcart.deleteShoppingCart);
 		it('Purchase With Registration', testshoppingcart.purchaseWithRegistration);
 		it('Purchase With Login', testshoppingcart.purchaseWithLogin);
 		it('Purchase Logged In', testshoppingcart.purchaseLoggedIn);
 	}
+	it('Get Price Calculation', testshoppingcart.getPriceCalculation);
 	
 	if(runTests) {
 		it('Send registration email', testsendemail.sendRegistrationMail);
@@ -165,14 +165,14 @@ describe('Test Suite', function() {
 	// Registration tests
 	if(runTests) {
 		it('Register new mailing user', testsregistration.registerNewMailingUser);
-		it('Client login', testsregistration.clientLogin);
 		it('Users registration with fields required errors', testsregistration.registerNewUserFieldsRequired);
 		it('Users registration ', testsregistration.registerNewUser);
 		it('Admin login', testsregistration.adminLogin);
 		it('Users login with invalid username/password', testsregistration.loginInvalidUsernamePassword);
 		it('Admin with no permissions', testsregistration.adminWithNoPermissions);
-		it('Confirm User', testsregistration.confirmUser);
 		it('List delivery', testsregistration.listDelivery);
+		it('Client login', testsregistration.clientLogin);
+		it('Confirm User', testsregistration.confirmUser);
 	}
 	 	
  	// Health check
@@ -183,9 +183,9 @@ describe('Test Suite', function() {
 		it('Elastic search reindex', testelastic.getReindex);
 	}
 	
-//	if(runTests) {
+	if(runTests) {
 		it('Redis upload sessions', testredis.uploadSessions);
-//	}
+	}
 	
 	if(runTests) {
 		it('Privacy', testprivacy.getPrivacy);
