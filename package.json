@@ -72,7 +72,7 @@
     "app_redis_host": "localhost",
     "app_redis_port": "6379",
     "app_redis_namespace": "ternopel",
-    "app_show_chat": "true",
+    "app_show_chat": "false",
     "db_database": "ternopel",
     "db_protocol": "postgres",
     "db_driver": "org.postgresql.Driver",
