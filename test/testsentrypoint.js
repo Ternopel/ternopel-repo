@@ -46,6 +46,7 @@ describe('Test Suite', function() {
 		config.app_redis_host				= config.test_app_redis_host;
 		config.app_redis_port				= config.test_app_redis_port;
 		config.app_redis_namespace			= config.test_app_redis_namespace;
+		config.app_show_chat				= config.test_app_show_chat;
 		
 		logger.info("Initiating app");
 		app.init(config, function(app,pdb,models) {
@@ -85,7 +86,7 @@ describe('Test Suite', function() {
 		});
 	});	
 
-	var runTests=false;
+	var runTests=true;
 	
 	if(runTests) {
 		it('Get Contact Unlogged in', testscontact.getContactUnloggedIn);
@@ -183,9 +184,9 @@ describe('Test Suite', function() {
 		it('Elastic search reindex', testelastic.getReindex);
 	}
 	
-//	if(runTests) {
+	if(runTests) {
 		it('Redis upload sessions', testredis.uploadSessions);
-//	}
+	}
 	
 	if(runTests) {
 		it('Privacy', testprivacy.getPrivacy);

@@ -112,12 +112,22 @@ var logger = require("./logger")(module);
 				return next();
 			}
 			var ld = require('lodash');
-			req.pageinfo = ld.merge(req.pageinfo,{app_resources: req.config.app_resources, page_title: 'Papelera Ternopel',is_home:false, og_images: []});
+			req.pageinfo = ld.merge(req.pageinfo,{	app_resources: req.config.app_resources, 
+													page_title: 'Papelera Ternopel',
+													is_home:false, 
+													og_images: [],
+													show_chat: JSON.parse(req.config.app_show_chat)});
+			
+			
+			
 			req.models.categories.find({},['name'],function(err,categories) {
 				if(err) {
 					return next(err);
 				}
 				req.pageinfo = ld.merge(req.pageinfo,{footer_categories: categories});
+				logger.info("---------------------------------------");
+				logger.info(JSON.stringify(req.pageinfo));
+				logger.info("---------------------------------------");
 				next();
 			});
 		});
