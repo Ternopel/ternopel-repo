@@ -55,6 +55,11 @@ var elasticsearch	= require('elasticsearch'),
 							c_name: record.c_name,
 							pf_format: record.pf_format,
 							published: true,
+							suggest: {
+								input: record.p_name,
+								output: record.p_name,
+								payload: { id: record.p_id } 
+							}
 						}
 					}, function (err, response) {
 						return mycallback(err);
@@ -187,13 +192,13 @@ var elasticsearch	= require('elasticsearch'),
 							id:			{ type: "long" },
 							p_name:		{ type: "string", boost: "3.0" },
 							c_name:		{ type: "string", boost: "1.0" },
-							pf_format:	{ type: "string", boost: "0.5" },
+							pf_format:	{ type: "string", boost: "0.5" }/* ,
 							suggest: {
 								type: "completion",
 								analyzer: "simple",
 								search_analyzer: "simple",
 								payloads: true
-							}
+							} */
 						}
 					}
 				},
@@ -209,7 +214,6 @@ var elasticsearch	= require('elasticsearch'),
 			return gencallback(err,records);
 		});
 	};
-	
 	
 	elastic_controller.get_reindex = function(req, res, next) {
 		elastic_controller.reindex(req.config.app_elastic_host, req.config.app_elastic_index,req.db,function(err, records) {
@@ -234,5 +238,27 @@ var elasticsearch	= require('elasticsearch'),
 			return res.end();
 		});
 	};
+	
+	elastic_controller.get_suggestions = function(req, res, next) {
+
+		elastic_controller.search(req.config.app_elastic_host, req.config.app_elastic_index,req.params.search,function(err,completeresponse) {
+			if(err) {
+				return utils.send_ajax_error(req,res,err);
+			}
+			logger.info(JSON.stringify(completeresponse));
+			var responses = [];
+			completeresponse.hits.hits.forEach(function (hit) {
+				responses.push(hit._source.p_name);
+				logger.info("p_name:"+hit._source.p_name);
+			});	
+			res.json(responses);
+			return res.end();
+		});
+	
+	
+	};
+	
+	
+	
 	
 })(module.exports);

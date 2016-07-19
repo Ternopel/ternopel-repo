@@ -182,6 +182,7 @@ describe('Test Suite', function() {
 	}
 	if(runTests) {
 		it('Elastic search reindex', testelastic.getReindex);
+		it('Elastic suggestions', testelastic.getSuggestions);
 	}
 	
 	if(runTests) {

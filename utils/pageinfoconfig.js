@@ -125,9 +125,9 @@ var logger = require("./logger")(module);
 					return next(err);
 				}
 				req.pageinfo = ld.merge(req.pageinfo,{footer_categories: categories});
-				logger.info("---------------------------------------");
-				logger.info(JSON.stringify(req.pageinfo));
-				logger.info("---------------------------------------");
+				logger.debug("---------------------------------------");
+				logger.debug(JSON.stringify(req.pageinfo));
+				logger.debug("---------------------------------------");
 				next();
 			});
 		});

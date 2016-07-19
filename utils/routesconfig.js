@@ -60,6 +60,7 @@
 		
 		app.get		( '/admin/elastic/reindex',				controllers.elastic.get_reindex);
 		app.get		( '/admin/elastic/search/:search',		controllers.elastic.get_search);
+		app.get		( '/elastic/suggestions/:search',		controllers.elastic.get_suggestions);
 
 		app.get		( '/admin/redis/upload_sessions',		controllers.redis.upload_sessions);
 

@@ -97,4 +97,34 @@ var request		= require('supertest'),
 		});
 	};
 	
+	testelastic.getSuggestions = function (done) {
+		var waterfall = require('async-waterfall');
+		waterfall([ 
+			function(callback) {
+				logger.info('Executing get to server');
+				request("http://localhost:"+config.test_app_port)
+					.get('/login')
+					.end(function(err, res){
+						return callback(err,res);
+					});
+			}, 
+			function(res,callback) {
+				logger.info('Executing elastic suggestion');
+				request("http://localhost:"+config.test_app_port)
+					.get('/elastic/suggestions/volsas consorcio')
+					.set('cookie', utils.getcookies(res))
+					.expect(200)
+					.end(function(err, newres){
+						var response = JSON.parse(newres.text);
+						expect(response.length).toBe(7);
+						return callback(err,res);
+					});
+			}		
+		], 
+		function(err) {
+			return done(err);
+		});
+	};	
+	
+	
 })(module.exports);
