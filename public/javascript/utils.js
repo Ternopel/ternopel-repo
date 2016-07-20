@@ -90,13 +90,27 @@ function sneak_lis(lis,description) {
 $(function () {
 	$("#listado").click(function () {
 		if($("#listadomenu").is(':visible')){
-			console.log('MEC>1');
 			$("#listadomenu").hide();
 		}
 		else {
-			console.log('MEC>2');
 			$("#listadomenu").show();
 		}
+	});
+});
+
+// Autocomplete
+$(function () {
+	$("input[name='homesearchinput']").autocomplete({
+		minLength: 2,
+		source : function(request, response) {
+			$.ajax({
+				url : "/elastic/suggestions/"+request.term,
+				success : function(data) {
+					console.log(data);
+					response(data);
+				}
+			});
+		}		
 	});
 });
 
