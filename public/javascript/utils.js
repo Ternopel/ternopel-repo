@@ -110,7 +110,13 @@ $(function () {
 					response(data);
 				}
 			});
-		}		
+		},
+		select: function(event, ui) { 
+			console.log(ui.item.label);
+			$("button[name='homesearchbutton']").click();
+//			$("#searchField").val(ui.item.label);
+//			$("#searchForm").submit(); 
+		}
 	});
 });
 

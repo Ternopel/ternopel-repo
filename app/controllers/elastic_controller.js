@@ -84,10 +84,10 @@ var elasticsearch	= require('elasticsearch'),
 			
 			var request = require('request');
 			var url		= 'http://'+hostName+'/'+indexName+'/document/_search?pretty';
-			logger.warn('-------------------------------------------------------');
-			logger.warn(url);
-			logger.warn(JSON.stringify(content));
-			logger.warn('-------------------------------------------------------');
+			logger.info('-------------------------------------------------------');
+			logger.info(url);
+			logger.info(JSON.stringify(content));
+			logger.info('-------------------------------------------------------');
 			// Configure the request
 			var options = {
 				url:		url,
@@ -101,9 +101,9 @@ var elasticsearch	= require('elasticsearch'),
 			// Start the request
 			request(options, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
-					logger.warn('-------------------------------------------------------');
-					logger.warn(body);
-					logger.warn('-------------------------------------------------------');
+					logger.info('-------------------------------------------------------');
+					logger.info(body);
+					logger.info('-------------------------------------------------------');
 					return callback(error,JSON.parse(body));
 				}
 				else {
