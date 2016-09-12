@@ -587,7 +587,11 @@ ul.main-nav li:first-child {
 
 a.menu-link {
 	display: none;
-	background: url(../images/nav-arrow.png) no-repeat right center;
+	padding: 0 24px 0 0;
+}
+
+div.menu-link {
+	display: none;
 	padding: 0 24px 0 0;
 }
 
@@ -1861,6 +1865,13 @@ MEDIA QUERIES
 	}
 	
 	a.menu-link {
+		display: inline-block;
+		padding: 0 30px;
+		color: #fff;
+		margin: 14px 0;
+	}
+	
+	div.menu-link {
 		display: inline-block;
 		padding: 0 30px;
 		color: #fff;

@@ -25,7 +25,7 @@
 		{{?}}
 		<!-- STYLESHEET -->
 
-		<link rel="stylesheet" type="text/css" href="{{=it.app_resources}}/css/styles5.css" media="screen,projection" />
+		<link rel="stylesheet" type="text/css" href="{{=it.app_resources}}/css/styles6.css" media="screen,projection" />
 		<link rel="alternate" href="https://www.papeleraternopel.com/" hreflang="x" />
 
 		<title>{{=it.page_title}}</title>
@@ -107,14 +107,39 @@
 				<p id='general_error'>ERROR MESSAGE - This is a message bar that will display all error messages</p>
 			</section>
 			<nav class="nav-bar">
-				<a href="" class="sub-menu-item menu-link">Menu</a>
+<!-- 				<a href="" class="sub-menu-item menu-link">Menu</a> -->
+				
+				
+				<!-- MENUES CON PANTALLA COMPRIMIDA -->
+				{{?it.is_logged_in}}
+					{{?it.is_admin}}
+						<a href="/admin" class="sub-menu-item menu-link">Administrador</a>
+					{{??}}
+						<a href="/" class="sub-menu-item menu-link">Inicio</a>
+						<a href="/contact" class="sub-menu-item menu-link">Contáctenos</a>
+					{{?}}
+				{{??}}	
+					<a href="/" class="sub-menu-item menu-link">Inicio</a>
+					<a href="/contact" class="sub-menu-item menu-link">Contáctenos</a>
+				{{?}}
+				<a href="/?posters=false" class="sub-menu-item menu-link">Ofertas</a>
+				<div class="sub-menu-item menu-link">
+					{{?it.searchinput}}
+						<input type="text" name="homesearchinput" style="height: 25px;" value="{{=it.searchinput}}" />
+					{{??}}
+						<input type="text" name="homesearchinput" style="height: 25px;" placeholder="Que estás buscando ?"/>
+					{{?}}
+					<button name="homesearchbutton" class="search-btn">Search</button>
+				</div>				
+				
+				<!-- MENUES CON PANTALLA EXPANDIDA -->
 				<ul class="main-nav clear-fix">
 					{{?it.is_logged_in}}
 						{{?it.is_admin}}
 							<li><a href="/admin">Administrador</a></li>
 						{{??}}
-							<li><a href="/">Inicio</a></li>
-							<li><a href="#">Mi Cuenta</a></li>
+							<li><a  href="/">Inicio</a></li>
+<!-- 							<li><a href="#">Mi Cuenta</a></li> -->
 							<li><a href="/contact">Contáctenos</a></li>
 						{{?}}
 					{{??}}	
