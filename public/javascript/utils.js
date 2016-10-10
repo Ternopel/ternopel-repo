@@ -114,8 +114,23 @@ $(function () {
 		select: function(event, ui) { 
 			console.log(ui.item.label);
 			$("button[name='homesearchbutton']").click();
-//			$("#searchField").val(ui.item.label);
-//			$("#searchForm").submit(); 
+		}
+	});
+
+	$("input[name='homesearchinputcompressed']").autocomplete({
+		minLength: 2,
+		source : function(request, response) {
+			$.ajax({
+				url : "/elastic/suggestions/"+request.term,
+				success : function(data) {
+					console.log(data);
+					response(data);
+				}
+			});
+		},
+		select: function(event, ui) { 
+			console.log(ui.item.label);
+			$("button[name='homesearchbuttoncompressed']").click();
 		}
 	});
 });
