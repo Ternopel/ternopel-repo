@@ -12,7 +12,7 @@
 - Crear base de datos ternopel y ternopel_test
 - En directorio de descarga, correr:
  ``
-npm.cmd install
+npm.cmd install 
 ``
 - Crear carpeta products/images y products/testimages
 
