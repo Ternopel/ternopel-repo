@@ -27,3 +27,8 @@ npm.cmd install
 - Asegurarse que %JAVA_HOME% esta en la configuracion de la computadora y no en la del usuario
 
 
+## Como instalar REDIS
+
+- Descargarlo redis-2.4.6-setup-64-bit.exe de https://github.com/rgl/redis/downloads
+- Instalarlo
+
