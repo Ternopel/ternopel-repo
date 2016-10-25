@@ -21,10 +21,10 @@ npm.cmd install
 - Descargar Elastic Search 2.3.3
 - Instalarlo en algun lado
 - Instalar el Windows Service corriendo el comando
+- Asegurarse que %JAVA_HOME% esta en la configuracion de la computadora y no en la del usuario
 ``
 <ElasticSearchDir>\bin\service.bat install <ServiceName>
 ``
-- Asegurarse que %JAVA_HOME% esta en la configuracion de la computadora y no en la del usuario
 
 
 ## Como instalar REDIS
