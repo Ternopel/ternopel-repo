@@ -32,3 +32,7 @@ npm.cmd install
 - Descargarlo redis-2.4.6-setup-64-bit.exe de https://github.com/rgl/redis/downloads
 - Instalarlo
 
+# Postinstalacion
+
+- Crear carpetas posters, posters/testimages e posters/images
+- Crear carpetas products, products/testimages e products/images
