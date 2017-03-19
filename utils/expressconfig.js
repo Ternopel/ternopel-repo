@@ -49,7 +49,7 @@ var logger = require("./logger")(module);
 		var compression = require('compression');
 		app.use(compression({
 			threshold: 512
-		}));
+		})); 
 		
 		logger.debug("Setting 'Public' folder with maxAge: 1 Day.");
 		var oneYear = 31557600000;
