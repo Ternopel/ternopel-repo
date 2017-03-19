@@ -1,0 +1,27 @@
+1) Generamos nuestra clave privada:
+
+openssl genrsa -out my-private-key.pem 2048
+
+2) Generamos el requerimiento para un certificado y lo mandamos a una autoridad certificante ( solo al csr.pem )
+
+openssl req -sha256 -new -key my-private-key.pem -out csr.pem
+
+3) Vamos a recibir de la autoridad certificante varios archivos crt
+
+gd_bundle-g2-g1.crt ( certificate CHAIN )
+b2f13dcc79933f61.crt ( public key certificate )
+
+4) Los convierto a los archivos recibidos a formato PEM
+
+openssl x509 -inform PEM -in gd_bundle-g2-g1.crt -out gd_bundle-g2-g1.pem
+
+6) Entonces:
+
+Public Key Certificate:
+b2f13dcc79933f61.pem
+
+Certificate Chain:	
+gd_bundle-g2-g1.pem
+
+Private Key: 
+my-private-key.pem
