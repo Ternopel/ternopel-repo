@@ -14,7 +14,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -22,7 +22,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -38,7 +38,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Executing elastic search reindex');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/admin/elastic/reindex')
 					.set('cookie', utils.getcookies(res))
 					.expect(200)
@@ -51,7 +51,7 @@ var request		= require('supertest'),
 				var sleep = require('sleep');
 				sleep.sleep(2);
 				logger.info('Executing elastic search reindex');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/admin/elastic/search/bolsas')
 					.set('cookie', utils.getcookies(res))
 					.expect(200)
@@ -67,7 +67,7 @@ var request		= require('supertest'),
 				var sleep = require('sleep');
 				sleep.sleep(2);
 				logger.info('Executing elastic search reindex');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/admin/elastic/search/xxxxx')
 				.set('cookie', utils.getcookies(res))
 				.expect(200)
@@ -81,7 +81,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/search/bolsas%20camisetas%20%20%20reforzadas')
 				.set('cookie', 'ter_token=notoken')
 				.expect(200)
@@ -102,7 +102,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -110,7 +110,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Executing elastic suggestion');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/elastic/suggestions/volsas consorcio')
 					.set('cookie', utils.getcookies(res))
 					.expect(200)

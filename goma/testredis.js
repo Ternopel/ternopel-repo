@@ -14,7 +14,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -22,7 +22,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -38,7 +38,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Executing redis upload sessions');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/admin/redis/upload_sessions')
 					.set('cookie', utils.getcookies(res))
 					.expect(200)

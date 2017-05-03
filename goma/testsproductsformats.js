@@ -14,7 +14,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -22,7 +22,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -38,7 +38,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Get product format');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/admin/productsformats?product_id=9')
 					.set('cookie', utils.getcookies(res))
 					.expect(200)
@@ -49,7 +49,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Get product format');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/admin/productsformats')
 				.set('cookie', utils.getcookies(res))
 				.expect(500)
@@ -60,7 +60,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Get product format');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/admin/productsformats?product_id=9000')
 				.set('cookie', utils.getcookies(res))
 				.expect(500)
@@ -82,7 +82,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -90,7 +90,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -106,7 +106,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Deleting product format');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.delete('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -121,7 +121,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Deleting product format');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.delete('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -146,7 +146,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -154,7 +154,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -170,7 +170,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Creating product Format');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.put('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -184,7 +184,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Creating product Format');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.put('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -209,7 +209,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -217,7 +217,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -233,7 +233,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Updating product');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -250,7 +250,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Updating product');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -267,7 +267,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Updating product');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -284,7 +284,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Updating product');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -301,7 +301,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Updating product');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -318,7 +318,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Updating product');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -335,7 +335,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Updating product');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.post('/admin/productsformats')
 				.set('cookie', utils.getcookies(res))
 				.send({
@@ -352,7 +352,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Updating product');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.post('/admin/productsformats')
 				.set('cookie', utils.getcookies(res))
 				.send({
@@ -369,7 +369,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Updating product');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -385,7 +385,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Updating category');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/admin/productsformats')
 					.set('cookie', utils.getcookies(res))
 					.send({

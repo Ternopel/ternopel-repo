@@ -33,7 +33,7 @@ describe('Test Suite', function() {
 		
 		config.app_run_liquibase			= 'false';
 		config.app_cron						= 'false';
-		config.app_port						= config.test_app_port;
+		config.app_http_port				= config.test_app_http_port;
 		config.db_database					= config.test_db_database;
 		config.db_show_sql					= config.test_db_show_sql;
 		config.db_liquibase_xml				= config.test_db_liquibase_xml;

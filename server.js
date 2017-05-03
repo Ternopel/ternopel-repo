@@ -5,7 +5,8 @@ var logger		= require("./utils/logger")(module),
 	cronconfig	= require("./utils/cronconfig"),
 	app			= require("./app.js"),
 	fs			= require('fs'),
-	http		= require('http');
+	http		= require('http'),
+	https		= require('https');
 	
 
 logger.info("Creating express app");
@@ -13,13 +14,13 @@ app.init(config, function(app,db,models) {
 	
 	app.disable('etag');
 	
-	logger.info("Creating server");
-	var server = http.createServer();
-	server.on('request',app);
+	logger.info("Creating http server");
+	var http_server = http.createServer();
+	http_server.on('request',app);
 
-	logger.info("Starting server");
-	server.listen(config.app_port,function() {
-		logger.info('Listening on port:'+server.address().port);
+	logger.info("Starting http server");
+	http_server.listen(config.app_http_port,function() {
+		logger.info('Listening http on port:'+http_server.address().port);
 	});
 	
 	logger.info("Configuring cron");

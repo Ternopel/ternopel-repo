@@ -36,3 +36,7 @@ npm.cmd install
 
 - Crear carpetas posters, posters/testimages e posters/images
 - Crear carpetas products, products/testimages e products/images
+- Correr a mano:
+``
+create table products_formats_backup as select * from products_formats;
+``

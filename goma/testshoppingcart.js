@@ -15,7 +15,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Getting price calculation ONE');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/shoppingcart/pricecalculation')
 					.expect(500)
 					.end(function(err,res) {
@@ -26,7 +26,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Getting price calculation TWO');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=A&incart=false')
 				.expect(500)
 				.end(function(err,newres) {
@@ -37,7 +37,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Getting price calculation THREE');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=29&incart=false')
 				.expect(200)
 				.end(function(err,newres) {
@@ -47,7 +47,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Getting price calculation FOUR');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=9&incart=false')
 				.expect(200)
 				.end(function(err,newres) {
@@ -57,7 +57,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Getting price calculation FIVE');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/shoppingcart/pricecalculation?productformatid=1&quantity=7&incart=true')
 				.set('cookie', utils.getcookies(res))
 				.expect(200)
@@ -77,7 +77,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -85,7 +85,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Getting products count for first time');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/shoppingcart/get_cart_count')
 				.set('cookie', utils.getcookies(res))
 				.expect(200)
@@ -96,7 +96,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Adding first product to cart');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/shoppingcart/addproducttocart')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -112,7 +112,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Adding second product to cart');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.post('/shoppingcart/addproducttocart')
 				.set('cookie', utils.getcookies(res))
 				.send({
@@ -128,7 +128,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Getting products count for second time');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/shoppingcart/get_cart_count')
 				.set('cookie', utils.getcookies(res))
 				.expect(200)
@@ -148,7 +148,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -156,7 +156,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Getting shopping cart unlogged in');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/shoppingcart')
 				.set('cookie', utils.getcookies(res))
 				.expect(200)
@@ -177,7 +177,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -185,7 +185,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -201,7 +201,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/shoppingcart')
 					.set('cookie', utils.getcookies(res))
 					.end(function(err, res){
@@ -220,7 +220,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -228,7 +228,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Delete shopping cart element');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.delete('/shoppingcart/deleteshoppingcart')
 				.send({
 						'shopping_cart_id' : '1',
@@ -243,7 +243,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Delete shopping cart element');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.delete('/shoppingcart/deleteshoppingcart')
 				.send({
 						'shopping_cart_id' : '10',
@@ -269,7 +269,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/')
 					.end(function(err, res){
 						return callback(err,res);
@@ -277,7 +277,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Post purchase with empty fields');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/shoppingcart/executepurchase')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -303,7 +303,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Register an existing user');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.post('/shoppingcart/executepurchase')
 				.set('cookie', utils.getcookies(res))
 				.send({
@@ -330,7 +330,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Post purchase with empty fields');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.post('/shoppingcart/executepurchase')
 				.set('cookie', utils.getcookies(res))
 				.send({
@@ -367,7 +367,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/')
 					.end(function(err, res){
 						return callback(err,res);
@@ -375,7 +375,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Register an existing user');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.post('/shoppingcart/executepurchase')
 				.set('cookie', utils.getcookies(res))
 				.send({
@@ -400,7 +400,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Register an existing user');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.post('/shoppingcart/executepurchase')
 				.set('cookie', utils.getcookies(res))
 				.send({
@@ -437,7 +437,7 @@ var request		= require('supertest'),
 		waterfall([ 
 			function(callback) {
 				logger.info('Executing get to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.get('/login')
 					.end(function(err, res){
 						return callback(err,res);
@@ -445,7 +445,7 @@ var request		= require('supertest'),
 			}, 
 			function(res,callback) {
 				logger.info('Posting info to server');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 					.post('/login')
 					.set('cookie', utils.getcookies(res))
 					.send({
@@ -461,7 +461,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Register an existing user');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.post('/shoppingcart/executepurchase')
 				.set('cookie', utils.getcookies(res))
 				.send({
@@ -486,7 +486,7 @@ var request		= require('supertest'),
 			},
 			function(res,callback) {
 				logger.info('Register an existing user');
-				request("http://localhost:"+config.test_app_port)
+				request("http://localhost:"+config.test_app_http_port)
 				.get('/shoppingcart/purchasedone')
 				.set('cookie', utils.getcookies(res))
 				.expect(200)
