@@ -15,7 +15,7 @@ app.init(config, function(app,db,models) {
 	var credentials = {
 		ca: fs.readFileSync(__dirname+"/support/godaddy/gd_bundle-g2-g1.crt", 'utf8'), //la certification authority o CA
 		key: fs.readFileSync(__dirname+"/support/godaddy/my-private-key.pem", 'utf8'), //la clave SSL, que es el primer archivo que generamos ;)
-		cert: fs.readFileSync(__dirname+"/support/godaddy/3430d5d8d2d502a.crt", 'utf8') //el certificado
+		cert: fs.readFileSync(__dirname+"/support/godaddy/19beba59ea6fde44.crt", 'utf8') //el certificado
 	};	
 	
 	app.disable('etag');
