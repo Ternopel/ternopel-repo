@@ -7,7 +7,7 @@
 - Validar con checkParam los lugares donde recibo query params en lugar de preguntar por no nulo
 - Corregir las fotos de los posters
 
-
+ 
 - CHange this:
 
 research Prod start and stop
