@@ -7,7 +7,6 @@ var logger		= require("./utils/logger")(module),
 	fs			= require('fs'),
 	http		= require('http'),
 	https		= require('https');
-	
 
 logger.info("Creating express app");
 app.init(config, function(app,db,models) {
